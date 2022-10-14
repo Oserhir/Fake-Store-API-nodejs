@@ -1,13 +1,16 @@
+// Require the NPM packages that we need
 const express = require("express");
 const app = express();
-require("dotenv").config(); // acceder les variable environnement
-
-const PORT = process.env.PORT || 3000;
+require("dotenv").config(); // access environment variables
+const db = require("./config/database"); // Connect to Database
 
 app.get("/", (req, res) => {
   res.send("Hello");
 });
 
+const PORT = process.env.PORT || 3000; // // Set a default environment port or cutom port - 3000
+
+// Start out application
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
