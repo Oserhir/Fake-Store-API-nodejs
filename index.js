@@ -4,9 +4,10 @@ const app = express();
 require("dotenv").config(); // access environment variables
 const db = require("./config/database"); // Connect to Database
 
-// Routes
-const userouter = require("./router/users");
-app.use("/", userouter);
+// Import Routes
+const useRouters = require("./router/users");
+// Routes Middlware
+app.use("/api/users", useRouters);
 
 const PORT = process.env.PORT || 3000; // // Set a default environment port or cutom port - 3000
 
