@@ -76,6 +76,11 @@ module.exports.login_post = (req, res) => {
   }
 };
 
+module.exports.signout_get = (req, res) => {
+  res.clearCookie("jwt");
+  res.send("User signOUT");
+};
+
 // create json web token
 // Signing a token with 3 Days of expiration:
 
