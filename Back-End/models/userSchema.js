@@ -32,8 +32,8 @@ const userSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
-  }
-  //{ timestamps: true }
+  },
+  { timestamps: true }
 );
 
 // Hash Password Before Send to Database

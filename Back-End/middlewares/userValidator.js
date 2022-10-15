@@ -1,15 +1,10 @@
 const Joi = require("joi");
 const User = require("../models/userSchema");
 
-module.exports.signUp_get = (req, res) => {
-  res.send("Hello");
-};
-
-module.exports.signup_post = (req, res) => {
-  /*
+exports.userSignUpValidator = (req, res, next) => {
   const schema = Joi.object({
-    name: Joi.string().max(20).required(),
-    email: Joi.string().max(50).required().email(),
+    name: Joi.string().min(2).max(20).required(),
+    email: Joi.string().min(6).max(50).required().email(),
     password: Joi.string().min(5).max(50).required(),
   });
 
@@ -25,15 +20,7 @@ module.exports.signup_post = (req, res) => {
         res.status(400).json("User already exists");
       }
     });
-  } */
+  }
 
-  const { name, email, password } = req.body;
-
-  User.create({ name, email, password })
-    .then((user) => {
-      res.status(201).send(user);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  next();
 };
