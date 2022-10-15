@@ -4,6 +4,7 @@ const app = express();
 require("dotenv").config(); // access environment variables
 const db = require("./config/database"); // Connect to Database
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 
 // Middleware
 // This allows us to pass data from the form
@@ -13,6 +14,10 @@ app.use(
     extended: true,
   })
 );
+
+//Parse Cookie header
+app.use(cookieParser());
+
 // Import Routes
 const useRouters = require("./router/users");
 // Routes Middlware
