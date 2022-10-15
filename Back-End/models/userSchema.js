@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+
 const userSchema = new mongoose.Schema(
   {
     name: {
@@ -16,20 +17,23 @@ const userSchema = new mongoose.Schema(
       trim: true,
       unique: true,
     },
-    hashed_password: {
+
+    password: {
       type: String,
       require: true,
     },
+
     role: {
       type: Number,
       default: 0,
     },
+
     history: {
       type: Array,
       default: [],
     },
-  },
-  { timestamps: true }
+  }
+  //{ timestamps: true }
 );
 
 // Hash Password Before Send to Database
