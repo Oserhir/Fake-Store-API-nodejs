@@ -9,7 +9,7 @@ const {
   login_post,
   signout_get,
   Hello_get,
-} = require("../controllers/userController");
+} = require("../controllers/authController");
 
 router.get("/signup", signup_get);
 router.post("/signup", signup_post);
