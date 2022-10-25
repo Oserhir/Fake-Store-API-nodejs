@@ -1,15 +1,15 @@
-## My Ecommerce Software Requirements
+# My Ecommerce Software Requirements
 
 Goal : Build an ecommerce website using Node js, React , Express js, and Mongoose.
 
 I use Express on NodeJs for the server, MongoDB to store data as document in JSON format and Mongoose for modeling.
 
-# The features in the API :
+## The features in the API :
 
 - Signing Up, signing in and signing out of users
 - Authentication using JSON Web Tokens (JWT).
 
-# Technology
+## Technology
 
 The application is built with:
 
@@ -24,7 +24,7 @@ The application is built with:
 - jsonwebtoken@8.5.1
 - uuid@9.0.0
 
-# Database
+## Database
 
 All the models can be found in the models directory created using mongoose.
 
