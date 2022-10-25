@@ -81,6 +81,9 @@ module.exports.signout_get = (req, res) => {
   res.send("User signOUT");
 };
 
+module.exports.Hello_get = (req, res) => {
+  res.send("Hello !!!!");
+};
 // create json web token
 // Signing a token with 3 Days of expiration:
 
