@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const router = express.Router();
-const { requireSignIn } = require("../middlewares/auth");
+const { requireSignIn, isAuth } = require("../middlewares/auth");
 const {
   signup_get,
   signup_post,
@@ -20,6 +20,6 @@ router.post("/Login", login_post);
 router.get("/signout", signout_get);
 
 //  The “/Hello” route only be accessible when the user is logged in.
-router.get("/Hello", requireSignIn, Hello_get);
+router.get("/Hello", requireSignIn, isAuth, Hello_get);
 
 module.exports = router;

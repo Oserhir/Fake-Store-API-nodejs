@@ -67,7 +67,11 @@ module.exports.login_post = (req, res) => {
             const token = createToken(user._id);
             res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
             //res.status(200).send({ user: user._id });
-            res.status(200).send(user);
+            // res.status(200).send(user);
+            res.status(200).json({
+              token,
+              user,
+            });
           }
         });
       } else {
@@ -89,8 +93,8 @@ module.exports.Hello_get = (req, res) => {
 // Signing a token with 3 Days of expiration:
 
 const maxAge = 3 * 24 * 60 * 60;
-const createToken = (id) => {
-  return jwt.sign({ id }, "net ninja secret", {
+const createToken = (user_id) => {
+  return jwt.sign({ user_id }, "net ninja secret", {
     expiresIn: maxAge,
   });
 };

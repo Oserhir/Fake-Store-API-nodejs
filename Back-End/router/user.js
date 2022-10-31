@@ -5,7 +5,7 @@ const { userById } = require("../middlewares/user");
 const { requireSignIn, isAuth } = require("../middlewares/auth");
 
 // router.get("/profile/:userId", requireSignIn, isAuth, getOneUser_get);
-router.get("/profile/:userId", requireSignIn, getOneUser_get);
-router.param("userId", userById);
+router.get("/profile/:userId", requireSignIn, isAuth, getOneUser_get);
+router.param("userId", userById); // Any route contain "userId" my app will execute userByID()
 
 module.exports = router;
