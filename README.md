@@ -1,6 +1,6 @@
 # My Ecommerce Software Requirements
 
-Goal : Build an ecommerce website using Node js, React , Express js, and Mongoose.
+Goal : developed an end to end Ecommerce web Application using Node js, React , Express js, and Mongoose.
 
 I use Express on NodeJs for the server, MongoDB to store data as document in JSON format and Mongoose for modeling.
 
@@ -8,21 +8,7 @@ I use Express on NodeJs for the server, MongoDB to store data as document in JSO
 
 - Signing Up, signing in and signing out of users
 - Authentication using JSON Web Tokens (JWT).
-
-## Technology
-
-The application is built with:
-
-- express@4.18.2
-- mongoose@6.6.5
-- dotenv@16.0.3
-- bcrypt@5.1.0
-- body-parser@1.20.1
-- cookie-parser@1.4.6
-- express-jwt@7.7.7
-- joi@17.6.3
-- jsonwebtoken@8.5.1
-- uuid@9.0.0
+- Schema Validation using Joi
 
 ## Database
 
@@ -40,8 +26,29 @@ User Schema:
 
 Auth Routes:
 
-- /signup | GET | sign up page
-- /login | GET | log in page
-- /signup | Post | create a new user in db
-- /login | Post | authenticate a current user
-- /logout | GET | log a user out
+- /api/signup | GET | sign up page
+- /api/signup | POST | create a new user in db
+- /api/login | GET | log in page
+- /api/login | POST | authenticate a current user
+- /api/logout | GET | log a user out
+- /profile/:userId | GET | retrieve a user's profile information
+
+## Technology
+
+- JavaScript
+- Node.js
+- Express
+- MongoDB
+
+The application is built with:
+
+- express 4.18.2
+- mongoose 6.6.5
+- dotenv 16.0.3
+- bcrypt 5.1.0
+- body-parser 1.20.1
+- cookie-parser 1.4.6
+- express-jwt 7.7.7
+- joi 17.6.3
+- jsonwebtoken 8.5.1
+- uuid 9.0.0
