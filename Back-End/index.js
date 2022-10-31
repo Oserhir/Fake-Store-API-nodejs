@@ -20,8 +20,10 @@ app.use(cookieParser());
 
 // Import Routes
 const authRouters = require("./router/auth");
+const userRouters = require("./router/user");
 // Routes Middlware
 app.use("/api", authRouters);
+app.use("/api", userRouters);
 
 const PORT = process.env.PORT || 3000; // // Set a default environment port or cutom port - 3000
 
