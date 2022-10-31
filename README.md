@@ -40,8 +40,8 @@ User Schema:
 
 Auth Routes:
 
-/signup | GET | sign up page
-/login | GET | log in page
-/signup | Post | create a new user in db
-/login | Post | authenticate a current user
-/logout | GET | log a user out
+- /signup | GET | sign up page
+- /login | GET | log in page
+- /signup | Post | create a new user in db
+- /login | Post | authenticate a current user
+- /logout | GET | log a user out
