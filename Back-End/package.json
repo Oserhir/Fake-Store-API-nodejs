@@ -19,6 +19,7 @@
     "joi": "^17.6.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.5",
+    "slugify": "^1.6.5",
     "uuid": "^9.0.0"
   }
 }
