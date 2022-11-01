@@ -2,8 +2,6 @@
 
 Goal : developed an end to end Ecommerce web Application using Node js, React , Express js, and Mongoose.
 
-I use Express on NodeJs for the server, MongoDB to store data as document in JSON format and Mongoose for modeling.
-
 ## The features in the API :
 
 - Signing Up, signing in and signing out of users
@@ -31,9 +29,14 @@ Auth Routes:
 - /api/login | GET | log in page
 - /api/login | POST | authenticate a current user
 - /api/logout | GET | log a user out
-- /profile/:userId | GET | retrieve a user's profile information
+
+User Routes:
+
+- /api/profile/:userId | GET | retrieve a user's profile information
 
 ## Technology
+
+I use Express on NodeJs for the server, MongoDB to store data as document in JSON format and Mongoose for modeling.
 
 - JavaScript
 - Node.js
