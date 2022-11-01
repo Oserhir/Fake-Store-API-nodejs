@@ -14,10 +14,17 @@ exports.requireSignIn = expressjwt({
 });
 
 exports.isAuth = (req, res, next) => {
-  let user = req.Profile && req.auth && req.Profile._id == req.auth.id;
+  let user = req.Profile && req.auth && req.Profile._id == req.auth.user_id;
 
   if (!user) {
     return res.status(403).send("Access Denied");
+  }
+  next();
+};
+
+exports.isAdmin = (req, res, next) => {
+  if (req.auth.user_role == 0) {
+    return res.status(403).json({ error: "Admin Resource, Access Denied !" });
   }
   next();
 };

@@ -2,6 +2,7 @@ const Joi = require("joi");
 const User = require("../models/userSchema");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+require("dotenv").config(); // access environment variables
 
 module.exports.signup_get = (req, res) => {
   res.send("signUp.....");
@@ -64,7 +65,7 @@ module.exports.login_post = (req, res) => {
               .send("The password that you've entered is incorrect.");
           } else {
             // Create Token and send it to the Browser
-            const token = createToken(user._id);
+            const token = createToken(user._id, user.role);
             res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
             //res.status(200).send({ user: user._id });
             // res.status(200).send(user);
@@ -93,8 +94,14 @@ module.exports.Hello_get = (req, res) => {
 // Signing a token with 3 Days of expiration:
 
 const maxAge = 3 * 24 * 60 * 60;
-const createToken = (user_id) => {
-  return jwt.sign({ user_id }, "net ninja secret", {
+const createToken = (user_id, user_role) => {
+  return jwt.sign({ user_id, user_role }, process.env.JWT_SECRET, {
     expiresIn: maxAge,
   });
 };
+
+// const createToken = (userid, user_role) => {
+//   return jwt.sign({ userid }, process.env.JWT_SECRET, {
+//     expiresIn: maxAge,
+//   });
+// };

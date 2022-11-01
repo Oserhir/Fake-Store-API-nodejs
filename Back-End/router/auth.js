@@ -20,6 +20,6 @@ router.post("/Login", login_post);
 router.get("/signout", signout_get);
 
 //  The “/Hello” route only be accessible when the user is logged in.
-router.get("/Hello", requireSignIn, isAuth, Hello_get);
+router.get("/Hello", requireSignIn, Hello_get);
 
 module.exports = router;
