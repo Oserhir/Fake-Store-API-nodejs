@@ -2,6 +2,12 @@
 
 Goal : developed an end to end Ecommerce web Application using Node js, React , Express js, and Mongoose.
 
+## User Stories
+
+As a user I can
+
+- Create an account, login or logout
+
 ## The features in the API :
 
 - Signing Up, signing in and signing out of users
