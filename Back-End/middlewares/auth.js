@@ -14,9 +14,9 @@ exports.requireSignIn = expressjwt({
 });
 
 exports.isAuth = (req, res, next) => {
-  if (req.auth.user_role == 1) {
-    return next();
-  }
+  // if (req.auth.user_role == 1) {
+  //   return next();
+  // }
 
   let user = req.Profile && req.auth && req.Profile._id == req.auth.user_id;
 
