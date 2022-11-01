@@ -2,11 +2,16 @@
 
 Goal : developed an end to end Ecommerce web Application using Node js, React , Express js, and Mongoose.
 
-## User Stories
+## Stories
 
 As a user I can
 
 - Create an account, login or logout
+- Browse available products added by the admin
+
+As an admin I can
+
+- View all the information stored in the database. I can view/create/edit/delete orders, users, products and categories.
 
 ## The features in the API :
 
@@ -26,6 +31,11 @@ User Schema:
 - Role(Number)
 - history(array)
 
+Category Schema:
+
+- title (String)
+- slug (String)
+
 ## Route
 
 Auth Routes:
@@ -40,14 +50,13 @@ User Routes:
 
 - /api/profile/:userId | GET | retrieve a user's profile information
 
+Category Routes:
+
+- /api/category/create/:userId | POST | Add new Category
+
 ## Technology
 
 I use Express on NodeJs for the server, MongoDB to store data as document in JSON format and Mongoose for modeling.
-
-- JavaScript
-- Node.js
-- Express
-- MongoDB
 
 The application is built with:
 
