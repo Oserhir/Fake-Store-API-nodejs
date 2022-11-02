@@ -21,11 +21,11 @@ const productSchema = new mongoose.Schema(
     quantity: {
       type: Number,
     },
-    photo: {
-      type: Buffer,
-      contentType: String,
+    image: {
+      type: String,
+      required: true,
     },
-    images: [String],
+    // images: [String],
     category: {
       type: ObjectId,
       ref: "Category",
