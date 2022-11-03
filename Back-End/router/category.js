@@ -1,7 +1,11 @@
 const express = require("express");
 const app = express();
 const router = express.Router();
-const { createCategory } = require("../controllers/categoryController");
+const {
+  createCategory,
+  categoryById,
+  showCategory,
+} = require("../controllers/categoryController");
 const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
 const { userById } = require("../middlewares/user");
 
@@ -11,6 +15,10 @@ router.post(
   [requireSignIn, isAuth, isAdmin],
   createCategory
 );
+
+router.get("/:categoryId", showCategory);
+
 router.param("userId", userById);
+router.param("categoryId", categoryById);
 
 module.exports = router;
