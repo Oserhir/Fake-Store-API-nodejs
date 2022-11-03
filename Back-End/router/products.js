@@ -5,6 +5,7 @@ const {
   showProduct,
   productById,
   removeProduct,
+  updateProduct,
 } = require("../controllers/productController");
 const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
 const { userById } = require("../middlewares/user");
@@ -50,10 +51,18 @@ router.post(
 );
 
 router.get("/:productId/", showProduct);
+
 router.delete(
   "/:productId/:userId",
   [requireSignIn, isAuth, isAdmin],
   removeProduct
+);
+
+router.put(
+  "/:productId/:userId",
+  upload.single("image"),
+  [requireSignIn, isAuth, isAdmin],
+  updateProduct
 );
 
 router.param("userId", userById);

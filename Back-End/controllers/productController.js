@@ -1,5 +1,6 @@
 const productModel = require("../models/productSchema");
 const Joi = require("joi");
+const _ = require("lodash");
 
 exports.createProduct = (req, res) => {
   // Joi Validation
@@ -69,4 +70,54 @@ exports.removeProduct = (req, res) => {
   });
 
   res.status(204).json({});
+};
+
+exports.updateProduct = (req, res) => {
+  // Joi Validation
+  const schema = Joi.object({
+    name: Joi.string().required(),
+    description: Joi.string().required(),
+    price: Joi.number().required(),
+    quantity: Joi.number().required(),
+    category: Joi.string().required(),
+  });
+
+  const { error, value } = schema.validate(req.body);
+  // let image;
+
+  if (error) {
+    res.status(400).json({ error: error.details[0].message });
+  }
+
+  // image not Found
+  if (req.file == null) {
+    res.status(400).json({ error: "image could not upload" });
+  }
+
+  // image should be less than 3MB in size
+  if (req.file) {
+    if (req.file.size > Math.pow(10, 6) * 3) {
+      return res
+        .status(400)
+        .json({ error: "File size exceeds the allowable limit of(3MB)" });
+    }
+
+    image = req.file.path;
+  }
+
+  //const { name, description, price, quantity, category } = value;
+
+  let product = req.product;
+  value.image = image || product.image;
+  product = _.extend(product, value);
+
+  product.save((err, product) => {
+    if (err) {
+      res.status(400).json({
+        error: "Product update failed",
+      });
+    }
+
+    res.json({ data: product });
+  });
 };
