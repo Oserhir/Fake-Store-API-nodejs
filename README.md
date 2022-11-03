@@ -4,20 +4,23 @@ Goal : developed an end to end Ecommerce web Application using Node js, React , 
 
 ## Stories
 
-As a user I can
+As a user I want to
 
 - Create an account, login or logout
 - Browse available products added by the admin
 
-As an admin I can
+As an admin I want to
 
-- View all the information stored in the database. I can view/create/edit/delete orders, users, products and categories.
+- View all the information stored in the database. I want to view/create/edit/delete orders, users, products and categories.
 
 ## The features in the API :
 
 - Signing Up, signing in and signing out of users
 - Authentication using JSON Web Tokens (JWT).
+- admin Middlware
 - Schema Validation using Joi
+- categories - create
+- product - CRUD
 
 ## Database
 
@@ -35,6 +38,16 @@ Category Schema:
 
 - title (String)
 - slug (String)
+
+Product Schema:
+
+- title (String)
+- description (String)
+- price (Number)
+- quantity (Number)
+- imagePath (String)
+- category (ObjectId - a reference to the category schema)
+- shipping (Boolean)
 
 ## Route
 
@@ -70,3 +83,5 @@ The application is built with:
 - joi 17.6.3
 - jsonwebtoken 8.5.1
 - uuid 9.0.0
+- multer 1.4.5-lts.1
+- slugify 1.6.5
