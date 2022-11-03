@@ -1,6 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { createProduct } = require("../controllers/productController");
+const {
+  createProduct,
+  showProduct,
+  productById,
+  removeProduct,
+} = require("../controllers/productController");
 const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
 const { userById } = require("../middlewares/user");
 const multer = require("multer");
@@ -43,6 +48,15 @@ router.post(
   [requireSignIn, isAuth, isAdmin],
   createProduct
 );
+
+router.get("/:productId/", showProduct);
+router.delete(
+  "/:productId/:userId",
+  [requireSignIn, isAuth, isAdmin],
+  removeProduct
+);
+
 router.param("userId", userById);
+router.param("productId", productById);
 
 module.exports = router;

@@ -40,3 +40,33 @@ exports.createProduct = (req, res) => {
       res.status(400).json(err.message);
     });
 };
+
+exports.productById = (req, res, next, id) => {
+  productModel.findById(id).exec((err, product) => {
+    if (err || !product) {
+      return res.status(404).json({
+        errors: "Product not found !",
+      });
+    }
+
+    req.product = product;
+    next();
+  });
+};
+
+exports.showProduct = (req, res) => {
+  res.json({
+    data: req.product,
+  });
+};
+
+exports.removeProduct = (req, res) => {
+  let product = req.product;
+  product.remove((err, product) => {
+    if (err) {
+      return res.status(404).json({ error: "Product not found !" });
+    }
+  });
+
+  res.status(204).json({});
+};
