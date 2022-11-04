@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {
+  searchProduct,
   listRelated,
   allProducts,
   createProduct,
@@ -76,6 +77,8 @@ router.put(
   [requireSignIn, isAuth, isAdmin],
   updateProduct
 );
+
+router.post("/search", searchProduct);
 
 router.param("userId", userById);
 router.param("productId", productById);
