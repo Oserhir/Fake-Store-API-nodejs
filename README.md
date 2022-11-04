@@ -45,6 +45,7 @@ Product Schema:
 - description (String)
 - price (Number)
 - quantity (Number)
+- sold (Number)
 - imagePath (String)
 - category (ObjectId - a reference to the category schema)
 - shipping (Boolean)
