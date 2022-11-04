@@ -121,3 +121,29 @@ exports.updateProduct = (req, res) => {
     res.json({ data: product });
   });
 };
+
+exports.allProducts = (req, res) => {
+  /*
+   * By sell = /products?sortedBy=sold&orders=desc&limit=4
+   * By arrival = /products?sortedBy=createdAt&orders=desc&limit=4
+   * if no params are sent, then all products are returned
+   */
+
+  let sortedBy = req.query.sortedBy ? req.query.sortedBy : "_id";
+  let order = req.query.order ? req.query.order : "asc";
+  let limit = req.query.limit ? parseInt(req.query.limit) : 6;
+
+  productModel
+    .find()
+    .select("-image")
+    .populate({ path: "category", select: "name -_id" })
+    .sort([[sortedBy, order]])
+    .limit(limit)
+    .exec((err, products) => {
+      if (err) {
+        return res.status(404).json({ error: "Products not found !" });
+      }
+
+      res.json({ data: products });
+    });
+};

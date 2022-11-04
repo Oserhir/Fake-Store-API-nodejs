@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {
+  allProducts,
   createProduct,
   showProduct,
   productById,
@@ -43,6 +44,10 @@ const joinString = (str, char) => {
   return str.split(" ").join(char);
 };
 
+// retrieve all products
+router.get("/", allProducts);
+
+// Create
 router.post(
   "/create/:userId",
   upload.single("image"),
@@ -50,14 +55,17 @@ router.post(
   createProduct
 );
 
+// Show Single Product
 router.get("/:productId/", showProduct);
 
+// Delete
 router.delete(
   "/:productId/:userId",
   [requireSignIn, isAuth, isAdmin],
   removeProduct
 );
 
+// Update
 router.put(
   "/:productId/:userId",
   upload.single("image"),
