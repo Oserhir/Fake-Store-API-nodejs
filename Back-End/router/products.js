@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {
+  listRelated,
   allProducts,
   createProduct,
   showProduct,
@@ -46,6 +47,9 @@ const joinString = (str, char) => {
 
 // retrieve all products
 router.get("/", allProducts);
+
+// retrieve related products
+router.get("/related/:productId/", listRelated);
 
 // Create
 router.post(

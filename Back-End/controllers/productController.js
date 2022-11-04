@@ -136,7 +136,7 @@ exports.allProducts = (req, res) => {
   productModel
     .find()
     .select("-image")
-    .populate({ path: "category", select: "name -_id" })
+    .populate({ path: "category", select: "name _id" })
     .sort([[sortedBy, order]])
     .limit(limit)
     .exec((err, products) => {
@@ -145,5 +145,22 @@ exports.allProducts = (req, res) => {
       }
 
       res.json({ data: products });
+    });
+};
+
+exports.listRelated = (req, res) => {
+  let limit = req.query.limit ? parseInt(req.query.limit) : 6;
+
+  productModel
+    .find({ category: req.product.category, _id: { $ne: req.product._id } })
+    .limit(limit)
+    .select("-image")
+    .populate("category", "_id name")
+    .exec((err, products) => {
+      if (err) {
+        res.status(404).json({ err: "Produts not found !" });
+      }
+
+      res.json(products);
     });
 };
