@@ -19,7 +19,7 @@ As an admin I want to
 - Authentication using JSON Web Tokens (JWT).
 - admin Middlware
 - Schema Validation using Joi
-- categories - create
+- categories - CRUD
 - product - CRUD
 
 ## Database
@@ -63,9 +63,20 @@ User Routes:
 
 - /api/profile/:userId | GET | retrieve a user's profile information
 
+Product Routes:
+
+- /api/product/create/:userId | POST | Add new product
+- /api/product/:productId | GET | show single product
+- /api/product/:productId/:userId" | PUT | Update product
+- /api/product/:productId/:userId" | DELETE | Delete product
+
 Category Routes:
 
 - /api/category/create/:userId | POST | Add new Category
+- /api/category/ | GET | show all Categories
+- /api/category/:categoryId | GET | show single Category
+- /api/category/:categoryId | PUT | UPDATE Category
+- /api/category/:categoryId | DELETE | Delete Category
 
 ## Technology
 

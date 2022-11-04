@@ -2,21 +2,41 @@ const express = require("express");
 const app = express();
 const router = express.Router();
 const {
+  allCategories,
+  showCategory,
   createCategory,
   categoryById,
-  showCategory,
+  updateCategory,
+  deleteCategory,
 } = require("../controllers/categoryController");
 const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
 const { userById } = require("../middlewares/user");
 
-// router.post("/create", requireSignIn, isAuth, isAdmin, createCategory);
+// allCategories
+router.get("/", allCategories);
+
+// showCategory
+router.get("/:categoryId", showCategory);
+
+// Create
 router.post(
   "/create/:userId",
   [requireSignIn, isAuth, isAdmin],
   createCategory
 );
+// update
+router.put(
+  "/:categoryId/:userId",
+  [requireSignIn, isAuth, isAdmin],
+  updateCategory
+);
 
-router.get("/:categoryId", showCategory);
+// Delete
+router.delete(
+  "/:categoryId/:userId",
+  [requireSignIn, isAuth, isAdmin],
+  deleteCategory
+);
 
 router.param("userId", userById);
 router.param("categoryId", categoryById);

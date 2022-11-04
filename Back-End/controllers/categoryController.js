@@ -30,6 +30,47 @@ exports.categoryById = (req, res, next, id) => {
     next();
   });
 };
+
 exports.showCategory = (req, res) => {
   res.send({ category: req.Category });
+};
+
+exports.allCategories = (req, res) => {
+  CategoryModel.find().exec((err, categories) => {
+    if (err) {
+      return res.status(500).json({
+        error: err,
+      });
+    }
+
+    res.json({
+      categories: categories,
+    });
+  });
+};
+
+exports.updateCategory = (req, res) => {
+  let category = req.Category;
+  const nameCategory = req.body.name;
+  category.name = nameCategory;
+  category.slug = slugify(nameCategory);
+
+  category.save((err, category) => {
+    if (err) {
+      return res.status(400).json({ err: "bad request !" });
+    }
+  });
+
+  res.json({ category, message: "Category updated" });
+};
+exports.deleteCategory = (req, res) => {
+  let category = req.Category;
+
+  category.remove((err, category) => {
+    if (err) {
+      return res.status(400).json({ err: "category not found!" });
+    }
+
+    res.status(204).json({});
+  });
 };
