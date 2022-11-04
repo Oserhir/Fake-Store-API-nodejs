@@ -75,8 +75,8 @@ Category Routes:
 - /api/category/create/:userId | POST | Add new Category
 - /api/category/ | GET | show all Categories
 - /api/category/:categoryId | GET | show single Category
-- /api/category/:categoryId | PUT | UPDATE Category
-- /api/category/:categoryId | DELETE | Delete Category
+- /api/category/:categoryId/:userId | PUT | Update Category
+- /api/category/:categoryId/:userId | DELETE | Delete Category
 
 ## Technology
 
@@ -96,3 +96,10 @@ The application is built with:
 - uuid 9.0.0
 - multer 1.4.5-lts.1
 - slugify 1.6.5
+
+## Run
+
+To run this application, you have to set your own environmental variables. For security reasons, Below are the variables that you need to set in order to run the application:
+
+- dbDatabaseURL
+- JWT_SECRET
