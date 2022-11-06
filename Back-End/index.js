@@ -28,6 +28,16 @@ app.use("/api", authRouters);
 app.use("/api", userRouters);
 app.use("/api/category", categoryRouters);
 app.use("/api/product", productRouters);
+// Handle Unhandled Routes
+app.all("*", (req, res, next) => {
+  // create error and send it to errors handling middlware
+  const err = new Error(`Can't find this route ${req.originalUrl}`);
+  next(err.message); // send it to Global handling middlware
+});
+// Global handling middlware
+app.use((err, req, res, next) => {
+  res.status(404).json({ err });
+});
 
 const PORT = process.env.PORT || 3000; // // Set a default environment port or cutom port - 3000
 
