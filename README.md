@@ -1,6 +1,6 @@
 # My Ecommerce Software Requirements
 
-Goal : developed an end to end Ecommerce web Application using Node js, React , Express js, and Mongoose.
+Goal : developed an end to end Ecommerce web Application using Node js , Express js, and Mongoose.
 
 <!---
 ## Stories
@@ -23,6 +23,7 @@ and --->
 - Schema Validation using Joi
 - categories - CRUD - Get List of Categories - Get specific Category
 - product - CRUD
+- Handling Errors ( Handle Unhandled Routes )
 
 ## Database
 
@@ -79,8 +80,8 @@ Category Routes:
 - /api/category/create/:userId | POST | Private | create Category
 - /api/category/?page=2&limit=1 | GET | Public | Get List of Categories
 - /api/category/:categoryId | GET | Public | Get specific Category
-- /api/category/:categoryId/:userId | PUT | Private |Update specific Category
-- /api/category/:categoryId/:userId | DELETE | Private |Delete specific Category
+- /api/category/:categoryId/:userId | PUT | Private | Update specific Category
+- /api/category/:categoryId/:userId | DELETE | Private | Delete specific Category
 
 ## Technology
 
