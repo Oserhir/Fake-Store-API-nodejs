@@ -5,6 +5,8 @@ require("dotenv").config(); // access environment variables
 const db = require("./config/database"); // Connect to Database
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const APIError = require("./utils/APIError");
+const globalError = require("./middlewares/errorMiddleware");
 
 // Middleware
 // This allows us to pass data from the form
@@ -31,13 +33,12 @@ app.use("/api/product", productRouters);
 // Handle Unhandled Routes
 app.all("*", (req, res, next) => {
   // create error and send it to errors handling middlware
-  const err = new Error(`Can't find this route ${req.originalUrl}`);
-  next(err.message); // send it to Global handling middlware
+  // const err = new Error(`Can't find this route ${req.originalUrl}`);
+  // next(err.message); // send it to Global handling middlware
+  next(new APIError(`Can't find this route ${req.originalUrl}`, 400)); // send it to Global handling middlware
 });
 // Global handling middlware
-app.use((err, req, res, next) => {
-  res.status(404).json({ err });
-});
+app.use(globalError);
 
 const PORT = process.env.PORT || 3000; // // Set a default environment port or cutom port - 3000
 
