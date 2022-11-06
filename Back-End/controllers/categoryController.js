@@ -19,9 +19,11 @@ const asyncHandler = require("express-async-handler");
 //   });
 // };
 
+//  @desc create category
+//  @route POST /api/category/create/:userId
+//  @access Private
 exports.createCategory = asyncHandler(async (req, res) => {
   const { name } = req.body;
-  // async await
   const category = await CategoryModel.create({ name, slug: slugify(name) });
   res.status(201).json({ data: category });
 });
@@ -43,18 +45,29 @@ exports.showCategory = (req, res) => {
   res.send({ category: req.Category });
 };
 
+//  @desc Get List of Categories
+//  @route GET /api/category?page=2&limit=1
+//  @access Public
 exports.allCategories = (req, res) => {
-  CategoryModel.find().exec((err, categories) => {
-    if (err) {
-      return res.status(500).json({
-        error: err,
-      });
-    }
+  const page = req.query.page * 1 || 1;
+  const limit = req.query.limit || 5;
+  const skip = (page - 1) * limit;
 
-    res.json({
-      categories: categories,
+  CategoryModel.find()
+    .skip(skip)
+    .limit(limit)
+    .exec((err, categories) => {
+      if (err) {
+        return res.status(500).json({
+          error: err,
+        });
+      }
+
+      res.json({
+        page: page,
+        categories: categories,
+      });
     });
-  });
 };
 
 exports.updateCategory = (req, res) => {

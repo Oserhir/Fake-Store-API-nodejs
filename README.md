@@ -74,7 +74,7 @@ Product Routes:
 Category Routes:
 
 - /api/category/create/:userId | POST | create Category
-- /api/category/ | GET | Get List of Categories
+- /api/category/?page=2&limit=1 | GET | Get List of Categories
 - /api/category/:categoryId | GET | Get specific Category
 - /api/category/:categoryId/:userId | PUT | Update specific Category
 - /api/category/:categoryId/:userId | DELETE | Delete specific Category
