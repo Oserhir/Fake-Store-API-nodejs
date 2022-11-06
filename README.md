@@ -2,6 +2,7 @@
 
 Goal : developed an end to end Ecommerce web Application using Node js, React , Express js, and Mongoose.
 
+<!---
 ## Stories
 
 As a user I want to
@@ -12,6 +13,7 @@ As a user I want to
 As an admin I want to
 
 - View all the information stored in the database. I want to view/create/edit/delete orders, users, products and categories.
+and --->
 
 ## The features in the API :
 
@@ -19,7 +21,7 @@ As an admin I want to
 - Authentication using JSON Web Tokens (JWT).
 - admin Middlware
 - Schema Validation using Joi
-- categories - CRUD
+- categories - CRUD - Get All Categories - Get specific Category
 - product - CRUD
 
 ## Database
