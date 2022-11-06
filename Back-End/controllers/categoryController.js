@@ -1,22 +1,30 @@
 const CategoryModel = require("../models/categorySchema");
 const slugify = require("slugify");
+const asyncHandler = require("express-async-handler");
 
-exports.createCategory = (req, res) => {
+// exports.createCategory = (req, res) => {
+//   const { name } = req.body;
+//   CategoryModel.findOne({ name: name }).then((category) => {
+//     if (category) {
+//       res.status(400).send("Category already exists");
+//     } else {
+//       CategoryModel.create({ name, slug: slugify(name) })
+//         .then((category) => {
+//           res.status(201).json({ data: category });
+//         })
+//         .catch((err) => {
+//           res.status(400).send(err);
+//         });
+//     }
+//   });
+// };
+
+exports.createCategory = asyncHandler(async (req, res) => {
   const { name } = req.body;
-  CategoryModel.findOne({ name: name }).then((category) => {
-    if (category) {
-      res.status(400).send("Category already exists");
-    } else {
-      CategoryModel.create({ name, slug: slugify(name) })
-        .then((category) => {
-          res.status(201).json({ data: category });
-        })
-        .catch((err) => {
-          res.status(400).send(err);
-        });
-    }
-  });
-};
+  // async await
+  const category = await CategoryModel.create({ name, slug: slugify(name) });
+  res.status(201).json({ data: category });
+});
 
 exports.categoryById = (req, res, next, id) => {
   CategoryModel.findById(id).exec((err, category) => {
