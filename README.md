@@ -73,11 +73,11 @@ Product Routes:
 
 Category Routes:
 
-- /api/category/create/:userId | POST | Add new Category
-- /api/category/ | GET | show all Categories
-- /api/category/:categoryId | GET | show single Category
-- /api/category/:categoryId/:userId | PUT | Update Category
-- /api/category/:categoryId/:userId | DELETE | Delete Category
+- /api/category/create/:userId | POST | create Category
+- /api/category/ | GET | Get List of Categories
+- /api/category/:categoryId | GET | Get specific Category
+- /api/category/:categoryId/:userId | PUT | Update specific Category
+- /api/category/:categoryId/:userId | DELETE | Delete specific Category
 
 ## Technology
 
