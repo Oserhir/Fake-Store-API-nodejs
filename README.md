@@ -21,7 +21,7 @@ and --->
 - Authentication using JSON Web Tokens (JWT).
 - admin Middlware
 - Schema Validation using Joi
-- categories - CRUD - Get All Categories - Get specific Category
+- categories - CRUD - Get List of Categories - Get specific Category
 - product - CRUD
 
 ## Database
@@ -40,6 +40,7 @@ Category Schema:
 
 - title (String)
 - slug (String)
+- image (String)
 
 Product Schema:
 
@@ -75,11 +76,11 @@ Product Routes:
 
 Category Routes:
 
-- /api/category/create/:userId | POST | create Category
-- /api/category/?page=2&limit=1 | GET | Get List of Categories
-- /api/category/:categoryId | GET | Get specific Category
-- /api/category/:categoryId/:userId | PUT | Update specific Category
-- /api/category/:categoryId/:userId | DELETE | Delete specific Category
+- /api/category/create/:userId | POST | Private | create Category
+- /api/category/?page=2&limit=1 | GET | Public | Get List of Categories
+- /api/category/:categoryId | GET | Public | Get specific Category
+- /api/category/:categoryId/:userId | PUT | Private |Update specific Category
+- /api/category/:categoryId/:userId | DELETE | Private |Delete specific Category
 
 ## Technology
 

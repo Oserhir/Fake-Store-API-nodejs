@@ -3,7 +3,7 @@ const app = express();
 const router = express.Router();
 const {
   allCategories,
-  showCategory,
+  getCategory,
   createCategory,
   categoryById,
   updateCategory,
@@ -16,7 +16,7 @@ const { userById } = require("../middlewares/user");
 router.get("/", allCategories);
 
 // showCategory
-router.get("/:categoryId", showCategory);
+router.get("/:categoryId", getCategory);
 
 // Create
 router.post(

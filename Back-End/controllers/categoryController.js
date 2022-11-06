@@ -2,23 +2,6 @@ const CategoryModel = require("../models/categorySchema");
 const slugify = require("slugify");
 const asyncHandler = require("express-async-handler");
 
-// exports.createCategory = (req, res) => {
-//   const { name } = req.body;
-//   CategoryModel.findOne({ name: name }).then((category) => {
-//     if (category) {
-//       res.status(400).send("Category already exists");
-//     } else {
-//       CategoryModel.create({ name, slug: slugify(name) })
-//         .then((category) => {
-//           res.status(201).json({ data: category });
-//         })
-//         .catch((err) => {
-//           res.status(400).send(err);
-//         });
-//     }
-//   });
-// };
-
 //  @desc create category
 //  @route POST /api/category/create/:userId
 //  @access Private
@@ -28,6 +11,7 @@ exports.createCategory = asyncHandler(async (req, res) => {
   res.status(201).json({ data: category });
 });
 
+//  Get Category  information Using Category ID
 exports.categoryById = (req, res, next, id) => {
   CategoryModel.findById(id).exec((err, category) => {
     if (err || !category) {
@@ -41,7 +25,10 @@ exports.categoryById = (req, res, next, id) => {
   });
 };
 
-exports.showCategory = (req, res) => {
+//  @desc Get specific Category
+//  @route GET /api/category/:categoryId
+//  @access Public
+exports.getCategory = (req, res) => {
   res.send({ category: req.Category });
 };
 
@@ -70,6 +57,9 @@ exports.allCategories = (req, res) => {
     });
 };
 
+//  @desc Update specific Category
+//  @route PUT /api/category/:categoryId/:userId
+//  @access Private
 exports.updateCategory = (req, res) => {
   let category = req.Category;
   const nameCategory = req.body.name;
@@ -84,6 +74,10 @@ exports.updateCategory = (req, res) => {
 
   res.json({ category, message: "Category updated" });
 };
+
+//  @desc Delete specific Category
+//  @route Delete /api/category/:categoryId/:userId
+//  @access Private
 exports.deleteCategory = (req, res) => {
   let category = req.Category;
 
