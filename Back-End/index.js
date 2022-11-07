@@ -40,6 +40,11 @@ app.all("*", (req, res, next) => {
 // Global handling middlware
 app.use(globalError);
 
+// Handle rejection outside express
+process.on("unhandledRejection", (err) => {
+  console.error(`unhandledRejection Errors ${err}`);
+});
+
 const PORT = process.env.PORT || 3000; // // Set a default environment port or cutom port - 3000
 
 // Start out application

@@ -1,6 +1,7 @@
 const CategoryModel = require("../models/categorySchema");
 const slugify = require("slugify");
 const asyncHandler = require("express-async-handler");
+const APIError = require("../utils/APIError");
 
 //  @desc create category
 //  @route POST /api/category/create/:userId
@@ -15,9 +16,10 @@ exports.createCategory = asyncHandler(async (req, res) => {
 exports.categoryById = (req, res, next, id) => {
   CategoryModel.findById(id).exec((err, category) => {
     if (err || !category) {
-      return res.status(404).json({
-        errors: "Category not found !",
-      });
+      // return res.status(404).json({
+      //   errors: "Category not found !",
+      // });
+      return next(new APIError(`Category not found !`, 404));
     }
 
     req.Category = category;
