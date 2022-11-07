@@ -83,6 +83,12 @@ Category Routes:
 - /api/category/:categoryId/:userId | PUT | Private | Update specific Category
 - /api/category/:categoryId/:userId | DELETE | Private | Delete specific Category
 
+## Validation Layer
+
+| Attribute name | Notes               |
+| -------------- | ------------------- |
+| `name`         | String,min 3,max 10 |
+
 ## Technology
 
 I use Express on NodeJs for the server, MongoDB to store data as document in JSON format and Mongoose for modeling.
