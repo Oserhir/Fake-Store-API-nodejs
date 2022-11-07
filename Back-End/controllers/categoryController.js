@@ -6,11 +6,23 @@ const APIError = require("../utils/APIError");
 //  @desc create category
 //  @route POST /api/category/create/:userId
 //  @access Private
-exports.createCategory = asyncHandler(async (req, res) => {
+exports.createCategory = (req, res) => {
   const { name } = req.body;
-  const category = await CategoryModel.create({ name, slug: slugify(name) });
-  res.status(201).json({ data: category });
-});
+
+  CategoryModel.findOne({ name: name }).then((category) => {
+    if (category) {
+      res.status(400).send("Category already exists");
+    } else {
+      CategoryModel.create({ name, slug: slugify(name) })
+        .then((category) => {
+          res.status(201).json({ data: category });
+        })
+        .catch((err) => {
+          res.status(400).send(err);
+        });
+    }
+  });
+};
 
 //  Get Category  information Using Category ID
 exports.categoryById = (req, res, next, id) => {

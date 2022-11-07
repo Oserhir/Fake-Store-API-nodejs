@@ -23,7 +23,7 @@ and --->
 - Schema Validation using Joi
 - categories - CRUD - Get List of Categories - Get specific Category
 - product - CRUD
-- Handling Errors ( Handle Unhandled Routes )
+- Handling Errors ( Handle Unhandled Routes -- Handle rejection outside express )
 
 ## Database
 
@@ -106,5 +106,5 @@ The application is built with:
 
 To run this application, you have to set your own environmental variables. For security reasons, Below are the variables that you need to set in order to run the application:
 
-- dbDatabaseURL
+- MONGO_URI
 - JWT_SECRET
