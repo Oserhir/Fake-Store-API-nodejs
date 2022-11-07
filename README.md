@@ -85,9 +85,12 @@ Category Routes:
 
 ## Validation Layer
 
-| Attribute name | Notes               |
-| -------------- | ------------------- |
-| `name`         | String,min 3,max 10 |
+Category:
+
+| Attribute name | Notes                      |
+| -------------- | -------------------------- |
+| name \*        | String,min 3,max 32,unique |
+| slug           | String,lowercase           |
 
 ## Technology
 

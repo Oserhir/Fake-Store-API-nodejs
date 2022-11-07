@@ -2,12 +2,24 @@ const CategoryModel = require("../models/categorySchema");
 const slugify = require("slugify");
 const asyncHandler = require("express-async-handler");
 const APIError = require("../utils/APIError");
+const Joi = require("joi");
 
 //  @desc create category
 //  @route POST /api/category/create/:userId
 //  @access Private
 exports.createCategory = (req, res) => {
-  const { name } = req.body;
+  // Joi Validation
+  const schema = Joi.object({
+    name: Joi.string().min(3).max(31).required(),
+  });
+
+  const { error, value } = schema.validate(req.body);
+
+  if (error) {
+    res.status(400).send(error.details[0].message);
+  }
+
+  const { name } = value;
 
   CategoryModel.findOne({ name: name }).then((category) => {
     if (category) {
@@ -75,8 +87,22 @@ exports.allCategories = (req, res) => {
 //  @route PUT /api/category/:categoryId/:userId
 //  @access Private
 exports.updateCategory = (req, res) => {
-  let category = req.Category;
+  // // Joi Validation
+  // const schema = Joi.object({
+  //   name: Joi.string().min(3).max(31).required(),
+  // });
+
+  // const { error, value } = schema.validate(req.body);
+
+  // if (error) {
+  //   res.status(400).json({ err: error.details[0].message });
+  // }
+
+  // const { name } = value;
+
   const nameCategory = req.body.name;
+
+  let category = req.Category;
   category.name = nameCategory;
   category.slug = slugify(nameCategory);
 
