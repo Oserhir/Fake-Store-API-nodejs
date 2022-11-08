@@ -21,10 +21,10 @@ and --->
 - Authentication using JSON Web Tokens (JWT).
 - admin Middlware
 - Schema Validation using Joi
-- categories - CRUD - Get List of Categories - Get specific Category
-- subcategories - CRUD
-- product - CRUD
-- Handling Errors ( Handle Unhandled Routes -- Handle rejection outside express )
+- categories ( CRUD | Get List of Categories | Get specific Category | Get All Subcategories for Specific Category | Create Subcategory on Category )
+- subcategories ( CRUD | Get List of subCategories | Get specific subCategory )
+- product ( CRUD )
+- Handling Errors ( Handle Unhandled Routes | Handle rejection outside express )
 
 ## Database
 
@@ -89,6 +89,8 @@ Category Routes:
 - /api/category/:categoryId | GET | Public | Get specific Category
 - /api/category/:categoryId/:userId | PUT | Private | Update specific Category
 - /api/category/:categoryId/:userId | DELETE | Private | Delete specific Category
+- /api/category/:categoryId/subcategories| GET | Public | Get All Subcategories for Specific Category
+- /api/category/:categoryId/subcategories | POST | Public | Create Subcategory on Category
 
 subCategory Routes:
 

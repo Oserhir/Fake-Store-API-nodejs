@@ -13,6 +13,7 @@ const userRouters = require("./router/user");
 const categoryRouters = require("./router/category");
 const productRouters = require("./router/products");
 const subCategoryRouters = require("./router/subcategory");
+const brandRouters = require("./router/brand");
 
 // Middleware
 // This allows us to pass data from the form
@@ -32,6 +33,7 @@ app.use("/api", userRouters);
 app.use("/api/category", categoryRouters);
 app.use("/api/product", productRouters);
 app.use("/api/subcategories", subCategoryRouters);
+app.use("/api/brand", brandRouters);
 
 // Handle Unhandled Routes
 app.all("*", (req, res, next) => {
