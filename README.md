@@ -51,15 +51,28 @@ subCategory Schema:
 - slug (String)
 - category (ObjectId - a reference to the category schema)
 
+brand Schema:
+
+- title (String)
+- image (String)
+
 Product Schema:
 
 - title (String)
+- slug (String)
 - description (String)
-- price (Number)
 - quantity (Number)
+- price (Number)
 - sold (Number)
-- imagePath (String)
+- priceAfterDiscount (Number)
+- Color ([String])
+- imageCover (string)
+- images ([String])
 - category (ObjectId - a reference to the category schema)
+- subcategories (ObjectId - a reference to the subcategories schema)
+- brand (ObjectId - a reference to the brand schema)
+- ratingsAverage (number)
+- ratingsQuantity (number)
 - shipping (Boolean)
 
 ## Route
@@ -132,6 +145,26 @@ Brand:
 | -------------- | -------------------------- |
 | name \*        | String,min 3,max 32,unique |
 | image          | String                     |
+
+Product:
+
+| Attribute name     | Notes                         |
+| ------------------ | ----------------------------- |
+| title \*           | String,min 3,max 100          |
+| slug \*            | String,lowercase              |
+| description \*     | String , min 20               |
+| quantity \*        | Number                        |
+| sold               | Number , default: 0           |
+| price \*           | Number, max: 200000           |
+| priceAfterDiscount | Number                        |
+| colors             | [String]                      |
+| imageCover \*      | String                        |
+| images             | [String]                      |
+| category           | ObjectId ref: 'Category'      |
+| subcategories      | ObjectId ref: 'subcategories' |
+| ratingsAverage     | Number min 1,max 5            |
+| ratingsQuantity    | Number default: 0             |
+| shipping           | boolean                       |
 
 ## Technology
 
