@@ -23,6 +23,7 @@ and --->
 - Schema Validation using Joi
 - categories ( CRUD | Get List of Categories | Get specific Category | Get All Subcategories for Specific Category | Create Subcategory on Category )
 - subcategories ( CRUD | Get List of subCategories | Get specific subCategory )
+- brand ( CRUD | Get List of Brands | Get specific brand )
 - product ( CRUD )
 - Handling Errors ( Handle Unhandled Routes | Handle rejection outside express )
 
@@ -98,7 +99,15 @@ subCategory Routes:
 - /api/subcategories/?page=2&limit=1 | GET | Public | Get List of subCategories
 - /api/subcategories/:subCategoryId | GET | Public | Get specific subCategory
 - /api/subcategories/:subCategoryId/:userId | PUT | Private | Update specific subCategory
-- /api/subcategories/:subCategoryId/:userId | DELETE | Private | Delete subspecific Category
+- /api/subcategories/:subCategoryId/:userId | DELETE | Private | Delete specific subCategory
+
+Brand Routes:
+
+- /api/brand/create/:userId | POST | Private | create Brand
+- /api/brand/?page=2&limit=1 | GET | Public | Get List of Brands
+- /api/brand/:brandId | GET | Public | Get specific Brand
+- /api/brand/:brandId/:userId | PUT | Private | Update specific Brand
+- /api/brand/:brandId/:userId | DELETE | Private | Delete specific Brand
 
 ## Validation Layer
 
@@ -116,6 +125,13 @@ subCategory:
 | name \*        | String,min 3,max 32,unique                    |
 | slug           | String,lowercase                              |
 | category \*    | subCategory must be belong to parent category |
+
+Brand:
+
+| Attribute name | Notes                      |
+| -------------- | -------------------------- |
+| name \*        | String,min 3,max 32,unique |
+| image          | String                     |
 
 ## Technology
 
