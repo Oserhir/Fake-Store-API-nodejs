@@ -8,7 +8,7 @@ const {
   createsubCategory,
   subCategoryById,
   updatesubCategory,
-  // deletesubCategory,
+  deleteSubCategory,
 } = require("../controllers/subcategoryController");
 
 const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
@@ -34,15 +34,14 @@ router.put(
   updatesubCategory
 );
 
-// // Delete
-// router.delete(
-//   "/:categoryId/:userId",
-//   [requireSignIn, isAuth, isAdmin],
-//   deletesubCategory
-// );
+// Delete
+router.delete(
+  "/:subcategoryId/:userId",
+  //[requireSignIn, isAuth, isAdmin],
+  deleteSubCategory
+);
 
 router.param("userId", userById);
 router.param("subcategoryId", subCategoryById);
-// router.param("categoryId", subcategoryById);
 
 module.exports = router;

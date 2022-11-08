@@ -72,7 +72,7 @@ exports.getsubCategories = (req, res) => {
 };
 
 //  @desc Update specific subCategory
-//  @route PUT /api/subcategories/:categoryId/:userId
+//  @route PUT /api/subcategories/:subcategoryId/:userId
 //  @access Private
 exports.updatesubCategory = (req, res) => {
   const nameSubCategory = req.body.name;
@@ -91,15 +91,14 @@ exports.updatesubCategory = (req, res) => {
   res.json({ subCategory, message: "subCategory updated" });
 };
 
-//  @desc Delete specific Category
-//  @route Delete /api/category/:categoryId/:userId
+//  @desc Delete specific subCategory
+//  @route Delete /api/subcategories/:subcategoryId/:userId
 //  @access Private
-exports.deletesubCategory = (req, res) => {
-  let category = req.Category;
-
-  category.remove((err, category) => {
-    if (err) {
-      return res.status(400).json({ err: "category not found!" });
+exports.deleteSubCategory = (req, res) => {
+  let subcategory = req.subcategory;
+  subcategory.remove((err, subcategory) => {
+    if (err || !subcategory) {
+      return res.status(400).json({ err: "subcategory not found!" });
     }
 
     res.status(204).json({});
