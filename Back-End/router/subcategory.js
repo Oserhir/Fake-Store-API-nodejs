@@ -4,9 +4,9 @@ const router = express.Router();
 
 const {
   //allsubCategories,
-  //getsubCategory,
+  getsubCategory,
   createsubCategory,
-  // subcategoryById,
+  subCategoryById,
   //updatesubCategory,
   // deletesubCategory,
 } = require("../controllers/subcategoryController");
@@ -17,8 +17,8 @@ const { userById } = require("../middlewares/user");
 // // allsubCategories
 // router.get("/", allsubCategories);
 
-// // showsubCategory
-// router.get("/:categoryId", getsubCategory);
+//  Get specific subCategory
+router.get("/:subcategoryId", getsubCategory);
 
 // Create subCategory
 router.post(
@@ -42,6 +42,7 @@ router.post(
 // );
 
 router.param("userId", userById);
+router.param("subcategoryId", subCategoryById);
 // router.param("categoryId", subcategoryById);
 
 module.exports = router;

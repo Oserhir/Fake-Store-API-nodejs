@@ -101,10 +101,11 @@ Category:
 
 subCategory:
 
-| Attribute name | Notes                      |
-| -------------- | -------------------------- |
-| name \*        | String,min 3,max 32,unique |
-| slug           | String,lowercase           |
+| Attribute name | Notes                                         |
+| -------------- | --------------------------------------------- |
+| name \*        | String,min 3,max 32,unique                    |
+| slug           | String,lowercase                              |
+| category \*    | subCategory must be belong to parent category |
 
 ## Technology
 

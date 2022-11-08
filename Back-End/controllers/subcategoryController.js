@@ -15,7 +15,6 @@ exports.createsubCategory = (req, res) => {
   });
 
   const { error, value } = schema.validate(req.body);
-  console.log(value);
 
   if (error) {
     res.status(400).send(error.details[0].message);
@@ -39,26 +38,11 @@ exports.createsubCategory = (req, res) => {
   });
 };
 
-//  Get Category  information Using Category ID
-exports.categoryById = (req, res, next, id) => {
-  CategoryModel.findById(id).exec((err, category) => {
-    if (err || !category) {
-      // return res.status(404).json({
-      //   errors: "Category not found !",
-      // });
-      return next(new APIError(`Category not found !`, 404));
-    }
-
-    req.Category = category;
-    next();
-  });
-};
-
-//  @desc Get specific Category
-//  @route GET /api/category/:categoryId
+//  @desc Get specific subCategory
+//  @route GET /api/subcategory/:subcategoryId
 //  @access Public
 exports.getsubCategory = (req, res) => {
-  res.send({ category: req.Category });
+  res.send({ subcategory: req.subcategory });
 };
 
 //  @desc Get List of Categories
@@ -117,5 +101,18 @@ exports.deletesubCategory = (req, res) => {
     }
 
     res.status(204).json({});
+  });
+};
+
+//  Get subategory information Using Category ID
+exports.subCategoryById = (req, res, next, id) => {
+  subCategoryModel.findById(id).exec((err, subCategory) => {
+    if (err || !subCategory) {
+      return res.status(404).json({
+        errors: "subCategory not found !",
+      });
+    }
+    req.subcategory = subCategory;
+    next();
   });
 };
