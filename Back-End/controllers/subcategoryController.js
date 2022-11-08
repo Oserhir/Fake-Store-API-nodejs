@@ -8,8 +8,6 @@ const Joi = require("joi");
 //  @route POST /api/subcategory/create/:userId
 //  @access Private
 exports.createsubCategory = (req, res) => {
-  console.log("Yes!");
-
   // Joi Validation
   const schema = Joi.object({
     name: Joi.string().min(3).max(31).required(),

@@ -22,6 +22,7 @@ and --->
 - admin Middlware
 - Schema Validation using Joi
 - categories - CRUD - Get List of Categories - Get specific Category
+- subcategories - CRUD
 - product - CRUD
 - Handling Errors ( Handle Unhandled Routes -- Handle rejection outside express )
 
@@ -42,6 +43,12 @@ Category Schema:
 - title (String)
 - slug (String)
 - image (String)
+
+subCategory Schema:
+
+- title (String)
+- slug (String)
+- category (ObjectId - a reference to the category schema)
 
 Product Schema:
 
@@ -86,6 +93,13 @@ Category Routes:
 ## Validation Layer
 
 Category:
+
+| Attribute name | Notes                      |
+| -------------- | -------------------------- |
+| name \*        | String,min 3,max 32,unique |
+| slug           | String,lowercase           |
+
+subCategory:
 
 | Attribute name | Notes                      |
 | -------------- | -------------------------- |
