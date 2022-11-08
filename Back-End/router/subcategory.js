@@ -12,6 +12,7 @@ const {
   subCategoryById,
   updatesubCategory,
   deleteSubCategory,
+  setCategoryTobody,
 } = require("../controllers/subcategoryController");
 
 const { categoryById } = require("../controllers/categoryController");
@@ -31,6 +32,9 @@ router.post(
   [requireSignIn, isAuth, isAdmin],
   createsubCategory
 );
+
+// Method #2 - Create subCategory
+router.post("/", setCategoryTobody, createsubCategory);
 
 // update subCategory
 router.put(

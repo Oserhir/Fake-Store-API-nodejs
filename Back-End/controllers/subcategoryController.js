@@ -4,6 +4,11 @@ const slugify = require("slugify");
 // const APIError = require("../utils/APIError");
 const Joi = require("joi");
 
+exports.setCategoryTobody = (req, res, next) => {
+  if (req.params.categoryId) req.body.category = req.params.categoryId;
+  next();
+};
+
 //  @desc create subcategory
 //  @route POST /api/subcategories/create/:userId
 //  @access Private
@@ -53,12 +58,11 @@ exports.getsubCategories = (req, res) => {
   const limit = req.query.limit || 5;
   const skip = (page - 1) * limit;
 
-  console.log("getsubCategories");
-  console.log(req.params);
-  console.log(req.Category._id);
-
   filterObject = {};
-  if (req.Category._id) filterObject = { category: req.Category._id };
+
+  if (req.params.categoryId) {
+    filterObject = { category: req.params.categoryId };
+  }
   // if (req.params.categoryId ) filterObject = { category: req.params.categoryId }; Or
 
   subCategoryModel
