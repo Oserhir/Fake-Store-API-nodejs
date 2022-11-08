@@ -90,6 +90,14 @@ Category Routes:
 - /api/category/:categoryId/:userId | PUT | Private | Update specific Category
 - /api/category/:categoryId/:userId | DELETE | Private | Delete specific Category
 
+subCategory Routes:
+
+- /api/subcategories/create/:userId | POST | Private | create subCategory
+- /api/subcategories/?page=2&limit=1 | GET | Public | Get List of subCategories
+- /api/subcategories/:subCategoryId | GET | Public | Get specific subCategory
+- /api/subcategories/:subCategoryId/:userId | PUT | Private | Update specific subCategory
+- /api/subcategories/:subCategoryId/:userId | DELETE | Private | Delete subspecific Category
+
 ## Validation Layer
 
 Category:
