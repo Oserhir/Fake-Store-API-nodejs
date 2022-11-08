@@ -3,18 +3,24 @@ const { ObjectId } = mongoose.Schema;
 // Create Schema
 const productSchema = new mongoose.Schema(
   {
-    name: {
+    title: {
       type: String,
       required: true,
-      maxlength: 150,
       trim: true,
+      minlength: 3,
+      maxlength: 100,
+    },
+    slug: {
+      type: String,
+      required: true,
+      lowercase: true,
     },
     description: {
       type: String,
       required: true,
-      maxlength: 2000,
+      minlength: 20,
     },
-    price: {
+    quantity: {
       type: Number,
       required: true,
     },
@@ -22,45 +28,43 @@ const productSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    quantity: {
+    price: {
+      type: Number,
+      required: true,
+      trim: true,
+      max: 200000,
+    },
+    priceAfterDiscount: {
       type: Number,
     },
-    image: {
+    colors: [String],
+    imageCover: {
       type: String,
       required: true,
     },
-    // images: [String],
+    images: [String],
     category: {
       type: ObjectId,
       ref: "Category",
       require: true,
     },
-    shipping: {
-      type: Boolean,
-      require: false,
-      default: false,
+    subcategories: {
+      type: ObjectId,
+      ref: "SubCategory",
     },
-    /*  priceAfterDiscount: {
-      type: Number,
-    }, 
-    color: {
-      type: [String],
-    }, 
-     brand: {
-      type: mongoose.Schema.ObjectId,
-      ref: 'Brand',
+    brand: {
+      type: ObjectId,
+      ref: "Brand",
     },
     ratingsAverage: {
       type: Number,
-      min: [1, 'Rating must be above or equal 1.0'],
-      max: [5, 'Rating must be below or equal 5.0'],
-      // set: (val) => Math.round(val * 10) / 10, // 3.3333 * 10 => 33.333 => 33 => 3.3
+      min: [1, "Rating must be above or equal 1.0"],
+      max: [5, "Rating must be below or equal 5.0"],
     },
-        ratingsQuantity: {
+    ratingsQuantity: {
       type: Number,
       default: 0,
     },
-    */
   },
   { timestamps: true }
 );
