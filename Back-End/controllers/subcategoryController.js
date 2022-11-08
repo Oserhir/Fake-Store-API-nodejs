@@ -53,8 +53,16 @@ exports.getsubCategories = (req, res) => {
   const limit = req.query.limit || 5;
   const skip = (page - 1) * limit;
 
+  console.log("getsubCategories");
+  console.log(req.params);
+  console.log(req.Category._id);
+
+  filterObject = {};
+  if (req.Category._id) filterObject = { category: req.Category._id };
+  // if (req.params.categoryId ) filterObject = { category: req.params.categoryId }; Or
+
   subCategoryModel
-    .find()
+    .find(filterObject)
     .skip(skip)
     .limit(limit)
     .exec((err, subcategories) => {
@@ -104,6 +112,11 @@ exports.deleteSubCategory = (req, res) => {
     res.status(204).json({});
   });
 };
+
+// Nested Route
+//  @desc Get All Subcategories for Specific Category
+//  @route GET /api/categories/:categoryId/subcategories
+//  @access Public
 
 //  Get subategory information Using Category ID
 exports.subCategoryById = (req, res, next, id) => {

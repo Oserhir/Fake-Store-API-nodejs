@@ -1,6 +1,14 @@
 const express = require("express");
 const app = express();
 const router = express.Router();
+
+// mergeParams: Allow us to access parameters on other routers
+// ex: We need to access categoryId from category router
+// const router = express.Router({ mergeParams: true });
+const subcategoriesRoute = require("./subcategory");
+// Nested route
+router.use("/:categoryId/subcategories", subcategoriesRoute);
+
 const {
   allCategories,
   getCategory,
@@ -11,6 +19,9 @@ const {
 } = require("../controllers/categoryController");
 const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
 const { userById } = require("../middlewares/user");
+
+// const { subcategory } = require("./subcategory");
+// router.use("/:categoryId/subcategories", subcategory);
 
 // allCategories
 router.get("/", allCategories);
