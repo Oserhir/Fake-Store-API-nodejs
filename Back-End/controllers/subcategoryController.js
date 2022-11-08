@@ -5,7 +5,7 @@ const slugify = require("slugify");
 const Joi = require("joi");
 
 //  @desc create subcategory
-//  @route POST /api/subcategory/create/:userId
+//  @route POST /api/subcategories/create/:userId
 //  @access Private
 exports.createsubCategory = (req, res) => {
   // Joi Validation
@@ -39,14 +39,14 @@ exports.createsubCategory = (req, res) => {
 };
 
 //  @desc Get specific subCategory
-//  @route GET /api/subcategory/:subcategoryId
+//  @route GET /api/subcategories/:subcategoryId
 //  @access Public
 exports.getsubCategory = (req, res) => {
   res.send({ subcategory: req.subcategory });
 };
 
 //  @desc Get List of subCategories
-//  @route GET /api/subcategory?page=2&limit=1
+//  @route GET /api/subcategories?page=2&limit=1
 //  @access Public
 exports.getsubCategories = (req, res) => {
   const page = req.query.page * 1 || 1;
@@ -71,23 +71,24 @@ exports.getsubCategories = (req, res) => {
     });
 };
 
-//  @desc Update specific Category
-//  @route PUT /api/category/:categoryId/:userId
+//  @desc Update specific subCategory
+//  @route PUT /api/subcategories/:categoryId/:userId
 //  @access Private
 exports.updatesubCategory = (req, res) => {
-  const nameCategory = req.body.name;
+  const nameSubCategory = req.body.name;
 
-  let category = req.Category;
-  category.name = nameCategory;
-  category.slug = slugify(nameCategory);
+  let subCategory = req.subcategory;
+  console.log(subCategory);
+  subCategory.name = nameSubCategory;
+  subCategory.slug = slugify(nameSubCategory);
 
-  category.save((err, category) => {
-    if (err) {
+  subCategory.save((err, subcategory) => {
+    if (err || !subcategory) {
       return res.status(400).json({ err: "bad request !" });
     }
   });
 
-  res.json({ category, message: "Category updated" });
+  res.json({ subCategory, message: "subCategory updated" });
 };
 
 //  @desc Delete specific Category

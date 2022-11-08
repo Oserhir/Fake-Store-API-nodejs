@@ -7,7 +7,7 @@ const {
   getsubCategory,
   createsubCategory,
   subCategoryById,
-  //updatesubCategory,
+  updatesubCategory,
   // deletesubCategory,
 } = require("../controllers/subcategoryController");
 
@@ -27,12 +27,12 @@ router.post(
   createsubCategory
 );
 
-// // update
-// router.put(
-//   "/:categoryId/:userId",
-//   [requireSignIn, isAuth, isAdmin],
-//   updatesubCategory
-// );
+// update
+router.put(
+  "/:subcategoryId/:userId",
+  [requireSignIn, isAuth, isAdmin],
+  updatesubCategory
+);
 
 // // Delete
 // router.delete(
