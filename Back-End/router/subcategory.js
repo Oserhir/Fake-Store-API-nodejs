@@ -3,7 +3,7 @@ const app = express();
 const router = express.Router();
 
 const {
-  //allsubCategories,
+  getsubCategories,
   getsubCategory,
   createsubCategory,
   subCategoryById,
@@ -15,7 +15,7 @@ const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
 const { userById } = require("../middlewares/user");
 
 // // allsubCategories
-// router.get("/", allsubCategories);
+router.get("/", getsubCategories);
 
 //  Get specific subCategory
 router.get("/:subcategoryId", getsubCategory);

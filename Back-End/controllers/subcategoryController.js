@@ -45,18 +45,19 @@ exports.getsubCategory = (req, res) => {
   res.send({ subcategory: req.subcategory });
 };
 
-//  @desc Get List of Categories
-//  @route GET /api/category?page=2&limit=1
+//  @desc Get List of subCategories
+//  @route GET /api/subcategory?page=2&limit=1
 //  @access Public
-exports.allsubCategories = (req, res) => {
+exports.getsubCategories = (req, res) => {
   const page = req.query.page * 1 || 1;
   const limit = req.query.limit || 5;
   const skip = (page - 1) * limit;
 
-  CategoryModel.find()
+  subCategoryModel
+    .find()
     .skip(skip)
     .limit(limit)
-    .exec((err, categories) => {
+    .exec((err, subcategories) => {
       if (err) {
         return res.status(500).json({
           error: err,
@@ -65,7 +66,7 @@ exports.allsubCategories = (req, res) => {
 
       res.json({
         page: page,
-        categories: categories,
+        subcategories: subcategories,
       });
     });
 };
