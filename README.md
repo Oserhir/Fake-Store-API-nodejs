@@ -79,48 +79,60 @@ Product Schema:
 
 Auth Routes:
 
-- /api/signup | GET | sign up page
-- /api/signup | POST | create a new user in db
-- /api/login | GET | log in page
-- /api/login | POST | authenticate a current user
-- /api/logout | GET | log a user out
+| @Route      | @Type | @access | @desc                       | Live |
+| ----------- | ----- | ------- | --------------------------- | ---- |
+| /api/signup | GET   | Private | sign up page                |      |
+| /api/signup | POST  | Private | create a new user in db     |      |
+| /api/login  | GET   | Private | log in page                 |      |
+| /api/login  | POST  | Private | authenticate a current user |      |
+| /api/logout | GET   | Private | log a user out              |      |
 
 User Routes:
 
-- /api/profile/:userId | GET | retrieve a user's profile information
+| @Route               | @Type | @access | @desc                                 | Live |
+| -------------------- | ----- | ------- | ------------------------------------- | ---- |
+| /api/profile/:userId | GET   | Private | retrieve a user's profile information |      |
 
 Product Routes:
 
-- /api/product/create/:userId | POST | Add new product
-- /api/product/:productId | GET | show single product
-- /api/product/:productId/:userId" | PUT | Update product
-- /api/product/:productId/:userId" | DELETE | Delete product
+| @Route                            | @Type  | @access | @desc               | Live |
+| --------------------------------- | ------ | ------- | ------------------- | ---- |
+| /api/products/create/:userId      | POST   | Private | Add new product     |      |
+| /api/products/:productId          | GET    | Private | show single product |      |
+| /api/products/:productId/:userId" | PUT    | Private | Update product      |      |
+| /api/products/:productId/:userId" | DELETE | Private | Delete product      |      |
 
 Category Routes:
 
-- /api/category/create/:userId | POST | Private | create Category
-- /api/category/?page=2&limit=1 | GET | Public | Get List of Categories
-- /api/category/:categoryId | GET | Public | Get specific Category
-- /api/category/:categoryId/:userId | PUT | Private | Update specific Category
-- /api/category/:categoryId/:userId | DELETE | Private | Delete specific Category
-- /api/category/:categoryId/subcategories| GET | Public | Get All Subcategories for Specific Category
-- /api/category/:categoryId/subcategories | POST | Public | Create Subcategory on Category
+| @Route                                  | @Type  | @access | @desc                                       | Live |
+| --------------------------------------- | ------ | ------- | ------------------------------------------- | ---- |
+| /api/category/create/:userId            | POST   | Private | create Category                             |      |
+| /api/category/?page=2&limit=1           | GET    | Public  | Get List of Categories                      |      |
+| /api/category/:categoryId               | GET    | Public  | Get specific Category                       |      |
+| /api/category/:categoryId/:userId       | PUT    | Private | Update specific Category                    |      |
+| /api/category/:categoryId/:userId       | DELETE | Private | Delete specific Category                    |      |
+| /api/category/:categoryId/subcategories | GET    | Public  | Get All Subcategories for Specific Category |      |
+| /api/category/:categoryId/subcategories | POST   | Public  | Create Subcategory on Category              |      |
 
 subCategory Routes:
 
-- /api/subcategories/create/:userId | POST | Private | create subCategory
-- /api/subcategories/?page=2&limit=1 | GET | Public | Get List of subCategories
-- /api/subcategories/:subCategoryId | GET | Public | Get specific subCategory
-- /api/subcategories/:subCategoryId/:userId | PUT | Private | Update specific subCategory
-- /api/subcategories/:subCategoryId/:userId | DELETE | Private | Delete specific subCategory
+| @Route                                    | @Type  | @access | @desc                       | Live |
+| ----------------------------------------- | ------ | ------- | --------------------------- | ---- |
+| /api/subcategories/create/:userId         | POST   | Private | create subCategory          |      |
+| /api/subcategories/?page=2&limit=1        | GET    | Public  | Get List of subCategories   |      |
+| /api/subcategories/:subCategoryId         | GET    | Public  | Get specific subCategory    |      |
+| /api/subcategories/:subCategoryId/:userId | PUT    | Private | Update specific subCategory |      |
+| /api/subcategories/:subCategoryId/:userId | DELETE | Private | Delete specific subCategory |      |
 
 Brand Routes:
 
-- /api/brand/create/:userId | POST | Private | create Brand
-- /api/brand/?page=2&limit=1 | GET | Public | Get List of Brands
-- /api/brand/:brandId | GET | Public | Get specific Brand
-- /api/brand/:brandId/:userId | PUT | Private | Update specific Brand
-- /api/brand/:brandId/:userId | DELETE | Private | Delete specific Brand
+| @Route                      | @Type  | @access | @desc                 | Live |
+| --------------------------- | ------ | ------- | --------------------- | ---- |
+| /api/brand/create/:userId   | POST   | Private | create Brand          |      |
+| /api/brand/?page=2&limit=1  | GET    | Public  | Get List of Brands    |      |
+| /api/brand/:brandId         | GET    | Public  | Get specific Brand    |      |
+| /api/brand/:brandId/:userId | PUT    | Private | Update specific Brand |      |
+| /api/brand/:brandId/:userId | DELETE | Private | Delete specific Brand |      |
 
 ## Validation Layer
 

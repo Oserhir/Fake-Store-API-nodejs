@@ -1,4 +1,5 @@
 const productModel = require("../models/productSchema");
+const categoryModel = require("../models/categorySchema");
 const Joi = require("joi");
 const _ = require("lodash");
 const slugify = require("slugify");
@@ -13,12 +14,23 @@ exports.createProduct = (req, res) => {
     description: Joi.string().min(20).max(2000).required(),
     quantity: Joi.number().required(),
     sold: Joi.number(),
-    priceAfterDiscount: Joi.number(), // Check
+    priceAfterDiscount: Joi.number().custom((value, helpers) => {
+      if (value >= req.body.price) {
+        throw new Error("priceAfterDiscount must be lower than price");
+      }
+    }),
     colors: Joi.array(),
     imageCover: Joi.string().required(),
     images: Joi.array(),
     price: Joi.number().max(20000).required(),
     category: Joi.string().required(),
+    // .custom((categoryId, helpers) => {
+    //   categoryModel.findById({ categoryId }).then((category) => {
+    //     // if (!category) {
+    //     //   throw new Error(`no category for this Id ${category._id}`);
+    //     // }
+    //   });
+    //})
     subcategories: Joi.string(),
     brand: Joi.string(),
     ratingsAverage: Joi.number().min(1).max(5),
