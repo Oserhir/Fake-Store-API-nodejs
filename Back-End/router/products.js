@@ -11,6 +11,10 @@ const {
   updateProduct,
 } = require("../controllers/productController");
 
+const {
+  createProductValidator,
+} = require("../utils/validators/productValidators");
+
 const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
 const { userById } = require("../middlewares/user");
 
@@ -53,6 +57,7 @@ router.post(
   "/create/:userId",
   // upload.single("image"),
   [requireSignIn, isAuth, isAdmin],
+  createProductValidator,
   createProduct
 );
 
@@ -64,7 +69,7 @@ router.put(
   updateProduct
 );
 
-// Delete a product 
+// Delete a product
 router.delete(
   "/:productId/:userId",
   [requireSignIn, isAuth, isAdmin],

@@ -9,7 +9,7 @@ const ObjectId = require("mongoose").Types.ObjectId;
 
 //  @desc create Product // Done
 exports.createProduct = (req, res) => {
-  req.body.slug = slugify(req.body.title);
+  // req.body.slug = slugify(req.body.title);
 
   productModel
     .create(req.body)
