@@ -46,13 +46,13 @@ const joinString = (str, char) => {
   return str.split(" ").join(char);
 };
 
-// retrieve all products
+// Get all products
 router.get("/", allProducts);
 
-// retrieve related products
+// Get related products i
 router.get("/related/:productId/", listRelated);
 
-// Create
+// Add new product
 router.post(
   "/create/:userId",
   upload.single("image"),
@@ -60,17 +60,17 @@ router.post(
   createProduct
 );
 
-// Show Single Product
+// Get a single product
 router.get("/:productId/", showProduct);
 
-// Delete
+// Delete a product
 router.delete(
   "/:productId/:userId",
   [requireSignIn, isAuth, isAdmin],
   removeProduct
 );
 
-// Update
+// Update a product
 router.put(
   "/:productId/:userId",
   upload.single("image"),
@@ -78,8 +78,10 @@ router.put(
   updateProduct
 );
 
+// Product Search
 router.post("/search", searchProduct);
 
+// Param
 router.param("userId", userById);
 router.param("productId", productById);
 

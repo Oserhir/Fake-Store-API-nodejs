@@ -11,15 +11,12 @@ const {
   Hello_get,
 } = require("../controllers/authController");
 
-router.get("/signup", signup_get);
-router.post("/signup", signup_post);
+router.get("/signup", signup_get); // sign up page
+router.post("/signup", signup_post); // create a new user in db
 
-router.get("/login", login_get);
-router.post("/Login", login_post);
+router.get("/login", login_get); // log in page
+router.post("/Login", login_post); // authenticate a current user
 
-router.get("/signout", signout_get);
-
-//  The “/Hello” route only be accessible when the user is logged in.
-router.get("/Hello", requireSignIn, Hello_get);
+router.get("/signout", signout_get); // log a user out
 
 module.exports = router;

@@ -4,7 +4,7 @@ const asyncHandler = require("express-async-handler");
 const APIError = require("../utils/APIError");
 const Joi = require("joi");
 
-//  @desc create brand
+//  @desc Add new Brand
 //  @route POST /api/brand/create/:userId
 //  @access Private
 exports.createBrand = (req, res) => {
@@ -86,8 +86,8 @@ exports.getBrands = (req, res) => {
     });
 };
 
-//  @desc Update specific Category
-//  @route PUT /api/category/:categoryId/:userId
+//  @desc Update specific Brand
+//  @route PUT /api/brand/:brandId/:userId
 //  @access Private
 exports.updateBrand = (req, res) => {
   // // Joi Validation
@@ -118,8 +118,8 @@ exports.updateBrand = (req, res) => {
   res.json({ brand, message: "Brand updated" });
 };
 
-//  @desc Delete specific Category
-//  @route Delete /api/category/:categoryId/:userId
+//  @desc Delete specific Brand
+//  @route Delete /api/brand/:brandId/:userId
 //  @access Private
 exports.deleteBrand = (req, res) => {
   let brand = req.brand;

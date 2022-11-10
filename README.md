@@ -21,11 +21,31 @@ and --->
 - Authentication using JSON Web Tokens (JWT).
 - admin Middlware
 - Schema Validation using Joi
-- categories ( CRUD | Get List of Categories | Get specific Category | Get All Subcategories for Specific Category | Create Subcategory on Category )
-- subcategories ( CRUD | Get List of subCategories | Get specific subCategory )
-- brand ( CRUD | Get List of Brands | Get specific brand )
-- product ( CRUD )
 - Handling Errors ( Handle Unhandled Routes | Handle rejection outside express )
+- categories
+  - CRUD
+  - Get List of Categories
+  - Get specific Category
+  - Get All Subcategories for Specific Category
+  - Create Subcategory on Category
+- subcategories
+  - CRUD
+  - Get List of subCategories
+  - Get specific subCategory
+- brand
+  - Add new Brand
+  - Update specific Brand
+  - Delete specific Brand
+  - Get List of Brands
+  - Get specific brand
+- product
+  - Add new product
+  - Get a single product
+  - Update a product
+  - Delete a product
+  - Get all products
+  - Get related products
+  - Product Seatrch
 
 ## Database
 
@@ -95,18 +115,22 @@ User Routes:
 
 Product Routes:
 
-| @Route                            | @Type  | @access | @desc               | Live |
-| --------------------------------- | ------ | ------- | ------------------- | ---- |
-| /api/products/create/:userId      | POST   | Private | Add new product     |      |
-| /api/products/:productId          | GET    | Private | show single product |      |
-| /api/products/:productId/:userId" | PUT    | Private | Update product      |      |
-| /api/products/:productId/:userId" | DELETE | Private | Delete product      |      |
+| @Route                            | @Type  | @access | @desc                | Live |
+| --------------------------------- | ------ | ------- | -------------------- | ---- |
+| /api/products/create/:userId      | POST   | Private | Add new product      |      |
+| /api/products/:productId          | GET    | Private | Get a single product |      |
+| /api/products/:productId/:userId" | PUT    | Private | Update a product     |      |
+| /api/products/:productId/:userId" | DELETE | Private | Delete a product     |      |
+| /api/products/                    | GET    | Public  | Get all products     |      |
+| /api/products/related/:productId/ | GET    | Public  | Get related products |      |
+| /api/products/search              | POST   | Public  | Product Search       |      |
 
 Category Routes:
 
 | @Route                                  | @Type  | @access | @desc                                       | Live |
 | --------------------------------------- | ------ | ------- | ------------------------------------------- | ---- |
-| /api/category/create/:userId            | POST   | Private | create Category                             |      |
+| /api/category/create/:userId            | POST   | Private | Add new Category                            |      |
+| /api/category/?limit=1                  | GET    | Public  | Get List of Categories ( Limit results)     |      |
 | /api/category/?page=2&limit=1           | GET    | Public  | Get List of Categories                      |      |
 | /api/category/:categoryId               | GET    | Public  | Get specific Category                       |      |
 | /api/category/:categoryId/:userId       | PUT    | Private | Update specific Category                    |      |
@@ -116,19 +140,20 @@ Category Routes:
 
 subCategory Routes:
 
-| @Route                                    | @Type  | @access | @desc                       | Live |
-| ----------------------------------------- | ------ | ------- | --------------------------- | ---- |
-| /api/subcategories/create/:userId         | POST   | Private | create subCategory          |      |
-| /api/subcategories/?page=2&limit=1        | GET    | Public  | Get List of subCategories   |      |
-| /api/subcategories/:subCategoryId         | GET    | Public  | Get specific subCategory    |      |
-| /api/subcategories/:subCategoryId/:userId | PUT    | Private | Update specific subCategory |      |
-| /api/subcategories/:subCategoryId/:userId | DELETE | Private | Delete specific subCategory |      |
+| @Route                                    | @Type  | @access | @desc                                      | Live |
+| ----------------------------------------- | ------ | ------- | ------------------------------------------ | ---- |
+| /api/subcategories/create/:userId         | POST   | Private | Add new subCategory                        |      |
+| /api/subcategories/?limit=1               | GET    | Public  | Get List of subCategories ( Limit results) |      |
+| /api/subcategories/?page=2&limit=1        | GET    | Public  | Get List of subCategories                  |      |
+| /api/subcategories/:subCategoryId         | GET    | Public  | Get specific subCategory                   |      |
+| /api/subcategories/:subCategoryId/:userId | PUT    | Private | Update specific subCategory                |      |
+| /api/subcategories/:subCategoryId/:userId | DELETE | Private | Delete specific subCategory                |      |
 
 Brand Routes:
 
 | @Route                      | @Type  | @access | @desc                 | Live |
 | --------------------------- | ------ | ------- | --------------------- | ---- |
-| /api/brand/create/:userId   | POST   | Private | create Brand          |      |
+| /api/brand/create/:userId   | POST   | Private | Add new Brand         |      |
 | /api/brand/?page=2&limit=1  | GET    | Public  | Get List of Brands    |      |
 | /api/brand/:brandId         | GET    | Public  | Get specific Brand    |      |
 | /api/brand/:brandId/:userId | PUT    | Private | Update specific Brand |      |
@@ -160,23 +185,23 @@ Brand:
 
 Product:
 
-| Attribute name     | Notes                         |
-| ------------------ | ----------------------------- |
-| title \*           | String,min 3,max 100          |
-| slug \*            | String,lowercase              |
-| description \*     | String , min 20               |
-| quantity \*        | Number                        |
-| sold               | Number , default: 0           |
-| price \*           | Number, max: 200000           |
-| priceAfterDiscount | Number                        |
-| colors             | [String]                      |
-| imageCover \*      | String                        |
-| images             | [String]                      |
-| category           | ObjectId ref: 'Category'      |
-| subcategories      | ObjectId ref: 'subcategories' |
-| ratingsAverage     | Number min 1,max 5            |
-| ratingsQuantity    | Number default: 0             |
-| shipping           | boolean                       |
+| Attribute name     | Notes                                                               |
+| ------------------ | ------------------------------------------------------------------- |
+| title \*           | String,min 3,max 100                                                |
+| slug \*            | String,lowercase                                                    |
+| description \*     | String , min 20                                                     |
+| quantity \*        | Number                                                              |
+| sold               | Number , default: 0                                                 |
+| price \*           | Number, max: 200000                                                 |
+| priceAfterDiscount | Number , priceAfterDiscount must be lower than price                |
+| colors             | [String]                                                            |
+| imageCover \*      | String                                                              |
+| images             | [String]                                                            |
+| category           | Valid MongoDB ObjectId ,Validate Category Existence in The DB       |
+| subcategories      | Valid MongoDB ObjectId , Validate Subcategories Existence in Our DB |
+| ratingsAverage     | Number min 1,max 5                                                  |
+| ratingsQuantity    | Number default: 0                                                   |
+| shipping           | boolean                                                             |
 
 ## Technology
 
@@ -203,3 +228,18 @@ To run this application, you have to set your own environmental variables. For s
 
 - MONGO_URI
 - JWT_SECRET
+
+<!-- 
+## How to use it
+
+
+Products :
+
+Get all products
+
+```JavaScript
+fetch('https://x.com/products')
+    .then(res=>res.json())
+    .then(json=>console.log(json))
+```
+-- >

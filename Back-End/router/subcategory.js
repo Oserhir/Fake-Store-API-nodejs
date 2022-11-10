@@ -20,13 +20,13 @@ const { categoryById } = require("../controllers/categoryController");
 const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
 const { userById } = require("../middlewares/user");
 
-// // Get all subCategories
+// Get List of subCategories
 router.get("/", getsubCategories);
 
 //  Get specific subCategory
 router.get("/:subcategoryId", getsubCategory);
 
-// Create subCategory
+// Add new subCategory
 router.post(
   "/create/:userId",
   [requireSignIn, isAuth, isAdmin],
@@ -36,17 +36,17 @@ router.post(
 // Method #2 - Create subCategory
 router.post("/", setCategoryTobody, createsubCategory);
 
-// update subCategory
+// Update specific subCategory
 router.put(
   "/:subcategoryId/:userId",
   [requireSignIn, isAuth, isAdmin],
   updatesubCategory
 );
 
-// Delete subCategory
+// Delete specific subCategory
 router.delete(
   "/:subcategoryId/:userId",
-  //[requireSignIn, isAuth, isAdmin],
+  [requireSignIn, isAuth, isAdmin],
   deleteSubCategory
 );
 
