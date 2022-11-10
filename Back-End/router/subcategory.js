@@ -1,6 +1,13 @@
 const express = require("express");
 const app = express();
 
+const {
+  deleteSubCategoryValidator,
+  updateSubCategoryValidator,
+  createSubCategoryValidator,
+  getSpecifiqueCategoriesValidator,
+} = require("../utils/validators/subCategoryValidators");
+
 // mergeParams: Allow us to access parameters on other routers
 // ex: We need to access categoryId from category router
 const router = express.Router({ mergeParams: true });
@@ -21,7 +28,7 @@ const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
 const { userById } = require("../middlewares/user");
 
 // Get List of subCategories
-router.get("/", getsubCategories);
+router.get("/", getSpecifiqueCategoriesValidator, getsubCategories);
 
 //  Get specific subCategory
 router.get("/:subcategoryId", getsubCategory);
@@ -30,16 +37,23 @@ router.get("/:subcategoryId", getsubCategory);
 router.post(
   "/create/:userId",
   [requireSignIn, isAuth, isAdmin],
+  createSubCategoryValidator,
   createsubCategory
 );
 
 // Method #2 - Create subCategory
-router.post("/", setCategoryTobody, createsubCategory);
+router.post(
+  "/",
+  setCategoryTobody,
+  createSubCategoryValidator,
+  createsubCategory
+);
 
 // Update specific subCategory
 router.put(
   "/:subcategoryId/:userId",
   [requireSignIn, isAuth, isAdmin],
+  updateSubCategoryValidator,
   updatesubCategory
 );
 
@@ -47,6 +61,7 @@ router.put(
 router.delete(
   "/:subcategoryId/:userId",
   [requireSignIn, isAuth, isAdmin],
+  //deleteSubCategoryValidator,
   deleteSubCategory
 );
 

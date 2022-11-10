@@ -5,6 +5,12 @@ const router = express.Router();
 // mergeParams: Allow us to access parameters on other routers
 // ex: We need to access categoryId from category router
 const subcategoriesRoute = require("./subcategory");
+const {
+  getSpecifiqueCategoriesValidator,
+  createCategoryValidator,
+  updateCategoryValidator,
+  deleteCategoryValidator,
+} = require("../utils/validators/categoryValidators");
 
 // Get All Subcategories for Specific Category
 // Create Subcategory on Category
@@ -25,12 +31,13 @@ const { userById } = require("../middlewares/user");
 router.get("/", allCategories);
 
 // Get specific Category
-router.get("/:categoryId", getCategory);
+router.get("/:categoryId", getSpecifiqueCategoriesValidator, getCategory);
 
 // Add new Category
 router.post(
   "/create/:userId",
   [requireSignIn, isAuth, isAdmin],
+  createCategoryValidator,
   createCategory
 );
 
@@ -38,6 +45,7 @@ router.post(
 router.put(
   "/:categoryId/:userId",
   [requireSignIn, isAuth, isAdmin],
+  updateCategoryValidator,
   updateCategory
 );
 
@@ -45,6 +53,7 @@ router.put(
 router.delete(
   "/:categoryId/:userId",
   [requireSignIn, isAuth, isAdmin],
+  deleteCategoryValidator,
   deleteCategory
 );
 

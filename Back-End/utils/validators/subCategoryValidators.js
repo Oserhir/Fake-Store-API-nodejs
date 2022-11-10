@@ -6,18 +6,18 @@ exports.getSpecifiqueCategoriesValidator = [
   validatorMiddleware,
 ];
 
-exports.createCategoryValidator = [
+exports.createSubCategoryValidator = [
   body("name")
     .notEmpty()
-    .withMessage("Category Required")
+    .withMessage("SubCategory Required")
     .isLength({ min: 3 })
-    .withMessage("Too short category name")
+    .withMessage("Too short subcategory name")
     .isLength({ max: 32 })
-    .withMessage("Too long category name"),
+    .withMessage("Too long subcategory name"),
   validatorMiddleware,
 ];
 
-exports.updateCategoryValidator = [
+exports.updateSubCategoryValidator = [
   // body("categoryId").isMongoId().withMessage("Invalid Category Id"),
   body("name")
     .notEmpty()
@@ -29,7 +29,7 @@ exports.updateCategoryValidator = [
   validatorMiddleware,
 ];
 
-exports.deleteCategoryValidator = [
+exports.deleteSubCategoryValidator = [
   // body("categoryId").isMongoId().withMessage("Invalid Category Id"),
   validatorMiddleware,
 ];

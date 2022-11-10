@@ -1,8 +1,5 @@
 const subCategoryModel = require("../models/subcategorySchema");
 const slugify = require("slugify");
-// const asyncHandler = require("express-async-handler");
-// const APIError = require("../utils/APIError");
-const Joi = require("joi");
 
 exports.setCategoryTobody = (req, res, next) => {
   if (req.params.categoryId) req.body.category = req.params.categoryId;
@@ -10,23 +7,8 @@ exports.setCategoryTobody = (req, res, next) => {
 };
 
 //  @desc create subcategory
-//  @route POST /api/subcategories/create/:userId
-//  @access Private
 exports.createsubCategory = (req, res) => {
-  // Joi Validation
-  const schema = Joi.object({
-    name: Joi.string().min(3).max(31).required(),
-    category: Joi.string().required(),
-  });
-
-  const { error, value } = schema.validate(req.body);
-
-  if (error) {
-    res.status(400).send(error.details[0].message);
-  }
-
-  const { name, category } = value;
-
+  const { name, category } = req.body;
   subCategoryModel.findOne({ name: name }).then((subcategory) => {
     if (subcategory) {
       res.status(400).send("subCategory already exists");
@@ -44,15 +26,11 @@ exports.createsubCategory = (req, res) => {
 };
 
 //  @desc Get specific subCategory
-//  @route GET /api/subcategories/:subcategoryId
-//  @access Public
 exports.getsubCategory = (req, res) => {
   res.send({ subcategory: req.subcategory });
 };
 
 //  @desc Get List of subCategories
-//  @route GET /api/subcategories?page=2&limit=1
-//  @access Public
 exports.getsubCategories = (req, res) => {
   const page = req.query.page * 1 || 1;
   const limit = req.query.limit || 5;
@@ -84,8 +62,6 @@ exports.getsubCategories = (req, res) => {
 };
 
 //  @desc Update specific subCategory
-//  @route PUT /api/subcategories/:subcategoryId/:userId
-//  @access Private
 exports.updatesubCategory = (req, res) => {
   const nameSubCategory = req.body.name;
 
@@ -104,10 +80,9 @@ exports.updatesubCategory = (req, res) => {
 };
 
 //  @desc Delete specific subCategory
-//  @route Delete /api/subcategories/:subcategoryId/:userId
-//  @access Private
 exports.deleteSubCategory = (req, res) => {
   let subcategory = req.subcategory;
+  console.log(subcategory);
   subcategory.remove((err, subcategory) => {
     if (err || !subcategory) {
       return res.status(400).json({ err: "subcategory not found!" });
@@ -116,11 +91,6 @@ exports.deleteSubCategory = (req, res) => {
     res.status(204).json({});
   });
 };
-
-// Nested Route
-//  @desc Get All Subcategories for Specific Category
-//  @route GET /api/categories/:categoryId/subcategories
-//  @access Public
 
 //  Get subategory information Using Category ID
 exports.subCategoryById = (req, res, next, id) => {
