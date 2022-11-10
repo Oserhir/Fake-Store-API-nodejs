@@ -4,23 +4,9 @@ const asyncHandler = require("express-async-handler");
 const APIError = require("../utils/APIError");
 const Joi = require("joi");
 
-//  @desc Add new Brand
-//  @route POST /api/brand/create/:userId
-//  @access Private
+// @desc Add new Brand
 exports.createBrand = (req, res) => {
-  console.log("createBrand");
-  // Joi Validation
-  const schema = Joi.object({
-    name: Joi.string().min(3).max(31).required(),
-  });
-
-  const { error, value } = schema.validate(req.body);
-
-  if (error) {
-    res.status(400).send(error.details[0].message);
-  }
-
-  const { name } = value;
+  const { name } = req.body;
 
   brandModel.findOne({ name: name }).then((brand) => {
     if (brand) {
@@ -38,31 +24,12 @@ exports.createBrand = (req, res) => {
   });
 };
 
-// Get Brand information Using Category ID
-exports.brandById = (req, res, next, id) => {
-  brandModel.findById(id).exec((err, brand) => {
-    if (err || !brand) {
-      // return res.status(404).json({
-      //   errors: "Category not found !",
-      // });
-      return next(new APIError(`Brand not found !`, 404));
-    }
-
-    req.brand = brand;
-    next();
-  });
-};
-
-//  @desc Get specific Brand
-//  @route GET /api/brand/:brandId
-//  @access Public
+// @desc Get specific Brand
 exports.getBrand = (req, res) => {
   res.send({ brand: req.brand });
 };
 
-//  @desc Get List of Brands
-//  @route GET /api/brand?page=2&limit=1
-//  @access Public
+// @desc Get List of Brands
 exports.getBrands = (req, res) => {
   const page = req.query.page * 1 || 1;
   const limit = req.query.limit || 5;
@@ -86,23 +53,8 @@ exports.getBrands = (req, res) => {
     });
 };
 
-//  @desc Update specific Brand
-//  @route PUT /api/brand/:brandId/:userId
-//  @access Private
+// @desc Update specific Brand
 exports.updateBrand = (req, res) => {
-  // // Joi Validation
-  // const schema = Joi.object({
-  //   name: Joi.string().min(3).max(31).required(),
-  // });
-
-  // const { error, value } = schema.validate(req.body);
-
-  // if (error) {
-  //   res.status(400).json({ err: error.details[0].message });
-  // }
-
-  // const { name } = value;
-
   const nameBrand = req.body.name;
 
   let brand = req.brand;
@@ -118,9 +70,7 @@ exports.updateBrand = (req, res) => {
   res.json({ brand, message: "Brand updated" });
 };
 
-//  @desc Delete specific Brand
-//  @route Delete /api/brand/:brandId/:userId
-//  @access Private
+// @desc Delete specific Brand
 exports.deleteBrand = (req, res) => {
   let brand = req.brand;
 
@@ -130,5 +80,20 @@ exports.deleteBrand = (req, res) => {
     }
 
     res.status(204).json({});
+  });
+};
+
+// @desc Get Brand information Using Category ID
+exports.brandById = (req, res, next, id) => {
+  brandModel.findById(id).exec((err, brand) => {
+    if (err || !brand) {
+      // return res.status(404).json({
+      //   errors: "Category not found !",
+      // });
+      return next(new APIError(`Brand not found !`, 404));
+    }
+
+    req.brand = brand;
+    next();
   });
 };

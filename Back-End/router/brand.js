@@ -2,6 +2,13 @@ const express = require("express");
 const app = express();
 const router = express.Router();
 
+const {
+  createBrandValidator,
+  updateBrandValidator,
+  deleteBrandValidator,
+  getSpecifiqueBrandValidator,
+} = require("../utils/validators/BrandValidators");
+
 // const subcategoriesRoute = require("./subcategory");
 // router.use("/:categoryId/subcategories", subcategoriesRoute);
 
@@ -16,22 +23,33 @@ const {
 const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
 const { userById } = require("../middlewares/user");
 
-// all Brands
+// Get List of Brands
 router.get("/", getBrands);
 
-// get Brand
-router.get("/:brandId", getBrand);
+// Get specific Brand
+router.get("/:brandId", getSpecifiqueBrandValidator, getBrand);
 
-// Create Brand
-router.post("/create/:userId", [requireSignIn, isAuth, isAdmin], createBrand);
+// Add new Brand
+router.post(
+  "/create/:userId",
+  [requireSignIn, isAuth, isAdmin],
+  createBrandValidator,
+  createBrand
+);
 
-// update Brand
-router.put("/:brandId/:userId", [requireSignIn, isAuth, isAdmin], updateBrand);
+// Update specific Brand
+router.put(
+  "/:brandId/:userId",
+  [requireSignIn, isAuth, isAdmin],
+  updateBrandValidator,
+  updateBrand
+);
 
-// // Delete
+// Delete specific Brand
 router.delete(
   "/:brandId/:userId",
   [requireSignIn, isAuth, isAdmin],
+  deleteBrandValidator,
   deleteBrand
 );
 
