@@ -75,23 +75,41 @@ exports.getProduct = (req, res) => {
 
 //  @desc Get List of Products
 exports.getProducts = (req, res) => {
-  let sortedBy = req.query.sortedBy ? req.query.sortedBy : "_id";
-  let order = req.query.order ? req.query.order : "asc";
-  let limit = req.query.limit ? parseInt(req.query.limit) : 6;
+  // Filtering ( price , ratingsAverage )
+  const queryStringObject = { ...req.query }; // { limit: '10', price: '15', ratingsAverage: '4', page: '2' }
+  const excludeFields = ["sortedBy", "order", "limit", "page"];
+  excludeFields.forEach((field) => delete queryStringObject[field]); // { price: '15', ratingsAverage: '4' }
+
+  // apply Filteration using [gte,gt,le,lte]
+  let queryStr = JSON.stringify(queryStringObject);
+  queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
+  queryStr = JSON.parse(queryStr);
+
+  // Pagination
+  const limit = req.query.limit ? parseInt(req.query.limit) : 100;
+  const page = req.query.page * 1 || 1;
+  const skip = (page - 1) * limit;
+
+  // Sorting
+  let sortedBy = "-createdAt"; // sorted By Newest
+  if (req.query.sortedBy) {
+    // change "price ,-sold" =>  [ price ,-sold ] =>  "price -sold"
+    sortedBy = req.query.sortedBy.split(",").join(" ");
+  }
 
   productModel
-    .find()
+    .find(queryStr)
     .select("-image")
     .populate({ path: "category", select: "name _id" })
-    .sort([[sortedBy, order]])
+    .sort(sortedBy)
+    .skip(skip)
     .limit(limit)
     .exec((err, products) => {
-      console.log(products);
       if (err) {
         return res.status(404).json({ error: "Products not found !" });
       }
 
-      res.json({ data: products });
+      res.json({ page: page, result: products.length, data: products });
     });
 };
 
