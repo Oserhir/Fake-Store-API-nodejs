@@ -97,13 +97,22 @@ exports.getProducts = (req, res) => {
     sortedBy = req.query.sortedBy.split(",").join(" ");
   }
 
+  // Apply Field Limiting Feature
+  let fields = "-__v -imageCover -images";
+  if (req.query.fields) {
+    // change "title,sold" =>  [ title ,sold ] =>  "title sold"
+    fields = req.query.fields.split(",").join(" ");
+  }
+
   productModel
     .find(queryStr)
-    .select("-image")
-    .populate({ path: "category", select: "name _id" })
+    //.select("-imageCover")
+    .select(fields)
+    //.populate({ path: "category", select: "name _id" })
     .sort(sortedBy)
     .skip(skip)
     .limit(limit)
+
     .exec((err, products) => {
       if (err) {
         return res.status(404).json({ error: "Products not found !" });
