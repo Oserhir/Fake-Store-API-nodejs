@@ -23,13 +23,17 @@ and --->
 - Schema Validation using Joi
 - Handling Errors ( Handle Unhandled Routes | Handle rejection outside express )
 - categories
-  - CRUD
+  - Add new Category
+  - Update specific Category
+  - Delete specific Category
   - Get List of Categories
   - Get specific Category
   - Get All Subcategories for Specific Category
   - Create Subcategory on Category
 - subcategories
-  - CRUD
+  - Add new subCategory
+  - Update specific subCategory
+  - Delete specific subCategory
   - Get List of subCategories
   - Get specific subCategory
 - brand
@@ -45,7 +49,7 @@ and --->
   - Delete a product
   - Get all products
   - Get related products
-  - Product Seatrch
+  - Product Search
 
 ## Database
 
