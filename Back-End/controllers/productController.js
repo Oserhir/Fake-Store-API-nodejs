@@ -104,8 +104,19 @@ exports.getProducts = (req, res) => {
     fields = req.query.fields.split(",").join(" ");
   }
 
+  // Apply Search Feature
+  let Search = {};
+  if (req.query.keyword) {
+    // { '$or': [ { title: [Object] }, { description: [Object] } ] }
+    Search.$or = [
+      { title: { $regex: req.query.keyword, $options: "i" } },
+      { description: { $regex: req.query.keyword, $options: "i" } },
+    ];
+  }
+
   productModel
-    .find(queryStr)
+    //.find(queryStr)
+    .find(Search)
     //.select("-imageCover")
     .select(fields)
     //.populate({ path: "category", select: "name _id" })
