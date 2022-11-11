@@ -1,6 +1,6 @@
 # My Ecommerce Software Requirements
 
-Goal : developed an end to end Ecommerce web Application using Node js , Express js, and Mongoose.
+Goal : developed an Ecommerce web Application using Node js , Express js, and Mongoose.
 
 <!---
 ## Stories
@@ -20,8 +20,11 @@ and --->
 - Signing Up, signing in and signing out of users
 - Authentication using JSON Web Tokens (JWT).
 - admin Middlware
-- Schema Validation using Joi
-- Handling Errors ( Handle Unhandled Routes | Handle rejection outside express )
+- Schema Validation using Express-Validator
+- Custom Filtertion, Pagination, Sorting, Search & Limit fields
+- Handling Errors
+  - Handle Unhandled Routes
+  - Handle rejection outside express
 - categories
   - Add new Category
   - Update specific Category
@@ -50,6 +53,45 @@ and --->
   - Get all products
   - Get related products
   - Product Search
+
+## Back-end project structure
+
+- index.js
+- config
+  - database.js
+- controllers
+  - auth.js
+  - brand.js
+  - category.js
+  - product.js
+  - subcategory.js
+  - user.js
+- middlewares
+  - errorMiddleware.js
+  - validatorMiddleware.js
+- models
+  - brands.js
+  - category.js
+  - product.js
+  - subcategory.js
+  - user.js
+- router
+  - auth.js
+  - brand.js
+  - category.js
+  - product.js
+  - subcategory.js
+  - user.js
+- utils
+  - APIError.js
+  - dummyData
+    - seeder.js
+    - products.json
+  - validators
+    - BrandValidators.js
+    - categoryValidators.js
+    - productValidators.js
+    - subCategoryValidators.js
 
 ## Database
 
@@ -119,15 +161,20 @@ User Routes:
 
 Product Routes:
 
-| @Route                            | @Type  | @access | @desc                | Live |
-| --------------------------------- | ------ | ------- | -------------------- | ---- |
-| /api/products/create/:userId      | POST   | Private | Add new product      |      |
-| /api/products/:productId          | GET    | Private | Get a single product |      |
-| /api/products/:productId/:userId" | PUT    | Private | Update a product     |      |
-| /api/products/:productId/:userId" | DELETE | Private | Delete a product     |      |
-| /api/products/                    | GET    | Public  | Get all products     |      |
-| /api/products/related/:productId/ | GET    | Public  | Get related products |      |
-| /api/products/search              | POST   | Public  | Product Search       |      |
+| @Route                                 | @Type  | @access | @desc                          | Live |
+| -------------------------------------- | ------ | ------- | ------------------------------ | ---- |
+| /api/products/create/:userId           | POST   | Private | Add new product                |      |
+| /api/products/:productId               | GET    | Private | Get a single product           |      |
+| /api/products/:productId/:userId"      | PUT    | Private | Update a product               |      |
+| /api/products/:productId/:userId"      | DELETE | Private | Delete a product               |      |
+| /api/products/related/:productId/      | GET    | Public  | Get related products           |      |
+| /api/products/search                   | POST   | Public  | Product Search                 |      |
+| /api/products/                         | GET    | Public  | Get all products               |      |
+| /api/products?limit=3                  | GET    | Public  | Limit results                  |      |
+| /api/products?sortedBy=price           | GET    | Public  | Sort results                   |      |
+| /api/products?keyword=Clark,Olsen      | GET    | Public  | Search by title or description |      |
+| /api/products?ratingsAverage[gte]=1.6  | GET    | Public  | Filter results                 |      |
+| /api/products?fields=title,description | GET    | Public  | Field Limiting                 |      |
 
 Category Routes:
 
