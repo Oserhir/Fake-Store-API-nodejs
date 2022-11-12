@@ -19,6 +19,8 @@ const {
   updateBrand,
   deleteBrand,
   brandById,
+  uploadBrandImage,
+  resizeImage,
 } = require("../controllers/brandController");
 const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
 const { userById } = require("../middlewares/user");
@@ -33,6 +35,8 @@ router.get("/:brandId", getSpecifiqueBrandValidator, getBrand);
 router.post(
   "/create/:userId",
   [requireSignIn, isAuth, isAdmin],
+  uploadBrandImage,
+  resizeImage,
   createBrandValidator,
   createBrand
 );
@@ -41,6 +45,8 @@ router.post(
 router.put(
   "/:brandId/:userId",
   [requireSignIn, isAuth, isAdmin],
+  uploadBrandImage,
+  resizeImage,
   updateBrandValidator,
   updateBrand
 );

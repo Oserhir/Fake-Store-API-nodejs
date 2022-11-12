@@ -49,6 +49,8 @@ router.post(
 router.put(
   "/:categoryId/:userId",
   [requireSignIn, isAuth, isAdmin],
+  uploadCategoryImage,
+  resizeImage,
   updateCategoryValidator,
   updateCategory
 );

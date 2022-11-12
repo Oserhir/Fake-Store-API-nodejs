@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+require("dotenv").config();
 // Create Schema
 const categorySchema = new mongoose.Schema(
   {
@@ -19,6 +19,22 @@ const categorySchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+const setImageUrl = (doc) => {
+  if (doc.image) {
+    const imageUrl = `${process.env.BASE_URL}/categories/${doc.image}`;
+    doc.image = imageUrl;
+  }
+  return doc;
+};
+// find findall update
+categorySchema.post("init", (doc) => {
+  setImageUrl(doc);
+});
+// create
+categorySchema.post("save", (doc) => {
+  setImageUrl(doc);
+});
 
 // Create model
 const CategoryModel = mongoose.model("Category", categorySchema);

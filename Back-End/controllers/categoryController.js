@@ -6,22 +6,12 @@ const Joi = require("joi");
 const { v4: uuidv4 } = require("uuid"); // create a random UUID
 const multer = require("multer");
 const sharp = require("sharp");
+const { uploadSingleImage } = require("../middlewares/uploadImageMiddlewares");
 
-// Configuration for Multer -  MemoryStorage engine
-const storage = multer.memoryStorage();
+// Upload Single Image
+exports.uploadCategoryImage = uploadSingleImage("image");
 
-const multerFilter = (req, file, cb) => {
-  if (file.mimetype.startsWith("image")) {
-    cb(null, true);
-  } else {
-    cb(new Error("Only Images Allowed"), false);
-  }
-};
-
-const upload = multer({ storage: storage, fileFilter: multerFilter });
-
-exports.uploadCategoryImage = upload.single("image");
-
+// Image Processing
 exports.resizeImage = asyncHandler(async (req, res, next) => {
   const fileName = `category-${uuidv4()}-${Date.now()}.jpeg`;
 
@@ -40,7 +30,7 @@ exports.resizeImage = asyncHandler(async (req, res, next) => {
 exports.createCategory = (req, res) => {
   // const { name } = req.body;
   req.body.slug = slugify(req.body.name);
-  console.log(req.body);
+
   CategoryModel.findOne({ name: req.body.name }).then((category) => {
     if (category) {
       res.status(400).send("Category already exists");
@@ -59,6 +49,7 @@ exports.createCategory = (req, res) => {
 //  @desc Update specific Category
 exports.updateCategory = (req, res) => {
   const { categoryId } = req.params;
+
   req.body.slug = slugify(req.body.name);
 
   CategoryModel.findOneAndUpdate(

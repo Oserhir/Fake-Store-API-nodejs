@@ -3,17 +3,39 @@ const slugify = require("slugify");
 const asyncHandler = require("express-async-handler");
 const APIError = require("../utils/APIError");
 const Joi = require("joi");
+const { v4: uuidv4 } = require("uuid"); // create a random UUID
+const sharp = require("sharp");
+const { uploadSingleImage } = require("../middlewares/uploadImageMiddlewares");
+
+// Upload Single Image
+exports.uploadBrandImage = uploadSingleImage("image");
+
+// Image Processing
+exports.resizeImage = asyncHandler(async (req, res, next) => {
+  const fileName = `brand-${uuidv4()}-${Date.now()}.jpeg`;
+
+  await sharp(req.file.buffer)
+    .resize(600, 600)
+    .toFormat("jpeg")
+    .jpeg({ quality: 90 })
+    .toFile(`uploads/brands/${fileName}`);
+
+  // Save image into our DB
+  req.body.image = fileName;
+  next();
+});
 
 // @desc Add new Brand
 exports.createBrand = (req, res) => {
-  const { name } = req.body;
+  //const { name } = req.body;
+  req.body.slug = slugify(req.body.name);
 
-  brandModel.findOne({ name: name }).then((brand) => {
+  brandModel.findOne({ name: req.body.name }).then((brand) => {
     if (brand) {
       res.status(400).send("Brand already exists");
     } else {
       brandModel
-        .create({ name, slug: slugify(name) })
+        .create(req.body)
         .then((brand) => {
           res.status(201).json({ data: brand });
         })
@@ -55,11 +77,10 @@ exports.getBrands = (req, res) => {
 
 // @desc Update specific Brand
 exports.updateBrand = (req, res) => {
-  const nameBrand = req.body.name;
-
   let brand = req.brand;
-  brand.name = nameBrand;
-  brand.slug = slugify(nameBrand);
+  brand.name = req.body.name;
+  brand.slug = slugify(req.body.name);
+  brand.image = req.body.image;
 
   brand.save((err, brand) => {
     if (err) {
