@@ -71,6 +71,15 @@ const productSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+//  Mongoose Query Middleware to Populate Category in Product
+productSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "category",
+    select: "name _id",
+  });
+  next();
+});
+
 // Create model
 const ProductModel = mongoose.model("Product", productSchema);
 module.exports = ProductModel;

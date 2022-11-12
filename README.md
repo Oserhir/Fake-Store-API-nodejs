@@ -1,7 +1,5 @@
 # My Ecommerce Software Requirements
 
-Goal : developed an Ecommerce web Application using Node js , Express js, and Mongoose.
-
 <!---
 ## Stories
 
@@ -19,7 +17,7 @@ and --->
 
 - Signing Up, signing in and signing out of users
 - Authentication using JSON Web Tokens (JWT).
-- admin Middlware
+- Admin Panel
 - Schema Validation using Express-Validator
 - Custom Filtertion, Pagination, Sorting, Search & Limit fields
 - Handling Errors

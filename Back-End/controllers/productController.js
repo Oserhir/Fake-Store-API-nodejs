@@ -77,7 +77,7 @@ exports.getProduct = (req, res) => {
 exports.getProducts = (req, res) => {
   // Filtering ( price , ratingsAverage )
   const queryStringObject = { ...req.query }; // { limit: '10', price: '15', ratingsAverage: '4', page: '2' }
-  const excludeFields = ["sortedBy", "order", "limit", "page"];
+  const excludeFields = ["sortedBy", "order", "limit", "page", "keyword"];
   excludeFields.forEach((field) => delete queryStringObject[field]); // { price: '15', ratingsAverage: '4' }
 
   // apply Filteration using [gte,gt,le,lte]
@@ -107,7 +107,6 @@ exports.getProducts = (req, res) => {
   // Apply Search Feature
   let Search = {};
   if (req.query.keyword) {
-    // { '$or': [ { title: [Object] }, { description: [Object] } ] }
     Search.$or = [
       { title: { $regex: req.query.keyword, $options: "i" } },
       { description: { $regex: req.query.keyword, $options: "i" } },
@@ -115,11 +114,9 @@ exports.getProducts = (req, res) => {
   }
 
   productModel
-    //.find(queryStr)
-    .find(Search)
-    //.select("-imageCover")
+    .find(queryStr)
     .select(fields)
-    //.populate({ path: "category", select: "name _id" })
+   // .populate({ path: "category", select: "name _id" })
     .sort(sortedBy)
     .skip(skip)
     .limit(limit)
@@ -191,13 +188,4 @@ exports.searchProduct = (req, res) => {
         data,
       });
     });
-};
-
-// Validator function
-const isValidObjectId = (id) => {
-  if (ObjectId.isValid(id)) {
-    if (String(new ObjectId(id)) === id) return true;
-    return false;
-  }
-  return false;
 };
