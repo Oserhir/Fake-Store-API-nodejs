@@ -19,38 +19,8 @@ and --->
 - Authentication using JSON Web Tokens (JWT).
 - Admin Panel
 - Schema Validation using Express-Validator
-- Custom Filtertion, Pagination, Sorting, Search & Limit fields
-- Handling Errors
-  - Handle Unhandled Routes
-  - Handle rejection outside express
-- categories
-  - Add new Category
-  - Update specific Category
-  - Delete specific Category
-  - Get List of Categories
-  - Get specific Category
-  - Get All Subcategories for Specific Category
-  - Create Subcategory on Category
-- subcategories
-  - Add new subCategory
-  - Update specific subCategory
-  - Delete specific subCategory
-  - Get List of subCategories
-  - Get specific subCategory
-- brand
-  - Add new Brand
-  - Update specific Brand
-  - Delete specific Brand
-  - Get List of Brands
-  - Get specific brand
-- product
-  - Add new product
-  - Get a single product
-  - Update a product
-  - Delete a product
-  - Get all products
-  - Get related products
-  - Product Search
+- Search Feature
+- Product Information and Catalog API
 
 ## Back-end project structure
 

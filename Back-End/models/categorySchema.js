@@ -27,11 +27,11 @@ const setImageUrl = (doc) => {
   }
   return doc;
 };
-// find findall update
+
 categorySchema.post("init", (doc) => {
   setImageUrl(doc);
 });
-// create
+
 categorySchema.post("save", (doc) => {
   setImageUrl(doc);
 });

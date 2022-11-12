@@ -50,7 +50,7 @@ exports.createCategory = (req, res) => {
 exports.updateCategory = (req, res) => {
   const { categoryId } = req.params;
 
-  req.body.slug = slugify(req.body.name);
+  // req.body.slug = slugify(req.body.name);
 
   CategoryModel.findOneAndUpdate(
     { _id: categoryId },

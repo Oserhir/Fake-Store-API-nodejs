@@ -78,8 +78,6 @@ exports.getBrands = (req, res) => {
 // @desc Update specific Brand
 exports.updateBrand = (req, res) => {
   let brand = req.brand;
-  brand.name = req.body.name;
-  brand.slug = slugify(req.body.name);
   brand.image = req.body.image;
 
   brand.save((err, brand) => {

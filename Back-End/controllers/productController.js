@@ -4,8 +4,46 @@ const subCategoryModel = require("../models/subcategorySchema");
 const Joi = require("joi");
 const _ = require("lodash");
 const slugify = require("slugify");
+const multer = require("multer");
 
-const ObjectId = require("mongoose").Types.ObjectId;
+const asyncHandler = require("express-async-handler");
+const sharp = require("sharp");
+const { v4: uuidv4 } = require("uuid"); // create a random UUID
+
+const storage = multer.memoryStorage();
+
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith("image")) {
+    cb(null, true);
+  } else {
+    cb(new Error("Only Images Allowed"), false);
+  }
+};
+
+const upload = multer({ storage: storage, fileFilter: multerFilter });
+
+exports.uploadProductImages = upload.fields([
+  { name: "imageCover", maxCount: 1 },
+  { name: "images", maxCount: 8 },
+]);
+
+// Image Processing
+exports.resizeProductImage = asyncHandler(async (req, res, next) => {
+  // Image Processing for image Cover
+  if (req.files.imageCover) {
+    const imageCoverFileName = `product-${uuidv4()}-${Date.now()}-cover.jpeg`;
+    await sharp(req.files.imageCover[0].buffer)
+      .resize(600, 600)
+      .toFormat("jpeg")
+      .jpeg({ quality: 90 })
+      .toFile(`uploads/brands/${imageCoverFileName}`);
+
+    // Save image into our DB
+    req.body.imageCover = imageCoverFileName;
+    console.log(req.body);
+    // next();
+  }
+});
 
 //  @desc create Product // Done
 exports.createProduct = (req, res) => {
