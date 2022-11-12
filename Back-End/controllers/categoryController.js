@@ -3,24 +3,49 @@ const slugify = require("slugify");
 const asyncHandler = require("express-async-handler");
 const APIError = require("../utils/APIError");
 const Joi = require("joi");
+const { v4: uuidv4 } = require("uuid"); // create a random UUID
+const multer = require("multer");
+
+// Configuration for Multer -  Disk Storage engine
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/categories");
+  },
+  filename: function (req, file, cb) {
+    const ext = file.mimetype.split("/")[1]; // "category-${id}-date.now().jpeg"
+    fileName = `category-${uuidv4()}-${Date.now()}.${ext}`;
+    cb(null, fileName);
+  },
+});
+
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith("image")) {
+    cb(null, true);
+  } else {
+    cb(new Error("Only Images Allowed"), false);
+  }
+};
+
+const upload = multer({ storage: storage, fileFilter: multerFilter });
+exports.uploadCategoryImage = upload.single("image");
 
 //  @desc create category
 exports.createCategory = (req, res) => {
   const { name } = req.body;
-
-  CategoryModel.findOne({ name: name }).then((category) => {
-    if (category) {
-      res.status(400).send("Category already exists");
-    } else {
-      CategoryModel.create({ name, slug: slugify(name) })
-        .then((category) => {
-          res.status(201).json({ data: category });
-        })
-        .catch((err) => {
-          res.status(400).send(err);
-        });
-    }
-  });
+  console.log(req.file);
+  // CategoryModel.findOne({ name: name }).then((category) => {
+  //   if (category) {
+  //     res.status(400).send("Category already exists");
+  //   } else {
+  //     CategoryModel.create({ name, slug: slugify(name) })
+  //       .then((category) => {
+  //         res.status(201).json({ data: category });
+  //       })
+  //       .catch((err) => {
+  //         res.status(400).send(err);
+  //       });
+  //   }
+  // });
 };
 
 //  @desc Update specific Category
