@@ -24,6 +24,7 @@ const {
   updateCategory,
   deleteCategory,
   uploadCategoryImage,
+  resizeImage,
 } = require("../controllers/categoryController");
 const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
 const { userById } = require("../middlewares/user");
@@ -39,6 +40,7 @@ router.post(
   "/create/:userId",
   [requireSignIn, isAuth, isAdmin],
   uploadCategoryImage,
+  resizeImage,
   createCategoryValidator,
   createCategory
 );

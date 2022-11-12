@@ -5,18 +5,10 @@ const APIError = require("../utils/APIError");
 const Joi = require("joi");
 const { v4: uuidv4 } = require("uuid"); // create a random UUID
 const multer = require("multer");
+const sharp = require("sharp");
 
-// Configuration for Multer -  Disk Storage engine
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/categories");
-  },
-  filename: function (req, file, cb) {
-    const ext = file.mimetype.split("/")[1]; // "category-${id}-date.now().jpeg"
-    fileName = `category-${uuidv4()}-${Date.now()}.${ext}`;
-    cb(null, fileName);
-  },
-});
+// Configuration for Multer -  MemoryStorage engine
+const storage = multer.memoryStorage();
 
 const multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith("image")) {
@@ -27,7 +19,20 @@ const multerFilter = (req, file, cb) => {
 };
 
 const upload = multer({ storage: storage, fileFilter: multerFilter });
+
 exports.uploadCategoryImage = upload.single("image");
+
+exports.resizeImage = asyncHandler(async (req, res, next) => {
+  const fileName = `category-${uuidv4()}-${Date.now()}.jpeg`;
+
+  await sharp(req.file.buffer)
+    .resize(600, 600)
+    .toFormat("jpeg")
+    .jpeg({ quality: 90 })
+    .toFile(`uploads/categories/${fileName}`);
+
+  next();
+});
 
 //  @desc create category
 exports.createCategory = (req, res) => {
