@@ -9,8 +9,6 @@ const ObjectId = require("mongoose").Types.ObjectId;
 
 //  @desc create Product // Done
 exports.createProduct = (req, res) => {
-  // req.body.slug = slugify(req.body.title);
-
   productModel
     .create(req.body)
     .then((product) => {
@@ -116,7 +114,7 @@ exports.getProducts = (req, res) => {
   productModel
     .find(queryStr)
     .select(fields)
-   // .populate({ path: "category", select: "name _id" })
+    // .populate({ path: "category", select: "name _id" })
     .sort(sortedBy)
     .skip(skip)
     .limit(limit)
@@ -138,7 +136,7 @@ exports.listRelated = (req, res) => {
     .find({ category: req.product.category, _id: { $ne: req.product._id } })
     .limit(limit)
     .select("-image")
-    .populate("category", "_id name")
+    //.populate("category", "_id name")
     .exec((err, products) => {
       if (err) {
         res.status(404).json({ err: "Produts not found !" });
