@@ -33,8 +33,9 @@ router.post(
 // Update a product
 router.put(
   "/:productId/:userId",
-  // upload.single("image"),
   [requireSignIn, isAuth, isAdmin],
+  uploadProductImages,
+  resizeProductImage,
   updateProduct
 );
 
