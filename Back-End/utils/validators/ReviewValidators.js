@@ -1,28 +1,37 @@
-const { body } = require("express-validator");
+const { check, body } = require("express-validator");
 const validatorMiddleware = require("../../middlewares/validatorMiddleware");
+const Review = require("../../models/ReviewModel");
 
-exports.getSpecifiqueBrandValidator = [
-  validatorMiddleware,
-];
+exports.getSpecifiqueBrandValidator = [validatorMiddleware];
 
-exports.createBrandValidator = [
-  body("name")
+exports.createReviewValidator = [
+  check("title").optional(),
+  check("ratings")
     .notEmpty()
-    .withMessage("Brand Required")
-    .isLength({ min: 3 })
-    .withMessage("Too short brand name")
-    .isLength({ max: 32 })
-    .withMessage("Too long brand name"),
+    .withMessage("ratings value required")
+    .isFloat({ min: 1, max: 5 })
+    .withMessage("Ratings value must be between 1 to 5"),
+  check("user").isMongoId().withMessage("Invalid Review id format"),
+  check("product")
+    .isMongoId()
+    .withMessage("Invalid Review id format")
+    .custom((val, { req }) =>
+      // Check if logged user create review before
+      Review.findOne({ user: req.Profile._id, product: req.body.product }).then(
+        (review) => {
+          console.log(review);
+          if (review) {
+            return Promise.reject(
+              new Error("You already created a review before")
+            );
+          }
+        }
+      )
+    ),
   validatorMiddleware,
 ];
 
-exports.updateBrandValidator = [
-  // body("brandId").isMongoId().withMessage("Invalid Category Id"),
-  body("name").optional(),
-  validatorMiddleware,
-];
-
-exports.deleteBrandValidator = [
-  // body("categoryId").isMongoId().withMessage("Invalid Category Id"),
+exports.getReviewValidator = [
+  check("id").isMongoId().withMessage("Invalid Review id format"),
   validatorMiddleware,
 ];

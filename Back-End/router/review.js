@@ -2,12 +2,9 @@ const express = require("express");
 const app = express();
 const router = express.Router();
 
-// const {
-//   createBrandValidator,
-//   updateBrandValidator,
-//   deleteBrandValidator,
-//   getSpecifiqueBrandValidator,
-// } = require("../utils/validators/BrandValidators");
+const {
+  createReviewValidator,
+} = require("../utils/validators/ReviewValidators");
 
 const {
   createReview,
@@ -28,7 +25,12 @@ router.get("/", getReviews);
 router.get("/:reviewId", getReview);
 
 // Add new Review
-router.post("/create/:userId", [requireSignIn, isAuth], createReview);
+router.post(
+  "/create/:userId",
+  [requireSignIn, isAuth],
+  createReviewValidator,
+  createReview
+);
 
 // Update specific Review
 router.put(
