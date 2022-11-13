@@ -4,6 +4,7 @@ const router = express.Router();
 
 const {
   createReviewValidator,
+  updateReviewValidator,
 } = require("../utils/validators/ReviewValidators");
 
 const {
@@ -35,7 +36,8 @@ router.post(
 // Update specific Review
 router.put(
   "/:reviewId/:userId",
-  [requireSignIn, isAuth, isAdmin],
+  [requireSignIn, isAuth],
+  updateReviewValidator,
   updateReview
 );
 
