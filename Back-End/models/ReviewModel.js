@@ -5,12 +5,12 @@ const reviewSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      //required: [true, "Category required"],
     },
     ratings: {
       type: Number,
       min: 1,
       Max: 5,
+      required: [true, "Review ratings required"],
     },
     user: {
       type: ObjectId,
@@ -26,5 +26,5 @@ const reviewSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const reviewModel = mongoose.model("Category", reviewSchema);
+const reviewModel = mongoose.model("Review", reviewSchema);
 module.exports = reviewModel;

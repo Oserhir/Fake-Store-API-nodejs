@@ -19,6 +19,7 @@ const categoryRouters = require("./router/category");
 const productRouters = require("./router/products");
 const subCategoryRouters = require("./router/subcategory");
 const brandRouters = require("./router/brand");
+const reviewRouters = require("./router/review");
 
 // Middleware
 app.use(bodyParser.json()); // This allows us to pass data from the form
@@ -41,6 +42,7 @@ app.use("/api/category", categoryRouters);
 app.use("/api/products", productRouters);
 app.use("/api/subcategories", subCategoryRouters);
 app.use("/api/brand", brandRouters);
+app.use("/api/reviews", reviewRouters);
 
 // Handle Unhandled Routes
 app.all("*", (req, res, next) => {
