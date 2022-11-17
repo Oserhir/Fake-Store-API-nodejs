@@ -5,6 +5,7 @@ const router = express.Router();
 const {
   createReviewValidator,
   updateReviewValidator,
+  deleteReviewValidator,
 } = require("../utils/validators/ReviewValidators");
 
 const {
@@ -42,7 +43,12 @@ router.put(
 );
 
 // Delete specific Review
-router.delete("/:reviewId/:userId", [requireSignIn, isAuth], deleteReview);
+router.delete(
+  "/:reviewId/:userId",
+  [requireSignIn, isAuth],
+  deleteReviewValidator,
+  deleteReview
+);
 
 router.param("userId", userById);
 router.param("reviewId", reviewById);

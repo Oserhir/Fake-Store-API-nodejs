@@ -1,26 +1,19 @@
 # My Ecommerce Software Requirements
 
-<!---
-## Stories
-
-As a user I want to
-
-- Create an account, login or logout
-- Browse available products added by the admin
-
-As an admin I want to
-
-- View all the information stored in the database. I want to view/create/edit/delete orders, users, products and categories.
-and --->
-
 ## The features in the API :
 
 - Signing Up, signing in and signing out of users
+- Password forgot/reset, confirmation email on signup
 - Authentication using JSON Web Tokens (JWT).
-- Admin Panel
+- Advance searching, sorting, pagination and filtering
 - Schema Validation using Express-Validator
-- Search Feature
-- Product Information and Catalog API
+- Credit card payment with stripe
+- Cash on delivery (no online payment required)
+- Image Upload & Multiple Images Upload and image processing
+- Star rating system
+- Discount coupon code
+- Add to wishlist
+- Add to cart
 
 ## Back-end project structure
 

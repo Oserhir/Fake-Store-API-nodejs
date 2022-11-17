@@ -71,6 +71,12 @@ const productSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+productSchema.virtual("reviews", {
+  ref: "Review",
+  localField: "product",
+  foreignField: "_id",
+});
+
 //  Mongoose Query Middleware to Populate Category in Product
 productSchema.pre(/^find/, function (next) {
   this.populate({
