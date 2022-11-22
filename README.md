@@ -12,7 +12,7 @@
 - Image Upload & Multiple Images Upload and image processing
 - Star rating system \*
 - Discount coupon code \*
-- Add to wishlist \*
+- Add to wishlist
 - Add to cart \*
 
 ## Back-end project structure
@@ -65,6 +65,7 @@ User Schema:
 - password (String)
 - Role(Number)
 - history(array)
+- Wishlist [ { ObjectId - a reference to the product schema } ]
 
 Category Schema:
 
@@ -188,6 +189,14 @@ Review Routes:
 | /api/reviews/:reviewId/:userId   | PUT    | Private | Update specific review                                 |
 | /api/reviews/:reviewId/:userId   | DELETE | Private | Delete specific review                                 |
 | /api/products/:IdProduct/reviews | GET    | Public  | Get all reviews on specifique products ( Nested Route) |
+
+wishlist Routes:
+
+| @Route                           | @Type  | @access | @desc                        |
+| -------------------------------- | ------ | ------- | ---------------------------- |
+| /api/wishlist/:userId            | POST   | Private | Add Product To Wishlist      |
+| /api/wishlist/:ProductId/:userId | DELETE | Private | Remove Product From Wishlist |
+| /api/wishlist/:userId            | GET    | Public  | Get Logged User Wishlist     |
 
 ## Validation Layer
 
