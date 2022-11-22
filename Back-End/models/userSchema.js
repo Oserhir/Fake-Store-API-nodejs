@@ -32,6 +32,13 @@ const userSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    // child reference (one to many)
+    wishlist: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: "Product",
+      },
+    ],
   },
   { timestamps: true }
 );
