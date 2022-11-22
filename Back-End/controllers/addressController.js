@@ -1,15 +1,12 @@
-const asyncHandler = require("express-async-handler");
-
+const subCategoryModel = require("../models/subcategorySchema");
+const slugify = require("slugify");
 const User = require("../models/userSchema");
 
-// @desc    Add product to wishlist
-// @route   POST /api/v1/wishlist
-// @access  Protected/User
-exports.addProductToWishlist = (req, res, next) => {
+exports.addAddress = (req, res, next) => {
   // $addToSet => add productId to wishlist array if productId not exist
   User.findOneAndUpdate(
     { _id: req.Profile._id },
-    { $addToSet: { wishlist: req.body.productId } },
+    { $addToSet: { addresses: req.body } },
     { new: true },
     (err, doc) => {
       if (err) {
@@ -18,22 +15,19 @@ exports.addProductToWishlist = (req, res, next) => {
 
       res.status(200).json({
         status: "success",
-        message: "Product added successfully to your wishlist.",
-        data: doc.wishlist,
+        message: "Address added successfully.",
+        data: doc.addresses,
       });
     }
   );
 };
 
-// @desc    Remove product from wishlist
-// @route   DELETE /api/wishlist/:productId/;userId
-// @access  Protected/User
-exports.removeProductFromWishlist = asyncHandler(async (req, res, next) => {
+exports.removeAddress = (req, res, next) => {
   // $pull => remove productId from wishlist array if productId exist
 
   User.findOneAndUpdate(
     { _id: req.Profile._id },
-    { $pull: { wishlist: req.params.productId } },
+    { $pull: { addresses: { _id: req.params.addressId } } },
     { new: true },
     (err, doc) => {
       if (err) {
@@ -42,27 +36,24 @@ exports.removeProductFromWishlist = asyncHandler(async (req, res, next) => {
 
       res.status(200).json({
         status: "success",
-        message: "Product removed successfully from your wishlist.",
-        data: doc.wishlist,
+        message: "Address removed successfully.",
+        data: doc.addresses,
       });
     }
   );
-});
+};
 
-// @desc    Get logged user wishlist
-// @route   GET /api/wishlist/;IdUser
-// @access  Protected/User
-exports.getLoggedUserWishlist = (req, res, next) => {
+exports.getLoggedUserAddresses = (req, res, next) => {
   // const user = await User.findById(req.Profile._id).populate("wishlist");
 
   User.findById(req.Profile._id)
-    .populate("wishlist")
+    .populate("addresses")
     .then((user) => {
       if (user) {
         res.status(200).json({
           status: "success",
-          results: user.wishlist.length,
-          data: user.wishlist,
+          results: user.addresses.length,
+          data: user.addresses,
         });
       }
     });
