@@ -2,9 +2,6 @@ const express = require("express");
 const app = express();
 const router = express.Router();
 
-// mergeParams: Allow us to access parameters on other routers
-// ex: We need to access categoryId from category router
-const subcategoriesRoute = require("./subcategory");
 const {
   getSpecifiqueCategoriesValidator,
   createCategoryValidator,
@@ -12,8 +9,8 @@ const {
   deleteCategoryValidator,
 } = require("../utils/validators/categoryValidators");
 
-// Get All Subcategories for Specific Category
-// Create Subcategory on Category
+// Nested Route
+const subcategoriesRoute = require("./subcategory");
 router.use("/:categoryId/subcategories", subcategoriesRoute);
 
 const {

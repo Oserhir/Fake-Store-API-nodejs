@@ -1,6 +1,24 @@
 const express = require("express");
 const app = express();
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
+
+// Nested route
+// GET /api/products/:productId/reviews
+createFilterObj = (req, res, next) => {
+  let filterObject = {};
+  if (req.params.productId) filterObject = { product: req.params.productId };
+  req.filterObj = filterObject;
+  next();
+};
+
+// Nested route
+// POST /api/products/:productId/reviews
+createFilterObj = (req, res, next) => {
+  let filterObject = {};
+  if (req.params.productId) filterObject = { product: req.params.productId };
+  req.filterObj = filterObject;
+  next();
+};
 
 const {
   createReviewValidator,
@@ -21,7 +39,7 @@ const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
 const { userById } = require("../middlewares/user");
 
 // Get List of Review
-router.get("/", getReviews);
+router.get("/", createFilterObj, getReviews);
 
 // Get specific Review
 router.get("/:reviewId", getReview);

@@ -1,5 +1,10 @@
 const express = require("express");
 const router = express.Router();
+
+// Nested Route
+const reviewsRoute = require("./review");
+router.use("/:productId/reviews", reviewsRoute);
+
 const {
   searchProduct,
   listRelated,

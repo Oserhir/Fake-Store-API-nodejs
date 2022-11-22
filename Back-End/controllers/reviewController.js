@@ -5,6 +5,7 @@ const APIError = require("../utils/APIError");
 
 // @desc Add new Review
 exports.createReview = (req, res) => {
+  console.log(req.body);
   reviewModel
     .create(req.body)
     .then((review) => {
@@ -22,12 +23,20 @@ exports.getReview = (req, res) => {
 
 // @desc Get List of Reviews
 exports.getReviews = (req, res) => {
+  let filter = {};
+
+  if (req.filterObj) {
+    filter = req.filterObj;
+  }
+
+  console.log(req.filterObj);
+
   const page = req.query.page * 1 || 1;
   const limit = req.query.limit || 5;
   const skip = (page - 1) * limit;
 
   reviewModel
-    .find()
+    .find(filter)
     .skip(skip)
     .limit(limit)
     .exec((err, reviews) => {
