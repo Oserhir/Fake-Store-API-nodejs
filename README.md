@@ -66,6 +66,7 @@ User Schema:
 - Role(Number)
 - history(array)
 - Wishlist [ { ObjectId - a reference to the product schema } ]
+- Addresses [ {id ,alias ,details ,phone: ,city ,postalCode }]
 
 Category Schema:
 
@@ -158,7 +159,7 @@ Category Routes:
 | /api/category/:categoryId/subcategories | GET    | Public  | Get All Subcategories for Specific Category ( Nested Route) |
 | /api/category/:categoryId/subcategories | POST   | Public  | Create Subcategory on Category ( Nested Route)              |
 
-subCategory Routes:
+SubCategory Routes:
 
 | @Route                                    | @Type  | @access | @desc                                      |
 | ----------------------------------------- | ------ | ------- | ------------------------------------------ |
@@ -190,13 +191,21 @@ Review Routes:
 | /api/reviews/:reviewId/:userId   | DELETE | Private | Delete specific review                                 |
 | /api/products/:IdProduct/reviews | GET    | Public  | Get all reviews on specifique products ( Nested Route) |
 
-wishlist Routes:
+Wishlist Routes:
 
 | @Route                           | @Type  | @access | @desc                        |
 | -------------------------------- | ------ | ------- | ---------------------------- |
 | /api/wishlist/:userId            | POST   | Private | Add Product To Wishlist      |
 | /api/wishlist/:ProductId/:userId | DELETE | Private | Remove Product From Wishlist |
-| /api/wishlist/:userId            | GET    | Public  | Get Logged User Wishlist     |
+| /api/wishlist/:userId            | GET    | Private | Get Logged User Wishlist     |
+
+Addresses Routes:
+
+| @Route                             | @Type  | @access | @desc              |
+| ---------------------------------- | ------ | ------- | ------------------ |
+| /api/addressess/:userId            | POST   | Private | add user address   |
+| /api/addressess/:addressId/:userId | DELETE | Private | remove user adress |
+| /api/addressess/:userId            | GET    | Private | get user address   |
 
 ## Validation Layer
 
@@ -207,7 +216,7 @@ Category:
 | name \*        | String,min 3,max 32,unique |
 | slug           | String,lowercase           |
 
-subCategory:
+SubCategory:
 
 | Attribute name | Notes                                         |
 | -------------- | --------------------------------------------- |
