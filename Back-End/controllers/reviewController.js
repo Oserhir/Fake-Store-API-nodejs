@@ -5,7 +5,6 @@ const APIError = require("../utils/APIError");
 
 // @desc Add new Review
 exports.createReview = (req, res) => {
-  
   console.log(req.body);
   reviewModel
     .create(req.body)
@@ -59,6 +58,7 @@ exports.updateReview = (req, res) => {
   let review = req.review;
   review.title = req.body.title;
   review.ratings = req.body.ratings;
+  // Trigger "Save" event when update review
   review.save((err, review) => {
     if (err) {
       return res.status(400).json({ err: "bad request !" });
