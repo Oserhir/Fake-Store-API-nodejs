@@ -26,12 +26,11 @@ exports.addProductToWishlist = (req, res, next) => {
 };
 
 // @desc    Remove product from wishlist
-// @route   DELETE /api/v1/wishlist/:productId
+// @route   DELETE /api/wishlist/:productId/;userId
 // @access  Protected/User
 exports.removeProductFromWishlist = asyncHandler(async (req, res, next) => {
   // $pull => remove productId from wishlist array if productId exist
 
-  // $addToSet => add productId to wishlist array if productId not exist
   User.findOneAndUpdate(
     { _id: req.Profile._id },
     { $pull: { wishlist: req.params.productId } },
