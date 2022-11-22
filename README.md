@@ -102,6 +102,13 @@ Product Schema:
 - ratingsQuantity (number)
 - shipping (Boolean)
 
+Review Schema:
+
+- title (String)
+- ratings (Number)
+- user (ObjectId - a reference to the User schema)
+- product (ObjectId - a reference to the product schema)
+
 ## Route
 
 Auth Routes:
