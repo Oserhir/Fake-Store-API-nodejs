@@ -106,71 +106,81 @@ Product Schema:
 
 Auth Routes:
 
-| @Route      | @Type | @access | @desc                       | Live |
-| ----------- | ----- | ------- | --------------------------- | ---- |
-| /api/signup | GET   | Private | sign up page                |      |
-| /api/signup | POST  | Private | create a new user in db     |      |
-| /api/login  | GET   | Private | log in page                 |      |
-| /api/login  | POST  | Private | authenticate a current user |      |
-| /api/logout | GET   | Private | log a user out              |      |
+| @Route      | @Type | @access | @desc                       |
+| ----------- | ----- | ------- | --------------------------- |
+| /api/signup | GET   | Private | sign up page                |
+| /api/signup | POST  | Private | create a new user in db     |
+| /api/login  | GET   | Private | log in page                 |
+| /api/login  | POST  | Private | authenticate a current user |
+| /api/logout | GET   | Private | log a user out              |
 
 User Routes:
 
-| @Route               | @Type | @access | @desc                                 | Live |
-| -------------------- | ----- | ------- | ------------------------------------- | ---- |
-| /api/profile/:userId | GET   | Private | retrieve a user's profile information |      |
+| @Route               | @Type | @access | @desc                                 |
+| -------------------- | ----- | ------- | ------------------------------------- |
+| /api/profile/:userId | GET   | Private | retrieve a user's profile information |
 
 Product Routes:
 
-| @Route                                 | @Type  | @access | @desc                                  |
-| -------------------------------------- | ------ | ------- | -------------------------------------- |
-| /api/products/create/:userId           | POST   | Private | Add new product                        |
-| /api/products/:productId               | GET    | Private | Get a single product                   |
-| /api/products/:productId/:userId"      | PUT    | Private | Update a product                       |
-| /api/products/:productId/:userId"      | DELETE | Private | Delete a product                       |
-| /api/products/related/:productId/      | GET    | Public  | Get related products                   |
-| /api/products/search                   | POST   | Public  | Product Search                         |
-| /api/products/                         | GET    | Public  | Get all products                       |
-| /api/products?limit=3                  | GET    | Public  | Limit results                          |
-| /api/products?sortedBy=price           | GET    | Public  | Sort results                           |
-| /api/products?keyword=Clark,Olsen      | GET    | Public  | Search by title or description         |
-| /api/products?ratingsAverage[gte]=1.6  | GET    | Public  | Filter results                         |
-| /api/products?fields=title,description | GET    | Public  | Field Limiting                         |
-| /api/products/:IdProduct/reviews       | GET    | Public  | Get all reviews on specifique products |
+| @Route                                 | @Type  | @access | @desc                          |
+| -------------------------------------- | ------ | ------- | ------------------------------ |
+| /api/products/create/:userId           | POST   | Private | Add new product                |
+| /api/products/:productId               | GET    | Private | Get a single product           |
+| /api/products/:productId/:userId"      | PUT    | Private | Update a product               |
+| /api/products/:productId/:userId"      | DELETE | Private | Delete a product               |
+| /api/products/related/:productId/      | GET    | Public  | Get related products           |
+| /api/products/search                   | POST   | Public  | Product Search                 |
+| /api/products/                         | GET    | Public  | Get all products               |
+| /api/products?limit=3                  | GET    | Public  | Limit results                  |
+| /api/products?sortedBy=price           | GET    | Public  | Sort results                   |
+| /api/products?keyword=Clark,Olsen      | GET    | Public  | Search by title or description |
+| /api/products?ratingsAverage[gte]=1.6  | GET    | Public  | Filter results                 |
+| /api/products?fields=title,description | GET    | Public  | Field Limiting                 |
 
 Category Routes:
 
-| @Route                                  | @Type  | @access | @desc                                       | Live |
-| --------------------------------------- | ------ | ------- | ------------------------------------------- | ---- |
-| /api/category/create/:userId            | POST   | Private | Add new Category                            |      |
-| /api/category/?limit=1                  | GET    | Public  | Get List of Categories ( Limit results)     |      |
-| /api/category/?page=2&limit=1           | GET    | Public  | Get List of Categories                      |      |
-| /api/category/:categoryId               | GET    | Public  | Get specific Category                       |      |
-| /api/category/:categoryId/:userId       | PUT    | Private | Update specific Category                    |      |
-| /api/category/:categoryId/:userId       | DELETE | Private | Delete specific Category                    |      |
-| /api/category/:categoryId/subcategories | GET    | Public  | Get All Subcategories for Specific Category |      |
-| /api/category/:categoryId/subcategories | POST   | Public  | Create Subcategory on Category              |      |
+| @Route                                  | @Type  | @access | @desc                                                       |
+| --------------------------------------- | ------ | ------- | ----------------------------------------------------------- |
+| /api/category/create/:userId            | POST   | Private | Add new Category                                            |
+| /api/category/?limit=1                  | GET    | Public  | Get List of Categories ( Limit results)                     |
+| /api/category/?page=2&limit=1           | GET    | Public  | Get List of Categories                                      |
+| /api/category/:categoryId               | GET    | Public  | Get specific Category                                       |
+| /api/category/:categoryId/:userId       | PUT    | Private | Update specific Category                                    |
+| /api/category/:categoryId/:userId       | DELETE | Private | Delete specific Category                                    |
+| /api/category/:categoryId/subcategories | GET    | Public  | Get All Subcategories for Specific Category ( Nested Route) |
+| /api/category/:categoryId/subcategories | POST   | Public  | Create Subcategory on Category ( Nested Route)              |
 
 subCategory Routes:
 
-| @Route                                    | @Type  | @access | @desc                                      | Live |
-| ----------------------------------------- | ------ | ------- | ------------------------------------------ | ---- |
-| /api/subcategories/create/:userId         | POST   | Private | Add new subCategory                        |      |
-| /api/subcategories/?limit=1               | GET    | Public  | Get List of subCategories ( Limit results) |      |
-| /api/subcategories/?page=2&limit=1        | GET    | Public  | Get List of subCategories                  |      |
-| /api/subcategories/:subCategoryId         | GET    | Public  | Get specific subCategory                   |      |
-| /api/subcategories/:subCategoryId/:userId | PUT    | Private | Update specific subCategory                |      |
-| /api/subcategories/:subCategoryId/:userId | DELETE | Private | Delete specific subCategory                |      |
+| @Route                                    | @Type  | @access | @desc                                      |
+| ----------------------------------------- | ------ | ------- | ------------------------------------------ |
+| /api/subcategories/create/:userId         | POST   | Private | Add new subCategory                        |
+| /api/subcategories/?limit=1               | GET    | Public  | Get List of subCategories ( Limit results) |
+| /api/subcategories/?page=2&limit=1        | GET    | Public  | Get List of subCategories                  |
+| /api/subcategories/:subCategoryId         | GET    | Public  | Get specific subCategory                   |
+| /api/subcategories/:subCategoryId/:userId | PUT    | Private | Update specific subCategory                |
+| /api/subcategories/:subCategoryId/:userId | DELETE | Private | Delete specific subCategory                |
 
 Brand Routes:
 
-| @Route                      | @Type  | @access | @desc                 | Live |
-| --------------------------- | ------ | ------- | --------------------- | ---- |
-| /api/brand/create/:userId   | POST   | Private | Add new Brand         |      |
-| /api/brand/?page=2&limit=1  | GET    | Public  | Get List of Brands    |      |
-| /api/brand/:brandId         | GET    | Public  | Get specific Brand    |      |
-| /api/brand/:brandId/:userId | PUT    | Private | Update specific Brand |      |
-| /api/brand/:brandId/:userId | DELETE | Private | Delete specific Brand |      |
+| @Route                      | @Type  | @access | @desc                 |
+| --------------------------- | ------ | ------- | --------------------- |
+| /api/brand/create/:userId   | POST   | Private | Add new Brand         |
+| /api/brand/?page=2&limit=1  | GET    | Public  | Get List of Brands    |
+| /api/brand/:brandId         | GET    | Public  | Get specific Brand    |
+| /api/brand/:brandId/:userId | PUT    | Private | Update specific Brand |
+| /api/brand/:brandId/:userId | DELETE | Private | Delete specific Brand |
+
+Review Routes:
+
+| @Route                           | @Type  | @access | @desc                                                  |
+| -------------------------------- | ------ | ------- | ------------------------------------------------------ |
+| /api/reviews/create/:userId      | POST   | Private | Add new Review                                         |
+| /api/reviews/?page=2&limit=1     | GET    | Public  | Get List of reviews                                    |
+| /api/reviews/:reviewId           | GET    | Public  | Get specific review                                    |
+| /api/reviews/:reviewId/:userId   | PUT    | Private | Update specific review                                 |
+| /api/reviews/:reviewId/:userId   | DELETE | Private | Delete specific review                                 |
+| /api/products/:IdProduct/reviews | GET    | Public  | Get all reviews on specifique products ( Nested Route) |
 
 ## Validation Layer
 
@@ -215,6 +225,15 @@ Product:
 | ratingsAverage     | Number min 1,max 5                                                  |
 | ratingsQuantity    | Number default: 0                                                   |
 | shipping           | boolean                                                             |
+
+Review:
+
+| Attribute name | Notes                                  |
+| -------------- | -------------------------------------- |
+| title          | String                                 |
+| ratings        | Number,min 1,max 5,required            |
+| user           | ObjectId (User) ,required              |
+| product        | ObjectId (Product) ,isMongoId,required |
 
 ## Technology
 
