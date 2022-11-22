@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const { addProductToWishlist } = require("../controllers/wishlistController");
+const {
+  addProductToWishlist,
+  removeProductFromWishlist,
+} = require("../controllers/wishlistController");
 const {
   addProductToWishlistValidator,
 } = require("../utils/validators/WishlistValidator");
@@ -14,6 +17,12 @@ router.post(
   // [requireSignIn, isAuth],
   addProductToWishlistValidator,
   addProductToWishlist
+);
+
+router.delete(
+  "/:productId/:userId",
+  // [requireSignIn, isAuth],
+  removeProductFromWishlist
 );
 
 // Param
