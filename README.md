@@ -3,17 +3,17 @@
 ## The features in the API :
 
 - Signing Up, signing in and signing out of users
-- Password forgot/reset, confirmation email on signup
+- Password forgot/reset, confirmation email on signup \*
 - Authentication using JSON Web Tokens (JWT).
 - Advance searching, sorting, pagination and filtering
 - Schema Validation using Express-Validator
-- Credit card payment with stripe
-- Cash on delivery (no online payment required)
+- Credit card payment with stripe \*
+- Cash on delivery (no online payment required) \*
 - Image Upload & Multiple Images Upload and image processing
-- Star rating system
-- Discount coupon code
-- Add to wishlist
-- Add to cart
+- Star rating system \*
+- Discount coupon code \*
+- Add to wishlist \*
+- Add to cart \*
 
 ## Back-end project structure
 
