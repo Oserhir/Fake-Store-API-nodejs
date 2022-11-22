@@ -4,6 +4,7 @@ const router = express.Router();
 const {
   addProductToWishlist,
   removeProductFromWishlist,
+  getLoggedUserWishlist,
 } = require("../controllers/wishlistController");
 const {
   addProductToWishlistValidator,
@@ -23,6 +24,12 @@ router.delete(
   "/:productId/:userId",
   // [requireSignIn, isAuth],
   removeProductFromWishlist
+);
+
+router.get(
+  "/:userId",
+  // [requireSignIn, isAuth],
+  getLoggedUserWishlist
 );
 
 // Param

@@ -48,3 +48,23 @@ exports.removeProductFromWishlist = asyncHandler(async (req, res, next) => {
     }
   );
 });
+
+// @desc    Get logged user wishlist
+// @route   GET /api/wishlist/;IdUser
+// @access  Protected/User
+exports.getLoggedUserWishlist = (req, res, next) => {
+  // const user = await User.findById(req.Profile._id).populate("wishlist");
+  console.log(req.Profile._id);
+
+  User.findById(req.Profile._id)
+    .populate("wishlist")
+    .then((user) => {
+      if (user) {
+        res.status(200).json({
+          status: "success",
+          results: user.wishlist.length,
+          data: user.wishlist,
+        });
+      }
+    });
+};
