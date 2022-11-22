@@ -122,20 +122,21 @@ User Routes:
 
 Product Routes:
 
-| @Route                                 | @Type  | @access | @desc                          | Live |
-| -------------------------------------- | ------ | ------- | ------------------------------ | ---- |
-| /api/products/create/:userId           | POST   | Private | Add new product                |      |
-| /api/products/:productId               | GET    | Private | Get a single product           |      |
-| /api/products/:productId/:userId"      | PUT    | Private | Update a product               |      |
-| /api/products/:productId/:userId"      | DELETE | Private | Delete a product               |      |
-| /api/products/related/:productId/      | GET    | Public  | Get related products           |      |
-| /api/products/search                   | POST   | Public  | Product Search                 |      |
-| /api/products/                         | GET    | Public  | Get all products               |      |
-| /api/products?limit=3                  | GET    | Public  | Limit results                  |      |
-| /api/products?sortedBy=price           | GET    | Public  | Sort results                   |      |
-| /api/products?keyword=Clark,Olsen      | GET    | Public  | Search by title or description |      |
-| /api/products?ratingsAverage[gte]=1.6  | GET    | Public  | Filter results                 |      |
-| /api/products?fields=title,description | GET    | Public  | Field Limiting                 |      |
+| @Route                                 | @Type  | @access | @desc                                  |
+| -------------------------------------- | ------ | ------- | -------------------------------------- |
+| /api/products/create/:userId           | POST   | Private | Add new product                        |
+| /api/products/:productId               | GET    | Private | Get a single product                   |
+| /api/products/:productId/:userId"      | PUT    | Private | Update a product                       |
+| /api/products/:productId/:userId"      | DELETE | Private | Delete a product                       |
+| /api/products/related/:productId/      | GET    | Public  | Get related products                   |
+| /api/products/search                   | POST   | Public  | Product Search                         |
+| /api/products/                         | GET    | Public  | Get all products                       |
+| /api/products?limit=3                  | GET    | Public  | Limit results                          |
+| /api/products?sortedBy=price           | GET    | Public  | Sort results                           |
+| /api/products?keyword=Clark,Olsen      | GET    | Public  | Search by title or description         |
+| /api/products?ratingsAverage[gte]=1.6  | GET    | Public  | Filter results                         |
+| /api/products?fields=title,description | GET    | Public  | Field Limiting                         |
+| /api/products/:IdProduct/reviews       | GET    | Public  | Get all reviews on specifique products |
 
 Category Routes:
 
