@@ -10,7 +10,7 @@
 - Credit card payment with stripe \*
 - Cash on delivery (no online payment required) \*
 - Image Upload & Multiple Images Upload and image processing
-- Star rating system \*
+- Star rating system
 - Discount coupon code \*
 - Add to wishlist
 - Add to cart \*
