@@ -15,22 +15,18 @@ const { userById } = require("../middlewares/user");
 
 router.post(
   "/:userId",
-  // [requireSignIn, isAuth],
+  [requireSignIn, isAuth],
   addProductToWishlistValidator,
   addProductToWishlist
 );
 
 router.delete(
   "/:productId/:userId",
-  // [requireSignIn, isAuth],
+  [requireSignIn, isAuth],
   removeProductFromWishlist
 );
 
-router.get(
-  "/:userId",
-  // [requireSignIn, isAuth],
-  getLoggedUserWishlist
-);
+router.get("/:userId", [requireSignIn, isAuth], getLoggedUserWishlist);
 
 // Param
 router.param("userId", userById);

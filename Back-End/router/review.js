@@ -47,7 +47,7 @@ router.get("/:reviewId", getReview);
 // Add new Review
 router.post(
   "/create/:userId",
-  //[requireSignIn, isAuth],
+  [requireSignIn, isAuth],
   createReviewValidator,
   createReview
 );
@@ -55,7 +55,7 @@ router.post(
 // Update specific Review
 router.put(
   "/:reviewId/:userId",
-  // [requireSignIn, isAuth],
+  [requireSignIn, isAuth],
   updateReviewValidator,
   updateReview
 );
@@ -63,7 +63,7 @@ router.put(
 // Delete specific Review
 router.delete(
   "/:reviewId/:userId",
-  // [requireSignIn, isAuth],
+  [requireSignIn, isAuth],
   deleteReviewValidator,
   deleteReview
 );

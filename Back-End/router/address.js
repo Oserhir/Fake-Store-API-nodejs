@@ -10,23 +10,11 @@ const {
 const { requireSignIn, isAuth } = require("../middlewares/auth");
 const { userById } = require("../middlewares/user");
 
-router.post(
-  "/:userId",
-  // [requireSignIn, isAuth],
-  addAddress
-);
+router.post("/:userId", [requireSignIn, isAuth], addAddress);
 
-router.delete(
-  "/:addressId/:userId",
-  // [requireSignIn, isAuth],
-  removeAddress
-);
+router.delete("/:addressId/:userId", [requireSignIn, isAuth], removeAddress);
 
-router.get(
-  "/:userId",
-  // [requireSignIn, isAuth],
-  getLoggedUserAddresses
-);
+router.get("/:userId", [requireSignIn, isAuth], getLoggedUserAddresses);
 
 // Param
 router.param("userId", userById);
