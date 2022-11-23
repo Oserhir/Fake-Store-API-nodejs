@@ -3,17 +3,17 @@
 ## The features in the API :
 
 - Signing Up, signing in and signing out of users
-- Password forgot/reset, confirmation email on signup \*
+<!--  - Password forgot/reset, confirmation email on signup \* -->
 - Authentication using JSON Web Tokens (JWT).
 - Advance searching, sorting, pagination and filtering
 - Schema Validation using Express-Validator
-- Credit card payment with stripe \*
-- Cash on delivery (no online payment required) \*
+  <!--  - Credit card payment with stripe \* -->
+  <!--  - Cash on delivery (no online payment required) \* -->
 - Image Upload & Multiple Images Upload and image processing
 - Star rating system
 - Discount coupon code
 - Add to wishlist
-- Add to cart \*
+- Add to cart
 
 ## Back-end project structure
 
@@ -27,8 +27,15 @@
   - product.js
   - subcategory.js
   - user.js
+  - address.js
+  - cart.js
+  - coupon.js
+  - review.js
+  - wishlist.js
 - middlewares
+  - auth.js
   - errorMiddleware.js
+  - uploadImageMiddlewares.js
   - validatorMiddleware.js
 - models
   - brands.js
@@ -36,6 +43,9 @@
   - product.js
   - subcategory.js
   - user.js
+  - cart.js
+  - coupon.js
+  - review.js
 - router
   - auth.js
   - brand.js
@@ -43,6 +53,11 @@
   - product.js
   - subcategory.js
   - user.js
+  - address.js
+  - cart.js
+  - coupon.js
+  - review.js
+  - wishlist.js
 - utils
   - APIError.js
   - dummyData
@@ -53,6 +68,9 @@
     - categoryValidators.js
     - productValidators.js
     - subCategoryValidators.js
+    - ReviewValidators.js
+    - subCategoryValidators.
+    - wishlistValidator.js
 
 ## Database
 
@@ -94,7 +112,7 @@ Product Schema:
 - price (Number)
 - sold (Number)
 - priceAfterDiscount (Number)
-- Color ([String])
+- Colors ([String])
 - imageCover (string)
 - images ([String])
 - category (ObjectId - a reference to the category schema)
@@ -116,6 +134,13 @@ Coupon Schema:
 - name (String)
 - discount (Number)
 - expire (Date)
+
+Cart Schema:
+
+- cartItems [ { product , quantity , color , price } ]
+- totalCartPrice (Number)
+- totalPriceAfterDiscount (Number)
+- user (ObjectId - a reference to the user schema)
 
 ## Route
 
@@ -199,19 +224,19 @@ Review Routes:
 
 Wishlist Routes:
 
-| @Route                           | @Type  | @access | @desc                        |
-| -------------------------------- | ------ | ------- | ---------------------------- |
-| /api/wishlist/:userId            | POST   | Private | Add Product To Wishlist      |
-| /api/wishlist/:ProductId/:userId | DELETE | Private | Remove Product From Wishlist |
-| /api/wishlist/:userId            | GET    | Private | Get Logged User Wishlist     |
+| @Route                           | @Type  | @access      | @desc                        |
+| -------------------------------- | ------ | ------------ | ---------------------------- |
+| /api/wishlist/:userId            | POST   | Private-User | Add Product To Wishlist      |
+| /api/wishlist/:ProductId/:userId | DELETE | Private-User | Remove Product From Wishlist |
+| /api/wishlist/:userId            | GET    | Private-User | Get Logged User Wishlist     |
 
 Addresses Routes:
 
-| @Route                             | @Type  | @access | @desc              |
-| ---------------------------------- | ------ | ------- | ------------------ |
-| /api/addressess/:userId            | POST   | Private | add user address   |
-| /api/addressess/:addressId/:userId | DELETE | Private | remove user adress |
-| /api/addressess/:userId            | GET    | Private | get user address   |
+| @Route                             | @Type  | @access      | @desc              |
+| ---------------------------------- | ------ | ------------ | ------------------ |
+| /api/addressess/:userId            | POST   | Private-User | add user address   |
+| /api/addressess/:addressId/:userId | DELETE | Private-User | remove user adress |
+| /api/addressess/:userId            | GET    | Private-User | get user address   |
 
 Coupon Routes:
 
@@ -222,6 +247,17 @@ Coupon Routes:
 | /api/coupons/:couponId/:userId | GET    | Private-Admin | Get specific Coupon    |
 | /api/coupons/:couponId/:userId | PUT    | Private-Admin | Update specific Coupon |
 | /api/coupons/:couponId/:userId | DELETE | Private-Admin | Delete specific Coupon |
+
+Cart Routes:
+
+| @Route                    | @Type  | @access      | @desc                         |
+| ------------------------- | ------ | ------------ | ----------------------------- |
+| /api/cart/create/:userId  | POST   | Private-User | add Product To Cart           |
+| /api/cart/:userId         | GET    | Private-User | get Logged User Cart          |
+| /api/cart/:itemId/:userId | DELETE | Private-User | remove Specific Cart Item     |
+| /api/cart/:userId         | DELETE | Private-User | clear logged user cart        |
+| /api/cart/:itemId/:userId | PUT    | Private-User | Update Cart Item Quantity     |
+| /api/cart/:userId         | PUT    | Private-User | Apply Coupon On Shopping Cart |
 
 ## Validation Layer
 
@@ -294,6 +330,11 @@ The application is built with:
 - uuid 9.0.0
 - multer 1.4.5-lts.1
 - slugify 1.6.5
+- colors 1.4.0
+- express-async-handler 1.2.0
+- express-validator 6.14.2
+- lodash 4.17.21
+- sharp 0.31.2
 
 ## Run
 
