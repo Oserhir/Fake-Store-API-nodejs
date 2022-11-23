@@ -29,13 +29,20 @@ exports.addProductToCart = asyncHandler(async (req, res, next) => {
     if (productIndex > -1) {
       const cartItem = cart.cartItems[productIndex];
       cartItem.quantity += 1;
-
       cart.cartItems[productIndex] = cartItem;
     } else {
       // product not exist in cart,  push product to cartItems array
       cart.cartItems.push({ product: productId, color, price: product.price });
     }
 
+    // calculate total cart price
+    let totalPrice = 0;
+    cart.cartItems.forEach((item) => {
+      totalPrice += item.quantity * item.price;
+    });
+
+    cart.totalCartPrice = totalPrice;
+    cart.totalPriceAfterDiscount = undefined;
     await cart.save();
 
     res.status(200).json({
