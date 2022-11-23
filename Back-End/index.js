@@ -23,6 +23,7 @@ const reviewRouters = require("./router/review");
 const wishlistRouters = require("./router/wishlist");
 const addressessRouters = require("./router/address");
 const couponRouters = require("./router/coupon");
+const cartRouters = require("./router/cart");
 
 // Middleware
 app.use(bodyParser.json()); // This allows us to pass data from the form
@@ -49,24 +50,17 @@ app.use("/api/reviews", reviewRouters);
 app.use("/api/wishlist", wishlistRouters);
 app.use("/api/addressess", addressessRouters);
 app.use("/api/coupons", couponRouters);
+app.use("/api/cart", cartRouters);
 
 // Handle Unhandled Routes
 app.all("*", (req, res, next) => {
-  // create error and send it to errors handling middlware
-  // const err = new Error(`Can't find this route ${req.originalUrl}`);
-  // next(err.message); // send it to Global handling middlware
-  next(new APIError(`Can't find this route ${req.originalUrl}`, 400)); // send it to Global handling middlware
+  next(new APIError(`Can't find this route ${req.originalUrl}`, 400));
 });
 
 // Global handling middlware
 app.use(globalError);
 
-// Handle rejection outside express
-// process.on("unhandledRejection", (err) => {
-//   console.error(`unhandledRejection Errors ${err}`);
-// });
-
-const PORT = process.env.PORT || 3000; // // Set a default environment port or cutom port - 3000
+const PORT = process.env.PORT || 3000; // Set a default environment port or cutom port - 3000
 
 // Start out application
 app.listen(PORT, () => {
