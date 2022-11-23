@@ -21,6 +21,28 @@ exports.addProductToCart = asyncHandler(async (req, res, next) => {
       cartItems: [{ product: productId, color, price: product.price }],
     });
   } else {
-    console.log("This is Cart");
+    // product exist in cart, update product quantity
+    const productIndex = cart.cartItems.findIndex(
+      (item) => item.product.toString() === productId && item.color === color
+    );
+
+    if (productIndex > -1) {
+      const cartItem = cart.cartItems[productIndex];
+      cartItem.quantity += 1;
+
+      cart.cartItems[productIndex] = cartItem;
+    } else {
+      // product not exist in cart,  push product to cartItems array
+      cart.cartItems.push({ product: productId, color, price: product.price });
+    }
+
+    await cart.save();
+
+    res.status(200).json({
+      status: "success",
+      message: "Product added to cart successfully",
+      numOfCartItems: cart.cartItems.length,
+      data: cart,
+    });
   }
 });
