@@ -11,7 +11,7 @@
 - Cash on delivery (no online payment required) \*
 - Image Upload & Multiple Images Upload and image processing
 - Star rating system
-- Discount coupon code \*
+- Discount coupon code
 - Add to wishlist
 - Add to cart \*
 
@@ -111,6 +111,12 @@ Review Schema:
 - user (ObjectId - a reference to the User schema)
 - product (ObjectId - a reference to the product schema)
 
+Coupon Schema:
+
+- name (String)
+- discount (Number)
+- expire (Date)
+
 ## Route
 
 Auth Routes:
@@ -206,6 +212,16 @@ Addresses Routes:
 | /api/addressess/:userId            | POST   | Private | add user address   |
 | /api/addressess/:addressId/:userId | DELETE | Private | remove user adress |
 | /api/addressess/:userId            | GET    | Private | get user address   |
+
+Coupon Routes:
+
+| @Route                         | @Type  | @access       | @desc                  |
+| ------------------------------ | ------ | ------------- | ---------------------- |
+| /api/coupons/create/:userId    | POST   | Private-Admin | Create Coupon          |
+| /api/coupons/:userId           | GET    | Private-Admin | Get All Coupons        |
+| /api/coupons/:couponId/:userId | GET    | Private-Admin | Get specific Coupon    |
+| /api/coupons/:couponId/:userId | PUT    | Private-Admin | Update specific Coupon |
+| /api/coupons/:couponId/:userId | DELETE | Private-Admin | Delete specific Coupon |
 
 ## Validation Layer
 
