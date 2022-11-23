@@ -15,6 +15,7 @@ const {
   removeSpecificCartItem,
   clearCart,
   updateCartItemQuantity,
+  applyCoupon,
 } = require("../controllers/cartController");
 
 const { requireSignIn, isAuth } = require("../middlewares/auth");
@@ -38,6 +39,9 @@ router.delete("/:userId", [requireSignIn, isAuth], clearCart);
 
 // Update Cart Item Quantity
 router.put("/:itemId/:userId", [requireSignIn, isAuth], updateCartItemQuantity);
+
+// Apply Coupon On Shopping Cart
+router.put("/:userId", [requireSignIn, isAuth], applyCoupon);
 
 router.param("userId", userById);
 
