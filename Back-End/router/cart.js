@@ -13,6 +13,8 @@ const {
   addProductToCart,
   getLoggedUserCart,
   removeSpecificCartItem,
+  clearCart,
+  updateCartItemQuantity,
 } = require("../controllers/cartController");
 
 const { requireSignIn, isAuth } = require("../middlewares/auth");
@@ -25,7 +27,17 @@ router.post("/create/:userId", [requireSignIn, isAuth], addProductToCart);
 router.get("/:userId", [requireSignIn, isAuth], getLoggedUserCart);
 
 // remove Specific Cart Item
-router.delete("/:itemId/:userId", [requireSignIn, isAuth], removeSpecificCartItem);
+router.delete(
+  "/:itemId/:userId",
+  [requireSignIn, isAuth],
+  removeSpecificCartItem
+);
+
+// clear logged user cart
+router.delete("/:userId", [requireSignIn, isAuth], clearCart);
+
+// Update Cart Item Quantity
+router.put("/:itemId/:userId", [requireSignIn, isAuth], updateCartItemQuantity);
 
 router.param("userId", userById);
 
