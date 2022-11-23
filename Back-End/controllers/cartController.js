@@ -53,3 +53,52 @@ exports.addProductToCart = asyncHandler(async (req, res, next) => {
     });
   }
 });
+
+// get Logged User Cart
+exports.getLoggedUserCart = asyncHandler(async (req, res, next) => {
+  const cart = await Cart.findOne({ user: req.Profile._id });
+
+  if (!cart) {
+    return next(
+      new ApiError(`There is no cart for this user id : ${req.user._id}`, 404)
+    );
+  }
+
+  res.status(200).json({
+    status: "success",
+    numOfCartItems: cart.cartItems.length,
+    data: cart,
+  });
+});
+
+// remove Specific Cart Item
+exports.removeSpecificCartItem = asyncHandler(async (req, res, next) => {
+
+
+  const cart = await Cart.findOneAndUpdate(
+    { user: req.Profile._id },
+    {
+      $pull: { cartItems: { _id: req.params.itemId } },
+    },
+    { new: true }
+  );
+
+  cart.totalCartPrice = calcTotalCartPrice(cart);
+ 
+  cart.save();
+
+  res.status(200).json({
+    status: "success",
+    numOfCartItems: cart.cartItems.length,
+    data: cart,
+  });
+});
+
+calcTotalCartPrice = (cart) => {
+  let totalPrice = 0;
+  cart.cartItems.forEach((item) => {
+    totalPrice += item.quantity * item.price;
+  });
+
+  return totalPrice;
+};
