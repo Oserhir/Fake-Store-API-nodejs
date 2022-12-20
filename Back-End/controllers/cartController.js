@@ -21,6 +21,13 @@ exports.addProductToCart = asyncHandler(async (req, res, next) => {
       user: req.Profile._id,
       cartItems: [{ product: productId, color, price: product.price }],
     });
+
+    res.status(200).json({
+      status: "success",
+      message: "Product added to cart successfully",
+      numOfCartItems: cart.cartItems.length,
+      data: cart,
+    });
   } else {
     // product exist in cart, update product quantity
     const productIndex = cart.cartItems.findIndex(
