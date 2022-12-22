@@ -24,6 +24,7 @@ const wishlistRouters = require("./router/wishlist");
 const addressessRouters = require("./router/address");
 const couponRouters = require("./router/coupon");
 const cartRouters = require("./router/cart");
+const orderRouters = require("./router/order");
 
 // Middleware
 app.use(bodyParser.json()); // This allows us to pass data from the form
@@ -51,6 +52,7 @@ app.use("/api/wishlist", wishlistRouters);
 app.use("/api/addressess", addressessRouters);
 app.use("/api/coupons", couponRouters);
 app.use("/api/cart", cartRouters);
+app.use("/api/orders", orderRouters);
 
 // Handle Unhandled Routes
 app.all("*", (req, res, next) => {

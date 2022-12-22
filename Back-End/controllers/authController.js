@@ -9,33 +9,20 @@ module.exports.signup_get = (req, res) => {
 };
 
 module.exports.signup_post = (req, res) => {
-  // Joi Validation
-  const schema = Joi.object({
-    name: Joi.string().max(20).required(),
-    email: Joi.string().max(50).required().email(),
-    password: Joi.string().min(5).max(50).required(),
-  });
-
-  const { error, value } = schema.validate(req.body);
-
-  if (error) {
-    res.status(400).send(error.details[0].message);
-  } else {
-    // check if user already exists in database
-    User.findOne({ email: value.email }).then((result) => {
-      if (result) {
-        res.status(400).json("User already exists");
-      }
-    });
-  }
-
-  const { name, email, password } = req.body;
-
-  User.create({ name, email, password })
+  // Create User
+  User.create(req.body)
     .then((user) => {
-      const token = createToken(user._id); // send the user Id after create
-      res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 }); // place token inside cookies and send as response
-      res.status(201).send(user);
+      if (user) {
+        // Generate Token
+        const token = createToken(user._id);
+        // Send token to client side ( Cookies )
+        res.cookie("jwt", token, {
+          httpOnly: true,
+          maxAge: maxAge * 1000,
+        });
+        // Send response to client side
+        res.status(201).send({ token: token, data: user });
+      }
     })
     .catch((err) => {
       console.log(err);
@@ -45,41 +32,20 @@ module.exports.signup_post = (req, res) => {
 module.exports.login_get = (req, res) => {
   res.send("Login..");
 };
+
 module.exports.login_post = (req, res) => {
-  const schema = Joi.object({
-    email: Joi.string().required().email(),
-    password: Joi.string().required(),
+  // Create Token and send it to the Browser
+  const token = createToken(req.user._id);
+  res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
+
+  // Delete password from response
+  delete req.user._doc.password;
+
+  // send response to client side
+  res.status(200).json({
+    token: token,
+    user: req.user,
   });
-  const { error, value } = schema.validate(req.body);
-  // Joi Validation
-  if (error) {
-    res.status(400).send(error.details[0].message);
-  } else {
-    User.findOne({ email: value.email }).then((user) => {
-      if (user) {
-        // compare Hash Password
-        bcrypt.compare(value.password, user.password).then((validPassword) => {
-          if (!validPassword) {
-            res
-              .status(400)
-              .send("The password that you've entered is incorrect.");
-          } else {
-            // Create Token and send it to the Browser
-            const token = createToken(user._id, user.role);
-            res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
-            //res.status(200).send({ user: user._id });
-            // res.status(200).send(user);
-            res.status(200).json({
-              token,
-              user,
-            });
-          }
-        });
-      } else {
-        res.send("The email address you entered isn't connected to an account");
-      }
-    });
-  }
 };
 
 module.exports.signout_get = (req, res) => {
@@ -87,9 +53,6 @@ module.exports.signout_get = (req, res) => {
   res.send("User signOUT");
 };
 
-module.exports.Hello_get = (req, res) => {
-  res.send("Hello !!!!");
-};
 // create json web token
 // Signing a token with 3 Days of expiration:
 

@@ -15,7 +15,8 @@ exports.createCashOrder = asyncHandler(async (req, res, next) => {
   const shippingPrice = 0;
 
   // 1) Get cart depend on cartId
-  const cart = await Cart.findById(req.params.cartId);
+  const cart = await Cart.findById(req.params.cardId);
+
   if (!cart) {
     return next(
       new ApiError(`There is no such cart with id ${req.params.cartId}`, 404)
@@ -30,8 +31,9 @@ exports.createCashOrder = asyncHandler(async (req, res, next) => {
   const totalOrderPrice = cartPrice + taxPrice + shippingPrice;
 
   // 3) Create order with default paymentMethodType cash
+
   const order = await Order.create({
-    user: req.user._id,
+    user: req.Profile._id,
     cartItems: cart.cartItems,
     shippingAddress: req.body.shippingAddress,
     totalOrderPrice,
