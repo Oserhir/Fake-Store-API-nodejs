@@ -13,6 +13,7 @@ const {
   createUser,
   deleteUser,
   changePasswords,
+  checkTheEmail,
 } = require("../controllers/userController");
 const { userById } = require("../middlewares/user");
 const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
