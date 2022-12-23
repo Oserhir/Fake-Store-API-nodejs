@@ -21,6 +21,7 @@ Fake Store API can be used with any type project that needs products, users, cat
 - Credit card payment with stripe
 - Cash on delivery (no online payment required)
 
+<!--
 ## Back-end project structure
 
 - index.js
@@ -77,6 +78,7 @@ Fake Store API can be used with any type project that needs products, users, cat
     - ReviewValidators.js
     - subCategoryValidators.
     - wishlistValidator.js
+-->
 
 ## Database
 
