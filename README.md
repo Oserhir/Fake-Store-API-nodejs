@@ -327,9 +327,9 @@ To run this application, you have to set your own environmental variables. For s
 
 ---
 
-## title: Users
+## Users
 
-### description: Endpoints for Users
+#### Endpoints for Users
 
 ---
 
@@ -463,9 +463,9 @@ You can change password of any user exists by sending an object like the followi
 
 ---
 
-## title: Authentication
+## Authentication
 
-### description: Endpoints for Authentication
+#### Endpoints for Authentication
 
 ---
 
