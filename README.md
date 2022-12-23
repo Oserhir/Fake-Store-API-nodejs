@@ -343,7 +343,7 @@ User Routes:
 
 ## Get all users
 
-You can access the list of users by using the `/users` endpoint.
+You can access the list of users by using the `/api/users` endpoint.
 
 ```
 [GET] https://localhost:3000/api/users
@@ -366,7 +366,7 @@ You can access the list of users by using the `/users` endpoint.
 
 ## Get a single user
 
-You can get a single user by adding the `id` as a parameter: `/users/{id}`
+You can get a single user by adding the `id` as a parameter: `/api/users/{id}`
 
 ```bash
 [GET] https://localhost:3000/api/users/6362a1793b0236acba300bad
@@ -386,7 +386,7 @@ You can get a single user by adding the `id` as a parameter: `/users/{id}`
 
 ## Create a user
 
-You can create a new user by sending an object like the following to `/users/`
+You can create a new user by sending an object like the following to `/api/users/`
 
 ```bash
 [POST] https://localhost:3000/api/users/
@@ -404,7 +404,7 @@ You can create a new user by sending an object like the following to `/users/`
 
 ## Update a user
 
-You can update a user exists by sending an object like the following and adding the `id` as a parameter: `/users/{id}`
+You can update a user exists by sending an object like the following and adding the `id` as a parameter: `/api/users/{id}`
 
 ```bash
 [PUT] https://localhost:3000/api/users/6362a1793b0236acba300bad
@@ -421,7 +421,7 @@ You can update a user exists by sending an object like the following and adding 
 
 ## Delete a user
 
-You can delete a user exists by adding the `id` as a parameter: `/users/{id}`
+You can delete a user exists by adding the `id` as a parameter: `/api/users/{id}`
 
 ```bash
 [DELETE] https://localhost:3000/api/users/6362a1793b0236acba300bad
@@ -429,6 +429,22 @@ You can delete a user exists by adding the `id` as a parameter: `/users/{id}`
 
 ```json
 status : 204 No Content
+```
+
+## Change Password
+
+You can change password a user exists by sending an object like the following and adding the `id` as a parameter: `/api/users/changeMyPassword/{id}`
+
+```bash
+[PUT] https://localhost:3000/api/users/changeMyPassword/63a5e987577e750d00acd787
+```
+
+```json
+{
+  "currentPassword": "123456",
+  "password": "1234",
+  "passwordConfirm": "1234"
+}
 ```
 
 ## Schema User

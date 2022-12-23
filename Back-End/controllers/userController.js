@@ -1,5 +1,6 @@
 const User = require("../models/userSchema");
 const asyncHandler = require("express-async-handler");
+const bcrypt = require("bcrypt");
 
 //  @desc update user  | GET /api/users | Private/Admin
 exports.updateUser = asyncHandler(async (req, res) => {
@@ -64,4 +65,19 @@ exports.deleteUser = asyncHandler(async (req, res) => {
 
     res.status(204).json({});
   });
+});
+
+exports.changePasswords = asyncHandler(async (req, res) => {
+  const user = await User.findByIdAndUpdate(
+    req.Profile._id,
+    {
+      password: await bcrypt.hash(req.body.password, 12),
+      // passwordChangedAt: Date.now(),
+    },
+    {
+      new: true,
+    }
+  );
+
+  res.status(200).json({ data: user });
 });

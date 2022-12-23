@@ -2,6 +2,7 @@ const { check } = require("express-validator");
 const validatorMiddleware = require("../../middlewares/validatorMiddleware");
 const User = require("../../models/userSchema");
 const bcrypt = require("bcrypt");
+const asyncHandler = require("express-async-handler");
 
 exports.createUserValidator = [
   check("email")
@@ -72,3 +73,72 @@ exports.updateUserValidator = [
 
   validatorMiddleware,
 ];
+
+exports.changePasswordValidator = [
+  check("userId").isMongoId().withMessage("Invalid User id format"),
+  check("currentPassword")
+    .notEmpty()
+    .withMessage("currentPassword is not allowed to be empty")
+    .custom(
+      asyncHandler(async (currentPassword, { req }) => {
+        const user = await User.findById(req.Profile._id);
+
+        const isCorrectPassword = await bcrypt.compare(
+          req.body.currentPassword,
+          user.password
+        );
+
+        if (!isCorrectPassword) {
+          throw new Error("Incorrect current password");
+        }
+      })
+    ),
+
+  check("password")
+    .notEmpty()
+    .withMessage("password is not allowed to be empty")
+    .custom((password, { req }) => {
+      //  Verify password confirm
+      if (password !== req.body.passwordConfirm) {
+        throw new Error("Password Confirmation incorrect");
+      }
+
+      return true;
+    }),
+
+  validatorMiddleware,
+];
+
+// exports.changePasswordValidator = [
+//   check("userId").isMongoId().withMessage("Invalid User id format"),
+//   check("currentPassword")
+//     .notEmpty()
+//     .withMessage("currentPassword is not allowed to be empty")
+//     .custom(
+//       asyncHandler(async (currentPassword) => {
+//         // Verify current password
+//         const user = await User.findById(req.Profile._id);
+//         console.log(req.Profile._id);
+//         console.log(user);
+
+//         // const isCorrectPassword = await bcrypt.compare(
+//         //   req.body.currentPassword,
+//         //   user.password
+//         // );
+//         // if (!isCorrectPassword) {
+//         //   throw new Error("Incorrect current password");
+//         // }
+//       })
+//     ),
+
+//   check("passwordConfirm")
+//     .notEmpty()
+//     .withMessage("passwordConfirm is not allowed to be empty"),
+
+//   ,
+//   check("password")
+//     .notEmpty()
+//     .withMessage("password is not allowed to be empty"),
+
+//   validatorMiddleware,
+// ];

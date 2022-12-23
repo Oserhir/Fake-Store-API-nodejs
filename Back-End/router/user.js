@@ -3,6 +3,7 @@ const router = express.Router();
 const {
   createUserValidator,
   updateUserValidator,
+  changePasswordValidator,
 } = require("../utils/validators/userValidators");
 
 const {
@@ -11,6 +12,7 @@ const {
   getallusers,
   createUser,
   deleteUser,
+  changePasswords,
 } = require("../controllers/userController");
 const { userById } = require("../middlewares/user");
 const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
@@ -30,6 +32,13 @@ router.delete(
   // [requireSignIn, isAuth],
   deleteUser
 ); // Delete a user
+
+// Change Password
+router.put(
+  "/changeMyPassword/:userId",
+  changePasswordValidator,
+  changePasswords
+);
 
 // router.get("/profile/:userId", requireSignIn, isAuth, getOneUser_get);
 router.param("userId", userById); // Any route contain "userId" my app will execute userByID()
