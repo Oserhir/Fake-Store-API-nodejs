@@ -1,16 +1,19 @@
 # My Ecommerce Software Requirements
 
-## The features in the API :
+Fake Store API can be used with any type project that needs products, users, categories, authentication and users in JSON format. you can use examples below to check how fakeStoreApi works and feel free to enjoy it in your awesome projects!
 
-- Signing Up, signing in and signing out of users
-- Authentication using JSON Web Tokens (JWT).
-- Advance searching, sorting, pagination and filtering
-- Schema Validation using Express-Validator
-- Image Upload & Multiple Images Upload and image processing
-- Star rating system
-- Discount coupon code
-- Add to wishlist
-- Add to cart
+## This API include feature like:
+
+- ✅ Signing Up, signing in and signing out of users
+- ✅ Authentication using JSON Web Tokens (JWT).
+- ✅ Advance searching, sorting, pagination and filtering
+- ✅ Schema Validation using Express-Validator
+- ✅ Image Upload & Multiple Images Upload and image processing
+- ✅ All CRUD Operations
+- ✅ Star rating system
+- ✅ Discount coupon code
+- ✅ Add to wishlist
+- ✅ Add to cart
 
 ## To-do list:
 
@@ -136,16 +139,6 @@ Cart Schema:
 - user (ObjectId - a reference to the user schema)
 
 ## Route
-
-Auth Routes:
-
-| @Route      | @Type | @access | @desc                       |
-| ----------- | ----- | ------- | --------------------------- |
-| /api/signup | GET   | Private | sign up page                |
-| /api/signup | POST  | Private | create a new user in db     |
-| /api/login  | GET   | Private | log in page                 |
-| /api/login  | POST  | Private | authenticate a current user |
-| /api/logout | GET   | Private | log a user out              |
 
 Product Routes:
 
@@ -344,7 +337,7 @@ User Routes:
 | /api/users      | GET   | Private | Get all users     |
 | /api/users/{id} | GET   | Private | Get a single user |
 | /api/users      | POST  | Private | Create a user     |
-| /api/users/{id} | Put   | Private | Update a user     |
+| /api/users/{id} | PUT   | Private | Update a user     |
 
 ## Get all users
 
@@ -447,3 +440,55 @@ status : 204 No Content
 | password  | string   | The password of the user.             |                  |
 | Wishlist  | ObjectId |                                       |                  |
 | Addresses | array    |                                       |                  |
+
+---
+
+title: Authentication
+description: Endpoints for Authentication
+
+---
+
+Auth Routes:
+
+| @Route            | @Type | @access | @desc                       |
+| ----------------- | ----- | ------- | --------------------------- |
+| /api/auth/signup  | POST  | Private | create a new user in db     |
+| /api/auth/login   | POST  | Private | authenticate a current user |
+| /api//auth/logout | GET   | Private | log a user out              |
+
+## Login
+
+You can do login by sending an object like the following to `/auth/login/`
+
+```bash
+[POST] https://localhost:3000/api/auth/login
+```
+
+```json
+{
+  "email": "dummy@email.com",
+  "password": "123456"
+}
+```
+
+## Sign Up
+
+Create a user by sending user's credentials (in JSON format) in the Body of the HTTP Request. The content of the Body should look like the following:
+
+```bash
+[POST] https://localhost:3000/api/auth/signup
+```
+
+```json
+{
+  "name": "test",
+  "email": "dummy@email.com",
+  "password": "123456"
+}
+```
+
+## Sign Out
+
+```bash
+[GET] https://localhost:3000/api/auth/signout
+```

@@ -41,7 +41,7 @@ app.use(express.static(path.join(__dirname, "uploads")));
 app.use(cookieParser());
 
 // Routes Middlware
-app.use("/api", authRouters);
+app.use("/api/auth", authRouters);
 app.use("/api/users", userRouters);
 app.use("/api/category", categoryRouters);
 app.use("/api/products", productRouters);
