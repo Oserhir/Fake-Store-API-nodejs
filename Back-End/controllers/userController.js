@@ -1,9 +1,67 @@
-exports.createUser = (req, res) => {
-  console.log("Create USER.................");
+const User = require("../models/userSchema");
+const asyncHandler = require("express-async-handler");
+
+//  @desc update user  | GET /api/users | Private/Admin
+exports.updateUser = asyncHandler(async (req, res) => {
+  const user = await User.findByIdAndUpdate(
+    req.Profile._id,
+    {
+      name: req.body.name,
+      email: req.body.email,
+      role: req.body.role,
+    },
+    {
+      new: true,
+    }
+  );
+  if (!user) {
+    return next(new ApiError(`No user for this id ${req.user._id}`, 404));
+  }
+  res.status(200).json({ data: user });
+});
+
+// @desc Get a single user  | GET /api/users | Private/Admin
+exports.getUser = (req, res) => {
+  res.json({ data: req.Profile });
 };
 
-module.exports.getOneUser_get = (req, res) => {
-  res.json({
-    user: req.Profile,
+// @desc  Get all users | GET /api/users | Private/Admin
+exports.getallusers = (req, res) => {
+  User.find().exec((err, users) => {
+    if (err) {
+      return res.status(500).json({
+        error: err,
+      });
+    }
+
+    res.json({
+      results: users.length,
+      data: users,
+    });
   });
 };
+
+// @desc Create a user | POST  /api/users | Private/Admin
+exports.createUser = (req, res) => {
+  User.create(req.body)
+    .then((user) => {
+      if (user) {
+        res.status(201).json({ data: user });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+exports.deleteUser = asyncHandler(async (req, res) => {
+  let user = req.Profile;
+
+  user.remove((err, user) => {
+    if (err || !user) {
+      return res.status(400).json({ err: "User not found!" });
+    }
+
+    res.status(204).json({});
+  });
+});

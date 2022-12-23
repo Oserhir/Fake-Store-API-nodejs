@@ -82,7 +82,7 @@ exports.updatesubCategory = (req, res) => {
 //  @desc Delete specific subCategory
 exports.deleteSubCategory = (req, res) => {
   let subcategory = req.subcategory;
-  console.log(subcategory);
+ 
   subcategory.remove((err, subcategory) => {
     if (err || !subcategory) {
       return res.status(400).json({ err: "subcategory not found!" });

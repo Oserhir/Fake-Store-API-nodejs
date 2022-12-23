@@ -42,7 +42,7 @@ app.use(cookieParser());
 
 // Routes Middlware
 app.use("/api", authRouters);
-app.use("/api", userRouters);
+app.use("/api/users", userRouters);
 app.use("/api/category", categoryRouters);
 app.use("/api/products", productRouters);
 app.use("/api/subcategories", subCategoryRouters);

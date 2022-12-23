@@ -79,16 +79,6 @@
 
 All the models can be found in the models directory created using mongoose.
 
-User Schema:
-
-- name (String)
-- email (String)
-- password (String)
-- Role(Number)
-- history(array)
-- Wishlist [ { ObjectId - a reference to the product schema } ]
-- Addresses [ {id ,alias ,details ,phone: ,city ,postalCode }]
-
 Category Schema:
 
 - title (String)
@@ -156,12 +146,6 @@ Auth Routes:
 | /api/login  | GET   | Private | log in page                 |
 | /api/login  | POST  | Private | authenticate a current user |
 | /api/logout | GET   | Private | log a user out              |
-
-User Routes:
-
-| @Route               | @Type | @access | @desc                                 |
-| -------------------- | ----- | ------- | ------------------------------------- |
-| /api/profile/:userId | GET   | Private | retrieve a user's profile information |
 
 Product Routes:
 
@@ -346,17 +330,120 @@ To run this application, you have to set your own environmental variables. For s
 - MONGO_URI
 - JWT_SECRET
 
-<!-- 
-## How to use it
+---
 
+title: Users
+description: Endpoints for Users
 
-Products :
+---
 
-Get all products
+User Routes:
 
-```JavaScript
-fetch('https://x.com/products')
-    .then(res=>res.json())
-    .then(json=>console.log(json))
+| @Route          | @Type | @access | @desc             |
+| --------------- | ----- | ------- | ----------------- |
+| /api/users      | GET   | Private | Get all users     |
+| /api/users/{id} | GET   | Private | Get a single user |
+| /api/users      | POST  | Private | Create a user     |
+| /api/users/{id} | Put   | Private | Update a user     |
+
+## Get all users
+
+You can access the list of users by using the `/users` endpoint.
+
 ```
--- >
+[GET] https://localhost:3000/api/users
+```
+
+```json
+[
+  {
+    "_id": "6362a1793b0236acba300bad",
+    "name": "Oserhir",
+    "email": "oserhir@gmail.com",
+    "password": "$2b$10$CW5dB3.zTAYgOTolpHG2Geswre.bt4TdXGkdrTGyHpytv5RNXFEZi",
+    "role": 0,
+    "createdAt": "2022-11-02T16:57:29.319Z",
+    "updatedAt": "2022-11-22T21:01:17.949Z"
+  }
+  // ...
+]
+```
+
+## Get a single user
+
+You can get a single user by adding the `id` as a parameter: `/users/{id}`
+
+```bash
+[GET] https://localhost:3000/api/users/6362a1793b0236acba300bad
+```
+
+```json
+{
+  "_id": "6362a1793b0236acba300bad",
+  "name": "Oserhir",
+  "email": "oserhir@gmail.com",
+  "password": "$2b$10$CW5dB3.zTAYgOTolpHG2Geswre.bt4TdXGkdrTGyHpytv5RNXFEZi",
+  "role": 0,
+  "createdAt": "2022-11-02T16:57:29.319Z",
+  "updatedAt": "2022-11-22T21:01:17.949Z"
+}
+```
+
+## Create a user
+
+You can create a new user by sending an object like the following to `/users/`
+
+```bash
+[POST] https://localhost:3000/api/users/
+```
+
+```json
+{
+  "name": "oserhir",
+  "email": "oserhir@gmail.com",
+  "password": "123456789"
+}
+```
+
+> Note that the password will be encrypted.
+
+## Update a user
+
+You can update a user exists by sending an object like the following and adding the `id` as a parameter: `/users/{id}`
+
+```bash
+[PUT] https://localhost:3000/api/users/6362a1793b0236acba300bad
+```
+
+```json
+{
+  "email": "oserhir@mail.com",
+  "name": "Change name"
+}
+```
+
+> Note that it is not necessary to send all user attributes, just send the attributes that want to update.
+
+## Delete a user
+
+You can delete a user exists by adding the `id` as a parameter: `/users/{id}`
+
+```bash
+[DELETE] https://localhost:3000/api/users/6362a1793b0236acba300bad
+```
+
+```json
+status : 204 No Content
+```
+
+## Schema User
+
+| Attribute | Type     | Description                           | Validation Layer |
+| --------- | -------- | ------------------------------------- | ---------------- |
+| id        | number   | The id of the user.                   |                  |
+| name      | string   | The name of the user.                 |                  |
+| role      | string   | The role of the user is user or admin |                  |
+| email     | string   | The email of the user.                |                  |
+| password  | string   | The password of the user.             |                  |
+| Wishlist  | ObjectId |                                       |                  |
+| Addresses | array    |                                       |                  |
