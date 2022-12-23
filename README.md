@@ -335,13 +335,13 @@ To run this application, you have to set your own environmental variables. For s
 
 User Routes:
 
-| @Route                           | @Type | @access | @desc             |
-| -------------------------------- | ----- | ------- | ----------------- |
-| /api/users                       | GET   | Private | Get all users     |
-| /api/users/{id}                  | GET   | Private | Get a single user |
-| /api/users                       | POST  | Private | Create a user     |
-| /api/users/{id}                  | PUT   | Private | Update a user     |
-| /api/users/changeMyPassword/{id} | PUT   | Private | Change Password   |
+| @Route                           | @Type | @access       | @desc             |
+| -------------------------------- | ----- | ------------- | ----------------- |
+| /api/users                       | GET   | Private/Admin | Get all users     |
+| /api/users/{id}                  | GET   | Private/Admin | Get a single user |
+| /api/users                       | POST  | Private/Admin | Create a user     |
+| /api/users/{id}                  | PUT   | Private/Admin | Update a user     |
+| /api/users/changeMyPassword/{id} | PUT   | Private/User  | Change Password   |
 
 ## Get all users
 
@@ -471,11 +471,11 @@ You can change password of any user exists by sending an object like the followi
 
 Auth Routes:
 
-| @Route            | @Type | @access | @desc                       |
-| ----------------- | ----- | ------- | --------------------------- |
-| /api/auth/signup  | POST  | Public  | create a new user in db     |
-| /api/auth/login   | POST  | Public  | authenticate a current user |
-| /api//auth/logout | GET   | Private | log a user out              |
+| @Route           | @Type | @access      | @desc                       |
+| ---------------- | ----- | ------------ | --------------------------- |
+| /api/auth/signup | POST  | Public       | create a new user in db     |
+| /api/auth/login  | POST  | Public       | authenticate a current user |
+| /api/auth/logout | GET   | Private/User | log a user out              |
 
 ## Login
 
