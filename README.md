@@ -355,8 +355,8 @@ You can access the list of users by using the `/api/users` endpoint.
 [
   {
     "_id": "6362a1793b0236acba300bad",
-    "name": "Oserhir",
-    "email": "oserhir@gmail.com",
+    "name": "Jhon",
+    "email": "john@mail.com",
     "password": "$2b$10$CW5dB3.zTAYgOTolpHG2Geswre.bt4TdXGkdrTGyHpytv5RNXFEZi",
     "role": 0,
     "createdAt": "2022-11-02T16:57:29.319Z",
@@ -377,8 +377,8 @@ You can get a single user by adding the `id` as a parameter: `/api/users/{id}`
 ```json
 {
   "_id": "6362a1793b0236acba300bad",
-  "name": "Oserhir",
-  "email": "oserhir@gmail.com",
+  "name": "Jhon",
+  "email": "john@mail.com",
   "password": "$2b$10$CW5dB3.zTAYgOTolpHG2Geswre.bt4TdXGkdrTGyHpytv5RNXFEZi",
   "role": 0,
   "createdAt": "2022-11-02T16:57:29.319Z",
@@ -396,9 +396,9 @@ You can create a new user by sending an object like the following to `/api/users
 
 ```json
 {
-  "name": "oserhir",
-  "email": "oserhir@gmail.com",
-  "password": "123456789"
+  "name": "Jhon",
+  "email": "john@mail.com",
+  "password": "123456"
 }
 ```
 
@@ -414,7 +414,7 @@ You can update a user exists by sending an object like the following and adding 
 
 ```json
 {
-  "email": "oserhir@mail.com",
+  "email": "john@mail.com",
   "name": "Change name"
 }
 ```
@@ -473,8 +473,8 @@ Auth Routes:
 
 | @Route            | @Type | @access | @desc                       |
 | ----------------- | ----- | ------- | --------------------------- |
-| /api/auth/signup  | POST  | Private | create a new user in db     |
-| /api/auth/login   | POST  | Private | authenticate a current user |
+| /api/auth/signup  | POST  | Public  | create a new user in db     |
+| /api/auth/login   | POST  | Public  | authenticate a current user |
 | /api//auth/logout | GET   | Private | log a user out              |
 
 ## Login
@@ -487,7 +487,7 @@ You can do login by sending an object like the following to `/auth/login/`
 
 ```json
 {
-  "email": "dummy@email.com",
+  "email": "john@mail.com",
   "password": "123456"
 }
 ```
@@ -502,8 +502,8 @@ Create a user by sending user's credentials (in JSON format) in the Body of the 
 
 ```json
 {
-  "name": "test",
-  "email": "dummy@email.com",
+  "name": "Jhon",
+  "email": "john@mail.com",
   "password": "123456"
 }
 ```
