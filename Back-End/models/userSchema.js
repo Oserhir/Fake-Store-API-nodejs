@@ -28,10 +28,6 @@ const userSchema = new mongoose.Schema(
       default: 0,
     },
 
-    history: {
-      type: Array,
-      default: [],
-    },
     // child reference (one to many)
     wishlist: [
       {

@@ -30,7 +30,19 @@ exports.createUserValidator = [
     .notEmpty()
     .withMessage("password is not allowed to be empty")
     .isLength({ min: 4 })
-    .withMessage("password length must be at least 4 characters long"),
+    .withMessage("password length must be at least 4 characters long")
+    .custom((password, { req }) => {
+      if (password != req.body.passwordConfirm) {
+        throw new Error("Password Confirmation incorrect");
+      }
+
+      return true;
+    }),
+
+  check("passwordConfirm")
+    .notEmpty()
+    .withMessage("Password confirmation required"),
+
   validatorMiddleware,
 ];
 

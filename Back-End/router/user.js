@@ -24,8 +24,12 @@ router.put(
   // [requireSignIn, isAuth],
   updateUserValidator,
   updateUser
-); // Update a user
-router.delete("/:userId", deleteUser); // Delete a user
+); // Delete a user
+router.delete(
+  "/:userId",
+  // [requireSignIn, isAuth],
+  deleteUser
+); // Delete a user
 
 // router.get("/profile/:userId", requireSignIn, isAuth, getOneUser_get);
 router.param("userId", userById); // Any route contain "userId" my app will execute userByID()
