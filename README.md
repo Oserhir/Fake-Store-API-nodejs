@@ -78,7 +78,6 @@ Fake Store API can be used with any type project that needs products, users, cat
     - ReviewValidators.js
     - subCategoryValidators.
     - wishlistValidator.js
--->
 
 ## Database
 
@@ -324,6 +323,7 @@ To run this application, you have to set your own environmental variables. For s
 
 - MONGO_URI
 - JWT_SECRET
+-->
 
 ---
 
