@@ -6,11 +6,7 @@ const ApiError = require("../utils/APIError");
 
 require("dotenv").config(); // access environment variables
 
-module.exports.signup_get = (req, res) => {
-  res.send("signUp.....");
-};
-
-// @desc   create a new user in db
+// @desc  create a new user in db @access Public
 module.exports.signup_post = (req, res) => {
   // Create User
   User.create(req.body)
@@ -32,11 +28,7 @@ module.exports.signup_post = (req, res) => {
     });
 };
 
-module.exports.login_get = (req, res) => {
-  res.send("Login..");
-};
-
-// @desc  authenticate a current user
+// @desc  authenticate a current user @access Public
 module.exports.login_post = (req, res) => {
   // Create Token and send it to the Browser
   const token = createToken(req.user._id);
@@ -52,7 +44,7 @@ module.exports.login_post = (req, res) => {
   });
 };
 
-// @desc  log a user out
+// @desc  log a user out @access Private
 module.exports.signout_get = (req, res) => {
   res.clearCookie("jwt");
   res.send("User signOUT");
@@ -104,9 +96,3 @@ const createToken = (user_id, user_role) => {
     expiresIn: maxAge,
   });
 };
-
-// const createToken = (userid, user_role) => {
-//   return jwt.sign({ userid }, process.env.JWT_SECRET, {
-//     expiresIn: maxAge,
-//   });
-// };

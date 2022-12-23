@@ -2,7 +2,7 @@ const User = require("../models/userSchema");
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcrypt");
 
-//  @desc update user  | GET /api/users | Private/Admin
+//  @desc update user  @access Private/Admin
 exports.updateUser = asyncHandler(async (req, res) => {
   const user = await User.findByIdAndUpdate(
     req.Profile._id,
@@ -21,12 +21,12 @@ exports.updateUser = asyncHandler(async (req, res) => {
   res.status(200).json({ data: user });
 });
 
-// @desc Get a single user  | GET /api/users | Private/Admin
+// @desc Get a single user @access Private/Admin
 exports.getUser = (req, res) => {
   res.json({ data: req.Profile });
 };
 
-// @desc  Get all users | GET /api/users | Private/Admin
+// @desc  Get all users @access Private/Admin
 exports.getallusers = (req, res) => {
   User.find().exec((err, users) => {
     if (err) {
@@ -42,7 +42,7 @@ exports.getallusers = (req, res) => {
   });
 };
 
-// @desc Create a user | POST  /api/users | Private/Admin
+// @desc Create a user @access Private/Admin
 exports.createUser = (req, res) => {
   User.create(req.body)
     .then((user) => {
@@ -55,6 +55,7 @@ exports.createUser = (req, res) => {
     });
 };
 
+// @desc Delete a user @access Private/Admin
 exports.deleteUser = asyncHandler(async (req, res) => {
   let user = req.Profile;
 
@@ -67,6 +68,7 @@ exports.deleteUser = asyncHandler(async (req, res) => {
   });
 });
 
+// @desc Change Password @access Private/Admin
 exports.changePasswords = asyncHandler(async (req, res) => {
   const user = await User.findByIdAndUpdate(
     req.Profile._id,

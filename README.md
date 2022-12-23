@@ -335,13 +335,14 @@ To run this application, you have to set your own environmental variables. For s
 
 User Routes:
 
-| @Route                           | @Type | @access       | @desc             |
-| -------------------------------- | ----- | ------------- | ----------------- |
-| /api/users                       | GET   | Private/Admin | Get all users     |
-| /api/users/{id}                  | GET   | Private/Admin | Get a single user |
-| /api/users                       | POST  | Private/Admin | Create a user     |
-| /api/users/{id}                  | PUT   | Private/Admin | Update a user     |
-| /api/users/changeMyPassword/{id} | PUT   | Private/User  | Change Password   |
+| @Route                           | @Type  | @access       | @desc             |
+| -------------------------------- | ------ | ------------- | ----------------- |
+| /api/users                       | GET    | Private/Admin | Get all users     |
+| /api/users/{id}                  | GET    | Private/Admin | Get a single user |
+| /api/users                       | POST   | Private/Admin | Create a user     |
+| /api/users/{id}                  | PUT    | Private/Admin | Update a user     |
+| /api/users/{id}                  | DELETE | Private/Admin | Delete a user     |
+| /api/users/changeMyPassword/{id} | PUT    | Private/User  | Change Password   |
 
 ## Get all users
 

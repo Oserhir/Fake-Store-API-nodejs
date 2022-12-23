@@ -15,10 +15,13 @@ const {
   Hello_get,
 } = require("../controllers/authController");
 
-router.post("/signup", signupValidator, signup_post); // create a new user in db
+// create a new user in db
+router.post("/signup", signupValidator, signup_post);
 
-router.post("/login", loginValidator, login_post); // authenticate a current user
+// authenticate a current user
+router.post("/login", loginValidator, login_post);
 
-router.get("/signout", signout_get); // log a user out
+// log a user out
+router.get("/signout", signout_get);
 
 module.exports = router;

@@ -19,20 +19,29 @@ const { userById } = require("../middlewares/user");
 const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
 const { requireLogIn } = require("../controllers/authController");
 
-router.get("/:userId", getUser); // Get a single user
-router.get("/", getallusers); // Get all users
-router.post("/", createUserValidator, createUser); // Create a user
+// Get a single user
+router.get("/:userId", getUser);
+
+// Get all users
+router.get("/", getallusers);
+
+// Create a user
+router.post("/", createUserValidator, createUser);
+
+// Update a user
 router.put(
   "/:userId",
   // [requireSignIn, isAuth],
   updateUserValidator,
   updateUser
-); // Delete a user
+);
+
+// Delete a user
 router.delete(
   "/:userId",
   // [requireSignIn, isAuth],
   deleteUser
-); // Delete a user
+);
 
 // Change Password
 router.put(
