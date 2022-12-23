@@ -1,14 +1,14 @@
 # My Ecommerce Software Requirements
 
-Fake Store API can be used with any type project that needs products, users, categories, authentication and users in JSON format. you can use examples below to check how fakeStoreApi works and feel free to enjoy it in your awesome projects!
+Fake Store API can be used with any type project that needs products, users, categories, authentication and users in JSON format. you can use examples below to check how fakeStoreApi works!
 
 ## This API include feature like:
 
 - ✅ Signing Up, signing in and signing out of users
-- ✅ Authentication using JSON Web Tokens (JWT).
+- ✅ Authentication using JSON Web tokens (JWT).
 - ✅ Advance searching, sorting, pagination and filtering
-- ✅ Schema Validation using Express-Validator
-- ✅ Image Upload & Multiple Images Upload and image processing
+- ✅ Schema validation using Express-Validator
+- ✅ Image upload , multiple images upload and image processing
 - ✅ All CRUD Operations
 - ✅ Star rating system
 - ✅ Discount coupon code
@@ -334,12 +334,13 @@ description: Endpoints for Users
 
 User Routes:
 
-| @Route          | @Type | @access | @desc             |
-| --------------- | ----- | ------- | ----------------- |
-| /api/users      | GET   | Private | Get all users     |
-| /api/users/{id} | GET   | Private | Get a single user |
-| /api/users      | POST  | Private | Create a user     |
-| /api/users/{id} | PUT   | Private | Update a user     |
+| @Route                           | @Type | @access | @desc             |
+| -------------------------------- | ----- | ------- | ----------------- |
+| /api/users                       | GET   | Private | Get all users     |
+| /api/users/{id}                  | GET   | Private | Get a single user |
+| /api/users                       | POST  | Private | Create a user     |
+| /api/users/{id}                  | PUT   | Private | Update a user     |
+| /api/users/changeMyPassword/{id} | PUT   | Private | Change Password   |
 
 ## Get all users
 
@@ -433,7 +434,7 @@ status : 204 No Content
 
 ## Change Password
 
-You can change password a user exists by sending an object like the following and adding the `id` as a parameter: `/api/users/changeMyPassword/{id}`
+You can change password of any user exists by sending an object like the following and adding the `id` as a parameter: `/api/users/changeMyPassword/{id}`
 
 ```bash
 [PUT] https://localhost:3000/api/users/changeMyPassword/63a5e987577e750d00acd787
