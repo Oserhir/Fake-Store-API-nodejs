@@ -108,36 +108,8 @@ exports.changePasswordValidator = [
   validatorMiddleware,
 ];
 
-// exports.changePasswordValidator = [
-//   check("userId").isMongoId().withMessage("Invalid User id format"),
-//   check("currentPassword")
-//     .notEmpty()
-//     .withMessage("currentPassword is not allowed to be empty")
-//     .custom(
-//       asyncHandler(async (currentPassword) => {
-//         // Verify current password
-//         const user = await User.findById(req.Profile._id);
-//         console.log(req.Profile._id);
-//         console.log(user);
+exports.deleteUserValidator = [
+  check("userId").isMongoId().withMessage("Invalid User id format"),
 
-//         // const isCorrectPassword = await bcrypt.compare(
-//         //   req.body.currentPassword,
-//         //   user.password
-//         // );
-//         // if (!isCorrectPassword) {
-//         //   throw new Error("Incorrect current password");
-//         // }
-//       })
-//     ),
-
-//   check("passwordConfirm")
-//     .notEmpty()
-//     .withMessage("passwordConfirm is not allowed to be empty"),
-
-//   ,
-//   check("password")
-//     .notEmpty()
-//     .withMessage("password is not allowed to be empty"),
-
-//   validatorMiddleware,
-// ];
+  validatorMiddleware,
+];
