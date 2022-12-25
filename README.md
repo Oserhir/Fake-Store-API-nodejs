@@ -397,15 +397,15 @@ You can change password of any user exists by sending an object like the followi
 
 ## Schema User
 
-| Attribute | Type     | Description                           | Validation Layer |
-| --------- | -------- | ------------------------------------- | ---------------- |
-| id        | number   | The id of the user.                   |                  |
-| name      | string   | The name of the user.                 |                  |
-| role      | string   | The role of the user is user or admin |                  |
-| email     | string   | The email of the user.                |                  |
-| password  | string   | The password of the user.             |                  |
-| Wishlist  | ObjectId |                                       |                  |
-| Addresses | array    |                                       |                  |
+| Attribute | Type    | Description                           | Validation Layer |
+| --------- | ------- | ------------------------------------- | ---------------- |
+| id        | number  | The id of the user.                   |                  |
+| name      | string  | The name of the user.                 |                  |
+| role      | string  | The role of the user is user or admin |                  |
+| email     | string  | The email of the user.                |                  |
+| password  | string  | The password of the user.             |                  |
+| active    | boolean |                                       |                  |
+| Addresses | array   |                                       |                  |
 
 ---
 
@@ -416,6 +416,13 @@ You can change password of any user exists by sending an object like the followi
 #### Endpoints for Logged Users
 
 ---
+
+| @Route              | @Type  | @access      | @desc                   |
+| ------------------- | ------ | ------------ | ----------------------- |
+| /api/users/getMe    | GET    | Private/User | Get Logged User         |
+| /api/users/updateMe | PUT    | Private/User | Update Logged User      |
+| /api/users/deleteMe | DELETE | Private/User | Deactivate Logged Users |
+| /api/users/activeMe | PUT    | Private/User | Activate Logged Users   |
 
 ## Get Logged User
 
@@ -439,7 +446,7 @@ You can change password of any user exists by sending an object like the followi
 You can update logged user by sending an object like the following
 
 ```bash
-[GET] https://localhost:3000/api/users/updateMe
+[PUT] https://localhost:3000/api/users/updateMe
 ```
 
 ```json
