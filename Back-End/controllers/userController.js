@@ -91,7 +91,7 @@ exports.getLoggedUserData = (req, res, next) => {
 };
 
 // @desc Update Logged User @access Private/Protect
-exports.updateLoggedData = asyncHandler(async (req, res, next) => {
+exports.updateLoggedUserData = asyncHandler(async (req, res, next) => {
   const user = await User.findByIdAndUpdate(
     req.crUser._id,
     {

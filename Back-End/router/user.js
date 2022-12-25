@@ -6,6 +6,7 @@ const {
   updateUserValidator,
   changePasswordValidator,
   deleteUserValidator,
+  updateLoggedUserValidator,
 } = require("../utils/validators/userValidators");
 
 const {
@@ -16,7 +17,7 @@ const {
   deleteUser,
   changePasswords,
   getLoggedUserData,
-  updateLoggedData,
+  updateLoggedUserData,
 } = require("../controllers/userController");
 const { userById } = require("../middlewares/user");
 
@@ -31,6 +32,12 @@ router.get(
   getUser
 );
 
+router.put(
+  "/updateMe",
+  requireLogIn,
+  updateLoggedUserValidator,
+  updateLoggedUserData
+);
 
 // Admin
 

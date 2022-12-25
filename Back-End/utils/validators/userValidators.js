@@ -113,3 +113,28 @@ exports.deleteUserValidator = [
 
   validatorMiddleware,
 ];
+
+exports.updateLoggedUserValidator = [
+  check("email")
+    .notEmpty()
+    .withMessage("email is not allowed to be empty")
+    .isLength({ min: 12 })
+    .withMessage("email length must be at least 12 characters long")
+    .isEmail()
+    .withMessage("email must be a valid email")
+    .custom(async (value, req) => {
+      // check if user already exists in database
+      const user = await User.findOne({ email: value });
+      if (user) {
+        return Promise.reject(
+          new Error("Sorry, that email address is already used!")
+        );
+      }
+    }),
+  check("name")
+    .optional()
+    .isLength({ min: 3 })
+    .withMessage("name length must be at least 3 characters long"),
+
+  validatorMiddleware,
+];
