@@ -1,6 +1,7 @@
 const User = require("../models/userSchema");
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcrypt");
+const ApiError = require("../utils/APIError");
 
 //  @desc update user  @access Private/Admin
 exports.updateUser = asyncHandler(async (req, res) => {
@@ -91,7 +92,7 @@ exports.getLoggedUserData = (req, res, next) => {
 };
 
 // @desc Update Logged User @access Private/Protect
-exports.updateLoggedUserData = asyncHandler(async (req, res, next) => {
+exports.updateLoggedUserData = asyncHandler(async (req, res) => {
   const user = await User.findByIdAndUpdate(
     req.crUser._id,
     {
@@ -106,4 +107,51 @@ exports.updateLoggedUserData = asyncHandler(async (req, res, next) => {
     return next(new ApiError(`No user for this id ${req.user._id}`, 404));
   }
   res.status(200).json({ data: user });
+});
+
+exports.deleteLoggedUserData = asyncHandler(async (req, res) => {
+  const user = await User.findByIdAndUpdate(
+    req.crUser._id,
+    {
+      active: false,
+    },
+    {
+      new: true,
+    }
+  );
+  if (!user) {
+    return next(new ApiError(`No user for this id ${req.user._id}`, 404));
+  }
+  res.status(200).json({ data: user });
+});
+
+exports.activeLoggedUserData = asyncHandler(async (req, res) => {
+  const user = await User.findByIdAndUpdate(
+    req.crUser._id,
+    {
+      active: true,
+    },
+    {
+      new: true,
+    }
+  );
+  if (!user) {
+    return next(new ApiError(`No user for this id ${req.user._id}`, 404));
+  }
+  res.status(200).json({ data: user });
+});
+
+exports.isDeactivate = asyncHandler(async (req, res, next) => {
+  // Check if account is not activated
+
+  if (!req.crUser.active) {
+    return next(
+      new ApiError(
+        "Your account has been deactivated : Please Reactivate Your Account",
+        401
+      )
+    );
+  }
+
+  next();
 });

@@ -409,6 +409,58 @@ You can change password of any user exists by sending an object like the followi
 
 ---
 
+---
+
+## Logged Users
+
+#### Endpoints for Logged Users
+
+---
+
+## Get Logged User
+
+```bash
+[GET] https://localhost:3000/api/users/getMe
+```
+
+```json
+{
+  "_id": "63a8803af43c0858d3f535e3",
+  "name": "Kvn",
+  "email": "kvn@gmail.com",
+  "password": "$2b$10$n7dykMNDae9Eu/0IGO/CZ./jq5MfYjuaWqypPRZr.xO2L9sjABxdG",
+  "role": "user",
+  "active": true
+}
+```
+
+## Update Logged User
+
+You can update logged user by sending an object like the following
+
+```bash
+[GET] https://localhost:3000/api/users/updateMe
+```
+
+```json
+{
+  "name": "KvnHart",
+  "email": "KvnHart@gmail.com"
+}
+```
+
+## Deactivate Logged Users
+
+```bash
+[DELETE] https://localhost:3000/api/users/deleteMe
+```
+
+## Activate Logged Users
+
+```bash
+[PUT] https://localhost:3000/api/users/activeMe
+```
+
 ## Authentication
 
 #### Endpoints for Authentication

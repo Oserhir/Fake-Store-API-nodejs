@@ -9,7 +9,6 @@ const db = require("./config/database"); // Connect to Database
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
-const APIError = require("./utils/APIError");
 const globalError = require("./middlewares/errorMiddleware");
 
 // Routes

@@ -52,6 +52,8 @@ exports.requireLogIn = async (req, res, next) => {
   // Verify token (no change happens, expired token)
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
+  //
+
   // Check if user exists
   const currentUser = await User.findById(decoded.user_id);
   if (!currentUser) {

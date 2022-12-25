@@ -29,6 +29,11 @@ const userSchema = new mongoose.Schema(
       default: "user",
     },
 
+    active: {
+      type: Boolean,
+      default: true,
+    },
+
     // child reference (one to many)
     wishlist: [
       {
