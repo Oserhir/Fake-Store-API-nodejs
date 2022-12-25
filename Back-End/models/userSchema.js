@@ -24,8 +24,9 @@ const userSchema = new mongoose.Schema(
     },
 
     role: {
-      type: Number,
-      default: 0,
+      type: String,
+      enum: ["user", "admin"],
+      default: "user",
     },
 
     // child reference (one to many)

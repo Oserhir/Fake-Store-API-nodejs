@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+
 const {
   createUserValidator,
   updateUserValidator,
@@ -14,34 +15,36 @@ const {
   createUser,
   deleteUser,
   changePasswords,
-  checkTheEmail,
 } = require("../controllers/userController");
 const { userById } = require("../middlewares/user");
-const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
-const { requireLogIn } = require("../controllers/authController");
+
+const { isAuth, requireLogIn, allowedTo } = require("../middlewares/auth");
+
+router.use(requireLogIn);
 
 // @desc Get a single user @access Private/Admin
-router.get("/:userId", getUser);
+router.get("/:userId", allowedTo("admin"), getUser);
 
 // @desc Get all users @access Private/Admin
-router.get("/", getallusers);
+router.get("/", allowedTo("admin"), getallusers);
 
 // @desc Create a user @access Private/Admin
-router.post("/", createUserValidator, createUser);
+router.post("/", allowedTo("admin"), createUserValidator, createUser);
 
 // @desc Update a user @access Private/Admin
-router.put("/:userId", updateUserValidator, updateUser);
+router.put("/:userId", allowedTo("admin"), updateUserValidator, updateUser);
 
 // @desc Delete a user @access Private/Admin
-router.delete("/:userId", deleteUserValidator, deleteUser);
+router.delete("/:userId", allowedTo("admin"), deleteUserValidator, deleteUser);
 
-// @desc Change Password @access Public/User
+// @desc Change Password @access Private/Admin
 router.put(
   "/changeMyPassword/:userId",
+  allowedTo("admin"),
   changePasswordValidator,
   changePasswords
 );
 
-router.param("userId", userById); // Any route contain "userId" my app will execute userByID()
+router.param("userId", userById); // @desc Any route contain "userId" my app will execute userByID()
 
 module.exports = router;

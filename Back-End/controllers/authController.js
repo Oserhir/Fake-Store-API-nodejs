@@ -50,44 +50,6 @@ module.exports.signout_get = (req, res) => {
   res.send("User signOUT");
 };
 
-// @desc make sure the user is logged in
-exports.requireLogIn = async (req, res, next) => {
-  // Check if token exist, if exist get token
-  let token;
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith("Bearer")
-  ) {
-    token = req.headers.authorization.split(" ")[1];
-  }
-
-  if (!token) {
-    return next(
-      new ApiError(
-        "You are not login, Please login to get access this route",
-        401
-      )
-    );
-  }
-
-  // Verify token (no change happens, expired token)
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-  //Check if user exists
-  const currentUser = await User.findById(decoded.user_id);
-  if (!currentUser) {
-    return next(
-      new ApiError(
-        "The user that belong to this token does no longer exist",
-        401
-      )
-    );
-  }
-
-  req.user = currentUser;
-  next();
-};
-
 // create json web token
 // Signing a token with 3 Days of expiration:
 const maxAge = 3 * 24 * 60 * 60;

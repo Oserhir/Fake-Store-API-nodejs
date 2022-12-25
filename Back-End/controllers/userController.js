@@ -23,7 +23,7 @@ exports.updateUser = asyncHandler(async (req, res) => {
 
 // @desc Get a single user @access Private/Admin
 exports.getUser = (req, res) => {
-  res.json({ data: req.Profile });
+  res.status(200).json({ data: req.Profile });
 };
 
 // @desc  Get all users @access Private/Admin
@@ -35,7 +35,7 @@ exports.getallusers = (req, res) => {
       });
     }
 
-    res.json({
+    res.status(200).json({
       results: users.length,
       data: users,
     });

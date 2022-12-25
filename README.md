@@ -15,69 +15,13 @@ Fake Store API can be used with any type project that needs products, users, cat
 - ✅ Add to wishlist
 - ✅ Add to cart
 
+<!--
+
 ## To-do list:
 
 - Password forgot/reset, confirmation email on signup
 - Credit card payment with stripe
 - Cash on delivery (no online payment required)
-
-<!--
-## Back-end project structure
-
-- index.js
-- config
-  - database.js
-- controllers
-  - auth.js
-  - brand.js
-  - category.js
-  - product.js
-  - subcategory.js
-  - user.js
-  - address.js
-  - cart.js
-  - coupon.js
-  - review.js
-  - wishlist.js
-- middlewares
-  - auth.js
-  - errorMiddleware.js
-  - uploadImageMiddlewares.js
-  - validatorMiddleware.js
-- models
-  - brands.js
-  - category.js
-  - product.js
-  - subcategory.js
-  - user.js
-  - cart.js
-  - coupon.js
-  - review.js
-- router
-  - auth.js
-  - brand.js
-  - category.js
-  - product.js
-  - subcategory.js
-  - user.js
-  - address.js
-  - cart.js
-  - coupon.js
-  - review.js
-  - wishlist.js
-- utils
-  - APIError.js
-  - dummyData
-    - seeder.js
-    - products.json
-  - validators
-    - BrandValidators.js
-    - categoryValidators.js
-    - productValidators.js
-    - subCategoryValidators.js
-    - ReviewValidators.js
-    - subCategoryValidators.
-    - wishlistValidator.js
 
 ## Database
 
@@ -323,7 +267,7 @@ To run this application, you have to set your own environmental variables. For s
 
 - MONGO_URI
 - JWT_SECRET
--->
+  -->
 
 ---
 
@@ -342,7 +286,7 @@ User Routes:
 | /api/users                       | POST   | Private/Admin | Create a user     |
 | /api/users/{id}                  | PUT    | Private/Admin | Update a user     |
 | /api/users/{id}                  | DELETE | Private/Admin | Delete a user     |
-| /api/users/changeMyPassword/{id} | PUT    | Private/User  | Change Password   |
+| /api/users/changeMyPassword/{id} | PUT    | Private/Admin | Change Password   |
 
 ## Get all users
 
