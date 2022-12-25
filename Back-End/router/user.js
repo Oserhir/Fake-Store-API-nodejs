@@ -15,10 +15,24 @@ const {
   createUser,
   deleteUser,
   changePasswords,
+  getLoggedUserData,
+  updateLoggedData,
 } = require("../controllers/userController");
 const { userById } = require("../middlewares/user");
 
 const { isAuth, requireLogIn, allowedTo } = require("../middlewares/auth");
+const { route } = require("./auth");
+
+router.get(
+  "/getMe",
+  requireLogIn,
+  allowedTo("user", "admin"),
+  getLoggedUserData,
+  getUser
+);
+
+
+// Admin
 
 router.use(requireLogIn);
 

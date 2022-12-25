@@ -83,3 +83,27 @@ exports.changePasswords = asyncHandler(async (req, res) => {
 
   res.status(200).json({ data: user });
 });
+
+// @desc Get Logged User @access Private/Protect
+exports.getLoggedUserData = (req, res, next) => {
+  req.Profile = req.crUser;
+  next();
+};
+
+// @desc Update Logged User @access Private/Protect
+exports.updateLoggedData = asyncHandler(async (req, res, next) => {
+  const user = await User.findByIdAndUpdate(
+    req.crUser._id,
+    {
+      name: req.body.name,
+      email: req.body.email,
+    },
+    {
+      new: true,
+    }
+  );
+  if (!user) {
+    return next(new ApiError(`No user for this id ${req.user._id}`, 404));
+  }
+  res.status(200).json({ data: user });
+});

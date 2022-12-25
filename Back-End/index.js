@@ -60,9 +60,16 @@ app.all("*", (req, res, next) => {
 });
 
 // Global handling middlware
-app.use(globalError);
+app.use((err, req, res, next) => {
+  err.statusCode = err.statusCode || 500;
 
-const PORT = process.env.PORT || 3000; // Set a default environment port or cutom port - 3000
+  res.status(err.statusCode).json({
+    message: err.message,
+  });
+});
+
+// Set a default environment port or cutom port - 3000
+const PORT = process.env.PORT || 3000;
 
 // Start out application
 app.listen(PORT, () => {

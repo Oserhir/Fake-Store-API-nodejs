@@ -2,7 +2,7 @@
 
 Fake Store API can be used with any type project that needs products, users, categories, authentication and users in JSON format. you can use examples below to check how fakeStoreApi works!
 
-## This API include feature like:
+## The features in the API :
 
 - ✅ Signing Up, signing in and signing out of users
 - ✅ Authentication using JSON Web tokens (JWT).
@@ -10,6 +10,7 @@ Fake Store API can be used with any type project that needs products, users, cat
 - ✅ Schema validation using Express-Validator
 - ✅ Image upload , multiple images upload and image processing
 - ✅ All CRUD Operations
+- ✅ Error Handling
 - ✅ Star rating system
 - ✅ Discount coupon code
 - ✅ Add to wishlist
@@ -271,7 +272,7 @@ To run this application, you have to set your own environmental variables. For s
 
 ---
 
-## Users
+## Users { Admin }
 
 #### Endpoints for Users
 
