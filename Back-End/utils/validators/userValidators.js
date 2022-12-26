@@ -48,7 +48,7 @@ exports.createUserValidator = [
 ];
 
 exports.updateUserValidator = [
-  check("userId").isMongoId().withMessage("Invalid User id format"),
+  check("id").isMongoId().withMessage("Invalid User id format"),
   check("email")
     .notEmpty()
     .withMessage("email is not allowed to be empty")
@@ -74,7 +74,8 @@ exports.updateUserValidator = [
 ];
 
 exports.changePasswordValidator = [
-  check("userId").isMongoId().withMessage("Invalid User id format"),
+  check("id").isMongoId().withMessage("Invalid User id format"),
+
   check("currentPassword")
     .notEmpty()
     .withMessage("currentPassword is not allowed to be empty")
@@ -109,7 +110,7 @@ exports.changePasswordValidator = [
 ];
 
 exports.deleteUserValidator = [
-  check("userId").isMongoId().withMessage("Invalid User id format"),
+  check("id").isMongoId().withMessage("Invalid User id format"),
 
   validatorMiddleware,
 ];
@@ -136,5 +137,10 @@ exports.updateLoggedUserValidator = [
     .isLength({ min: 3 })
     .withMessage("name length must be at least 3 characters long"),
 
+  validatorMiddleware,
+];
+
+exports.getUserValidator = [
+  check("id").isMongoId().withMessage("Invalid User id format"),
   validatorMiddleware,
 ];

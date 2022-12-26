@@ -7,6 +7,7 @@ const {
   changePasswordValidator,
   deleteUserValidator,
   updateLoggedUserValidator,
+  getUserValidator,
 } = require("../utils/validators/userValidators");
 
 const {
@@ -22,10 +23,11 @@ const {
   activeLoggedUserData,
   isDeactivate,
 } = require("../controllers/userController");
-const { userById } = require("../middlewares/user");
+// const { userById } = require("../middlewares/user");
 
 const { isAuth, requireLogIn, allowedTo } = require("../middlewares/auth");
 const { route } = require("./auth");
+const { userById } = require("../controllers/userController");
 
 // @desc Get Logged User
 router.get(
@@ -40,8 +42,8 @@ router.get(
 router.put(
   "/updateMe",
   requireLogIn,
-  updateLoggedUserValidator,
   isDeactivate,
+  updateLoggedUserValidator,
   updateLoggedUserData
 );
 // @desc  Deactivate Logged User
@@ -54,7 +56,7 @@ router.put("/ActiveMe", requireLogIn, activeLoggedUserData);
 router.use(requireLogIn);
 
 // @desc Get a single user @access Private/Admin
-router.get("/:userId", allowedTo("admin"), getUser);
+router.get("/:id", allowedTo("admin"), getUserValidator, getUser);
 
 // @desc Get all users @access Private/Admin
 router.get("/", allowedTo("admin"), getallusers);
@@ -63,19 +65,20 @@ router.get("/", allowedTo("admin"), getallusers);
 router.post("/", allowedTo("admin"), createUserValidator, createUser);
 
 // @desc Update a user @access Private/Admin
-router.put("/:userId", allowedTo("admin"), updateUserValidator, updateUser);
+router.put("/:id", allowedTo("admin"), updateUserValidator, updateUser);
 
 // @desc Delete a user @access Private/Admin
-router.delete("/:userId", allowedTo("admin"), deleteUserValidator, deleteUser);
+router.delete("/:id", allowedTo("admin"), deleteUserValidator, deleteUser);
 
 // @desc Change Password @access Private/Admin
 router.put(
-  "/changeMyPassword/:userId",
+  "/changeMyPassword/:id",
   allowedTo("admin"),
+  userById,
   changePasswordValidator,
   changePasswords
 );
 
-router.param("userId", userById); // @desc Any route contain "userId" my app will execute userByID()
+// router.param("userId", userById); // @desc Any route contain "userId" my app will execute userByID()
 
 module.exports = router;

@@ -4,9 +4,9 @@ const bcrypt = require("bcrypt");
 const ApiError = require("../utils/APIError");
 
 //  @desc update user  @access Private/Admin
-exports.updateUser = asyncHandler(async (req, res) => {
+exports.updateUser = asyncHandler(async (req, res, next) => {
   const user = await User.findByIdAndUpdate(
-    req.Profile._id,
+    req.params.id,
     {
       name: req.body.name,
       email: req.body.email,
@@ -17,15 +17,20 @@ exports.updateUser = asyncHandler(async (req, res) => {
     }
   );
   if (!user) {
-    return next(new ApiError(`No user for this id ${req.user._id}`, 404));
+    return next(new ApiError(`No user for this id ${req.params.id}`, 404));
   }
   res.status(200).json({ data: user });
 });
 
 // @desc Get a single user @access Private/Admin
-exports.getUser = (req, res) => {
-  res.status(200).json({ data: req.Profile });
-};
+exports.getUser = asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (!user) {
+    return next(new ApiError(`No user for this id ${id}`, 404));
+  }
+  res.status(200).json({ data: user });
+});
 
 // @desc  Get all users @access Private/Admin
 exports.getallusers = (req, res) => {
@@ -57,25 +62,25 @@ exports.createUser = (req, res) => {
 };
 
 // @desc Delete a user @access Private/Admin
-exports.deleteUser = asyncHandler(async (req, res) => {
-  let user = req.Profile;
+exports.deleteUser = asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+  const document = await User.findByIdAndDelete(id);
 
-  user.remove((err, user) => {
-    if (err || !user) {
-      return res.status(400).json({ err: "User not found!" });
-    }
+  if (!document) {
+    return next(new ApiError(`No document for this id ${id}`, 404));
+  }
 
-    res.status(204).json({});
-  });
+  document.remove();
+  res.status(204).send();
 });
 
 // @desc Change Password @access Private/Admin
 exports.changePasswords = asyncHandler(async (req, res) => {
   const user = await User.findByIdAndUpdate(
-    req.Profile._id,
+    req.params.id,
     {
       password: await bcrypt.hash(req.body.password, 12),
-      // passwordChangedAt: Date.now(),
+      passwordChangedAt: Date.now(),
     },
     {
       new: true,
@@ -87,7 +92,7 @@ exports.changePasswords = asyncHandler(async (req, res) => {
 
 // @desc Get Logged User @access Private/Protect
 exports.getLoggedUserData = (req, res, next) => {
-  req.Profile = req.crUser;
+  req.params.id = req.crUser._id;
   next();
 };
 
@@ -143,6 +148,7 @@ exports.activeLoggedUserData = asyncHandler(async (req, res) => {
 
 exports.isDeactivate = asyncHandler(async (req, res, next) => {
   // Check if account is not activated
+  console.log(req.crUser.active);
 
   if (!req.crUser.active) {
     return next(
@@ -155,3 +161,15 @@ exports.isDeactivate = asyncHandler(async (req, res, next) => {
 
   next();
 });
+
+exports.userById = (req, res, next) => {
+  User.findById(req.params.id).exec((err, user) => {
+    if (err || !user) {
+      return next(new ApiError(`No user for this id ${req.params.id}`, 404));
+      // return res.status(404).json("User not found !!");
+    }
+
+    req.Profile = user;
+    next();
+  });
+};
