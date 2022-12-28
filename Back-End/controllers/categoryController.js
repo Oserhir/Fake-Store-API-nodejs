@@ -55,9 +55,13 @@ exports.updateCategory = (req, res) => {
 };
 
 //  @desc Get specific Category
-exports.getCategory = (req, res) => {
-  res.send({ category: req.Category });
-};
+exports.getCategory = asyncHandler(async (req, res, next) => {
+  const category = await CategoryModel.findById(req.params.id);
+  if (!category) {
+    return next(new APIError(`No category for this id ${req.params.id}`, 404));
+  }
+  res.send({ data: category });
+});
 
 // @desc Get List of Categories
 exports.allCategories = (req, res) => {
@@ -99,7 +103,7 @@ exports.categoryById = (req, res, next, id) => {
       // return res.status(404).json({
       //   errors: "Category not found !",
       // });
-      return next(new APIError(`Category not found !`, 404));
+      return next(new APIError(`No category for this id ${id}`, 404));
     }
 
     req.Category = category;

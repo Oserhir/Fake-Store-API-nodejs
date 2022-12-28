@@ -5,7 +5,7 @@ const Category = require("../../models/categorySchema");
 const ApiError = require("../APIError");
 
 exports.getSpecifiqueCategoriesValidator = [
-  // body("categoryId").isMongoId().withMessage("Invalid Category Id"),
+  // body("id").isMongoId().withMessage("Invalid Category Id"),
   validatorMiddleware,
 ];
 

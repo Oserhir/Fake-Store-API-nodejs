@@ -32,7 +32,13 @@ const { isAuth, requireLogIn, allowedTo } = require("../middlewares/auth");
 router.get("/", allCategories);
 
 // Get a single category
-router.get("/:categoryId", getSpecifiqueCategoriesValidator, getCategory);
+// @access Private/Admin
+router.get(
+  "/:id",
+  [requireLogIn, allowedTo("admin")],
+  getSpecifiqueCategoriesValidator,
+  getCategory
+);
 
 // @desc Add new Category
 // @access Private/Admin
