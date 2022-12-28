@@ -521,10 +521,10 @@ Category Routes:
 | ----------------------------------------- | ------ | ------------- | ----------------------------------------------------------- |
 | /api/categories/                          | POST   | Private/Admin | Create a category                                           |
 | /api/categories/:categoryId/              | PUT    | Private/Admin | Update a category                                           |
+| /api/categories/:categoryId/              | DELETE | Private       | Delete a category                                           |
 | /api/categories/?limit=1                  | GET    | Public        | ( Limit results)                                            |
 | /api/categories/?page=2&limit=1           | GET    | Public        | Get List of Categories                                      |
 | /api/categories/:categoryId               | GET    | Public        | Get specific Category                                       |
-| /api/categories/:categoryId/:userId       | DELETE | Private       | Delete specific Category                                    |
 | /api/categories/:categoryId/subcategories | GET    | Public        | Get All Subcategories for Specific Category ( Nested Route) |
 | /api/categories/:categoryId/subcategories | POST   | Public        | Create Subcategory on Category ( Nested Route)              |
 
@@ -548,7 +548,7 @@ You can create a new category by sending an object like the following to `/categ
 You can update a category exists by sending an object like the following and adding the id as a parameter: `/categories/{id}`
 
 ```bash
-[PUT] https://localhost:3000/api/categories/{Categoryid}
+[PUT] https://localhost:3000/api/categories/{categoryId}
 ```
 
 ```json
@@ -558,3 +558,15 @@ You can update a category exists by sending an object like the following and add
 ```
 
 > Note that it is not necessary to send all user attributes, just send the attributes that want to update.
+
+## Delete a category
+
+You can delete a category exists by adding the `id`as a parameter: `/api/users/{id}`
+
+```bash
+[DELETE] https://localhost:3000/api/categories/{categoryId}
+```
+
+```json
+status : 204 No Content
+```

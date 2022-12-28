@@ -31,7 +31,7 @@ const { isAuth, requireLogIn, allowedTo } = require("../middlewares/auth");
 // Get List of Categories
 router.get("/", allCategories);
 
-// Get specific Category
+// Get a single category
 router.get("/:categoryId", getSpecifiqueCategoriesValidator, getCategory);
 
 // @desc Add new Category
@@ -56,10 +56,11 @@ router.put(
   updateCategory
 );
 
-// Delete specific Category
+// Delete a category
+// @access Private/Admin
 router.delete(
-  "/:categoryId/:userId",
-  // [requireSignIn, isAuth, isAdmin],
+  "/:id",
+  [requireLogIn, allowedTo("admin")],
   deleteCategoryValidator,
   deleteCategory
 );

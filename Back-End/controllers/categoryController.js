@@ -82,18 +82,15 @@ exports.allCategories = (req, res) => {
     });
 };
 
-// @desc Delete specific Category
-exports.deleteCategory = (req, res) => {
-  let category = req.Category;
-
-  category.remove((err, category) => {
-    if (err) {
-      return res.status(400).json({ err: "category not found!" });
-    }
-
-    res.status(204).json({});
-  });
-};
+// @desc Delete a category
+exports.deleteCategory = asyncHandler(async (req, res, next) => {
+  const category = await CategoryModel.findByIdAndRemove(req.params.id);
+  if (!category) {
+    return next(new APIError(`No category for this id ${req.params.id}`, 404));
+  }
+  category.remove();
+  res.status(204).json({});
+});
 
 //  @desc Get Category information Using Category ID
 exports.categoryById = (req, res, next, id) => {

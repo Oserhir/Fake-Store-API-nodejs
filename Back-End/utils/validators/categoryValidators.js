@@ -22,7 +22,7 @@ exports.createCategoryValidator = [
       const category = await Category.findOne({ name: val });
 
       if (category) {
-        throw new Error("Category already exists");
+        throw new Error("Category with this Name already exists");
       }
       req.body.slug = slugify(val);
       return true;
