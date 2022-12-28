@@ -63,8 +63,9 @@ router.delete(
   deleteSubCategory
 );
 
-// Get List of subCategories
-router.get("/", getSpecifiqueCategoriesValidator, getsubCategories);
+// @esc Get List of subCategories
+// @access Public
+router.get("/", getsubCategories);
 
 //  Get specific subCategory
 router.get("/:subcategoryId", getsubCategory);

@@ -656,7 +656,7 @@ You can update a Sub-category exists by sending an object like the following and
 
 ## Delete a sub-Category
 
-You can delete a SUBcategory exists by adding the `id`as a parameter: `/api/subcategories/{id}`
+You can delete a subcategory exists by adding the `id`as a parameter: `/api/subcategories/{id}`
 
 ```bash
 [DELETE] https://localhost:3000/api/subcategories/{categoryId}
@@ -664,4 +664,30 @@ You can delete a SUBcategory exists by adding the `id`as a parameter: `/api/subc
 
 ```json
 status : 204 No Content
+```
+
+## Get all Sub-Categories
+
+You can access the list of subcategories by using the `/subcategories` endpoint.
+
+```bash
+[GET] https://localhost:3000/api/subcategories/
+```
+
+```json
+{
+  "page": 1,
+  "subcategories": [
+    {
+      "_id": "63ac8c42e7a0e5ce49dce1bd",
+      "name": "Travel & Outdoor",
+      "category": "636e61cbaa2719937c3cf0e0",
+      "createdAt": "2022-12-28T18:34:42.494Z",
+      "updatedAt": "2022-12-28T18:34:42.494Z",
+      "__v": 0
+    }
+    // ...
+  ]
+}
+// ...
 ```
