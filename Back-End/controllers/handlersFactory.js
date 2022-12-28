@@ -8,7 +8,7 @@ exports.createOne = (Model) =>
     res.status(201).json({ data: newDoc });
   });
 
-exports.updateOne = (Model, name) =>
+exports.updateOne = (Model, name = "document") =>
   asyncHandler(async (req, res, next) => {
     const document = await Model.findByIdAndUpdate(req.params.id, req.body, {
       new: true,

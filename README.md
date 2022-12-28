@@ -618,10 +618,10 @@ Sub-Category Routes:
 | @Route                                    | @Type  | @access       | @desc                       |
 | ----------------------------------------- | ------ | ------------- | --------------------------- |
 | /api/subcategories/                       | POST   | Private/Admin | Add New Sub-Category        |
+| /api/subcategories/:id                    | PUT    | Private/Admin | Update specific subCategory |
 | /api/subcategories/?limit=1               | GET    | Public        | Get List of subCategories   |
 | /api/subcategories/?page=2&limit=1        | GET    | Public        | Get List of subCategories   |
 | /api/subcategories/:subCategoryId         | GET    | Public        | Get specific subCategory    |
-| /api/subcategories/:subCategoryId/:userId | PUT    | Private       | Update specific subCategory |
 | /api/subcategories/:subCategoryId/:userId | DELETE | Private       | Delete specific subCategory |
 
 ## Create Sub-Category
@@ -638,3 +638,20 @@ You can create a new subcategory by sending an object like the following to `/su
   "category": "636e61cbaa2719937c3cf0e0"
 }
 ```
+
+## Update a Sub-Category
+
+You can update a Sub-category exists by sending an object like the following and adding the id as a parameter: `/subcategories/{id}`
+
+```bash
+[PUT] https://localhost:3000/api/subcategories/{subCategoryId}
+```
+
+```json
+{
+  "name": "Change name",
+  "category": "99999999999"
+}
+```
+
+> Note that it is not necessary to send all user attributes, just send the attributes that want to update.
