@@ -10,6 +10,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
 const globalError = require("./middlewares/errorMiddleware");
+const APIError = require("./utils/APIError");
 
 // Routes
 const authRouters = require("./router/auth");
@@ -58,10 +59,15 @@ app.all("*", (req, res, next) => {
   next(new APIError(`Can't find this route ${req.originalUrl}`, 400));
 });
 
+const handleJwtInvalidSignature = () =>
+  new ApiError("Invalid token, please login again..", 401);
+
 // Global handling middlware
 app.use((err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
-
+  if (err.name === "JsonWebTokenError") {
+    err = handleJwtInvalidSignature();
+  }
   res.status(err.statusCode).json({
     message: err.message,
   });

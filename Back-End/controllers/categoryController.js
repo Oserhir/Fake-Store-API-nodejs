@@ -26,24 +26,15 @@ exports.resizeImage = asyncHandler(async (req, res, next) => {
   next();
 });
 
-//  @desc create category
+//  @desc Add new Category
 exports.createCategory = (req, res) => {
-  // const { name } = req.body;
-  // req.body.slug = slugify(req.body.name);
-
-  CategoryModel.findOne({ name: req.body.name }).then((category) => {
-    if (category) {
-      res.status(400).send("Category already exists");
-    } else {
-      CategoryModel.create(req.body)
-        .then((category) => {
-          res.status(201).json({ data: category });
-        })
-        .catch((err) => {
-          res.status(400).send(err);
-        });
-    }
-  });
+  CategoryModel.create(req.body)
+    .then((category) => {
+      res.status(201).json({ data: category });
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    });
 };
 
 //  @desc Update specific Category

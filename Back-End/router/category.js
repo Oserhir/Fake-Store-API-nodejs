@@ -34,16 +34,6 @@ router.get("/", allCategories);
 // Get specific Category
 router.get("/:categoryId", getSpecifiqueCategoriesValidator, getCategory);
 
-// Add new Category
-// router.post(
-//   "/create/:userId",
-//   [requireSignIn, isAuth, isAdmin],
-//   uploadCategoryImage,
-//   resizeImage,
-//   createCategoryValidator,
-//   createCategory
-// );
-
 // @desc Add new Category @access Private/Admin
 router.post(
   "/",
