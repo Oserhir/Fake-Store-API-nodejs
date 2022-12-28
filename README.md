@@ -509,9 +509,9 @@ Create a user by sending user's credentials (in JSON format) in the Body of the 
 
 ---
 
-## Category
+## Categories
 
-#### Endpoints for Category
+#### Endpoints for Categories
 
 ---
 
