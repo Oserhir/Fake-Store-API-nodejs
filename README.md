@@ -99,16 +99,6 @@ Product Routes:
 | /api/products?fields=title,description | GET    | Public  | Field Limiting                 |
 
 
-SubCategory Routes:
-
-| @Route                                    | @Type  | @access | @desc                                      |
-| ----------------------------------------- | ------ | ------- | ------------------------------------------ |
-| /api/subcategories/create/:userId         | POST   | Private | Add new subCategory                        |
-| /api/subcategories/?limit=1               | GET    | Public  | Get List of subCategories ( Limit results) |
-| /api/subcategories/?page=2&limit=1        | GET    | Public  | Get List of subCategories                  |
-| /api/subcategories/:subCategoryId         | GET    | Public  | Get specific subCategory                   |
-| /api/subcategories/:subCategoryId/:userId | PUT    | Private | Update specific subCategory                |
-| /api/subcategories/:subCategoryId/:userId | DELETE | Private | Delete specific subCategory                |
 
 Brand Routes:
 
@@ -614,3 +604,37 @@ You can access the list of categories by using the `/categories` endpoint.
 | name      | string | Name of the category           |
 | slug      | string |                                |
 | image     | string | The string with URL to a image |
+
+---
+
+## Subcategories
+
+#### Endpoints for Subcategories
+
+---
+
+SubCategory Routes:
+
+| @Route                                    | @Type  | @access       | @desc                       |
+| ----------------------------------------- | ------ | ------------- | --------------------------- |
+| /api/subcategories/                       | POST   | Private/Admin | Add New Subcategory         |
+| /api/subcategories/?limit=1               | GET    | Public        | Get List of subCategories   |
+| /api/subcategories/?page=2&limit=1        | GET    | Public        | Get List of subCategories   |
+| /api/subcategories/:subCategoryId         | GET    | Public        | Get specific subCategory    |
+| /api/subcategories/:subCategoryId/:userId | PUT    | Private       | Update specific subCategory |
+| /api/subcategories/:subCategoryId/:userId | DELETE | Private       | Delete specific subCategory |
+
+## Create a Subcategory
+
+You can create a new subcategory by sending an object like the following to `/subcategories/`
+
+```bash
+[POST] https://localhost:3000/api/categories/
+```
+
+```json
+{
+  "name": "test",
+  "category": "636e61cbaa2719937c3cf0e0"
+}
+```

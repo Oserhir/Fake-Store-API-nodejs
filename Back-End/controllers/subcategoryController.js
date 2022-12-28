@@ -1,5 +1,6 @@
 const subCategoryModel = require("../models/subcategorySchema");
 const slugify = require("slugify");
+const factory = require("./handlersFactory");
 
 exports.setCategoryTobody = (req, res, next) => {
   if (req.params.categoryId) req.body.category = req.params.categoryId;
@@ -7,23 +8,25 @@ exports.setCategoryTobody = (req, res, next) => {
 };
 
 //  @desc create subcategory
-exports.createsubCategory = (req, res) => {
-  const { name, category } = req.body;
-  subCategoryModel.findOne({ name: name }).then((subcategory) => {
-    if (subcategory) {
-      res.status(400).send("subCategory already exists");
-    } else {
-      subCategoryModel
-        .create({ name, slug: slugify(name), category })
-        .then((subcategory) => {
-          res.status(201).json({ data: subcategory });
-        })
-        .catch((err) => {
-          res.status(400).send(err);
-        });
-    }
-  });
-};
+exports.createsubCategory = factory.createOne(subCategoryModel);
+
+// exports.createsubCategory = (req, res) => {
+//   const { name, category } = req.body;
+//   subCategoryModel.findOne({ name: name }).then((subcategory) => {
+//     if (subcategory) {
+//       res.status(400).send("subCategory already exists");
+//     } else {
+//       subCategoryModel
+//         .create({ name, slug: slugify(name), category })
+//         .then((subcategory) => {
+//           res.status(201).json({ data: subcategory });
+//         })
+//         .catch((err) => {
+//           res.status(400).send(err);
+//         });
+//     }
+//   });
+// };
 
 //  @desc Get specific subCategory
 exports.getsubCategory = (req, res) => {
@@ -79,10 +82,10 @@ exports.updatesubCategory = (req, res) => {
   res.json({ subCategory, message: "subCategory updated" });
 };
 
-//  @desc Delete specific subCategory
+// @desc Delete specific subCategory
 exports.deleteSubCategory = (req, res) => {
   let subcategory = req.subcategory;
- 
+
   subcategory.remove((err, subcategory) => {
     if (err || !subcategory) {
       return res.status(400).json({ err: "subcategory not found!" });

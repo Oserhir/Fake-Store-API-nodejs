@@ -24,8 +24,9 @@ const {
 
 const { categoryById } = require("../controllers/categoryController");
 
-const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
+// const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
 const { userById } = require("../middlewares/user");
+const { isAuth, requireLogIn, allowedTo } = require("../middlewares/auth");
 
 // Get List of subCategories
 router.get("/", getSpecifiqueCategoriesValidator, getsubCategories);
@@ -33,26 +34,27 @@ router.get("/", getSpecifiqueCategoriesValidator, getsubCategories);
 //  Get specific subCategory
 router.get("/:subcategoryId", getsubCategory);
 
-// Add new subCategory
+// @desc Create a Subcategory
+// @access Private/Admin
 router.post(
-  "/create/:userId",
-  [requireSignIn, isAuth, isAdmin],
+  "/",
+  [requireLogIn, allowedTo("admin")],
   createSubCategoryValidator,
   createsubCategory
 );
 
 // Method #2 - Create subCategory
-router.post(
-  "/",
-  setCategoryTobody,
-  createSubCategoryValidator,
-  createsubCategory
-);
+// router.post(
+//   "/",
+//   setCategoryTobody,
+//   createSubCategoryValidator,
+//   createsubCategory
+// );
 
 // Update specific subCategory
 router.put(
   "/:subcategoryId/:userId",
-  [requireSignIn, isAuth, isAdmin],
+  //[requireSignIn, isAuth, isAdmin],
   updateSubCategoryValidator,
   updatesubCategory
 );
@@ -60,7 +62,7 @@ router.put(
 // Delete specific subCategory
 router.delete(
   "/:subcategoryId/:userId",
-  [requireSignIn, isAuth, isAdmin],
+  //[requireSignIn, isAuth, isAdmin],
   //deleteSubCategoryValidator,
   deleteSubCategory
 );
