@@ -28,11 +28,6 @@ Fake Store API can be used with any type project that needs products, users, cat
 
 All the models can be found in the models directory created using mongoose.
 
-Category Schema:
-
-- title (String)
-- slug (String)
-- image (String)
 
 subCategory Schema:
 
@@ -610,3 +605,12 @@ You can access the list of categories by using the `/categories` endpoint.
 }
 // ...
 ```
+
+## Schema Category
+
+| Attribute | Type   | Description                    |
+| --------- | ------ | ------------------------------ |
+| id        | number | The id of the category         |
+| name      | string | Name of the category           |
+| slug      | string |                                |
+| image     | string | The string with URL to a image |
