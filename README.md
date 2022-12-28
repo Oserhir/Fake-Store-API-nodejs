@@ -520,7 +520,7 @@ Category Routes:
 | @Route                                    | @Type  | @access       | @desc                                                       |
 | ----------------------------------------- | ------ | ------------- | ----------------------------------------------------------- |
 | /api/categories/                          | POST   | Private/Admin | Create a category                                           |
-| /api/categories/:categoryId/:userId       | PUT    | Private       | Update a category                                           |
+| /api/categories/:categoryId/              | PUT    | Private/Admin | Update a category                                           |
 | /api/categories/?limit=1                  | GET    | Public        | ( Limit results)                                            |
 | /api/categories/?page=2&limit=1           | GET    | Public        | Get List of Categories                                      |
 | /api/categories/:categoryId               | GET    | Public        | Get specific Category                                       |
