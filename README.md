@@ -653,3 +653,15 @@ You can update a Sub-category exists by sending an object like the following and
 ```
 
 > Note that it is not necessary to send all user attributes, just send the attributes that want to update.
+
+## Delete a sub-Category
+
+You can delete a SUBcategory exists by adding the `id`as a parameter: `/api/subcategories/{id}`
+
+```bash
+[DELETE] https://localhost:3000/api/subcategories/{categoryId}
+```
+
+```json
+status : 204 No Content
+```
