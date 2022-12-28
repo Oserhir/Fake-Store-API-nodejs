@@ -530,7 +530,7 @@ Category Routes:
 
 ## Create a category
 
-You can create a new category by sending an object like the following to /categories/
+You can create a new category by sending an object like the following to `/categories/`
 
 ```bash
 [POST] https://localhost:3000/api/categories/

@@ -39,19 +39,18 @@ exports.createCategory = (req, res) => {
 
 //  @desc Update specific Category
 exports.updateCategory = (req, res) => {
-  const { categoryId } = req.params;
+  const { id } = req.params;
 
-  // req.body.slug = slugify(req.body.name);
+  req.body.slug = slugify(req.body.name);
 
   CategoryModel.findOneAndUpdate(
-    { _id: categoryId },
+    { _id: id },
     req.body,
     { new: true },
     (err, doc) => {
       if (err) {
         res.status(400).json({ err: "Something wrong when updating data!" });
       }
-
       res.json({ data: doc, message: "Category updated" });
     }
   );

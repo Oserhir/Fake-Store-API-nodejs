@@ -31,8 +31,16 @@ exports.createCategoryValidator = [
 ];
 
 exports.updateCategoryValidator = [
-  // body("categoryId").isMongoId().withMessage("Invalid Category Id"),
-  body("name").optional(),
+  // body("id").isMongoId().withMessage("Invalid Category Id"),
+  body("name")
+    .optional()
+    .custom(async (val, { req }) => {
+      // Check if the Category name already exists
+      const category = await Category.findOne({ name: val });
+      if (category) {
+        throw new Error("Category with this Name already exists");
+      }
+    }),
   validatorMiddleware,
 ];
 

@@ -44,10 +44,11 @@ router.post(
   createCategory
 );
 
-// Update specific Category
+// Update specific Category @access Private/Admin
+
 router.put(
-  "/:categoryId/:userId",
-  // [requireSignIn, isAuth, isAdmin],
+  "/:id",
+  [requireLogIn, allowedTo("admin")],
   uploadCategoryImage,
   resizeImage,
   updateCategoryValidator,
