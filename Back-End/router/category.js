@@ -28,7 +28,8 @@ const { userById } = require("../middlewares/user");
 
 const { isAuth, requireLogIn, allowedTo } = require("../middlewares/auth");
 
-// Get List of Categories
+// @desc Get List of Categories
+// @access Public
 router.get("/", allCategories);
 
 // @desc Get a single category

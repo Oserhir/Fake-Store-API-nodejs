@@ -521,10 +521,9 @@ Category Routes:
 | ----------------------------------------- | ------ | ------------- | ----------------------------------------------------------- |
 | /api/categories/                          | POST   | Private/Admin | Create a category                                           |
 | /api/categories/:categoryId/              | PUT    | Private/Admin | Update a category                                           |
-| /api/categories/:categoryId/              | DELETE | Private       | Delete a category                                           |
-| /api/categories/?limit=1                  | GET    | Public        | ( Limit results)                                            |
+| /api/categories/:categoryId/              | DELETE | Private/Admin | Delete a category                                           |
+| /api/categories/:categoryId               | GET    | Public        | Get a single category                                       |
 | /api/categories/?page=2&limit=1           | GET    | Public        | Get List of Categories                                      |
-| /api/categories/:categoryId               | GET    | Public        | Get specific Category                                       |
 | /api/categories/:categoryId/subcategories | GET    | Public        | Get All Subcategories for Specific Category ( Nested Route) |
 | /api/categories/:categoryId/subcategories | POST   | Public        | Create Subcategory on Category ( Nested Route)              |
 
@@ -589,4 +588,25 @@ You can get a single category by adding the `id` as a parameter: `/categories/{i
     "updatedAt": "2022-11-11T14:52:24.938Z"
   }
 }
+```
+
+## Get all categories
+
+You can access the list of categories by using the `/categories` endpoint.
+
+```bash
+[GET] https://localhost:3000/api/categories/
+```
+
+```json
+{
+  "data": {
+    "_id": "636e61a8aa2719937c3cf0dc",
+    "name": "Men's Clothing",
+    "slug": "men's-clothing",
+    "createdAt": "2022-11-11T14:52:24.938Z",
+    "updatedAt": "2022-11-11T14:52:24.938Z"
+  }
+}
+// ...
 ```
