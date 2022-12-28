@@ -3,7 +3,8 @@ const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcrypt");
 const ApiError = require("../utils/APIError");
 
-//  @desc update user  @access Private/Admin
+//  @desc update user
+//  @access Private/Admin
 exports.updateUser = asyncHandler(async (req, res, next) => {
   const user = await User.findByIdAndUpdate(
     req.params.id,
@@ -22,7 +23,8 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
   res.status(200).json({ data: user });
 });
 
-// @desc Get a single user @access Private/Admin
+// @desc Get a single user
+// @access Private/Admin
 exports.getUser = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
   const user = await User.findById(id);
@@ -32,7 +34,8 @@ exports.getUser = asyncHandler(async (req, res, next) => {
   res.status(200).json({ data: user });
 });
 
-// @desc  Get all users @access Private/Admin
+// @desc  Get all users
+// @access Private/Admin
 exports.getallusers = (req, res) => {
   User.find().exec((err, users) => {
     if (err) {
@@ -48,7 +51,8 @@ exports.getallusers = (req, res) => {
   });
 };
 
-// @desc Create a user @access Private/Admin
+// @desc Create a user
+// @access Private/Admin
 exports.createUser = (req, res) => {
   User.create(req.body)
     .then((user) => {
@@ -61,7 +65,8 @@ exports.createUser = (req, res) => {
     });
 };
 
-// @desc Delete a user @access Private/Admin
+// @desc Delete a user
+// @access Private/Admin
 exports.deleteUser = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
   const document = await User.findByIdAndDelete(id);
@@ -74,7 +79,8 @@ exports.deleteUser = asyncHandler(async (req, res, next) => {
   res.status(204).send();
 });
 
-// @desc Change Password @access Private/Admin
+// @desc Change Password
+// @access Private/Admin
 exports.changePasswords = asyncHandler(async (req, res) => {
   const user = await User.findByIdAndUpdate(
     req.params.id,
@@ -90,13 +96,15 @@ exports.changePasswords = asyncHandler(async (req, res) => {
   res.status(200).json({ data: user });
 });
 
-// @desc Get Logged User @access Private/Protect
+// @desc Get Logged User
+// @access Private/Protect
 exports.getLoggedUserData = (req, res, next) => {
   req.params.id = req.crUser._id;
   next();
 };
 
-// @desc Update Logged User @access Private/Protect
+// @desc Update Logged User
+// @access Private/Protect
 exports.updateLoggedUserData = asyncHandler(async (req, res) => {
   const user = await User.findByIdAndUpdate(
     req.crUser._id,
@@ -114,6 +122,8 @@ exports.updateLoggedUserData = asyncHandler(async (req, res) => {
   res.status(200).json({ data: user });
 });
 
+// @desc Delete Logged User
+// @access Private/Protect
 exports.deleteLoggedUserData = asyncHandler(async (req, res) => {
   const user = await User.findByIdAndUpdate(
     req.crUser._id,
@@ -130,6 +140,8 @@ exports.deleteLoggedUserData = asyncHandler(async (req, res) => {
   res.status(200).json({ data: user });
 });
 
+// @desc Activate Logged User
+// @access Private/Protect
 exports.activeLoggedUserData = asyncHandler(async (req, res) => {
   const user = await User.findByIdAndUpdate(
     req.crUser._id,
@@ -146,9 +158,10 @@ exports.activeLoggedUserData = asyncHandler(async (req, res) => {
   res.status(200).json({ data: user });
 });
 
+// @desc Deactivate Logged User
+// @access Private/Protect
 exports.isDeactivate = asyncHandler(async (req, res, next) => {
   // Check if account is not activated
-  console.log(req.crUser.active);
 
   if (!req.crUser.active) {
     return next(

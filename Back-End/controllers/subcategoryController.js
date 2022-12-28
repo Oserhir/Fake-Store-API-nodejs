@@ -52,7 +52,7 @@ exports.updatesubCategory = factory.updateOne(subCategoryModel, "subcategory");
 // @desc Delete specific subCategory
 exports.deleteSubCategory = factory.deleteOne(subCategoryModel, "subcategory");
 
-//  Get subategory information Using Category ID
+//  @desc Get subategory information Using Category ID
 exports.subCategoryById = (req, res, next, id) => {
   subCategoryModel.findById(id).exec((err, subCategory) => {
     if (err || !subCategory) {
