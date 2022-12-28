@@ -103,18 +103,6 @@ Product Routes:
 | /api/products?ratingsAverage[gte]=1.6  | GET    | Public  | Filter results                 |
 | /api/products?fields=title,description | GET    | Public  | Field Limiting                 |
 
-Category Routes:
-
-| @Route                                  | @Type  | @access | @desc                                                       |
-| --------------------------------------- | ------ | ------- | ----------------------------------------------------------- |
-| /api/category/create/:userId            | POST   | Private | Add new Category                                            |
-| /api/category/?limit=1                  | GET    | Public  | Get List of Categories ( Limit results)                     |
-| /api/category/?page=2&limit=1           | GET    | Public  | Get List of Categories                                      |
-| /api/category/:categoryId               | GET    | Public  | Get specific Category                                       |
-| /api/category/:categoryId/:userId       | PUT    | Private | Update specific Category                                    |
-| /api/category/:categoryId/:userId       | DELETE | Private | Delete specific Category                                    |
-| /api/category/:categoryId/subcategories | GET    | Public  | Get All Subcategories for Specific Category ( Nested Route) |
-| /api/category/:categoryId/subcategories | POST   | Public  | Create Subcategory on Category ( Nested Route)              |
 
 SubCategory Routes:
 
@@ -517,4 +505,40 @@ Create a user by sending user's credentials (in JSON format) in the Body of the 
 
 ```bash
 [GET] https://localhost:3000/api/auth/signout
+```
+
+---
+
+## Category
+
+#### Endpoints for Category
+
+---
+
+Category Routes:
+
+| @Route                                    | @Type  | @access       | @desc                                                       |
+| ----------------------------------------- | ------ | ------------- | ----------------------------------------------------------- |
+| /api/categories/                          | POST   | Private/Admin | Create a category                                           |
+| /api/categories/?limit=1                  | GET    | Public        | ( Limit results)                                            |
+| /api/categories/?page=2&limit=1           | GET    | Public        | Get List of Categories                                      |
+| /api/categories/:categoryId               | GET    | Public        | Get specific Category                                       |
+| /api/categories/:categoryId/:userId       | PUT    | Private       | Update specific Category                                    |
+| /api/categories/:categoryId/:userId       | DELETE | Private       | Delete specific Category                                    |
+| /api/categories/:categoryId/subcategories | GET    | Public        | Get All Subcategories for Specific Category ( Nested Route) |
+| /api/categories/:categoryId/subcategories | POST   | Public        | Create Subcategory on Category ( Nested Route)              |
+
+## Create a category
+
+You can create a new category by sending an object like the following to /categories/
+
+```bash
+[POST] https://localhost:3000/api/categories/
+```
+
+```json
+{
+  "name": "New Category",
+  "image": "https://localhost:3000/640/480/test"
+}
 ```

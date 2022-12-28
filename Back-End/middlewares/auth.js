@@ -56,7 +56,7 @@ exports.requireLogIn = async (req, res, next) => {
     function (err, decoded) {
       if (err) {
         if (err.name === "JsonWebTokenError") {
-          return next(new ApiError(err.message, 401));
+          next(new ApiError(err.message, 401));
         }
       } else {
         return decoded;
@@ -64,19 +64,20 @@ exports.requireLogIn = async (req, res, next) => {
     }
   );
 
-  // Check if user exists
-  const currentUser = await User.findById(decoded.user_id);
-  if (!currentUser) {
-    return next(
-      new ApiError(
-        "The user that belong to this token does no longer exist",
-        401
-      )
-    );
+  if (decoded) {
+    // Check if user exists
+    const currentUser = await User.findById(decoded.user_id);
+    if (!currentUser) {
+      return next(
+        new ApiError(
+          "The user that belong to this token does no longer exist",
+          401
+        )
+      );
+    }
+    req.crUser = currentUser;
+    next();
   }
-
-  req.crUser = currentUser;
-  next();
 };
 
 // @desc Make sure the user is logged in the same own url
