@@ -1,6 +1,6 @@
 # My Ecommerce Software Requirements
 
-Fake Store API can be used with any type project that needs products, users, categories, authentication and users in JSON format. you can use examples below to check how fakeStoreApi works!
+Goals : Build Fake Store API that can be used with any type project that needs products, categories, authentication and users. you can use examples below to check how fakeStoreApi works!
 
 ## The features in the API :
 
@@ -8,9 +8,8 @@ Fake Store API can be used with any type project that needs products, users, cat
 - ✅ Authentication using JSON Web tokens (JWT).
 - ✅ Advance searching, sorting, pagination and filtering
 - ✅ Schema validation using Express-Validator
-- ✅ Image upload , multiple images upload and image processing
+- ✅ single/multiple Image upload and image processing
 - ✅ All CRUD Operations
-- ✅ Error Handling
 - ✅ Star rating system
 - ✅ Discount coupon code
 - ✅ Add to wishlist
@@ -245,7 +244,7 @@ To run this application, you have to set your own environmental variables. For s
 
 ---
 
-## Users { Admin }
+## Users { @access : Admin }
 
 #### Endpoints for Users
 
@@ -502,15 +501,13 @@ Create a user by sending user's credentials (in JSON format) in the Body of the 
 
 Category Routes:
 
-| @Route                                    | @Type  | @access       | @desc                                                       |
-| ----------------------------------------- | ------ | ------------- | ----------------------------------------------------------- |
-| /api/categories/                          | POST   | Private/Admin | Create a category                                           |
-| /api/categories/:categoryId/              | PUT    | Private/Admin | Update a category                                           |
-| /api/categories/:categoryId/              | DELETE | Private/Admin | Delete a category                                           |
-| /api/categories/:categoryId               | GET    | Public        | Get a single category                                       |
-| /api/categories/?page=2&limit=1           | GET    | Public        | Get List of Categories                                      |
-| /api/categories/:categoryId/subcategories | GET    | Public        | Get All Subcategories for Specific Category ( Nested Route) |
-| /api/categories/:categoryId/subcategories | POST   | Public        | Create Subcategory on Category ( Nested Route)              |
+| @Route                          | @Type  | @access       | @desc                  |
+| ------------------------------- | ------ | ------------- | ---------------------- |
+| /api/categories/                | POST   | Private/Admin | Create a category      |
+| /api/categories/:categoryId/    | PUT    | Private/Admin | Update a category      |
+| /api/categories/:categoryId/    | DELETE | Private/Admin | Delete a category      |
+| /api/categories/:categoryId     | GET    | Public        | Get a single category  |
+| /api/categories/?page=2&limit=1 | GET    | Public        | Get List of Categories |
 
 ## Create a category
 
@@ -615,14 +612,15 @@ You can access the list of categories by using the `/categories` endpoint.
 
 Sub-Category Routes:
 
-| @Route                                    | @Type  | @access       | @desc                       |
-| ----------------------------------------- | ------ | ------------- | --------------------------- |
-| /api/subcategories/                       | POST   | Private/Admin | Add New Sub-Category        |
-| /api/subcategories/:id                    | PUT    | Private/Admin | Update specific subCategory |
-| /api/subcategories/?limit=1               | GET    | Public        | Get List of subCategories   |
-| /api/subcategories/?page=2&limit=1        | GET    | Public        | Get List of subCategories   |
-| /api/subcategories/:subCategoryId         | GET    | Public        | Get specific subCategory    |
-| /api/subcategories/:subCategoryId/:userId | DELETE | Private       | Delete specific subCategory |
+| @Route                                    | @Type  | @access       | @desc                                       |
+| ----------------------------------------- | ------ | ------------- | ------------------------------------------- |
+| /api/subcategories/                       | POST   | Private/Admin | Add New Sub-Category                        |
+| /api/subcategories/:id                    | PUT    | Private/Admin | Update specific subCategory                 |
+| /api/subcategories/?page=2&limit=1        | GET    | Public        | Get List of subCategories                   |
+| /api/subcategories/:subCategoryId         | GET    | Public        | Get specific subCategory                    |
+| /api/subcategories/:subCategoryId/:userId | DELETE | Private       | Delete specific subCategory                 |
+| /api/categories/:categoryId/subcategories | GET    | Public        | Get All Subcategories for Specific Category |
+| /api/categories/:categoryId/subcategories | POST   | Public        | Create Subcategory on Category              |
 
 ## Create Sub-Category
 
