@@ -54,11 +54,12 @@ router.put(
 //   createsubCategory
 // );
 
-// Delete specific subCategory
+// @desc Delete specific subCategory
+// @access Private/Admin
 router.delete(
-  "/:subcategoryId/:userId",
-  //[requireSignIn, isAuth, isAdmin],
-  //deleteSubCategoryValidator,
+  "/:id",
+  [requireLogIn, allowedTo("admin")],
+  deleteSubCategoryValidator,
   deleteSubCategory
 );
 

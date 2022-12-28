@@ -50,17 +50,7 @@ exports.getsubCategories = (req, res) => {
 exports.updatesubCategory = factory.updateOne(subCategoryModel, "subcategory");
 
 // @desc Delete specific subCategory
-exports.deleteSubCategory = (req, res) => {
-  let subcategory = req.subcategory;
-
-  subcategory.remove((err, subcategory) => {
-    if (err || !subcategory) {
-      return res.status(400).json({ err: "subcategory not found!" });
-    }
-
-    res.status(204).json({});
-  });
-};
+exports.deleteSubCategory = factory.deleteOne(subCategoryModel, "subcategory");
 
 //  Get subategory information Using Category ID
 exports.subCategoryById = (req, res, next, id) => {

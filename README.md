@@ -612,15 +612,15 @@ You can access the list of categories by using the `/categories` endpoint.
 
 Sub-Category Routes:
 
-| @Route                                    | @Type  | @access       | @desc                                       |
-| ----------------------------------------- | ------ | ------------- | ------------------------------------------- |
-| /api/subcategories/                       | POST   | Private/Admin | Add New Sub-Category                        |
-| /api/subcategories/:id                    | PUT    | Private/Admin | Update specific subCategory                 |
-| /api/subcategories/?page=2&limit=1        | GET    | Public        | Get List of subCategories                   |
-| /api/subcategories/:subCategoryId         | GET    | Public        | Get specific subCategory                    |
-| /api/subcategories/:subCategoryId/:userId | DELETE | Private       | Delete specific subCategory                 |
-| /api/categories/:categoryId/subcategories | GET    | Public        | Get All Subcategories for Specific Category |
-| /api/categories/:categoryId/subcategories | POST   | Public        | Create Subcategory on Category              |
+| @Route                             | @Type  | @access       | @desc                                       |
+| ---------------------------------- | ------ | ------------- | ------------------------------------------- |
+| /api/subcategories/                | POST   | Private/Admin | Add New Sub-Category                        |
+| /api/subcategories/:id             | PUT    | Private/Admin | Update specific subCategory                 |
+| /api/subcategories/?page=2&limit=1 | GET    | Public        | Get List of subCategories                   |
+| /api/subcategories/:id             | GET    | Public        | Get specific subCategory                    |
+| /api/subcategories/:id/            | DELETE | Private       | Delete specific subCategory                 |
+| /api/categories/:id/subcategories  | GET    | Public        | Get All Subcategories for Specific Category |
+| /api/categories/:id/subcategories  | POST   | Public        | Create Subcategory on Category              |
 
 ## Create Sub-Category
 

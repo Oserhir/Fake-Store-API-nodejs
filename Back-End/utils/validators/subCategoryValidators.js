@@ -71,6 +71,6 @@ exports.updateSubCategoryValidator = [
 ];
 
 exports.deleteSubCategoryValidator = [
-  // body("categoryId").isMongoId().withMessage("Invalid Category Id"),
+  // body("id").isMongoId().withMessage("Invalid SubCategory id format"),
   validatorMiddleware,
 ];

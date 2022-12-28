@@ -21,3 +21,17 @@ exports.updateOne = (Model, name = "document") =>
     document.save();
     res.status(200).json({ data: document });
   });
+
+exports.deleteOne = (Model, name = "document") =>
+  asyncHandler(async (req, res, next) => {
+    const { id } = req.params;
+    const document = await Model.findByIdAndDelete(id);
+
+    if (!document) {
+      return next(new ApiError(`No ${name} for this id ${id}`, 404));
+    }
+
+    // Trigger "remove" event when update document
+    document.remove();
+    res.status(204).send();
+  });
