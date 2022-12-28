@@ -29,7 +29,7 @@ exports.resizeImage = asyncHandler(async (req, res, next) => {
 //  @desc create category
 exports.createCategory = (req, res) => {
   // const { name } = req.body;
-  req.body.slug = slugify(req.body.name);
+  // req.body.slug = slugify(req.body.name);
 
   CategoryModel.findOne({ name: req.body.name }).then((category) => {
     if (category) {

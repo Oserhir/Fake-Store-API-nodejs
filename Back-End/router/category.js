@@ -23,8 +23,10 @@ const {
   uploadCategoryImage,
   resizeImage,
 } = require("../controllers/categoryController");
-const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
+// const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
 const { userById } = require("../middlewares/user");
+
+const { isAuth, requireLogIn, allowedTo } = require("../middlewares/auth");
 
 // Get List of Categories
 router.get("/", allCategories);
@@ -33,9 +35,19 @@ router.get("/", allCategories);
 router.get("/:categoryId", getSpecifiqueCategoriesValidator, getCategory);
 
 // Add new Category
+// router.post(
+//   "/create/:userId",
+//   [requireSignIn, isAuth, isAdmin],
+//   uploadCategoryImage,
+//   resizeImage,
+//   createCategoryValidator,
+//   createCategory
+// );
+
+// @desc Add new Category @access Private/Admin
 router.post(
-  "/create/:userId",
-  [requireSignIn, isAuth, isAdmin],
+  "/",
+  [requireLogIn, allowedTo("admin")],
   uploadCategoryImage,
   resizeImage,
   createCategoryValidator,
@@ -45,7 +57,7 @@ router.post(
 // Update specific Category
 router.put(
   "/:categoryId/:userId",
-  [requireSignIn, isAuth, isAdmin],
+  // [requireSignIn, isAuth, isAdmin],
   uploadCategoryImage,
   resizeImage,
   updateCategoryValidator,
@@ -55,7 +67,7 @@ router.put(
 // Delete specific Category
 router.delete(
   "/:categoryId/:userId",
-  [requireSignIn, isAuth, isAdmin],
+  // [requireSignIn, isAuth, isAdmin],
   deleteCategoryValidator,
   deleteCategory
 );
