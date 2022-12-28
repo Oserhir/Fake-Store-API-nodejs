@@ -616,9 +616,9 @@ Sub-Category Routes:
 | ---------------------------------- | ------ | ------------- | ------------------------------------------- |
 | /api/subcategories/                | POST   | Private/Admin | Add New Sub-Category                        |
 | /api/subcategories/:id             | PUT    | Private/Admin | Update specific subCategory                 |
+| /api/subcategories/:id             | DELETE | Private/Admin | Delete specific subCategory                 |
 | /api/subcategories/?page=2&limit=1 | GET    | Public        | Get List of subCategories                   |
 | /api/subcategories/:id             | GET    | Public        | Get specific subCategory                    |
-| /api/subcategories/:id/            | DELETE | Private       | Delete specific subCategory                 |
 | /api/categories/:id/subcategories  | GET    | Public        | Get All Subcategories for Specific Category |
 | /api/categories/:id/subcategories  | POST   | Public        | Create Subcategory on Category              |
 
@@ -688,5 +688,25 @@ You can access the list of subcategories by using the `/subcategories` endpoint.
     }
     // ...
   ]
+}
+```
+
+## Get a single sub-Category
+
+You can get a single subcategory by adding the `id` as a parameter: `/subcategories/{id}`
+
+```bash
+[GET] https://localhost:3000/api/categories/${id}
+```
+
+```json
+{
+  "subcategory": {
+    "_id": "63ac901625fabe4f633c4be4",
+    "name": "Travel & Outdoor",
+    "category": "636e61cbaa2719937c3cf0e0",
+    "createdAt": "2022-12-28T18:51:02.581Z",
+    "updatedAt": "2022-12-28T18:51:02.581Z"
+  }
 }
 ```

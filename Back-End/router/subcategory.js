@@ -46,14 +46,6 @@ router.put(
   updatesubCategory
 );
 
-// Method #2 - Create subCategory
-// router.post(
-//   "/",
-//   setCategoryTobody,
-//   createSubCategoryValidator,
-//   createsubCategory
-// );
-
 // @desc Delete specific subCategory
 // @access Private/Admin
 router.delete(
@@ -63,12 +55,20 @@ router.delete(
   deleteSubCategory
 );
 
-// @esc Get List of subCategories
+// @desc Get List of subCategories
 // @access Public
 router.get("/", getsubCategories);
 
-//  Get specific subCategory
+// @desc Get specific subCategory
 router.get("/:subcategoryId", getsubCategory);
+
+// Method #2 - Create subCategory
+// router.post(
+//   "/",
+//   setCategoryTobody,
+//   createSubCategoryValidator,
+//   createsubCategory
+// );
 
 router.param("userId", userById);
 router.param("subcategoryId", subCategoryById);
