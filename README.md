@@ -613,18 +613,18 @@ You can access the list of categories by using the `/categories` endpoint.
 
 ---
 
-SubCategory Routes:
+Sub-Category Routes:
 
 | @Route                                    | @Type  | @access       | @desc                       |
 | ----------------------------------------- | ------ | ------------- | --------------------------- |
-| /api/subcategories/                       | POST   | Private/Admin | Add New Subcategory         |
+| /api/subcategories/                       | POST   | Private/Admin | Add New Sub-Category        |
 | /api/subcategories/?limit=1               | GET    | Public        | Get List of subCategories   |
 | /api/subcategories/?page=2&limit=1        | GET    | Public        | Get List of subCategories   |
 | /api/subcategories/:subCategoryId         | GET    | Public        | Get specific subCategory    |
 | /api/subcategories/:subCategoryId/:userId | PUT    | Private       | Update specific subCategory |
 | /api/subcategories/:subCategoryId/:userId | DELETE | Private       | Delete specific subCategory |
 
-## Create a Subcategory
+## Create Sub-Category
 
 You can create a new subcategory by sending an object like the following to `/subcategories/`
 

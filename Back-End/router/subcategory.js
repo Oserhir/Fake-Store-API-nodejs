@@ -34,7 +34,7 @@ router.get("/", getSpecifiqueCategoriesValidator, getsubCategories);
 //  Get specific subCategory
 router.get("/:subcategoryId", getsubCategory);
 
-// @desc Create a Subcategory
+// @desc Create Subcategory
 // @access Private/Admin
 router.post(
   "/",
@@ -51,10 +51,11 @@ router.post(
 //   createsubCategory
 // );
 
-// Update specific subCategory
+// @desc Update specific subCategory
+// @access Private/Admin
 router.put(
-  "/:subcategoryId/:userId",
-  //[requireSignIn, isAuth, isAdmin],
+  "/:id",
+  [requireLogIn, allowedTo("admin")],
   updateSubCategoryValidator,
   updatesubCategory
 );

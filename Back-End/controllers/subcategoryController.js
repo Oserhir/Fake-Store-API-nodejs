@@ -10,24 +10,6 @@ exports.setCategoryTobody = (req, res, next) => {
 //  @desc create subcategory
 exports.createsubCategory = factory.createOne(subCategoryModel);
 
-// exports.createsubCategory = (req, res) => {
-//   const { name, category } = req.body;
-//   subCategoryModel.findOne({ name: name }).then((subcategory) => {
-//     if (subcategory) {
-//       res.status(400).send("subCategory already exists");
-//     } else {
-//       subCategoryModel
-//         .create({ name, slug: slugify(name), category })
-//         .then((subcategory) => {
-//           res.status(201).json({ data: subcategory });
-//         })
-//         .catch((err) => {
-//           res.status(400).send(err);
-//         });
-//     }
-//   });
-// };
-
 //  @desc Get specific subCategory
 exports.getsubCategory = (req, res) => {
   res.send({ subcategory: req.subcategory });
@@ -65,22 +47,7 @@ exports.getsubCategories = (req, res) => {
 };
 
 //  @desc Update specific subCategory
-exports.updatesubCategory = (req, res) => {
-  const nameSubCategory = req.body.name;
-
-  let subCategory = req.subcategory;
-  console.log(subCategory);
-  subCategory.name = nameSubCategory;
-  subCategory.slug = slugify(nameSubCategory);
-
-  subCategory.save((err, subcategory) => {
-    if (err || !subcategory) {
-      return res.status(400).json({ err: "bad request !" });
-    }
-  });
-
-  res.json({ subCategory, message: "subCategory updated" });
-};
+exports.updatesubCategory = factory.updateOne(subCategoryModel, "subcategory");
 
 // @desc Delete specific subCategory
 exports.deleteSubCategory = (req, res) => {

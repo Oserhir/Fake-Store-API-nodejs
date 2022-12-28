@@ -2,6 +2,7 @@ const { body } = require("express-validator");
 const validatorMiddleware = require("../../middlewares/validatorMiddleware");
 const SubcategoryModel = require("../../models/subcategorySchema");
 const categorySchema = require("../../models/categorySchema");
+const slugify = require("slugify");
 
 exports.getSpecifiqueCategoriesValidator = [
   // body("categoryId").isMongoId().withMessage("Invalid Category Id"),
@@ -16,11 +17,14 @@ exports.createSubCategoryValidator = [
     .withMessage("name length must be at least 3 characters long")
     .isLength({ max: 32 })
     .withMessage("name length must be less than or equal to 32 characters long")
-    .custom(async (value) => {
+    .custom(async (value, { req }) => {
       const subcategory = await SubcategoryModel.findOne({ name: value });
       if (subcategory) {
         throw new Error("Subcategory with this Name already exists");
       }
+
+      req.body.slug = slugify(value);
+      return true;
     }),
   body("category")
     .notEmpty()
@@ -37,14 +41,32 @@ exports.createSubCategoryValidator = [
 ];
 
 exports.updateSubCategoryValidator = [
-  // body("categoryId").isMongoId().withMessage("Invalid Category Id"),
   body("name")
     .notEmpty()
-    .withMessage("Category Required")
+    .withMessage("name is not allowed to be empty")
     .isLength({ min: 3 })
-    .withMessage("Too short category name")
+    .withMessage("name length must be at least 3 characters long")
     .isLength({ max: 32 })
-    .withMessage("Too long category name"),
+    .withMessage("name length must be less than or equal to 32 characters long")
+    .custom(async (value, { req }) => {
+      const subcategory = await SubcategoryModel.findOne({ name: value });
+      if (subcategory) {
+        throw new Error("Subcategory with this Name already exists");
+      }
+
+      req.body.slug = slugify(value);
+      return true;
+    }),
+  body("category")
+    .optional()
+    .isMongoId()
+    .withMessage("Invalid Category id format")
+    .custom(async (value) => {
+      const category = await categorySchema.findById(value);
+      if (!category) {
+        throw new Error(`No category for this id ${value}`);
+      }
+    }),
   validatorMiddleware,
 ];
 
