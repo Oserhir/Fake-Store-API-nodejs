@@ -570,3 +570,23 @@ You can delete a category exists by adding the `id`as a parameter: `/api/users/{
 ```json
 status : 204 No Content
 ```
+
+## Get a single category
+
+You can get a single category by adding the `id` as a parameter: `/categories/{id}`
+
+```bash
+[GET] https://localhost:3000/api/categories/${id}
+```
+
+```json
+{
+  "data": {
+    "_id": "636e61a8aa2719937c3cf0dc",
+    "name": "Men's Clothing",
+    "slug": "men's-clothing",
+    "createdAt": "2022-11-11T14:52:24.938Z",
+    "updatedAt": "2022-11-11T14:52:24.938Z"
+  }
+}
+```
