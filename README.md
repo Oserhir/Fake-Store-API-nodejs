@@ -305,7 +305,7 @@ You can access the list of users by using the `/api/users` endpoint.
 You can get a single user by adding the `id` as a parameter: `/api/users/{id}`
 
 ```bash
-[GET] https://localhost:3000/api/users/6362a1793b0236acba300bad
+[GET] https://localhost:3000/api/users/{userId}
 ```
 
 ```json
@@ -343,7 +343,7 @@ You can create a new user by sending an object like the following to `/api/users
 You can update a user exists by sending an object like the following and adding the `id` as a parameter: `/api/users/{id}`
 
 ```bash
-[PUT] https://localhost:3000/api/users/6362a1793b0236acba300bad
+[PUT] https://localhost:3000/api/users/{userId}
 ```
 
 ```json
@@ -360,7 +360,7 @@ You can update a user exists by sending an object like the following and adding 
 You can delete a user exists by adding the `id` as a parameter: `/api/users/{id}`
 
 ```bash
-[DELETE] https://localhost:3000/api/users/6362a1793b0236acba300bad
+[DELETE] https://localhost:3000/api/users/{userId}
 ```
 
 ```json
@@ -520,10 +520,10 @@ Category Routes:
 | @Route                                    | @Type  | @access       | @desc                                                       |
 | ----------------------------------------- | ------ | ------------- | ----------------------------------------------------------- |
 | /api/categories/                          | POST   | Private/Admin | Create a category                                           |
+| /api/categories/:categoryId/:userId       | PUT    | Private       | Update a category                                           |
 | /api/categories/?limit=1                  | GET    | Public        | ( Limit results)                                            |
 | /api/categories/?page=2&limit=1           | GET    | Public        | Get List of Categories                                      |
 | /api/categories/:categoryId               | GET    | Public        | Get specific Category                                       |
-| /api/categories/:categoryId/:userId       | PUT    | Private       | Update specific Category                                    |
 | /api/categories/:categoryId/:userId       | DELETE | Private       | Delete specific Category                                    |
 | /api/categories/:categoryId/subcategories | GET    | Public        | Get All Subcategories for Specific Category ( Nested Route) |
 | /api/categories/:categoryId/subcategories | POST   | Public        | Create Subcategory on Category ( Nested Route)              |
@@ -542,3 +542,19 @@ You can create a new category by sending an object like the following to `/categ
   "image": "https://localhost:3000/640/480/test"
 }
 ```
+
+## Update a category
+
+You can update a category exists by sending an object like the following and adding the id as a parameter: `/categories/{id}`
+
+```bash
+[PUT] https://localhost:3000/api/categories/{Categoryid}
+```
+
+```json
+{
+  "name": "Change name"
+}
+```
+
+> Note that it is not necessary to send all user attributes, just send the attributes that want to update.

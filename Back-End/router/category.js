@@ -34,7 +34,8 @@ router.get("/", allCategories);
 // Get specific Category
 router.get("/:categoryId", getSpecifiqueCategoriesValidator, getCategory);
 
-// @desc Add new Category @access Private/Admin
+// @desc Add new Category
+// @access Private/Admin
 router.post(
   "/",
   [requireLogIn, allowedTo("admin")],
@@ -44,8 +45,8 @@ router.post(
   createCategory
 );
 
-// Update specific Category @access Private/Admin
-
+// @desc Update specific Category
+// @access Private/Admin
 router.put(
   "/:id",
   [requireLogIn, allowedTo("admin")],
