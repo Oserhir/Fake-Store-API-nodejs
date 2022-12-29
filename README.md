@@ -30,24 +30,6 @@ All the models can be found in the models directory created using mongoose.
 
 
 
-Product Schema:
-
-- title (String)
-- slug (String)
-- description (String)
-- quantity (Number)
-- price (Number)
-- sold (Number)
-- priceAfterDiscount (Number)
-- Colors ([String])
-- imageCover (string)
-- images ([String])
-- category (ObjectId - a reference to the category schema)
-- subcategories (ObjectId - a reference to the subcategories schema)
-- brand (ObjectId - a reference to the brand schema)
-- ratingsAverage (number)
-- ratingsQuantity (number)
-- shipping (Boolean)
 
 Review Schema:
 
@@ -1108,6 +1090,7 @@ To Search by title or description the API needs to be called with the `keyword` 
       "updatedAt": "2022-12-29T15:07:08.918Z"
     }
   ]
+  // ...
 }
 ```
 
@@ -1144,12 +1127,13 @@ To Filter results the API needs to be called with the `ratingsAverage[gte]` set 
       "updatedAt": "2022-11-11T15:36:15.688Z"
     }
   ]
+  // ...
 }
 ```
 
 ## Field Limiting
 
-To Field Limiting the API needs to be called with the `fields` set attribute that you want need to display
+To Field Limiting the API needs to be called with the `fields` set attribute that you want to display
 
 ```bash
 [GET] https://localhost:3000/api/products/?fields=title,price
@@ -1166,5 +1150,28 @@ To Field Limiting the API needs to be called with the `fields` set attribute tha
       "price": 44.96
     }
   ]
+  // ...
 }
 ```
+
+## Product Schema
+
+| Attribute          | Type     |
+| ------------------ | -------- |
+| title              | string   |
+| slug               | string   |
+| description        | string   |
+| quantity           | Number   |
+| price              | Number   |
+| sold               | Number   |
+| priceAfterDiscount | Number   |
+| Colors             | arrays   |
+| imageCover         | string   |
+| images             | images   |
+| category           | ObjectId |
+| subcategories      | ObjectId |
+| brand              | ObjectId |
+| ratingsAverage     | Number   |
+| ratingsAverage     | Number   |
+| ratingsQuantity    | Number   |
+| shipping           | Boolean  |
