@@ -26,7 +26,6 @@ exports.getsubCategories = (req, res) => {
   if (req.params.categoryId) {
     filterObject = { category: req.params.categoryId };
   }
-  // if (req.params.categoryId ) filterObject = { category: req.params.categoryId }; Or
 
   subCategoryModel
     .find(filterObject)

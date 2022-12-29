@@ -710,3 +710,27 @@ You can get a single subcategory by adding the `id` as a parameter: `/subcategor
   }
 }
 ```
+
+## Get All Subcategories for Specific Category
+
+You can get All Subcategories for Specific Category by adding the `categoryId` as a parameter: `categories/${categoryId}/subcategories`
+
+```bash
+[GET] https://localhost:3000/api/categories/${categoryId}/subcategories
+```
+
+```json
+"page": 1,
+    "subcategories": [
+        {
+            "_id": "63ad3d03304ec94eb416f2f9",
+            "name": "Shirts",
+            "slug": "shirts",
+            "category": "636e61a8aa2719937c3cf0dc",
+            "createdAt": "2022-12-29T07:08:51.708Z",
+            "updatedAt": "2022-12-29T07:08:51.708Z",
+            "__v": 0
+        },
+        // ...
+    ]
+```

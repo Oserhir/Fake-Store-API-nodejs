@@ -9,8 +9,10 @@ const {
   deleteCategoryValidator,
 } = require("../utils/validators/categoryValidators");
 
-// Nested Route
 const subcategoriesRoute = require("./subcategory");
+
+// @desc Get All Subcategories for Specific Category ( Nested Route )
+// @access Public /api/categories/:id/subcategories
 router.use("/:categoryId/subcategories", subcategoriesRoute);
 
 const {
