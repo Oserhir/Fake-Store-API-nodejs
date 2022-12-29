@@ -73,20 +73,7 @@ Cart Schema:
 
 Product Routes:
 
-| @Route                                 | @Type  | @access | @desc                          |
-| -------------------------------------- | ------ | ------- | ------------------------------ |
-| /api/products/create/:userId           | POST   | Private | Add new product                |
-| /api/products/:productId               | GET    | Private | Get a single product           |
-| /api/products/:productId/:userId"      | PUT    | Private | Update a product               |
-| /api/products/:productId/:userId"      | DELETE | Private | Delete a product               |
-| /api/products/related/:productId/      | GET    | Public  | Get related products           |
-| /api/products/search                   | POST   | Public  | Product Search                 |
-| /api/products/                         | GET    | Public  | Get all products               |
-| /api/products?limit=3                  | GET    | Public  | Limit results                  |
-| /api/products?sortedBy=price           | GET    | Public  | Sort results                   |
-| /api/products?keyword=Clark,Olsen      | GET    | Public  | Search by title or description |
-| /api/products?ratingsAverage[gte]=1.6  | GET    | Public  | Filter results                 |
-| /api/products?fields=title,description | GET    | Public  | Field Limiting                 |
+
 
 
 
@@ -370,12 +357,12 @@ You can change password of any user exists by sending an object like the followi
 
 ---
 
-| @Route              | @Type  | @access      | @desc                   |
-| ------------------- | ------ | ------------ | ----------------------- |
-| /api/users/getMe    | GET    | Private/User | Get Logged User         |
-| /api/users/updateMe | PUT    | Private/User | Update Logged User      |
-| /api/users/deleteMe | DELETE | Private/User | Deactivate Logged Users |
-| /api/users/activeMe | PUT    | Private/User | Activate Logged Users   |
+| @Route              | @Type  | @access         | @desc                   |
+| ------------------- | ------ | --------------- | ----------------------- |
+| /api/users/getMe    | GET    | Private/Protect | Get Logged User         |
+| /api/users/updateMe | PUT    | Private/Protect | Update Logged User      |
+| /api/users/deleteMe | DELETE | Private/Protect | Deactivate Logged Users |
+| /api/users/activeMe | PUT    | Private/Protect | Activate Logged Users   |
 
 ## Get Logged User
 
@@ -810,7 +797,7 @@ You can create a new brand by sending an object like the following to `/brands/`
 
 ## Update specific Brand
 
-You can update a brand exists by sending an object like the following and adding the id as a parameter: `/brands/{id}`
+You can update a brand exists by sending an object like the following and adding the `id` as a parameter: `/brands/{id}`
 
 ```bash
 [PUT] https://localhost:3000/api/subcategories/{brandId}
@@ -888,3 +875,296 @@ You can get a single brand by adding the `id` as a parameter: `/brands/{id}`
 | --------- | ------ |
 | title     | string |
 | image     | string |
+
+## Products
+
+#### Endpoints for Products
+
+---
+
+Product Routes:
+
+| @Route                                 | @Type  | @access       | @desc                          |
+| -------------------------------------- | ------ | ------------- | ------------------------------ |
+| /api/products/                         | POST   | Private/Admin | Create a product               |
+| /api/products/:productId               | PUT    | Private/Admin | Update a product               |
+| /api/products/:productId               | DELETE | Private/Admin | Delete a product               |
+| /api/products/:productId               | GET    | Public        | Get a single product           |
+| /api/products/                         | GET    | Public        | Get all products               |
+| /api/products/related/:productId/      | GET    | Public        | Get related products           |
+| /api/products/search                   | POST   | Public        | Search for a product by price  |
+| /api/products?sortedBy=price           | GET    | Public        | Sort results                   |
+| /api/products?keyword=Clark,Olsen      | GET    | Public        | Search by title or description |
+| /api/products?ratingsAverage[gte]=1.6  | GET    | Public        | Filter results                 |
+| /api/products?fields=title,description | GET    | Public        | Field Limiting                 |
+
+## Create a product
+
+You can create a new product by sending an object like the following to `/api/products/` endpoint.
+
+```
+[GET] https://localhost:3000/api/products
+```
+
+```json
+{
+  "title": "Big Chill Women's Wrap Fleece Jacket",
+  "description": "Fleece is not only for athleisure! Get a sophisticated style upgrade to your standard .............",
+  "quantity": 3,
+  "sold": 0,
+  "price": 44.96,
+  "priceAfterDiscount": 14.99,
+  "imageCover": "product-9ee766fa-2eb1-47b5-9c3f-94fc483bdcb3-1672326428001-cover.jpeg",
+  "images": [
+    "product-008610d3-0044-45b3-8e3a-8b886abcd130-1672326428159-2.jpeg",
+    "product-519c8e4a-887b-4463-b0f5-932943ac7498-1672326428158-1.jpeg"
+  ],
+  "category": "636e64579569c30b4ef8de53",
+  "ratingsQuantity": 0
+}
+```
+
+## Update a product
+
+you can update a product exists by sending an object like the following and adding the `id` as a parameter: `/api/products/{id}`
+
+```bash
+[PUT] https://localhost:3000/api/products/{productsId}
+```
+
+```json
+{
+  "title": "Change title",
+  "price": 100
+}
+```
+
+> Note that it is not necessary to send all product attributes, just send the attributes that want to update.
+
+## Delete a product
+
+You can delete a product exists by adding the `id` as a parameter: `/api/products/{id}`
+
+```bash
+[DELETE] https://localhost:3000/api/products/{productrId}
+```
+
+```json
+status : 204 No Content
+```
+
+## Get a single product
+
+You can get a single product by adding the `id` as a parameter: `/api/products/{id}`
+
+```bash
+[GET] https://localhost:3000/api/products/{productId}
+```
+
+```json
+{
+  "data": {
+    "_id": "636e6bef6c34aa33724e6cdb",
+    "title": "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
+    "slug": "john-hardy-women's-legends-naga-gold-and-silver-dragon-station-chain-bracelet",
+    "description": "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
+    "quantity": 91,
+    "sold": 23,
+    "price": 695,
+    "colors": [],
+    "imageCover": "https://test.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg",
+    "images": [],
+    "category": {
+      "_id": "636e64579569c30b4ef8de53",
+      "name": "Women's Clothing"
+    },
+    "subcategories": [],
+    "ratingsAverage": 4.4,
+    "ratingsQuantity": 12,
+    "createdAt": "2022-11-11T15:36:15.688Z",
+    "updatedAt": "2022-12-20T12:12:03.570Z",
+    "__v": 0
+  }
+}
+```
+
+## Get all products
+
+You can access the list of 200 products by using the `/api/products` endpoint.
+
+```bash
+[GET] https://localhost:3000/api/products
+```
+
+```json
+{
+  "page": 1,
+  "result": 200,
+  "data": [
+    {
+      "_id": "63adad1c279142448c05b4ff",
+      "title": "Big Chill Women's Wrap Fleece Jacket",
+      "slug": "big-chill-women's-wrap-fleece-jacket",
+      "description": "Fleece is not only for athleisure.......................",
+      "quantity": 3,
+      "sold": 0,
+      "price": 44.96,
+      "priceAfterDiscount": 14.99,
+      "colors": [],
+      "category": {
+        "_id": "636e64579569c30b4ef8de53",
+        "name": "Women's Clothing"
+      },
+      "ratingsQuantity": 0,
+      "createdAt": "2022-12-29T15:07:08.918Z",
+      "updatedAt": "2022-12-29T15:07:08.918Z"
+    }
+  ]
+  // ...
+}
+```
+
+## Get Related Products
+
+You can get related product by adding the `/api/products/related/{id}` endpoint.
+
+```bash
+[GET] https://localhost:3000/api/products/related/{productId}
+```
+
+```json
+[
+  {
+    "_id": "636e6bef6c34aa33724e6cdb",
+    "title": "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
+    "slug": "john-hardy-women's-legends-naga-gold-and-silver-dragon-station-chain-bracelet",
+    "description": "From our Legends Collection, the Naga was inspired by the .....................",
+    "quantity": 91,
+    "sold": 23,
+    "price": 695,
+    "colors": [],
+    "imageCover": "https://test.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg",
+    "images": [],
+    "category": {
+      "_id": "636e64579569c30b4ef8de53",
+      "name": "Women's Clothing"
+    },
+    "subcategories": [],
+    "ratingsAverage": 4.4,
+    "ratingsQuantity": 12,
+    "createdAt": "2022-11-11T15:36:15.688Z",
+    "updatedAt": "2022-12-20T12:12:03.570Z"
+  }
+  // ...
+]
+```
+
+## Search for a product by price
+
+You can search for a product by price by sending an object like the following
+
+```bash
+[GET] https://localhost:3000/api/products/search
+```
+
+```json
+{
+  "filters": {
+    "price": [4, 20]
+  }
+}
+```
+
+## Search by title or description
+
+To Search by title or description the API needs to be called with the `keyword` set word that you want
+
+```bash
+[GET] https://localhost:3000/api/products/?keyword=Clark,Olsen
+```
+
+```json
+{
+  "page": 1,
+  "result": 16,
+  "data": [
+    {
+      "_id": "63adad1c279142448c05b4ff",
+      "title": "Big Chill Women's Wrap Fleece Jacket",
+      "slug": "big-chill-women's-wrap-fleece-jacket",
+      "description": "Fleece is not only for athleisure! .................",
+      "quantity": 3,
+      "sold": 0,
+      "price": 44.96,
+      "priceAfterDiscount": 14.99,
+      "colors": [],
+      "category": {
+        "_id": "636e64579569c30b4ef8de53",
+        "name": "Women's Clothing"
+      },
+      "subcategories": [],
+      "ratingsQuantity": 0,
+      "createdAt": "2022-12-29T15:07:08.918Z",
+      "updatedAt": "2022-12-29T15:07:08.918Z"
+    }
+  ]
+}
+```
+
+## Filter results
+
+To Filter results the API needs to be called with the `ratingsAverage[gte]` set number that you want
+
+```bash
+[GET] https://localhost:3000/api/products/?ratingsAverage[gte]=1.6
+```
+
+```json
+{
+  "page": 1,
+  "result": 16,
+  "data": [
+    {
+      "_id": "636e6bef6c34aa33724e6cd9",
+      "title": "Mens Cotton Jacket",
+      "slug": "mens-cotton-jacket",
+      "description": "great outerwear jackets for Spring/Autumn/Winter, .........",
+      "quantity": 20,
+      "sold": 75,
+      "price": 55.99,
+      "colors": [],
+      "category": {
+        "_id": "636e61a8aa2719937c3cf0dc",
+        "name": "Men's Clothing"
+      },
+      "subcategories": [],
+      "ratingsAverage": 4,
+      "ratingsQuantity": 70,
+      "createdAt": "2022-11-11T15:36:15.688Z",
+      "updatedAt": "2022-11-11T15:36:15.688Z"
+    }
+  ]
+}
+```
+
+## Field Limiting
+
+To Field Limiting the API needs to be called with the `fields` set attribute that you want need to display
+
+```bash
+[GET] https://localhost:3000/api/products/?fields=title,price
+```
+
+```json
+{
+  "page": 1,
+  "result": 16,
+  "data": [
+    {
+      "_id": "63adad1c279142448c05b4ff",
+      "title": "Big Chill Women's Wrap Fleece Jacket",
+      "price": 44.96
+    }
+  ]
+}
+```

@@ -73,8 +73,7 @@ exports.createProductValidator = [
 
   check("subcategories")
     .optional()
-    //.isMongoId()
-    //.withMessage("Invalid ID formate")
+    .isMongoId()
     .custom((subcategoriesIds) =>
       SubCategory.find({ _id: { $exists: true, $in: subcategoriesIds } }).then(
         (result) => {

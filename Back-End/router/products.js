@@ -22,51 +22,61 @@ const {
 
 const {
   createProductValidator,
+  updateProductValidator,
+  deleteProductValidator,
 } = require("../utils/validators/productValidators");
 
-const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
 const { userById } = require("../middlewares/user");
+const { isAuth, requireLogIn, allowedTo } = require("../middlewares/auth");
 
-// Add new product
+// @desc Create a product
+// @access Private/Admin
 router.post(
-  "/create/:userId",
-  [requireSignIn, isAuth, isAdmin],
+  "/",
+  [requireLogIn, allowedTo("admin")],
   uploadProductImages,
   resizeProductImage,
   createProductValidator,
   createProduct
 );
 
-// Update a product
+// @desc Update a product
+// @access Private/Admin
 router.put(
-  "/:productId/:userId",
-  [requireSignIn, isAuth, isAdmin],
+  "/:id",
+  [requireLogIn, allowedTo("admin")],
   uploadProductImages,
   resizeProductImage,
+  updateProductValidator,
   updateProduct
 );
 
-// Delete a product
+// @desc Delete a product
+// @access Private/Admin
 router.delete(
-  "/:productId/:userId",
-  [requireSignIn, isAuth, isAdmin],
+  "/:id",
+  [requireLogIn, allowedTo("admin")],
+  deleteProductValidator,
   removeProduct
 );
 
-// Get all products // Done
+// @desc Get all products
+// @access Public
 router.get("/", getProducts);
 
-// Get a single product // Done
-router.get("/:productId/", getProduct);
+// @desc  Get a single product
+// @access Public
+router.get("/:id/", getProduct);
 
-// Get related products // Done
+// @desc  Get Related Products Base in Product_Id
+// @access Public
 router.get("/related/:productId/", listRelated);
 
-// Product Search
+// @desc Product Search
+// @access Public
 router.post("/search", searchProduct);
 
 // Param
-router.param("userId", userById);
 router.param("productId", productById);
 
 module.exports = router;

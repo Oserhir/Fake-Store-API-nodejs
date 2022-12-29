@@ -6,6 +6,8 @@ const _ = require("lodash");
 const slugify = require("slugify");
 const multer = require("multer");
 
+const factory = require("../controllers/handlersFactory");
+
 const asyncHandler = require("express-async-handler");
 const sharp = require("sharp");
 const { v4: uuidv4 } = require("uuid"); // create a random UUID
@@ -63,79 +65,20 @@ exports.resizeProductImage = asyncHandler(async (req, res, next) => {
   next();
 });
 
-//  @desc create Product // Done
-exports.createProduct = (req, res) => {
-  productModel
-    .create(req.body)
-    .then((product) => {
-      res.status(201).json({ data: product });
-    })
-    .catch((err) => {
-      res.status(400).json(err.message);
-    });
-};
+//  @desc Create a product
+exports.createProduct = factory.createOne(productModel);
 
-//  @desc update Product  // Done
-exports.updateProduct = (req, res) => {
-  const { productId } = req.params; //  const { id } = req.product._id;
-  req.body.slug = slugify(req.body.title);
+//  @desc Update a product
+exports.updateProduct = factory.updateOne(productModel, "product");
 
-  productModel.findOneAndUpdate(
-    { _id: productId },
-    req.body,
-    { new: true },
-    (err, doc) => {
-      if (err) {
-        res.status(400).json({ err: "Something wrong when updating data!" });
-      }
+//  @desc Delete a product
+exports.removeProduct = factory.deleteOne(productModel, "product");
 
-      res.json({ data: doc });
-    }
-  );
-};
-
-//  @desc Delete Product
-exports.removeProduct = (req, res) => {
-  let product = req.product;
-  product.remove((err, product) => {
-    if (err) {
-      return res.status(404).json({ error: "Product not found !" });
-    }
-  });
-
-  res.status(204).json({});
-};
-
-//
-exports.productById = (req, res, next, id) => {
-  productModel.findById(id).exec((err, product) => {
-    if (err || !product) {
-      return res.status(404).json({
-        errors: "Product not found !",
-      });
-    }
-
-    req.product = product;
-    next();
-  });
-};
-
-//  @desc Get  Product
-exports.getProduct = (req, res) => {
-  res.json({
-    data: req.product,
-  });
-};
+//  @desc Get a single product
+exports.getProduct = factory.getOne(productModel);
 
 //  @desc Get List of Products
 exports.getProducts = (req, res) => {
-  //
-  filterObject = {};
-
-  if (req.params.categoryId) {
-    filterObject = { category: req.params.categoryId };
-  }
-
   // Filtering ( price , ratingsAverage )
   const queryStringObject = { ...req.query }; // { limit: '10', price: '15', ratingsAverage: '4', page: '2' }
   const excludeFields = ["sortedBy", "order", "limit", "page", "keyword"];
@@ -175,8 +118,7 @@ exports.getProducts = (req, res) => {
   }
 
   productModel
-    // .find(queryStr)
-    .find(filterObject)
+    .find(queryStr)
     .select(fields)
     // .populate({ path: "category", select: "name _id" })
     .sort(sortedBy)
@@ -192,7 +134,7 @@ exports.getProducts = (req, res) => {
     });
 };
 
-//  desc Get  Related Product
+//  @desc Get Related Product
 exports.listRelated = (req, res) => {
   let limit = req.query.limit ? parseInt(req.query.limit) : 6;
 
@@ -216,8 +158,6 @@ exports.searchProduct = (req, res) => {
   let limit = req.body.limit ? parseInt(req.body.limit) : 100;
   let skip = parseInt(req.body.skip);
   let findArgs = {};
-
-  console.log(req.body.filters);
 
   for (let key in req.body.filters) {
     if (req.body.filters[key].length > 0) {
@@ -250,4 +190,18 @@ exports.searchProduct = (req, res) => {
         data,
       });
     });
+};
+
+//
+exports.productById = (req, res, next, id) => {
+  productModel.findById(id).exec((err, product) => {
+    if (err || !product) {
+      return res.status(404).json({
+        errors: "Product not found !",
+      });
+    }
+
+    req.product = product;
+    next();
+  });
 };
