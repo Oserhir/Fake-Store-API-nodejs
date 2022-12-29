@@ -501,13 +501,14 @@ Create a user by sending user's credentials (in JSON format) in the Body of the 
 
 Category Routes:
 
-| @Route                          | @Type  | @access       | @desc                  |
-| ------------------------------- | ------ | ------------- | ---------------------- |
-| /api/categories/                | POST   | Private/Admin | Create a category      |
-| /api/categories/:categoryId/    | PUT    | Private/Admin | Update a category      |
-| /api/categories/:categoryId/    | DELETE | Private/Admin | Delete a category      |
-| /api/categories/:categoryId     | GET    | Public        | Get a single category  |
-| /api/categories/?page=2&limit=1 | GET    | Public        | Get List of Categories |
+| @Route                               | @Type  | @access       | @desc                        |
+| ------------------------------------ | ------ | ------------- | ---------------------------- |
+| /api/categories/                     | POST   | Private/Admin | Create a category            |
+| /api/categories/:categoryId/         | PUT    | Private/Admin | Update a category            |
+| /api/categories/:categoryId/         | DELETE | Private/Admin | Delete a category            |
+| /api/categories/:categoryId          | GET    | Public        | Get a single category        |
+| /api/categories/?page=2&limit=1      | GET    | Public        | Get List of Categories       |
+| /api/categories/:categoryId/products | GET    | Public        | Get all products by category |
 
 ## Create a category
 
@@ -591,6 +592,43 @@ You can access the list of categories by using the `/categories` endpoint.
   }
 }
 // ...
+```
+
+## Get all products by category
+
+You can access the list of products by using the `/categories/{categoryId}/products` endpoint.
+
+```bash
+[GET] https://localhost:3000/api/categories/{categoryId}/products
+```
+
+```json
+{
+  "page": 1,
+  "result": 5,
+  "data": [
+    {
+      "_id": "636e6bef6c34aa33724e6cd9",
+      "title": "Mens Cotton Jacket",
+      "slug": "mens-cotton-jacket",
+      "description": "great outerwear jackets ...........",
+      "quantity": 20,
+      "sold": 75,
+      "price": 55.99,
+      "colors": [],
+      "category": {
+        "_id": "636e61a8aa2719937c3cf0dc",
+        "name": "Men's Clothing"
+      },
+      "subcategories": [],
+      "ratingsAverage": 4,
+      "ratingsQuantity": 70,
+      "createdAt": "2022-11-11T15:36:15.688Z",
+      "updatedAt": "2022-11-11T15:36:15.688Z"
+    }
+    // ...
+  ]
+}
 ```
 
 ## Schema Category

@@ -1,5 +1,7 @@
 const express = require("express");
-const router = express.Router();
+
+//  Allow us to access parameters on other routers
+const router = express.Router({ mergeParams: true });
 
 // Nested Route
 const reviewsRoute = require("./review");

@@ -129,6 +129,13 @@ exports.getProduct = (req, res) => {
 
 //  @desc Get List of Products
 exports.getProducts = (req, res) => {
+  //
+  filterObject = {};
+
+  if (req.params.categoryId) {
+    filterObject = { category: req.params.categoryId };
+  }
+
   // Filtering ( price , ratingsAverage )
   const queryStringObject = { ...req.query }; // { limit: '10', price: '15', ratingsAverage: '4', page: '2' }
   const excludeFields = ["sortedBy", "order", "limit", "page", "keyword"];
@@ -168,7 +175,8 @@ exports.getProducts = (req, res) => {
   }
 
   productModel
-    .find(queryStr)
+    // .find(queryStr)
+    .find(filterObject)
     .select(fields)
     // .populate({ path: "category", select: "name _id" })
     .sort(sortedBy)

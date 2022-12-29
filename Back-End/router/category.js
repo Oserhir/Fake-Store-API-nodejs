@@ -10,10 +10,12 @@ const {
 } = require("../utils/validators/categoryValidators");
 
 const subcategoriesRoute = require("./subcategory");
+const productsRoute = require("../router/products");
 
 // @desc Get All Subcategories for Specific Category ( Nested Route )
 // @desc Create Subcategory on Category ( Nested Route )
 router.use("/:categoryId/subcategories", subcategoriesRoute);
+router.use("/:categoryId/products", productsRoute);
 
 const {
   allCategories,
