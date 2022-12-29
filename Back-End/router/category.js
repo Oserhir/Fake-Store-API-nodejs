@@ -12,7 +12,7 @@ const {
 const subcategoriesRoute = require("./subcategory");
 
 // @desc Get All Subcategories for Specific Category ( Nested Route )
-// @access Public /api/categories/:id/subcategories
+// @desc Create Subcategory on Category ( Nested Route )
 router.use("/:categoryId/subcategories", subcategoriesRoute);
 
 const {

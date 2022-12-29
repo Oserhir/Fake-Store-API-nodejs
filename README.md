@@ -734,3 +734,17 @@ You can get All Subcategories for Specific Category by adding the `categoryId` a
         // ...
     ]
 ```
+
+## Create Subcategory on Category
+
+You can create a new subcategory by sending an object like the following to `/categories/${categoryId}/subcategories/`
+
+```bash
+[POST] https://localhost:3000/api/categories/${categoryId}/subcategories/
+```
+
+```json
+{
+  "name": "test"
+}
+```

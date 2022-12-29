@@ -33,6 +33,7 @@ const { isAuth, requireLogIn, allowedTo } = require("../middlewares/auth");
 router.post(
   "/",
   [requireLogIn, allowedTo("admin")],
+  setCategoryTobody,
   createSubCategoryValidator,
   createsubCategory
 );
