@@ -46,7 +46,7 @@ app.use("/api/users", userRouters);
 app.use("/api/categories", categoryRouters);
 app.use("/api/products", productRouters);
 app.use("/api/subcategories", subCategoryRouters);
-app.use("/api/brand", brandRouters);
+app.use("/api/brands", brandRouters);
 app.use("/api/reviews", reviewRouters);
 app.use("/api/wishlist", wishlistRouters);
 app.use("/api/addressess", addressessRouters);

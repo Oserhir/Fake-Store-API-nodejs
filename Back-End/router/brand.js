@@ -22,19 +22,20 @@ const {
   uploadBrandImage,
   resizeImage,
 } = require("../controllers/brandController");
-const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
+// const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
+const { isAuth, requireLogIn, allowedTo } = require("../middlewares/auth");
 const { userById } = require("../middlewares/user");
 
 // Get List of Brands
 router.get("/", getBrands);
 
 // Get specific Brand
-router.get("/:brandId", getSpecifiqueBrandValidator, getBrand);
+router.get("/:id", getSpecifiqueBrandValidator, getBrand);
 
 // Add new Brand
 router.post(
-  "/create/:userId",
-  [requireSignIn, isAuth, isAdmin],
+  "/",
+  [requireLogIn, allowedTo("admin")],
   uploadBrandImage,
   resizeImage,
   createBrandValidator,
@@ -43,8 +44,8 @@ router.post(
 
 // Update specific Brand
 router.put(
-  "/:brandId/:userId",
-  [requireSignIn, isAuth, isAdmin],
+  "/:id",
+  [requireLogIn, allowedTo("admin")],
   uploadBrandImage,
   resizeImage,
   updateBrandValidator,
@@ -53,13 +54,13 @@ router.put(
 
 // Delete specific Brand
 router.delete(
-  "/:brandId/:userId",
-  [requireSignIn, isAuth, isAdmin],
+  "/:id",
+  [requireLogIn, allowedTo("admin")],
   deleteBrandValidator,
   deleteBrand
 );
 
-router.param("userId", userById);
-router.param("brandId", brandById);
+// router.param("userId", userById);
+// router.param("brandId", brandById);
 
 module.exports = router;

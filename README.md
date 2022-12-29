@@ -17,7 +17,7 @@ Goals : Build Fake Store API that can be used with any type project that needs p
 
 <!--
 
-## To-do list:
+## ToDo:
 
 - Password forgot/reset, confirmation email on signup
 - Credit card payment with stripe
@@ -99,15 +99,6 @@ Product Routes:
 
 
 
-Brand Routes:
-
-| @Route                      | @Type  | @access | @desc                 |
-| --------------------------- | ------ | ------- | --------------------- |
-| /api/brand/create/:userId   | POST   | Private | Add new Brand         |
-| /api/brand/?page=2&limit=1  | GET    | Public  | Get List of Brands    |
-| /api/brand/:brandId         | GET    | Public  | Get specific Brand    |
-| /api/brand/:brandId/:userId | PUT    | Private | Update specific Brand |
-| /api/brand/:brandId/:userId | DELETE | Private | Delete specific Brand |
 
 Review Routes:
 
@@ -784,5 +775,112 @@ You can create a new subcategory by sending an object like the following to `/ca
 ```json
 {
   "name": "test"
+}
+```
+
+---
+
+## Brands
+
+#### Endpoints for Brands
+
+---
+
+Brand Routes:
+
+| @Route                      | @Type  | @access       | @desc                 |
+| --------------------------- | ------ | ------------- | --------------------- |
+| /api/brand/                 | POST   | Private/Admin | Add new Brand         |
+| /api/brand/:brandId/:userId | PUT    | Private       | Update specific Brand |
+| /api/brand/:brandId/:userId | DELETE | Private       | Delete specific Brand |
+| /api/brand/?page=2&limit=1  | GET    | Public        | Get List of Brands    |
+| /api/brand/:brandId         | GET    | Public        | Get specific Brand    |
+
+## Add new Brand
+
+You can create a new brand by sending an object like the following to `/brands/`
+
+```bash
+[POST] https://localhost:3000/api/brands/
+```
+
+```json
+{
+  "name": "BMW",
+  "image": "http://localhost:3000/brands/brand-4c6dc1a5-c156-409a-8774-1d47b71f3f6d-1672313914144.jpeg"
+}
+```
+
+## Update specific Brand
+
+You can update a brand exists by sending an object like the following and adding the id as a parameter: `/brands/{id}`
+
+```bash
+[PUT] https://localhost:3000/api/subcategories/{brandId}
+```
+
+```json
+{
+  "name": "Change name"
+}
+```
+
+> Note that it is not necessary to send all brand attributes, just send the attributes that want to update.
+
+## Delete specific Brand
+
+You can delete brand exists by adding the `id`as a parameter: `/api/brands/{id}`
+
+```bash
+[DELETE] https://localhost:3000/api/brands/{brandId}
+```
+
+```json
+status : 204 No Content
+```
+
+## Get List of Brands
+
+You can access the list of brands by using the `/brands` endpoint.
+
+```bash
+[GET] https://localhost:3000/api/brands/
+```
+
+```json
+{
+  "page": 1,
+  "result": 13,
+  "data": [
+    {
+      "_id": "63ad7c3aa9e90aed3fac800e",
+      "name": "brand name",
+      "image": "http://localhost:3000/brands/brand-4c6dc1a5-c156-409a-8774-1d47b71f3f6d-1672313914144.jpeg",
+      "createdAt": "2022-12-29T11:38:34.244Z",
+      "updatedAt": "2022-12-29T11:38:34.244Z"
+    }
+    // ...
+  ]
+}
+```
+
+## Get specific Brand
+
+You can get a single brand by adding the `id` as a parameter: `/brands/{id}`
+
+```bash
+[GET] https://localhost:3000/api/categories/${id}
+```
+
+```json
+{
+  "data": {
+    "_id": "63ad7c3aa9e90aed3fac800e",
+    "name": "brand name",
+    "image": "http://localhost:3000/brands/brand-4c6dc1a5-c156-409a-8774-1d47b71f3f6d-1672313914144.jpeg",
+    "createdAt": "2022-12-29T11:38:34.244Z",
+    "updatedAt": "2022-12-29T11:38:34.244Z",
+    "__v": 0
+  }
 }
 ```
