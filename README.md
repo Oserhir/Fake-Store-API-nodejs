@@ -791,8 +791,8 @@ Brand Routes:
 | @Route                      | @Type  | @access       | @desc                 |
 | --------------------------- | ------ | ------------- | --------------------- |
 | /api/brand/                 | POST   | Private/Admin | Add new Brand         |
-| /api/brand/:brandId/:userId | PUT    | Private       | Update specific Brand |
-| /api/brand/:brandId/:userId | DELETE | Private       | Delete specific Brand |
+| /api/brand/:brandId/:userId | PUT    | Private/Admin | Update specific Brand |
+| /api/brand/:brandId/:userId | DELETE | Private/Admin | Delete specific Brand |
 | /api/brand/?page=2&limit=1  | GET    | Public        | Get List of Brands    |
 | /api/brand/:brandId         | GET    | Public        | Get specific Brand    |
 

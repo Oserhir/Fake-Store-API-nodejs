@@ -26,13 +26,16 @@ const {
 const { isAuth, requireLogIn, allowedTo } = require("../middlewares/auth");
 const { userById } = require("../middlewares/user");
 
-// Get List of Brands
+// @desc Get List of Brands
+// @access Public
 router.get("/", getBrands);
 
-// Get specific Brand
+// @desc Get specific Brand
+// @access Public
 router.get("/:id", getSpecifiqueBrandValidator, getBrand);
 
-// Add new Brand
+//  @desc  Add new Brand
+//  @access Private/Admin
 router.post(
   "/",
   [requireLogIn, allowedTo("admin")],
@@ -42,7 +45,8 @@ router.post(
   createBrand
 );
 
-// Update specific Brand
+// @desc Update specific Brand
+// @access Private/Admin
 router.put(
   "/:id",
   [requireLogIn, allowedTo("admin")],
@@ -52,7 +56,8 @@ router.put(
   updateBrand
 );
 
-// Delete specific Brand
+//  @desc Delete specific Brand
+//  @access Private/Admin
 router.delete(
   "/:id",
   [requireLogIn, allowedTo("admin")],
