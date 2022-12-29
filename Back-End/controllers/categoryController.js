@@ -8,9 +8,6 @@ const multer = require("multer");
 const sharp = require("sharp");
 const { uploadSingleImage } = require("../middlewares/uploadImageMiddlewares");
 
-
-
-
 // Upload Single Image
 exports.uploadCategoryImage = uploadSingleImage("image");
 

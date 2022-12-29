@@ -15,6 +15,7 @@ const productsRoute = require("../router/products");
 // @desc Get All Subcategories for Specific Category ( Nested Route )
 // @desc Create Subcategory on Category ( Nested Route )
 router.use("/:categoryId/subcategories", subcategoriesRoute);
+// @desc Get all products by category
 router.use("/:categoryId/products", productsRoute);
 
 const {
@@ -27,9 +28,8 @@ const {
   uploadCategoryImage,
   resizeImage,
 } = require("../controllers/categoryController");
-// const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
-const { userById } = require("../middlewares/user");
 
+const { userById } = require("../middlewares/user");
 const { isAuth, requireLogIn, allowedTo } = require("../middlewares/auth");
 
 // @desc Get all categories

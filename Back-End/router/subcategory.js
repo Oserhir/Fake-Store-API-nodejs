@@ -9,7 +9,7 @@ const {
 } = require("../utils/validators/subCategoryValidators");
 
 // mergeParams: Allow us to access parameters on other routers
-// ex: We need to access categoryId from category router
+// We need to access categoryId from category router
 const router = express.Router({ mergeParams: true });
 
 const {
@@ -24,7 +24,6 @@ const {
 
 const { categoryById } = require("../controllers/categoryController");
 
-// const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
 const { userById } = require("../middlewares/user");
 const { isAuth, requireLogIn, allowedTo } = require("../middlewares/auth");
 
@@ -63,16 +62,6 @@ router.get("/", getsubCategories);
 // @desc Get specific subCategory
 router.get("/:subcategoryId", getsubCategory);
 
-// Method #2 - Create subCategory
-// router.post(
-//   "/",
-//   setCategoryTobody,
-//   createSubCategoryValidator,
-//   createsubCategory
-// );
-
-router.param("userId", userById);
 router.param("subcategoryId", subCategoryById);
-router.param("categoryId", categoryById);
 
 module.exports = router;

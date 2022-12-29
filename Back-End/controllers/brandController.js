@@ -34,36 +34,14 @@ exports.getBrand = factory.getOne(brandModel);
 
 // @desc Get List of Brands
 exports.getBrands = factory.getAll(brandModel);
-//   const page = req.query.page * 1 || 1;
-//   const limit = req.query.limit || 5;
-//   const skip = (page - 1) * limit;
-
-//   brandModel
-//     .find()
-//     .skip(skip)
-//     .limit(limit)
-//     .exec((err, brands) => {
-//       if (err) {
-//         return res.status(500).json({
-//           error: err,
-//         });
-//       }
-
-//       res.json({
-//         page: page,
-//         brands: brands,
-//       });
-//     });
-// };
 
 // @desc Update specific Brand
 exports.updateBrand = factory.updateOne(brandModel, "Brand");
 
 // @desc Delete specific Brand
-
 exports.deleteBrand = factory.deleteOne(brandModel, "Brand");
 
-// @desc Get Brand information Using Category ID
+// @desc Get Brand information Using BrandID
 exports.brandById = (req, res, next, id) => {
   brandModel.findById(id).exec((err, brand) => {
     if (err || !brand) {

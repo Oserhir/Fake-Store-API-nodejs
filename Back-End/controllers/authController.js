@@ -6,7 +6,8 @@ const ApiError = require("../utils/APIError");
 
 require("dotenv").config(); // access environment variables
 
-// @desc  create a new user in db @access Public
+// @desc  create a new user in db
+// @access Public
 module.exports.signup_post = (req, res) => {
   // Create User
   User.create(req.body)
@@ -28,7 +29,8 @@ module.exports.signup_post = (req, res) => {
     });
 };
 
-// @desc  authenticate a current user @access Public
+// @desc  authenticate a current user
+// @access Public
 module.exports.login_post = (req, res) => {
   // Create Token and send it to the Browser
   const token = createToken(req.user._id);
@@ -44,13 +46,14 @@ module.exports.login_post = (req, res) => {
   });
 };
 
-// @desc  log a user out @access Private
+// @desc  log a user out
+// @access Private
 module.exports.signout_get = (req, res) => {
   res.clearCookie("jwt");
   res.send("User signOUT");
 };
 
-// create json web token
+// @desc create json web token
 // Signing a token with 3 Days of expiration:
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (user_id, user_role) => {

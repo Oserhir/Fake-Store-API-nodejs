@@ -9,9 +9,6 @@ const {
   getSpecifiqueBrandValidator,
 } = require("../utils/validators/BrandValidators");
 
-// const subcategoriesRoute = require("./subcategory");
-// router.use("/:categoryId/subcategories", subcategoriesRoute);
-
 const {
   getBrand,
   getBrands,
@@ -22,7 +19,7 @@ const {
   uploadBrandImage,
   resizeImage,
 } = require("../controllers/brandController");
-// const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
+
 const { isAuth, requireLogIn, allowedTo } = require("../middlewares/auth");
 const { userById } = require("../middlewares/user");
 
@@ -64,8 +61,5 @@ router.delete(
   deleteBrandValidator,
   deleteBrand
 );
-
-// router.param("userId", userById);
-// router.param("brandId", brandById);
 
 module.exports = router;
