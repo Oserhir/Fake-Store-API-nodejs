@@ -28,16 +28,7 @@ Goals : Build Fake Store API that can be used with any type project that needs p
 All the models can be found in the models directory created using mongoose.
 
 
-subCategory Schema:
 
-- title (String)
-- slug (String)
-- category (ObjectId - a reference to the category schema)
-
-brand Schema:
-
-- title (String)
-- image (String)
 
 Product Schema:
 
@@ -360,15 +351,14 @@ You can change password of any user exists by sending an object like the followi
 
 ## Schema User
 
-| Attribute | Type    | Description                           | Validation Layer |
-| --------- | ------- | ------------------------------------- | ---------------- |
-| id        | number  | The id of the user.                   |                  |
-| name      | string  | The name of the user.                 |                  |
-| role      | string  | The role of the user is user or admin |                  |
-| email     | string  | The email of the user.                |                  |
-| password  | string  | The password of the user.             |                  |
-| active    | boolean |                                       |                  |
-| Addresses | array   |                                       |                  |
+| Attribute | Type    |
+| --------- | ------- |
+| name      | string  |
+| role      | string  |
+| email     | string  |
+| password  | string  |
+| active    | boolean |
+| Addresses | array   |
 
 ---
 
@@ -624,12 +614,11 @@ You can access the list of products by using the `/categories/{categoryId}/produ
 
 ## Schema Category
 
-| Attribute | Type   | Description                    |
-| --------- | ------ | ------------------------------ |
-| id        | number | The id of the category         |
-| name      | string | Name of the category           |
-| slug      | string |                                |
-| image     | string | The string with URL to a image |
+| Attribute | Type   |
+| --------- | ------ |
+| name      | string |
+| slug      | string |
+| image     | string |
 
 ---
 
@@ -778,6 +767,14 @@ You can create a new subcategory by sending an object like the following to `/ca
 }
 ```
 
+## Schema Sub-Category
+
+| Attribute | Type     |
+| --------- | -------- |
+| title     | string   |
+| slug      | string   |
+| category  | ObjectId |
+
 ---
 
 ## Brands
@@ -788,13 +785,13 @@ You can create a new subcategory by sending an object like the following to `/ca
 
 Brand Routes:
 
-| @Route                      | @Type  | @access       | @desc                 |
-| --------------------------- | ------ | ------------- | --------------------- |
-| /api/brand/                 | POST   | Private/Admin | Add new Brand         |
-| /api/brand/:brandId/:userId | PUT    | Private/Admin | Update specific Brand |
-| /api/brand/:brandId/:userId | DELETE | Private/Admin | Delete specific Brand |
-| /api/brand/?page=2&limit=1  | GET    | Public        | Get List of Brands    |
-| /api/brand/:brandId         | GET    | Public        | Get specific Brand    |
+| @Route                     | @Type  | @access       | @desc                 |
+| -------------------------- | ------ | ------------- | --------------------- |
+| /api/brand/                | POST   | Private/Admin | Add new Brand         |
+| /api/brand/:brandId/       | PUT    | Private/Admin | Update specific Brand |
+| /api/brand/:brandId/       | DELETE | Private/Admin | Delete specific Brand |
+| /api/brand/?page=2&limit=1 | GET    | Public        | Get List of Brands    |
+| /api/brand/:brandId        | GET    | Public        | Get specific Brand    |
 
 ## Add new Brand
 
@@ -884,3 +881,10 @@ You can get a single brand by adding the `id` as a parameter: `/brands/{id}`
   }
 }
 ```
+
+## Schema Brand
+
+| Attribute | Type   |
+| --------- | ------ |
+| title     | string |
+| image     | string |
