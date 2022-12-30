@@ -1171,9 +1171,9 @@ Review Routes:
 
 | @Route                           | @Type  | @access               | @desc                                  |
 | -------------------------------- | ------ | --------------------- | -------------------------------------- |
-| /api/reviews/create/:userId      | POST   | Private/Protect       | Add new Review                         |
-| /api/reviews/:reviewId/:userId   | PUT    | Private/Protect       | Update specific review                 |
-| /api/reviews/:reviewId/:userId   | DELETE | Private/Protect/Admin | Delete specific review                 |
+| /api/reviews/                    | POST   | Private/Protect       | Add new Review                         |
+| /api/reviews/:reviewId           | PUT    | Private/Protect       | Update specific review                 |
+| /api/reviews/:reviewId           | DELETE | Private/Protect/Admin | Delete specific review                 |
 | /api/reviews/?page=2&limit=1     | GET    | Public                | Get List of reviews                    |
 | /api/reviews/:reviewId           | GET    | Public                | Get specific review                    |
 | /api/products/:productId/reviews | GET    | Public                | Get all reviews on specifique products |
