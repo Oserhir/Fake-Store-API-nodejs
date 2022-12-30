@@ -1,4 +1,5 @@
 const asyncHandler = require("express-async-handler");
+const ApiError = require("../utils/APIError");
 
 const User = require("../models/userSchema");
 
@@ -8,8 +9,8 @@ const User = require("../models/userSchema");
 exports.addProductToWishlist = (req, res, next) => {
   // $addToSet => add productId to wishlist array if productId not exist
   User.findOneAndUpdate(
-    { _id: req.Profile._id },
-    { $addToSet: { wishlist: req.body.productId } },
+    { _id: req.crUser._id },
+    { $addToSet: { wishlist: req.body.product } },
     { new: true },
     (err, doc) => {
       if (err) {
@@ -32,8 +33,8 @@ exports.removeProductFromWishlist = asyncHandler(async (req, res, next) => {
   // $pull => remove productId from wishlist array if productId exist
 
   User.findOneAndUpdate(
-    { _id: req.Profile._id },
-    { $pull: { wishlist: req.params.productId } },
+    { _id: req.crUser._id },
+    { $pull: { wishlist: req.params.id } },
     { new: true },
     (err, doc) => {
       if (err) {
@@ -53,9 +54,8 @@ exports.removeProductFromWishlist = asyncHandler(async (req, res, next) => {
 // @route   GET /api/wishlist/;IdUser
 // @access  Protected/User
 exports.getLoggedUserWishlist = (req, res, next) => {
-  // const user = await User.findById(req.Profile._id).populate("wishlist");
-
-  User.findById(req.Profile._id)
+  // const user = await User.findById(req.Profile._id).populate("wishlist");0
+  User.findById(req.crUser._id)
     .populate("wishlist")
     .then((user) => {
       if (user) {

@@ -54,14 +54,6 @@ Product Routes:
 
 
 
-Wishlist Routes:
-
-| @Route                           | @Type  | @access      | @desc                        |
-| -------------------------------- | ------ | ------------ | ---------------------------- |
-| /api/wishlist/:userId            | POST   | Private-User | Add Product To Wishlist      |
-| /api/wishlist/:ProductId/:userId | DELETE | Private-User | Remove Product From Wishlist |
-| /api/wishlist/:userId            | GET    | Private-User | Get Logged User Wishlist     |
-
 Addresses Routes:
 
 | @Route                             | @Type  | @access      | @desc              |
@@ -1318,3 +1310,93 @@ Review Schema:
 | ratings   | Number   |
 | user      | ObjectId |
 | product   | ObjectId |
+
+---
+
+## Wishlist
+
+#### Endpoints for Wishlist
+
+---
+
+Wishlist Routes:
+
+| @Route                    | @Type  | @access      | @desc                        |
+| ------------------------- | ------ | ------------ | ---------------------------- |
+| /api/wishlist/            | POST   | Private/User | Add Product To Wishlist      |
+| /api/wishlist/:ProductId/ | DELETE | Private/User | Remove Product From Wishlist |
+| /api/wishlist/            | GET    | Private/User | Get Logged User Wishlist     |
+
+## Add Product To Wishlist
+
+You can add Product To Wishlist by sending an object like the following to `/api/wishlist/` endpoint.
+
+```
+[GET] https://localhost:3000/api/wishlist
+```
+
+```json
+{
+  "product": "63ada0558394679ebc49646f"
+}
+```
+
+## Remove Product From Wishlist
+
+You can Remove Product From Wishlist by adding the `id` as a parameter: `/api/wishlist/{id}`
+
+```bash
+[DELETE] https://localhost:3000/api/wishlist/{reviewId}
+```
+
+```json
+{
+  "status": "success",
+  "message": "Product removed successfully from your wishlist.",
+  "data": ["63adace3279142448c05b4fb", "63ada0558394679ebc49646f"]
+}
+```
+
+## Get Logged User Wishlist
+
+You can access the list of User Wishlist by using the `/api/wishlist` endpoint.
+
+```
+[GET] https://localhost:3000/api/wishlist
+```
+
+```json
+{
+  "status": "success",
+  "results": 2,
+  "data": [
+    {
+      "_id": "63adace3279142448c05b4fb",
+      "title": "Big Chill Women's Wrap Fleece Jacket",
+      "slug": "big-chill-women's-wrap-fleece-jacket",
+      "description": "Fleece is not only for athleisure! ..........",
+      "quantity": 3,
+      "sold": 0,
+      "price": 44.96,
+      "priceAfterDiscount": 14.99,
+      "colors": [],
+      "imageCover": "product-3eed9312-8a1f-4a9c-b4a2-ce5a652d5f5c-1672326370700-cover.jpeg",
+      "images": [
+        "product-ca74c168-ea0b-49b8-aa02-c695b7509d4f-1672326370887-2.jpeg",
+        "product-f90b50d4-a784-4ea9-9ae4-4c48bdd6d49a-1672326370884-1.jpeg"
+      ],
+      "category": {
+        "_id": "636e64579569c30b4ef8de53",
+        "name": "Women's Clothing"
+      },
+      "subcategories": [],
+      "ratingsQuantity": 2,
+      "createdAt": "2022-12-29T15:06:11.655Z",
+      "updatedAt": "2022-12-30T10:55:55.852Z",
+      "__v": 0,
+      "ratingsAverage": 3.5
+    }
+    // ...
+  ]
+}
+```

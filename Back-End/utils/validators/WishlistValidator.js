@@ -3,17 +3,11 @@ const validatorMiddleware = require("../../middlewares/validatorMiddleware");
 const Product = require("../../models/productSchema");
 
 exports.addProductToWishlistValidator = [
-  body("productId")
-    .isMongoId()
-    .withMessage("Invalid Review id format")
-    .custom((val, { req }) =>
-      // Check if logged user create review before
-      Product.findOne({ _id: req.body.productId }).then((product) => {
-        if (!product) {
-          return Promise.reject(new Error("Product Not Found"));
-        }
-      })
-    ),
-
+  body("product").custom(async (val) => {
+    const product = await Product.findById(val);
+    if (!product) {
+      return Promise.reject(new Error(`There is no product with id ${val}`));
+    }
+  }),
   validatorMiddleware,
 ];

@@ -10,23 +10,27 @@ const {
   addProductToWishlistValidator,
 } = require("../utils/validators/WishlistValidator");
 
-const { requireSignIn, isAuth } = require("../middlewares/auth");
+const { isAuth, requireLogIn, allowedTo } = require("../middlewares/auth");
 const { userById } = require("../middlewares/user");
 
 router.post(
-  "/:userId",
-  [requireSignIn, isAuth],
+  "/",
+  [requireLogIn, allowedTo("user")],
   addProductToWishlistValidator,
   addProductToWishlist
 );
 
 router.delete(
-  "/:productId/:userId",
-  [requireSignIn, isAuth],
+  "/:id",
+  [requireLogIn, allowedTo("user")],
   removeProductFromWishlist
 );
 
-router.get("/:userId", [requireSignIn, isAuth], getLoggedUserWishlist);
+router.get(
+  "/",
+  [requireLogIn, allowedTo("user")],
+  getLoggedUserWishlist
+);
 
 // Param
 router.param("userId", userById);
