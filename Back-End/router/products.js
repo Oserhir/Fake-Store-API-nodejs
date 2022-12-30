@@ -4,8 +4,9 @@ const express = require("express");
 const router = express.Router({ mergeParams: true });
 
 // Nested Route
+// @Desc Get all reviews on specifique products
 const reviewsRoute = require("./review");
-router.use("/:productId/reviews", reviewsRoute);
+router.use("/:productID/reviews", reviewsRoute);
 
 const {
   searchProduct,

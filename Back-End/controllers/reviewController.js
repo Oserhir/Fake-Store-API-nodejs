@@ -1,85 +1,37 @@
 const reviewModel = require("../models/ReviewModel");
 const slugify = require("slugify");
-
+const factory = require("../controllers/handlersFactory");
 const APIError = require("../utils/APIError");
+const asyncHandler = require("express-async-handler");
 
 // @desc Add new Review
-exports.createReview = (req, res) => {
-  console.log(req.body);
-  reviewModel
-    .create(req.body)
-    .then((review) => {
-      res.status(201).json({ data: review });
-    })
-    .catch((err) => {
-      res.status(400).send(err);
-    });
-};
+exports.createReview = factory.createOne(reviewModel);
 
 // @desc Get specific Review
-exports.getReview = (req, res) => {
-  res.send({ review: req.review });
-};
+exports.getReview = factory.getOne(reviewModel);
 
 // @desc Get List of Reviews
-exports.getReviews = (req, res) => {
+exports.getReviews = asyncHandler(async (req, res) => {
   let filter = {};
-
   if (req.filterObj) {
     filter = req.filterObj;
   }
 
-  console.log(req.filterObj);
+  const review = await reviewModel.find(filter);
+  if (!review) {
+    return next(
+      new APIError(`No review for this id ${req.params.productID}`, 404)
+    );
+  }
 
-  const page = req.query.page * 1 || 1;
-  const limit = req.query.limit || 5;
-  const skip = (page - 1) * limit;
-
-  reviewModel
-    .find(filter)
-    .skip(skip)
-    .limit(limit)
-    .exec((err, reviews) => {
-      if (err) {
-        return res.status(500).json({
-          error: err,
-        });
-      }
-
-      res.json({
-        page: page,
-        reviews: reviews,
-      });
-    });
-};
+  res.status(200).json({ result: review.length, data: review });
+});
 
 // @desc Update specific Review
-exports.updateReview = (req, res) => {
-  let review = req.review;
-  review.title = req.body.title;
-  review.ratings = req.body.ratings;
-  // Trigger "Save" event when update review
-  review.save((err, review) => {
-    if (err) {
-      return res.status(400).json({ err: "bad request !" });
-    }
-  });
+exports.updateReview = factory.updateOne(reviewModel, "review");
 
-  res.json({ review, message: "Review updated" });
-};
-
-// @desc Delete specific Brand
-exports.deleteReview = (req, res) => {
-  let review = req.review;
-
-  review.remove((err, review) => {
-    if (err || !review) {
-      return res.status(400).json({ err: "review not found!" });
-    }
-
-    res.status(204).json({});
-  });
-};
+// @desc Delete specific Review
+exports.deleteReview = factory.deleteOne(reviewModel, "review");
 
 // @desc Get Brand information Using Category ID
 exports.reviewById = (req, res, next, id) => {
@@ -91,4 +43,10 @@ exports.reviewById = (req, res, next, id) => {
     req.review = review;
     next();
   });
+};
+
+exports.setProductIdAndUserIdToBody = (req, res, next) => {
+  if (!req.body.product) req.body.product = req.params.productId;
+  if (!req.body.user) req.body.user = req.crUser;
+  next();
 };

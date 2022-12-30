@@ -32,14 +32,6 @@ const {
 const { userById } = require("../middlewares/user");
 const { isAuth, requireLogIn, allowedTo } = require("../middlewares/auth");
 
-// @desc Get all categories
-// @access Public
-router.get("/", allCategories);
-
-// @desc Get a single category
-// @access Public
-router.get("/:id", getSpecifiqueCategoriesValidator, getCategory);
-
 // @desc Create a category
 // @access Private/Admin
 router.post(
@@ -50,6 +42,14 @@ router.post(
   createCategoryValidator,
   createCategory
 );
+
+// @desc Get all categories
+// @access Public
+router.get("/", allCategories);
+
+// @desc Get a single category
+// @access Public
+router.get("/:id", getSpecifiqueCategoriesValidator, getCategory);
 
 // @desc Update a category
 // @access Private/Admin

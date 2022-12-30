@@ -31,13 +31,6 @@ All the models can be found in the models directory created using mongoose.
 
 
 
-Review Schema:
-
-- title (String)
-- ratings (Number)
-- user (ObjectId - a reference to the User schema)
-- product (ObjectId - a reference to the product schema)
-
 Coupon Schema:
 
 - name (String)
@@ -60,16 +53,6 @@ Product Routes:
 
 
 
-Review Routes:
-
-| @Route                           | @Type  | @access | @desc                                                  |
-| -------------------------------- | ------ | ------- | ------------------------------------------------------ |
-| /api/reviews/create/:userId      | POST   | Private | Add new Review                                         |
-| /api/reviews/?page=2&limit=1     | GET    | Public  | Get List of reviews                                    |
-| /api/reviews/:reviewId           | GET    | Public  | Get specific review                                    |
-| /api/reviews/:reviewId/:userId   | PUT    | Private | Update specific review                                 |
-| /api/reviews/:reviewId/:userId   | DELETE | Private | Delete specific review                                 |
-| /api/products/:IdProduct/reviews | GET    | Public  | Get all reviews on specifique products ( Nested Route) |
 
 Wishlist Routes:
 
@@ -1175,3 +1158,163 @@ To Field Limiting the API needs to be called with the `fields` set attribute tha
 | ratingsAverage     | Number   |
 | ratingsQuantity    | Number   |
 | shipping           | Boolean  |
+
+---
+
+## Reviews
+
+#### Endpoints for Reviews
+
+---
+
+Review Routes:
+
+| @Route                           | @Type  | @access               | @desc                                  |
+| -------------------------------- | ------ | --------------------- | -------------------------------------- |
+| /api/reviews/create/:userId      | POST   | Private/Protect       | Add new Review                         |
+| /api/reviews/:reviewId/:userId   | PUT    | Private/Protect       | Update specific review                 |
+| /api/reviews/:reviewId/:userId   | DELETE | Private/Protect/Admin | Delete specific review                 |
+| /api/reviews/?page=2&limit=1     | GET    | Public                | Get List of reviews                    |
+| /api/reviews/:reviewId           | GET    | Public                | Get specific review                    |
+| /api/products/:productId/reviews | GET    | Public                | Get all reviews on specifique products |
+
+## Add new Review
+
+You can create a new review by sending an object like the following to `/api/reviews/` endpoint.
+
+```
+[GET] https://localhost:3000/api/reviews
+```
+
+```json
+{
+  "title": "Good Product",
+  "ratings": 4,
+  "product": "63adace3279142448c05b4fb"
+}
+```
+
+## Update a product
+
+you can update review exists by sending an object like the following and adding the `id` as a parameter: `/api/reviews/{id}`
+
+```bash
+[PUT] https://localhost:3000/api/reviews/{reviewId}
+```
+
+```json
+{
+  "title": "updating Reviews",
+  "ratings": 5
+}
+```
+
+> Note that it is not necessary to send all review attributes, just send the attributes that want to update.
+
+## Delete specific review
+
+You can delete specific review by adding the `id` as a parameter: `/api/reviews/{id}`
+
+```bash
+[DELETE] https://localhost:3000/api/reviews/{reviewId}
+```
+
+```json
+status : 204 No Content
+```
+
+## Get specific review
+
+You can get specific review by adding the `id` as a parameter: `/api/reviews/{id}`
+
+```bash
+[GET] https://localhost:3000/api/reviews/{reviewId}
+```
+
+```json
+{
+  "data": {
+    "_id": "63aec38300b84ab23dbf222d",
+    "title": "Good Product",
+    "ratings": 4,
+    "user": {
+      "_id": "63a9b1b28fbd8a25a5202f58",
+      "name": "Emma"
+    },
+    "product": "63adad1c279142448c05b4ff",
+    "createdAt": "2022-12-30T10:54:59.146Z",
+    "updatedAt": "2022-12-30T10:54:59.146Z"
+  }
+}
+```
+
+## Get List of reviews
+
+You can access the list of reviews by using the `/api/reviews` endpoint.
+
+```bash
+[GET] https://localhost:3000/api/reviews
+```
+
+```json
+{
+  "page": 1,
+  "result": 7,
+  "data": [
+    {
+      "_id": "63aec39f00b84ab23dbf2236",
+      "title": "Good Product",
+      "ratings": 5,
+      "user": {
+        "_id": "63a9b1b28fbd8a25a5202f58",
+        "name": "Emma"
+      },
+      "product": "63adace3279142448c05b4fb",
+      "createdAt": "2022-12-30T10:55:27.679Z",
+      "updatedAt": "2022-12-30T10:55:55.834Z"
+    }
+    // ...
+  ]
+}
+```
+
+## Get all reviews on specifique products
+
+You can access the list of reviews on specifique products by using the `/api/{productId}/reviews` endpoint.
+
+```bash
+[GET] https://localhost:3000/api/{productId}/reviews
+```
+
+```json
+{
+  "result": 2,
+  "data": [
+    {
+      "_id": "63aec1dff1a585ce1a2cd108",
+      "title": "Bad Product",
+      "ratings": 2,
+      "user": {
+        "_id": "63aead724ba368735b49ae67",
+        "name": "KvnHart"
+      },
+      "product": "63adace3279142448c05b4fb",
+      "createdAt": "2022-12-30T10:47:59.701Z",
+      "updatedAt": "2022-12-30T10:47:59.701Z",
+      "__v": 0
+    }
+    // ...
+  ]
+}
+```
+
+## Review Schema
+
+Review Schema:
+
+| Attribute | Type     |
+| --------- | -------- |
+| title     | string   |
+| ratings   | Number   |
+| user      | ObjectId |
+| product   | ObjectId |

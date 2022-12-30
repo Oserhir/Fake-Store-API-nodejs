@@ -6,16 +6,7 @@ const router = express.Router({ mergeParams: true });
 // GET /api/products/:productId/reviews
 createFilterObj = (req, res, next) => {
   let filterObject = {};
-  if (req.params.productId) filterObject = { product: req.params.productId };
-  req.filterObj = filterObject;
-  next();
-};
-
-// Nested route
-// POST /api/products/:productId/reviews
-createFilterObj = (req, res, next) => {
-  let filterObject = {};
-  if (req.params.productId) filterObject = { product: req.params.productId };
+  if (req.params.productID) filterObject = { product: req.params.productID };
   req.filterObj = filterObject;
   next();
 };
@@ -33,42 +24,45 @@ const {
   updateReview,
   deleteReview,
   reviewById,
+  setProductIdAndUserIdToBody,
 } = require("../controllers/reviewController");
 
-const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
-const { userById } = require("../middlewares/user");
+const { isAuth, requireLogIn, allowedTo } = require("../middlewares/auth");
 
-// Get List of Review
+// @Desc Get List of Reviews
+// @access Public
 router.get("/", createFilterObj, getReviews);
 
-// Get specific Review
-router.get("/:reviewId", getReview);
+// @Desc Get specific Review
+// @access Public
+router.get("/:id", getReview);
 
-// Add new Review
+// @Desc Create Review
+// @access Private/Protect
 router.post(
-  "/create/:userId",
-  [requireSignIn, isAuth],
+  "/",
+  [requireLogIn, allowedTo("user")],
+  setProductIdAndUserIdToBody,
   createReviewValidator,
   createReview
 );
 
-// Update specific Review
+// @Desc Update specific Review
+// @access Private/Protect
 router.put(
-  "/:reviewId/:userId",
-  [requireSignIn, isAuth],
+  "/:id",
+  [requireLogIn, allowedTo("user")],
   updateReviewValidator,
   updateReview
 );
 
-// Delete specific Review
+// @Desc Delete specific Review
+// @access Private/Protect/Admin
 router.delete(
-  "/:reviewId/:userId",
-  [requireSignIn, isAuth],
+  "/:id",
+  [requireLogIn, allowedTo("user", "admin")],
   deleteReviewValidator,
   deleteReview
 );
-
-router.param("userId", userById);
-router.param("reviewId", reviewById);
 
 module.exports = router;
