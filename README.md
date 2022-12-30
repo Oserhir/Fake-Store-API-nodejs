@@ -1332,7 +1332,7 @@ Wishlist Routes:
 You can add Product To Wishlist by sending an object like the following to `/api/wishlist/` endpoint.
 
 ```
-[GET] https://localhost:3000/api/wishlist
+[POST] https://localhost:3000/api/wishlist
 ```
 
 ```json
@@ -1346,7 +1346,7 @@ You can add Product To Wishlist by sending an object like the following to `/api
 You can Remove Product From Wishlist by adding the `id` as a parameter: `/api/wishlist/{id}`
 
 ```bash
-[DELETE] https://localhost:3000/api/wishlist/{reviewId}
+[DELETE] https://localhost:3000/api/wishlist/{productId}
 ```
 
 ```json

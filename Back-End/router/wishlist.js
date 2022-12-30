@@ -13,6 +13,8 @@ const {
 const { isAuth, requireLogIn, allowedTo } = require("../middlewares/auth");
 const { userById } = require("../middlewares/user");
 
+// @desc    Add product to wishlist
+// @access    Private/User
 router.post(
   "/",
   [requireLogIn, allowedTo("user")],
@@ -20,17 +22,17 @@ router.post(
   addProductToWishlist
 );
 
+// @desc    Remove Product From Wishlist
+// @access    Private/User
 router.delete(
   "/:id",
   [requireLogIn, allowedTo("user")],
   removeProductFromWishlist
 );
 
-router.get(
-  "/",
-  [requireLogIn, allowedTo("user")],
-  getLoggedUserWishlist
-);
+// @desc   Get Logged User Wishlist
+// @access    Private/User
+router.get("/", [requireLogIn, allowedTo("user")], getLoggedUserWishlist);
 
 // Param
 router.param("userId", userById);

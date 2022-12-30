@@ -4,8 +4,6 @@ const ApiError = require("../utils/APIError");
 const User = require("../models/userSchema");
 
 // @desc    Add product to wishlist
-// @route   POST /api/v1/wishlist
-// @access  Protected/User
 exports.addProductToWishlist = (req, res, next) => {
   // $addToSet => add productId to wishlist array if productId not exist
   User.findOneAndUpdate(
@@ -27,8 +25,6 @@ exports.addProductToWishlist = (req, res, next) => {
 };
 
 // @desc    Remove product from wishlist
-// @route   DELETE /api/wishlist/:productId/;userId
-// @access  Protected/User
 exports.removeProductFromWishlist = asyncHandler(async (req, res, next) => {
   // $pull => remove productId from wishlist array if productId exist
 
@@ -51,8 +47,6 @@ exports.removeProductFromWishlist = asyncHandler(async (req, res, next) => {
 });
 
 // @desc    Get logged user wishlist
-// @route   GET /api/wishlist/;IdUser
-// @access  Protected/User
 exports.getLoggedUserWishlist = (req, res, next) => {
   // const user = await User.findById(req.Profile._id).populate("wishlist");0
   User.findById(req.crUser._id)
