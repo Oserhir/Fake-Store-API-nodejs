@@ -1,13 +1,7 @@
 const express = require("express");
 const app = express();
 const router = express.Router();
-
-// const {
-//   createBrandValidator,
-//   updateBrandValidator,
-//   deleteBrandValidator,
-//   getSpecifiqueBrandValidator,
-// } = require("../utils/validators/BrandValidators");
+const { updateCartValidator } = require("../utils/validators/cartValidator");
 
 const {
   addProductToCart,
@@ -18,30 +12,39 @@ const {
   applyCoupon,
 } = require("../controllers/cartController");
 
-const { requireSignIn, isAuth } = require("../middlewares/auth");
+const { isAuth, requireLogIn, allowedTo } = require("../middlewares/auth");
 const { userById } = require("../middlewares/user");
 
-// add Product To Cart
-router.post("/create/:userId", [requireSignIn, isAuth], addProductToCart);
+//  @desc add Product To Cart
+//  @desc Private/User
+router.post("/", [requireLogIn, allowedTo("user")], addProductToCart);
 
-// get Logged User Cart
-router.get("/:userId", [requireSignIn, isAuth], getLoggedUserCart);
+//  @desc get Logged User Cart
+//  @desc Private/User
+router.get("/", [requireLogIn, allowedTo("user")], getLoggedUserCart);
 
-// remove Specific Cart Item
+// @desc remove Specific Cart Item
+//  @desc Private/User
 router.delete(
-  "/:itemId/:userId",
-  [requireSignIn, isAuth],
+  "/:itemId",
+  [requireLogIn, allowedTo("user")],
   removeSpecificCartItem
 );
 
-// clear logged user cart
-router.delete("/:userId", [requireSignIn, isAuth], clearCart);
+// @desc  Clear logged user cart
+//  @desc Private/User
+router.delete("/", [requireLogIn, allowedTo("user")], clearCart);
 
-// Update Cart Item Quantity
-router.put("/:itemId/:userId", [requireSignIn, isAuth], updateCartItemQuantity);
+// @Desc Apply Coupon On Shopping Cart
+router.put("/applyCoupon", [requireLogIn, allowedTo("user")], applyCoupon);
 
-// Apply Coupon On Shopping Cart
-router.put("/:userId", [requireSignIn, isAuth], applyCoupon);
+// @Desc Update Cart Item Quantity
+router.put(
+  "/:itemId/",
+  [requireLogIn, allowedTo("user")],
+  updateCartValidator,
+  updateCartItemQuantity
+);
 
 router.param("userId", userById);
 

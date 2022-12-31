@@ -35,7 +35,7 @@ router.post(
 // @desc Update specific Coupon
 router.put("/:id", updateCouponValidator, updateCoupon);
 
-// Delete specific Coupon
+// @desc Delete specific Coupon
 router.delete("/:id", deleteCoupon);
 
 module.exports = router;
