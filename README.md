@@ -31,11 +31,7 @@ All the models can be found in the models directory created using mongoose.
 
 
 
-Coupon Schema:
 
-- name (String)
-- discount (Number)
-- expire (Date)
 
 Cart Schema:
 
@@ -55,15 +51,6 @@ Product Routes:
 
 
 
-Coupon Routes:
-
-| @Route                         | @Type  | @access       | @desc                  |
-| ------------------------------ | ------ | ------------- | ---------------------- |
-| /api/coupons/create/:userId    | POST   | Private-Admin | Create Coupon          |
-| /api/coupons/:userId           | GET    | Private-Admin | Get All Coupons        |
-| /api/coupons/:couponId/:userId | GET    | Private-Admin | Get specific Coupon    |
-| /api/coupons/:couponId/:userId | PUT    | Private-Admin | Update specific Coupon |
-| /api/coupons/:couponId/:userId | DELETE | Private-Admin | Delete specific Coupon |
 
 Cart Routes:
 
@@ -1479,3 +1466,121 @@ You can access the list of addresses by using the `/api/addressess` endpoint.
   ]
 }
 ```
+
+---
+
+## Coupon
+
+#### Endpoints for Coupon
+
+---
+
+Coupon Routes:
+
+| @Route            | @Type  | @access       | @desc                  |
+| ----------------- | ------ | ------------- | ---------------------- |
+| /api/coupons/     | POST   | Private/Admin | Create Coupon          |
+| /api/coupons/:id/ | PUT    | Private/Admin | Update specific Coupon |
+| /api/coupons/:id/ | DELETE | Private/Admin | Delete specific Coupon |
+| /api/coupons/     | GET    | Public        | Get All Coupons        |
+| /api/coupons/:id/ | GET    | Public        | Get specific Coupon    |
+
+## Create Coupon
+
+You can Create Coupon by sending an object like the following to `/coupons/`
+
+```bash
+[POST] https://localhost:3000/api/coupons/
+```
+
+```json
+{
+  "name": "HAPPY20",
+  "expire": "2021/12/01",
+  "discount": 30
+}
+```
+
+## Update specific coupon
+
+You can Update specific coupon by sending an object like the following and adding the `id` as a parameter: `/coupons/{id}`
+
+```bash
+[PUT] https://localhost:3000/api/coupons/{couponId}
+```
+
+```json
+{
+  "discount": 10
+}
+```
+
+> Note that it is not necessary to send all coupon attributes, just send the attributes that want to update.
+
+## Delete specific coupon
+
+You can Delete specific coupon by adding the `id`as a parameter: `/api/coupons/{id}`
+
+```bash
+[DELETE] https://localhost:3000/api/coupons/{couponId}
+```
+
+```json
+status : 204 No Content
+```
+
+## Get list of coupons
+
+You can access the list of coupons by using the `/api/coupons` endpoint.
+
+```bash
+[GET] https://localhost:3000/api/coupons
+```
+
+```json
+{
+  "page": 1,
+  "result": 3,
+  "data": [
+    {
+      "_id": "63b0552c3fb00490d0b7d573",
+      "name": "HAPPY20",
+      "expire": "2021-11-30T23:00:00.000Z",
+      "discount": 20,
+      "createdAt": "2022-12-31T15:28:44.651Z",
+      "updatedAt": "2022-12-31T15:28:44.651Z"
+    }
+    // ..
+  ]
+}
+```
+
+## Get specific coupon
+
+You can get specific coupon by adding the `id` as a parameter: `/api/coupons/{id}`
+
+```bash
+[GET] https://localhost:3000/api/coupons/{couponId}
+```
+
+```json
+{
+  "data": {
+    "_id": "63b0552c3fb00490d0b7d573",
+    "name": "HAPPY20",
+    "expire": "2021-11-30T23:00:00.000Z",
+    "discount": 20,
+    "createdAt": "2022-12-31T15:28:44.651Z",
+    "updatedAt": "2022-12-31T15:28:44.651Z",
+    "__v": 0
+  }
+}
+```
+
+## Coupon Schema
+
+| Attribute | Type   |
+| --------- | ------ |
+| name      | string |
+| discount  | Number |
+| expire    | Date   |

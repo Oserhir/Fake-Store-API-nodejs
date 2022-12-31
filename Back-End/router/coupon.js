@@ -3,11 +3,9 @@ const app = express();
 const router = express.Router();
 
 const {
-  createBrandValidator,
-  updateBrandValidator,
-  deleteBrandValidator,
-  getSpecifiqueBrandValidator,
-} = require("../utils/validators/BrandValidators");
+  createCouponValidator,
+  updateCouponValidator,
+} = require("../utils/validators/couponValidator");
 
 const {
   createCoupon,
@@ -18,33 +16,26 @@ const {
   couponById,
 } = require("../controllers/couponController");
 
-const { requireSignIn, isAuth, isAdmin } = require("../middlewares/auth");
-const { userById } = require("../middlewares/user");
+const { isAuth, requireLogIn, allowedTo } = require("../middlewares/auth");
 
-// Get List of Coupon
-router.get("/:userId", [requireSignIn, isAuth, isAdmin], getCoupons);
+// @desc Get list of coupons
+router.get("/", getCoupons);
 
-// Get specific Coupon
-router.get("/:couponId/:userId", [requireSignIn, isAuth, isAdmin], getCoupon);
+// @desc Get specific coupon
+router.get("/:id", getCoupon);
 
-// Add new Coupon
-router.post("/create/:userId", [requireSignIn, isAuth, isAdmin], createCoupon);
-
-// Update specific Coupon
-router.put(
-  "/:couponId/:userId",
-  [requireSignIn, isAuth, isAdmin],
-  updateCoupon
+// @desc Create coupon
+router.post(
+  "/",
+  [requireLogIn, allowedTo("admin")],
+  createCouponValidator,
+  createCoupon
 );
+
+// @desc Update specific Coupon
+router.put("/:id", updateCouponValidator, updateCoupon);
 
 // Delete specific Coupon
-router.delete(
-  "/:couponId/:userId",
-  [requireSignIn, isAuth, isAdmin],
-  deleteCoupon
-);
-
-router.param("userId", userById);
-router.param("couponId", couponById);
+router.delete("/:id", deleteCoupon);
 
 module.exports = router;
