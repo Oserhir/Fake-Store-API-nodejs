@@ -1672,13 +1672,6 @@ You can Apply Coupon On Shopping Cart by sending an object like the following
 }
 ```
 
-Cart Schema:
-
-- cartItems [ { product , quantity , color , price } ]
-- totalCartPrice (Number)
-- totalPriceAfterDiscount (Number)
-- user (ObjectId - a reference to the user schema)
-
 ## Cart Schema
 
 | Attribute               | Type   |
