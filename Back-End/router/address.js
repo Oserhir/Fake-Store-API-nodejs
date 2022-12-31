@@ -7,16 +7,15 @@ const {
   getLoggedUserAddresses,
 } = require("../controllers/addressController");
 
-const { requireSignIn, isAuth } = require("../middlewares/auth");
-const { userById } = require("../middlewares/user");
+const { isAuth, requireLogIn, allowedTo } = require("../middlewares/auth");
 
-router.post("/:userId", [requireSignIn, isAuth], addAddress);
+// @desc  Add address to user addresses list
+router.post("/", [requireLogIn, allowedTo("user")], addAddress);
 
-router.delete("/:addressId/:userId", [requireSignIn, isAuth], removeAddress);
+// @desc  Remove address from user addresses list
+router.delete("/:id", [requireLogIn, allowedTo("user")], removeAddress);
 
-router.get("/:userId", [requireSignIn, isAuth], getLoggedUserAddresses);
-
-// Param
-router.param("userId", userById);
+// / @desc  Get logged user addresses list
+router.get("/", [requireLogIn, allowedTo("user")], getLoggedUserAddresses);
 
 module.exports = router;

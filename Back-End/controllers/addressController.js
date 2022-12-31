@@ -2,10 +2,11 @@ const subCategoryModel = require("../models/subcategorySchema");
 const slugify = require("slugify");
 const User = require("../models/userSchema");
 
+// @desc  Add address to user addresses list
 exports.addAddress = (req, res, next) => {
   // $addToSet => add productId to wishlist array if productId not exist
   User.findOneAndUpdate(
-    { _id: req.Profile._id },
+    { _id: req.crUser._id },
     { $addToSet: { addresses: req.body } },
     { new: true },
     (err, doc) => {
@@ -26,8 +27,8 @@ exports.removeAddress = (req, res, next) => {
   // $pull => remove productId from wishlist array if productId exist
 
   User.findOneAndUpdate(
-    { _id: req.Profile._id },
-    { $pull: { addresses: { _id: req.params.addressId } } },
+    { _id: req.crUser._id },
+    { $pull: { addresses: { _id: req.params.id } } },
     { new: true },
     (err, doc) => {
       if (err) {
@@ -46,7 +47,7 @@ exports.removeAddress = (req, res, next) => {
 exports.getLoggedUserAddresses = (req, res, next) => {
   // const user = await User.findById(req.Profile._id).populate("wishlist");
 
-  User.findById(req.Profile._id)
+  User.findById(req.crUser._id)
     .populate("addresses")
     .then((user) => {
       if (user) {

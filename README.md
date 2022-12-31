@@ -54,13 +54,6 @@ Product Routes:
 
 
 
-Addresses Routes:
-
-| @Route                             | @Type  | @access      | @desc              |
-| ---------------------------------- | ------ | ------------ | ------------------ |
-| /api/addressess/:userId            | POST   | Private-User | add user address   |
-| /api/addressess/:addressId/:userId | DELETE | Private-User | remove user adress |
-| /api/addressess/:userId            | GET    | Private-User | get user address   |
 
 Coupon Routes:
 
@@ -1397,6 +1390,92 @@ You can access the list of User Wishlist by using the `/api/wishlist` endpoint.
       "ratingsAverage": 3.5
     }
     // ...
+  ]
+}
+```
+
+---
+
+## Addresses
+
+#### Endpoints for Addresses
+
+---
+
+Addresses Routes:
+
+| @Route                      | @Type  | @access      | @desc                                   |
+| --------------------------- | ------ | ------------ | --------------------------------------- |
+| /api/addressess/            | POST   | Private/User | Add address to user addresses list      |
+| /api/addressess/:addressId/ | DELETE | Private/User | Remove address from user addresses list |
+| /api/addressess/            | GET    | Private/User | Get logged user addresses list          |
+
+## Add address to user addresses list
+
+You can Add address to user addresses list by sending an object like the following to `/api/addressess/` endpoint.
+
+```
+[POST] https://localhost:3000/api/addressess
+```
+
+```json
+{
+  "alias": "Home",
+  "details": "985 Pinnickinnick Street",
+  "phone": "615-827-2462",
+  "city": "Sayreville",
+  "postalCode": "08872"
+}
+```
+
+## Remove address from user addresses list
+
+You can Remove address from user addresses list by adding the `id` as a parameter: `/api/addressess/{id}`
+
+```bash
+[DELETE] https://localhost:3000/api/addressess/{addressId}
+```
+
+```json
+{
+  "status": "success",
+  "message": "Address removed successfully.",
+  "data": [
+    {
+      "alias": "Home",
+      "details": "985 Pinnickinnick Street",
+      "phone": "615-827-2462",
+      "city": "Sayreville",
+      "postalCode": "08872",
+      "_id": "63b045fbdd839ae49bd78e5f"
+    }
+    // ..
+  ]
+}
+```
+
+## Get logged user addresses list
+
+You can access the list of addresses by using the `/api/addressess` endpoint.
+
+```
+[GET] https://localhost:3000/api/addressess
+```
+
+```json
+{
+  "status": "success",
+  "results": 2,
+  "data": [
+    {
+      "alias": "Home",
+      "details": "985 Pinnickinnick Street",
+      "phone": "615-827-2462",
+      "city": "Sayreville",
+      "postalCode": "08872",
+      "_id": "63b045fbdd839ae49bd78e5f"
+    }
+    // ..
   ]
 }
 ```
