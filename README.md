@@ -32,14 +32,6 @@ All the models can be found in the models directory created using mongoose.
 
 
 
-
-Cart Schema:
-
-- cartItems [ { product , quantity , color , price } ]
-- totalCartPrice (Number)
-- totalPriceAfterDiscount (Number)
-- user (ObjectId - a reference to the user schema)
-
 ## Route
 
 Product Routes:
@@ -51,17 +43,6 @@ Product Routes:
 
 
 
-
-Cart Routes:
-
-| @Route                    | @Type  | @access      | @desc                         |
-| ------------------------- | ------ | ------------ | ----------------------------- |
-| /api/cart/create/:userId  | POST   | Private-User | add Product To Cart           |
-| /api/cart/:userId         | GET    | Private-User | get Logged User Cart          |
-| /api/cart/:itemId/:userId | DELETE | Private-User | remove Specific Cart Item     |
-| /api/cart/:userId         | DELETE | Private-User | clear logged user cart        |
-| /api/cart/:itemId/:userId | PUT    | Private-User | Update Cart Item Quantity     |
-| /api/cart/:userId         | PUT    | Private-User | Apply Coupon On Shopping Cart |
 
 ## Validation Layer
 
@@ -1584,3 +1565,124 @@ You can get specific coupon by adding the `id` as a parameter: `/api/coupons/{id
 | name      | string |
 | discount  | Number |
 | expire    | Date   |
+
+---
+
+## Cart
+
+#### Endpoints for Cart
+
+---
+
+Cart Routes:
+
+| @Route                | @Type  | @access      | @desc                         |
+| --------------------- | ------ | ------------ | ----------------------------- |
+| /api/cart/            | POST   | Private/User | Add product to cart           |
+| /api/cart/            | GET    | Private/User | Get logged user cart          |
+| /api/cart/:itemId/    | DELETE | Private/User | Remove specific cart item     |
+| /api/cart/            | DELETE | Private/User | Clear logged user cart        |
+| /api/cart/:itemId/    | PUT    | Private/User | Update cart item quantity     |
+| /api/cart/applyCoupon | PUT    | Private/User | Apply coupon on shopping cart |
+
+## Add product to cart
+
+You can Add product to cart by sending an object like the following to `/cart/`
+
+```bash
+[POST] https://localhost:3000/api/cart/
+```
+
+```json
+{
+  "productId": "636e6bef6c34aa33724e6cdd",
+  "color": "Black"
+}
+```
+
+## Get logged user cart
+
+```bash
+[GET] https://localhost:3000/api/cart
+```
+
+```json
+{
+  "status": "success",
+  "numOfCartItems": 2,
+  "data": {
+    "_id": "63b08822a8808232467c2993",
+    "cartItems": [
+      {
+        "product": "636e6bef6c34aa33724e6cdd",
+        "quantity": 1,
+        "color": "Black",
+        "price": 9.99,
+        "_id": "63b08822a8808232467c2994"
+      }
+      // ...
+    ],
+    "user": "63aeed564a116b073bc4d0cf",
+    "createdAt": "2022-12-31T19:06:10.762Z",
+    "updatedAt": "2022-12-31T19:11:18.797Z",
+    "__v": 1
+  }
+}
+```
+
+## Update specific coupon
+
+You can Update specific coupon by sending an object like the following and adding the `id` as a parameter: `/cart/{id}`
+
+```bash
+[PUT] https://localhost:3000/api/cart/{itemId}
+```
+
+```json
+{
+  "quantity": 2
+}
+```
+
+## Remove specific cart item
+
+You can remove Specific Cart Item by adding the `id`as a parameter: `/api/cart/{id}`
+
+```bash
+[DELETE] https://localhost:3000/api/cart/{itemId}
+```
+
+## Clear logged user cart
+
+```bash
+[DELETE] https://localhost:3000/api/cart/
+```
+
+## Apply Coupon On Shopping Cart
+
+You can Apply Coupon On Shopping Cart by sending an object like the following
+
+```bash
+[PUT] https://localhost:3000/api/cart/applyCoupon
+```
+
+```json
+{
+  "coupon": "HAPPY24"
+}
+```
+
+Cart Schema:
+
+- cartItems [ { product , quantity , color , price } ]
+- totalCartPrice (Number)
+- totalPriceAfterDiscount (Number)
+- user (ObjectId - a reference to the user schema)
+
+## Cart Schema
+
+| Attribute               | Type   |
+| ----------------------- | ------ |
+| cartItems               | arrays |
+| totalCartPrice          | Number |
+| totalPriceAfterDiscount | Number |

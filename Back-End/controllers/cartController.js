@@ -181,7 +181,7 @@ exports.applyCoupon = asyncHandler(async (req, res, next) => {
   }
 });
 
-// clear logged user cart
+// @Desc clear logged user cart
 exports.clearCart = asyncHandler(async (req, res, next) => {
   await Cart.findOneAndDelete({ user: req.crUser._id });
   res.status(204).send();
