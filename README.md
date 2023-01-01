@@ -15,6 +15,96 @@ Goals : Build Fake Store API that can be used with any type project that needs p
 - ✅ Add to wishlist
 - ✅ Add to cart
 
+# Table of contents
+
+<!--ts-->
+
+- [Users ](#users--access--admin-)
+  - [Get all users](#get-all-users)
+  - [Get a single user](#get-a-single-user)
+  - [Create a user](#create-a-user)
+  - [Update a user](#update-a-user)
+  - [Delete a user](#delete-a-user)
+  - [Change Password](#change-password)
+  - [Schema User](#schema-user)
+- [Logged Users](#logged-users)
+  - [Get Logged User](#get-logged-user)
+  - [Update Logged User](#update-logged-user)
+  - [Deactivate Logged Users](#deactivate-logged-users)
+  - [Activate Logged Users](#activate-logged-users)
+- [Authentication](#authentication)
+  - [Login](#login)
+  - [Sign Up](#sign-up)
+  - [Sign Out](#sign-out)
+- [Categories](#categories)
+  - [Create a category](#create-a-category)
+  - [Update a category](#update-a-category)
+  - [Delete a category](#delete-a-category)
+  - [Get a single category](#get-a-single-category)
+  - [Get all categories](#get-all-categories)
+  - [Get all products by category](#get-all-products-by-category)
+  - [Schema Category](#schema-category)
+- [Subcategories](#subcategories)
+  - [Create Sub-Category](#create-sub-category)
+  - [Update a Sub-Category ](#update-a-sub-category)
+  - [Delete a sub-Category ](#delete-a-sub-category)
+  - [Get all Sub-Categories ](#get-all-sub-categories)
+  - [Get a single sub-Category ](#get-a-single-sub-category)
+  - [Get All Subcategories for Specific Category ](#get-all-subcategories-for-specific-category)
+  - [Create Subcategory on Category ](#create-subcategory-on-category)
+  - [Schema Sub-Category ](#schema-sub-category)
+- [Brands](#brands)
+  - [Add new Brand](#add-new-brand)
+  - [Update specific Brand ](#update-specific-brand)
+  - [Delete specific Brand ](#delete-specific-brand)
+  - [Get specific Brand ](#get-specific-brand)
+  - [Schema Brand ](#schema-brand)
+- [product](#products)
+  - [Create a product](#create-a-product)
+  - [Update a product ](#update-a-product)
+  - [Delete a product ](#delete-a-product)
+  - [Get a single product ](#get-a-single-product)
+  - [Get all products ](#get-all-products)
+  - [Get Related Products ](#get-related-products)
+  - [Search for a product by price ](#search-for-a-product-by-price)
+  - [Search by title or description ](#search-by-title-or-description)
+  - [Filter results ](#filter-results)
+  - [Field Limiting ](#field-limiting)
+  - [Product Schema ](#product-schema)
+- [Reviews](#reviews)
+  - [Add new Review ](#add-new-review)
+  - [Update a Review ](#update-a-review)
+  - [Delete specific review ](#delete-specific-review)
+  - [Get specific review ](#get-specific-review)
+  - [Get List of reviews ](#get-list-of-reviews)
+  - [Get all reviews on specifique products ](#get-all-reviews-on-specifique-products)
+  - [Review Schema ](#review-schema)
+- [Wishlist](#wishlist)
+  - [Add Product To Wishlist ](#add-product-to-wishlist)
+  - [Remove Product From Wishlist ](#remove-product-from-wishlist)
+  - [Get Logged User Wishlist ](#get-logged-user-wishlist)
+- [Addresses](#addresses)
+  - [Add address to user addresses list ](#add-address-to-user-addresses-list)
+  - [Remove address from user addresses list ](#remove-address-from-user-addresses-list)
+  - [Get logged user addresses list ](#get-logged-user-addresses-list)
+- [Coupon](#coupon)
+  - [Create Coupon ](#create-coupon)
+  - [Update specific coupon ](#update-specific-coupon)
+  - [Delete specific coupon ](#delete-specific-coupon)
+  - [Get list of coupons ](#get-list-of-coupons)
+  - [Get specific coupon ](#get-specific-coupon)
+  - [Coupon Schema ](#coupon-schema)
+- [Cart](#cart)
+  - [Add product to cart ](#add-product-to-cart)
+  - [Get logged user cart ](#get-logged-user-cart)
+  - [Update specific cart ](#delete-specific-cart)
+  - [Remove specific cart item ](#remove-specific-cart-item)
+  - [Clear logged user cart ](#clear-logged-user-cart)
+  - [Apply Coupon On Shopping Cart ](#apply-coupon-on-shopping-cart)
+  - [Cart Schema ](#cart-schema)
+
+<!--te-->
+
 <!--
 
 ## ToDo:
@@ -1147,7 +1237,7 @@ You can create a new review by sending an object like the following to `/api/rev
 }
 ```
 
-## Update a product
+## Update a review
 
 you can update review exists by sending an object like the following and adding the `id` as a parameter: `/api/reviews/{id}`
 
@@ -1630,7 +1720,7 @@ You can Add product to cart by sending an object like the following to `/cart/`
 }
 ```
 
-## Update specific coupon
+## Update specific cart
 
 You can Update specific coupon by sending an object like the following and adding the `id` as a parameter: `/cart/{id}`
 
