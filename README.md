@@ -628,17 +628,36 @@ You can create a new category by sending an object like the following to `/categ
 
 ```json
 {
-  "name": "New Category",
-  "image": "https://yofakestoreapi.onrender.com/640/480/test"
+  "name": "Dog Food",
+  "image": "https://yofakestoreapi.onrender.com//categories/category-bc9c91b0-0602-4679-a90a-ec2d35dcc895-1673300203174.jpeg"
 }
 ```
 
+<details><summary><b>Output</b></summary>
+<br/>
+
+```javascript
+{
+    "data": {
+        "name": "Dog Food",
+        "slug": "dog-food",
+        "image": "https://yofakestoreapi.onrender.com//categories/category-bc9c91b0-0602-4679-a90a-ec2d35dcc895-1673300203174.jpeg",
+        "_id": "63bc88ec3e721990a8cc5064",
+        "createdAt": "2023-01-09T21:36:44.017Z",
+        "updatedAt": "2023-01-09T21:36:44.017Z",
+        "__v": 0
+    }
+}
+```
+
+</details>
+
 ## Update a category
 
-You can update a category exists by sending an object like the following and adding the id as a parameter: `/categories/{id}`
+You can update a category exists by sending an object like the following and adding the id as a parameter: `/categories/{categoryId}`
 
 ```bash
-[PUT] https://yofakestoreapi.onrender.com/api/categories/{categoryId}
+[PUT] https://yofakestoreapi.onrender.com/api/categories/63bc88ec3e721990a8cc5064
 ```
 
 ```json
@@ -663,20 +682,22 @@ status : 204 No Content
 
 ## Get a single category
 
-You can get a single category by adding the `id` as a parameter: `/categories/{id}`
+You can get a single category by adding the `id` as a parameter: `/categories/{categoryId}`
 
 ```bash
-[GET] https://yofakestoreapi.onrender.com/api/categories/${id}
+[GET] https://yofakestoreapi.onrender.com/api/categories/63bc88ec3e721990a8cc5064
 ```
 
 ```json
 {
   "data": {
-    "_id": "636e61a8aa2719937c3cf0dc",
-    "name": "Men's Clothing",
-    "slug": "men's-clothing",
-    "createdAt": "2022-11-11T14:52:24.938Z",
-    "updatedAt": "2022-11-11T14:52:24.938Z"
+    "_id": "63bc88ec3e721990a8cc5064",
+    "name": "Dog Food",
+    "slug": "dog-food",
+    "image": "https://yofakestoreapi.onrender.com//categories/category-bc9c91b0-0602-4679-a90a-ec2d35dcc895-1673300203174.jpeg",
+    "createdAt": "2023-01-09T21:36:44.017Z",
+    "updatedAt": "2023-01-09T21:36:44.017Z",
+    "__v": 0
   }
 }
 ```
@@ -691,13 +712,17 @@ You can access the list of categories by using the `/categories` endpoint.
 
 ```json
 {
-  "data": {
-    "_id": "636e61a8aa2719937c3cf0dc",
-    "name": "Men's Clothing",
-    "slug": "men's-clothing",
-    "createdAt": "2022-11-11T14:52:24.938Z",
-    "updatedAt": "2022-11-11T14:52:24.938Z"
-  }
+  "data": [
+    {
+      "_id": "63bc88ec3e721990a8cc5064",
+      "name": "Dog Food",
+      "slug": "dog-food",
+      "image": "https://yofakestoreapi.onrender.com//categories/category-bc9c91b0-0602-4679-a90a-ec2d35dcc895-1673300203174.jpeg",
+      "createdAt": "2023-01-09T21:36:44.017Z",
+      "updatedAt": "2023-01-09T21:36:44.017Z"
+    }
+    // ...
+  ]
 }
 // ...
 ```
