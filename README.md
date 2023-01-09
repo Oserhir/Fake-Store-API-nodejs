@@ -335,7 +335,7 @@ You can create a new user by sending an object like the following to `/api/users
 
 ## Update a user
 
-You can update a user exists by sending an object like the following and adding the `id` as a parameter: `/api/users/{id}`
+You can update a user exists by sending an object like the following and adding the `id` as a parameter: `/api/users/{userId}`
 
 ```bash
 [PUT] https://yofakestoreapi.onrender.com/api/users/63bc81973e721990a8cc501f
@@ -388,7 +388,9 @@ status : 204 No Content
 
 ## Change Password
 
-You can change password of any user exists by sending an object like the following and adding the `id` as a parameter: `/api/users/changeMyPassword/{userId}`
+You can change password of any user exists by sending an object like the following and adding the `id` as a parameter: `/api/users/changePassword/{userId}`
+
+<!--  changeMyPassword/{userId -->
 
 ```bash
 [PUT] https://yofakestoreapi.onrender.com/api/users/changePassword/63bc802d3e721990a8cc5005
@@ -462,12 +464,19 @@ You can change password of any user exists by sending an object like the followi
 
 ```json
 {
-  "_id": "63a8803af43c0858d3f535e3",
-  "name": "Kvn",
-  "email": "kvn@gmail.com",
-  "password": "$2b$10$n7dykMNDae9Eu/0IGO/CZ./jq5MfYjuaWqypPRZr.xO2L9sjABxdG",
-  "role": "user",
-  "active": true
+  "data": {
+    "_id": "63bc7cf53e721990a8cc4ff8",
+    "name": "Ruby",
+    "email": "ruby@mail.com",
+    "password": "$2a$12$vJ1Yf9Jkj700doCaSZBlgudPTOLlzpkGgOlB4fUzOwaKcYyQGfGJS",
+    "role": "user",
+    "active": true,
+    "wishlist": [],
+    "addresses": [],
+    "createdAt": "2023-01-09T20:45:41.648Z",
+    "updatedAt": "2023-01-09T20:45:41.648Z",
+    "__v": 0
+  }
 }
 ```
 
@@ -481,8 +490,8 @@ You can update logged user by sending an object like the following
 
 ```json
 {
-  "name": "KvnHart",
-  "email": "KvnHart@gmail.com"
+  "name": "Ruby",
+  "email": "ruby@mail.com"
 }
 ```
 
