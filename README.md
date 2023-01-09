@@ -249,13 +249,16 @@ You can access the list of users by using the `/api/users` endpoint.
 ```json
 [
   {
-    "_id": "6362a1793b0236acba300bad",
+    "_id": "63bc7cb13e721990a8cc4ff5",
     "name": "Jhon",
     "email": "john@mail.com",
-    "password": "$2b$10$CW5dB3.zTAYgOTolpHG2Geswre.bt4TdXGkdrTGyHpytv5RNXFEZi",
-    "role": 0,
-    "createdAt": "2022-11-02T16:57:29.319Z",
-    "updatedAt": "2022-11-22T21:01:17.949Z"
+    "password": "$2a$12$ZZuflASgU6q.hZ0PsoqtL.tGocZZtBUAxHsvP/jvz3APY70/8BU2y",
+    "role": "user",
+    "active": true,
+    "wishlist": [],
+    "addresses": [],
+    "createdAt": "2023-01-09T20:44:33.095Z",
+    "updatedAt": "2023-01-09T20:44:33.095Z"
   }
   // ...
 ]
@@ -263,21 +266,27 @@ You can access the list of users by using the `/api/users` endpoint.
 
 ## Get a single user
 
-You can get a single user by adding the `id` as a parameter: `/api/users/{id}`
+You can get a single user by adding the `id` as a parameter: `/api/users/{userId}`
 
 ```bash
-[GET] https://yofakestoreapi.onrender.com/api/users/{userId}
+[GET] https://yofakestoreapi.onrender.com/api/users/63bc7cb13e721990a8cc4ff5
 ```
 
 ```json
 {
-  "_id": "6362a1793b0236acba300bad",
-  "name": "Jhon",
-  "email": "john@mail.com",
-  "password": "$2b$10$CW5dB3.zTAYgOTolpHG2Geswre.bt4TdXGkdrTGyHpytv5RNXFEZi",
-  "role": 0,
-  "createdAt": "2022-11-02T16:57:29.319Z",
-  "updatedAt": "2022-11-22T21:01:17.949Z"
+  "data": {
+    "_id": "63bc7cb13e721990a8cc4ff5",
+    "name": "Jhon",
+    "email": "john@mail.com",
+    "password": "$2a$12$ZZuflASgU6q.hZ0PsoqtL.tGocZZtBUAxHsvP/jvz3APY70/8BU2y",
+    "role": "user",
+    "active": true,
+    "wishlist": [],
+    "addresses": [],
+    "createdAt": "2023-01-09T20:44:33.095Z",
+    "updatedAt": "2023-01-09T20:44:33.095Z",
+    "__v": 0
+  }
 }
 ```
 
@@ -291,11 +300,36 @@ You can create a new user by sending an object like the following to `/api/users
 
 ```json
 {
-  "name": "Jhon",
-  "email": "john@mail.com",
-  "password": "123456"
+  "name": "Oscar",
+  "email": "oscar@mail.com",
+  "password": "123456",
+  "passwordConfirm": "123456"
 }
 ```
+
+<details><summary><b>Output</b></summary>
+<br/>
+
+```javascript
+{
+    "data": {
+        "name": "Oscar",
+        "slug": "oscar",
+        "email": "oscar@mail.com",
+        "password": "$2a$12$LhfBZCCTvsKgSmBKS9brN.tRKSVKuWJYVc1Kr1fh65hMuBWU3N12O",
+        "role": "user",
+        "active": true,
+        "wishlist": [],
+        "_id": "63bc81973e721990a8cc501f",
+        "addresses": [],
+        "createdAt": "2023-01-09T21:05:27.441Z",
+        "updatedAt": "2023-01-09T21:05:27.441Z",
+        "__v": 0
+    }
+}
+```
+
+</details>
 
 > Note that the password will be encrypted.
 
@@ -304,24 +338,48 @@ You can create a new user by sending an object like the following to `/api/users
 You can update a user exists by sending an object like the following and adding the `id` as a parameter: `/api/users/{id}`
 
 ```bash
-[PUT] https://yofakestoreapi.onrender.com/api/users/{userId}
+[PUT] https://yofakestoreapi.onrender.com/api/users/63bc81973e721990a8cc501f
 ```
 
 ```json
 {
-  "email": "john@mail.com",
-  "name": "Change name"
+  "name": "Billy",
+  "email": "billy@mail.com"
 }
 ```
+
+<details><summary><b>Output</b></summary>
+<br/>
+
+```javascript
+{
+    "data": {
+        "_id": "63bc81973e721990a8cc501f",
+        "name": "Billy",
+        "slug": "billy",
+        "email": "billy@mail.com",
+        "password": "$2a$12$LhfBZCCTvsKgSmBKS9brN.tRKSVKuWJYVc1Kr1fh65hMuBWU3N12O",
+        "role": "user",
+        "active": true,
+        "wishlist": [],
+        "addresses": [],
+        "createdAt": "2023-01-09T21:05:27.441Z",
+        "updatedAt": "2023-01-09T21:07:22.679Z",
+        "__v": 0
+    }
+}
+```
+
+</details>
 
 > Note that it is not necessary to send all user attributes, just send the attributes that want to update.
 
 ## Delete a user
 
-You can delete a user exists by adding the `id` as a parameter: `/api/users/{id}`
+You can delete a user exists by adding the `id` as a parameter: `/api/users/{userId}`
 
 ```bash
-[DELETE] https://yofakestoreapi.onrender.com/api/users/{userId}
+[DELETE] https://yofakestoreapi.onrender.com/api/users/63bc81973e721990a8cc501f
 ```
 
 ```json
@@ -330,10 +388,10 @@ status : 204 No Content
 
 ## Change Password
 
-You can change password of any user exists by sending an object like the following and adding the `id` as a parameter: `/api/users/changeMyPassword/{id}`
+You can change password of any user exists by sending an object like the following and adding the `id` as a parameter: `/api/users/changeMyPassword/{userId}`
 
 ```bash
-[PUT] https://yofakestoreapi.onrender.com/api/users/changeMyPassword/63a5e987577e750d00acd787
+[PUT] https://yofakestoreapi.onrender.com/api/users/changePassword/63bc802d3e721990a8cc5005
 ```
 
 ```json
@@ -343,6 +401,30 @@ You can change password of any user exists by sending an object like the followi
   "passwordConfirm": "1234"
 }
 ```
+
+<details><summary><b>Output</b></summary>
+<br/>
+
+```javascript
+{
+    "data": {
+        "_id": "63bc802d3e721990a8cc5005",
+        "name": "Admin",
+        "email": "admin@mail.com",
+        "password": "$2a$12$TfmUC4p.eR8HVDyXBGn4y.9EiO.54W5J78rBDxl9PWMuRQN0iMvwy",
+        "role": "admin",
+        "active": true,
+        "wishlist": [],
+        "addresses": [],
+        "createdAt": "2023-01-09T20:59:25.738Z",
+        "updatedAt": "2023-01-09T21:17:11.214Z",
+        "__v": 0,
+        "passwordChangedAt": "2023-01-09T21:17:11.214Z"
+    }
+}
+```
+
+</details>
 
 ## Schema User
 
@@ -426,8 +508,8 @@ Auth Routes:
 
 | @Route           | @Type | @access | @desc                       |
 | ---------------- | ----- | ------- | --------------------------- |
-| /api/auth/signup | POST  | Public  | create a new user in db     |
-| /api/auth/login  | POST  | Public  | authenticate a current user |
+| /api/auth/signup | POST  | Public  | Create a new user in db     |
+| /api/auth/login  | POST  | Public  | Authenticate a current user |
 
 ## Login
 
