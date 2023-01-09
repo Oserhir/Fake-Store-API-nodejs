@@ -1,0 +1,53 @@
+[
+  {
+    "name": "Jhon",
+    "email": "john@mail.com",
+    "password": "$2b$10$Oypy.jgvtyMdyyh7ZpRA6OI9nUSI29LEs1NO5afkyuaf7zi4r1idi",
+    "role": "user",
+    "active": true,
+    "wishlist": [],
+    "_id": "63b9cf81dee6f6399a9d7c2c",
+    "addresses": [],
+    "createdAt": "2023-01-07T20:01:05.333Z",
+    "updatedAt": "2023-01-07T20:01:05.333Z"
+  },
+
+  {
+    "name": "Ruby",
+    "email": "ruby@mail.com",
+    "password": "$2b$10$7qAqJ1N.Ch1orOr62tSeT.GAQtARDkwWM24ODmFOxphyS./1HD97m",
+    "role": "user",
+    "active": true,
+    "wishlist": [],
+    "_id": "63b9d00d037ff103fd19d486",
+    "addresses": [],
+    "createdAt": "2023-01-07T20:03:25.766Z",
+    "updatedAt": "2023-01-07T20:03:25.766Z"
+  },
+
+  {
+    "name": "Ruby",
+    "email": "ruby@mail.com",
+    "password": "$2b$10$7qAqJ1N.Ch1orOr62tSeT.GAQtARDkwWM24ODmFOxphyS./1HD97m",
+    "role": "user",
+    "active": true,
+    "wishlist": [],
+    "_id": "63b9d00d037ff103fd19d486",
+    "addresses": [],
+    "createdAt": "2023-01-07T20:03:25.766Z",
+    "updatedAt": "2023-01-07T20:03:25.766Z"
+  },
+
+  {
+    "name": "Admin",
+    "email": "admin@mail.com",
+    "password": "$2b$10$hP7ZRPa8ZOOTdqIkZos13O7IilRQc4W9Kq2r6TuYdZx8efJFxcP5K",
+    "role": "admin",
+    "active": true,
+    "wishlist": [],
+    "_id": "63b9d04f9a500962b3f616e5",
+    "addresses": [],
+    "createdAt": "2023-01-07T20:04:31.601Z",
+    "updatedAt": "2023-01-07T20:04:31.601Z"
+  }
+]

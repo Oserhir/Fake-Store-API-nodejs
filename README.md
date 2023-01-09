@@ -243,7 +243,7 @@ User Routes:
 You can access the list of users by using the `/api/users` endpoint.
 
 ```
-[GET] https://localhost:3000/api/users
+[GET] https://yofakestoreapi.onrender.com/api/users
 ```
 
 ```json
@@ -266,7 +266,7 @@ You can access the list of users by using the `/api/users` endpoint.
 You can get a single user by adding the `id` as a parameter: `/api/users/{id}`
 
 ```bash
-[GET] https://localhost:3000/api/users/{userId}
+[GET] https://yofakestoreapi.onrender.com/api/users/{userId}
 ```
 
 ```json
@@ -286,7 +286,7 @@ You can get a single user by adding the `id` as a parameter: `/api/users/{id}`
 You can create a new user by sending an object like the following to `/api/users/`
 
 ```bash
-[POST] https://localhost:3000/api/users/
+[POST] https://yofakestoreapi.onrender.com/api/users/
 ```
 
 ```json
@@ -304,7 +304,7 @@ You can create a new user by sending an object like the following to `/api/users
 You can update a user exists by sending an object like the following and adding the `id` as a parameter: `/api/users/{id}`
 
 ```bash
-[PUT] https://localhost:3000/api/users/{userId}
+[PUT] https://yofakestoreapi.onrender.com/api/users/{userId}
 ```
 
 ```json
@@ -321,7 +321,7 @@ You can update a user exists by sending an object like the following and adding 
 You can delete a user exists by adding the `id` as a parameter: `/api/users/{id}`
 
 ```bash
-[DELETE] https://localhost:3000/api/users/{userId}
+[DELETE] https://yofakestoreapi.onrender.com/api/users/{userId}
 ```
 
 ```json
@@ -333,7 +333,7 @@ status : 204 No Content
 You can change password of any user exists by sending an object like the following and adding the `id` as a parameter: `/api/users/changeMyPassword/{id}`
 
 ```bash
-[PUT] https://localhost:3000/api/users/changeMyPassword/63a5e987577e750d00acd787
+[PUT] https://yofakestoreapi.onrender.com/api/users/changeMyPassword/63a5e987577e750d00acd787
 ```
 
 ```json
@@ -375,7 +375,7 @@ You can change password of any user exists by sending an object like the followi
 ## Get Logged User
 
 ```bash
-[GET] https://localhost:3000/api/users/getMe
+[GET] https://yofakestoreapi.onrender.com/api/users/getMe
 ```
 
 ```json
@@ -394,7 +394,7 @@ You can change password of any user exists by sending an object like the followi
 You can update logged user by sending an object like the following
 
 ```bash
-[PUT] https://localhost:3000/api/users/updateMe
+[PUT] https://yofakestoreapi.onrender.com/api/users/updateMe
 ```
 
 ```json
@@ -407,13 +407,13 @@ You can update logged user by sending an object like the following
 ## Deactivate Logged Users
 
 ```bash
-[DELETE] https://localhost:3000/api/users/deleteMe
+[DELETE] https://yofakestoreapi.onrender.com/api/users/deleteMe
 ```
 
 ## Activate Logged Users
 
 ```bash
-[PUT] https://localhost:3000/api/users/activeMe
+[PUT] https://yofakestoreapi.onrender.com/api/users/activeMe
 ```
 
 ## Authentication
@@ -424,48 +424,89 @@ You can update logged user by sending an object like the following
 
 Auth Routes:
 
-| @Route           | @Type | @access      | @desc                       |
-| ---------------- | ----- | ------------ | --------------------------- |
-| /api/auth/signup | POST  | Public       | create a new user in db     |
-| /api/auth/login  | POST  | Public       | authenticate a current user |
-| /api/auth/logout | GET   | Private/User | log a user out              |
+| @Route           | @Type | @access | @desc                       |
+| ---------------- | ----- | ------- | --------------------------- |
+| /api/auth/signup | POST  | Public  | create a new user in db     |
+| /api/auth/login  | POST  | Public  | authenticate a current user |
 
 ## Login
 
 You can do login by sending an object like the following to `/auth/login/`
 
 ```bash
-[POST] https://localhost:3000/api/auth/login
+[POST] https://yofakestoreapi.onrender.com/api/auth/login
 ```
 
 ```json
 {
-  "email": "john@mail.com",
+  "email": "ruby@mail.com",
   "password": "123456"
 }
 ```
+
+<details><summary><b>Output</b></summary>
+<br/>
+
+```javascript
+{
+    "data": {
+        "_id": "63bc7cf53e721990a8cc4ff8",
+        "name": "Ruby",
+        "email": "ruby@mail.com",
+        "role": "user",
+        "active": true,
+        "wishlist": [],
+        "addresses": [],
+        "createdAt": "2023-01-09T20:45:41.648Z",
+        "updatedAt": "2023-01-09T20:45:41.648Z",
+        "__v": 0
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2JjN2NmNTNlNzIxOTkwYThjYzRmZjgiLCJpYXQiOjE2NzMyOTczOTYsImV4cCI6MTY4MTA3MzM5Nn0.cHnKhOCIYvWkEvS2yNYKYDrTvvUOV5GaxddTzbqYSLA"
+}
+```
+
+</details>
 
 ## Sign Up
 
 Create a user by sending user's credentials (in JSON format) in the Body of the HTTP Request. The content of the Body should look like the following:
 
 ```bash
-[POST] https://localhost:3000/api/auth/signup
+[POST] https://yofakestoreapi.onrender.com/api/auth/signup
 ```
 
 ```json
 {
-  "name": "Jhon",
-  "email": "john@mail.com",
-  "password": "123456"
+  "name": "Ruby",
+  "email": "ruby@mail.com",
+  "password": "123456",
+  "passwordConfirm": "123456"
 }
 ```
 
-## Sign Out
+<details><summary><b>Output</b></summary>
+<br/>
 
-```bash
-[GET] https://localhost:3000/api/auth/signout
+```javascript
+{
+    "data": {
+        "name": "Ruby",
+        "email": "ruby@mail.com",
+        "password": "$2a$12$vJ1Yf9Jkj700doCaSZBlgudPTOLlzpkGgOlB4fUzOwaKcYyQGfGJS",
+        "role": "user",
+        "active": true,
+        "wishlist": [],
+        "_id": "63bc7cf53e721990a8cc4ff8",
+        "addresses": [],
+        "createdAt": "2023-01-09T20:45:41.648Z",
+        "updatedAt": "2023-01-09T20:45:41.648Z",
+        "__v": 0
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2JjN2NmNTNlNzIxOTkwYThjYzRmZjgiLCJpYXQiOjE2NzMyOTcxNDQsImV4cCI6MTY4MTA3MzE0NH0.FpBunPGtHG88Xi2fvJ4k-q7t3vW_ARPBpmAH-eMAmzQ"
+}
 ```
+
+</details>
 
 ---
 
@@ -491,13 +532,13 @@ Category Routes:
 You can create a new category by sending an object like the following to `/categories/`
 
 ```bash
-[POST] https://localhost:3000/api/categories/
+[POST] https://yofakestoreapi.onrender.com/api/categories/
 ```
 
 ```json
 {
   "name": "New Category",
-  "image": "https://localhost:3000/640/480/test"
+  "image": "https://yofakestoreapi.onrender.com/640/480/test"
 }
 ```
 
@@ -506,7 +547,7 @@ You can create a new category by sending an object like the following to `/categ
 You can update a category exists by sending an object like the following and adding the id as a parameter: `/categories/{id}`
 
 ```bash
-[PUT] https://localhost:3000/api/categories/{categoryId}
+[PUT] https://yofakestoreapi.onrender.com/api/categories/{categoryId}
 ```
 
 ```json
@@ -522,7 +563,7 @@ You can update a category exists by sending an object like the following and add
 You can delete a category exists by adding the `id`as a parameter: `/api/users/{id}`
 
 ```bash
-[DELETE] https://localhost:3000/api/categories/{categoryId}
+[DELETE] https://yofakestoreapi.onrender.com/api/categories/{categoryId}
 ```
 
 ```json
@@ -534,7 +575,7 @@ status : 204 No Content
 You can get a single category by adding the `id` as a parameter: `/categories/{id}`
 
 ```bash
-[GET] https://localhost:3000/api/categories/${id}
+[GET] https://yofakestoreapi.onrender.com/api/categories/${id}
 ```
 
 ```json
@@ -554,7 +595,7 @@ You can get a single category by adding the `id` as a parameter: `/categories/{i
 You can access the list of categories by using the `/categories` endpoint.
 
 ```bash
-[GET] https://localhost:3000/api/categories/
+[GET] https://yofakestoreapi.onrender.com/api/categories/
 ```
 
 ```json
@@ -575,7 +616,7 @@ You can access the list of categories by using the `/categories` endpoint.
 You can access the list of products by using the `/categories/{categoryId}/products` endpoint.
 
 ```bash
-[GET] https://localhost:3000/api/categories/{categoryId}/products
+[GET] https://yofakestoreapi.onrender.com/api/categories/{categoryId}/products
 ```
 
 ```json
@@ -640,7 +681,7 @@ Sub-Category Routes:
 You can create a new subcategory by sending an object like the following to `/subcategories/`
 
 ```bash
-[POST] https://localhost:3000/api/categories/
+[POST] https://yofakestoreapi.onrender.com/api/categories/
 ```
 
 ```json
@@ -655,7 +696,7 @@ You can create a new subcategory by sending an object like the following to `/su
 You can update a Sub-category exists by sending an object like the following and adding the id as a parameter: `/subcategories/{id}`
 
 ```bash
-[PUT] https://localhost:3000/api/subcategories/{subCategoryId}
+[PUT] https://yofakestoreapi.onrender.com/api/subcategories/{subCategoryId}
 ```
 
 ```json
@@ -672,7 +713,7 @@ You can update a Sub-category exists by sending an object like the following and
 You can delete a subcategory exists by adding the `id`as a parameter: `/api/subcategories/{id}`
 
 ```bash
-[DELETE] https://localhost:3000/api/subcategories/{categoryId}
+[DELETE] https://yofakestoreapi.onrender.com/api/subcategories/{categoryId}
 ```
 
 ```json
@@ -684,7 +725,7 @@ status : 204 No Content
 You can access the list of subcategories by using the `/subcategories` endpoint.
 
 ```bash
-[GET] https://localhost:3000/api/subcategories/
+[GET] https://yofakestoreapi.onrender.com/api/subcategories/
 ```
 
 ```json
@@ -709,7 +750,7 @@ You can access the list of subcategories by using the `/subcategories` endpoint.
 You can get a single subcategory by adding the `id` as a parameter: `/subcategories/{id}`
 
 ```bash
-[GET] https://localhost:3000/api/categories/${id}
+[GET] https://yofakestoreapi.onrender.com/api/categories/${id}
 ```
 
 ```json
@@ -729,7 +770,7 @@ You can get a single subcategory by adding the `id` as a parameter: `/subcategor
 You can get All Subcategories for Specific Category by adding the `categoryId` as a parameter: `categories/${categoryId}/subcategories`
 
 ```bash
-[GET] https://localhost:3000/api/categories/${categoryId}/subcategories
+[GET] https://yofakestoreapi.onrender.com/api/categories/${categoryId}/subcategories
 ```
 
 ```json
@@ -753,7 +794,7 @@ You can get All Subcategories for Specific Category by adding the `categoryId` a
 You can create a new subcategory by sending an object like the following to `/categories/${categoryId}/subcategories/`
 
 ```bash
-[POST] https://localhost:3000/api/categories/${categoryId}/subcategories/
+[POST] https://yofakestoreapi.onrender.com/api/categories/${categoryId}/subcategories/
 ```
 
 ```json
@@ -793,7 +834,7 @@ Brand Routes:
 You can create a new brand by sending an object like the following to `/brands/`
 
 ```bash
-[POST] https://localhost:3000/api/brands/
+[POST] https://yofakestoreapi.onrender.com/api/brands/
 ```
 
 ```json
@@ -808,7 +849,7 @@ You can create a new brand by sending an object like the following to `/brands/`
 You can update a brand exists by sending an object like the following and adding the `id` as a parameter: `/brands/{id}`
 
 ```bash
-[PUT] https://localhost:3000/api/subcategories/{brandId}
+[PUT] https://yofakestoreapi.onrender.com/api/subcategories/{brandId}
 ```
 
 ```json
@@ -824,7 +865,7 @@ You can update a brand exists by sending an object like the following and adding
 You can delete brand exists by adding the `id`as a parameter: `/api/brands/{id}`
 
 ```bash
-[DELETE] https://localhost:3000/api/brands/{brandId}
+[DELETE] https://yofakestoreapi.onrender.com/api/brands/{brandId}
 ```
 
 ```json
@@ -836,7 +877,7 @@ status : 204 No Content
 You can access the list of brands by using the `/brands` endpoint.
 
 ```bash
-[GET] https://localhost:3000/api/brands/
+[GET] https://yofakestoreapi.onrender.com/api/brands/
 ```
 
 ```json
@@ -861,7 +902,7 @@ You can access the list of brands by using the `/brands` endpoint.
 You can get a single brand by adding the `id` as a parameter: `/brands/{id}`
 
 ```bash
-[GET] https://localhost:3000/api/categories/${id}
+[GET] https://yofakestoreapi.onrender.com/api/categories/${id}
 ```
 
 ```json
@@ -911,7 +952,7 @@ Product Routes:
 You can create a new product by sending an object like the following to `/api/products/` endpoint.
 
 ```
-[GET] https://localhost:3000/api/products
+[GET] https://yofakestoreapi.onrender.com/api/products
 ```
 
 ```json
@@ -937,7 +978,7 @@ You can create a new product by sending an object like the following to `/api/pr
 you can update a product exists by sending an object like the following and adding the `id` as a parameter: `/api/products/{id}`
 
 ```bash
-[PUT] https://localhost:3000/api/products/{productsId}
+[PUT] https://yofakestoreapi.onrender.com/api/products/{productsId}
 ```
 
 ```json
@@ -954,7 +995,7 @@ you can update a product exists by sending an object like the following and addi
 You can delete a product exists by adding the `id` as a parameter: `/api/products/{id}`
 
 ```bash
-[DELETE] https://localhost:3000/api/products/{productrId}
+[DELETE] https://yofakestoreapi.onrender.com/api/products/{productrId}
 ```
 
 ```json
@@ -966,7 +1007,7 @@ status : 204 No Content
 You can get a single product by adding the `id` as a parameter: `/api/products/{id}`
 
 ```bash
-[GET] https://localhost:3000/api/products/{productId}
+[GET] https://yofakestoreapi.onrender.com/api/products/{productId}
 ```
 
 ```json
@@ -1001,7 +1042,7 @@ You can get a single product by adding the `id` as a parameter: `/api/products/{
 You can access the list of 200 products by using the `/api/products` endpoint.
 
 ```bash
-[GET] https://localhost:3000/api/products
+[GET] https://yofakestoreapi.onrender.com/api/products
 ```
 
 ```json
@@ -1037,7 +1078,7 @@ You can access the list of 200 products by using the `/api/products` endpoint.
 You can get related product by adding the `/api/products/related/{id}` endpoint.
 
 ```bash
-[GET] https://localhost:3000/api/products/related/{productId}
+[GET] https://yofakestoreapi.onrender.com/api/products/related/{productId}
 ```
 
 ```json
@@ -1072,7 +1113,7 @@ You can get related product by adding the `/api/products/related/{id}` endpoint.
 You can search for a product by price by sending an object like the following
 
 ```bash
-[GET] https://localhost:3000/api/products/search
+[GET] https://yofakestoreapi.onrender.com/api/products/search
 ```
 
 ```json
@@ -1088,7 +1129,7 @@ You can search for a product by price by sending an object like the following
 To Search by title or description the API needs to be called with the `keyword` set word that you want
 
 ```bash
-[GET] https://localhost:3000/api/products/?keyword=Clark,Olsen
+[GET] https://yofakestoreapi.onrender.com/api/products/?keyword=Clark,Olsen
 ```
 
 ```json
@@ -1125,7 +1166,7 @@ To Search by title or description the API needs to be called with the `keyword` 
 To Filter results the API needs to be called with the `ratingsAverage[gte]` set number that you want
 
 ```bash
-[GET] https://localhost:3000/api/products/?ratingsAverage[gte]=1.6
+[GET] https://yofakestoreapi.onrender.com/api/products/?ratingsAverage[gte]=1.6
 ```
 
 ```json
@@ -1162,7 +1203,7 @@ To Filter results the API needs to be called with the `ratingsAverage[gte]` set 
 To Field Limiting the API needs to be called with the `fields` set attribute that you want to display
 
 ```bash
-[GET] https://localhost:3000/api/products/?fields=title,price
+[GET] https://yofakestoreapi.onrender.com/api/products/?fields=title,price
 ```
 
 ```json
@@ -1226,7 +1267,7 @@ Review Routes:
 You can create a new review by sending an object like the following to `/api/reviews/` endpoint.
 
 ```
-[GET] https://localhost:3000/api/reviews
+[GET] https://yofakestoreapi.onrender.com/api/reviews
 ```
 
 ```json
@@ -1242,7 +1283,7 @@ You can create a new review by sending an object like the following to `/api/rev
 you can update review exists by sending an object like the following and adding the `id` as a parameter: `/api/reviews/{id}`
 
 ```bash
-[PUT] https://localhost:3000/api/reviews/{reviewId}
+[PUT] https://yofakestoreapi.onrender.com/api/reviews/{reviewId}
 ```
 
 ```json
@@ -1259,7 +1300,7 @@ you can update review exists by sending an object like the following and adding 
 You can delete specific review by adding the `id` as a parameter: `/api/reviews/{id}`
 
 ```bash
-[DELETE] https://localhost:3000/api/reviews/{reviewId}
+[DELETE] https://yofakestoreapi.onrender.com/api/reviews/{reviewId}
 ```
 
 ```json
@@ -1271,7 +1312,7 @@ status : 204 No Content
 You can get specific review by adding the `id` as a parameter: `/api/reviews/{id}`
 
 ```bash
-[GET] https://localhost:3000/api/reviews/{reviewId}
+[GET] https://yofakestoreapi.onrender.com/api/reviews/{reviewId}
 ```
 
 ```json
@@ -1296,7 +1337,7 @@ You can get specific review by adding the `id` as a parameter: `/api/reviews/{id
 You can access the list of reviews by using the `/api/reviews` endpoint.
 
 ```bash
-[GET] https://localhost:3000/api/reviews
+[GET] https://yofakestoreapi.onrender.com/api/reviews
 ```
 
 ```json
@@ -1326,7 +1367,7 @@ You can access the list of reviews by using the `/api/reviews` endpoint.
 You can access the list of reviews on specifique products by using the `/api/{productId}/reviews` endpoint.
 
 ```bash
-[GET] https://localhost:3000/api/{productId}/reviews
+[GET] https://yofakestoreapi.onrender.com/api/{productId}/reviews
 ```
 
 ```json
@@ -1383,7 +1424,7 @@ Wishlist Routes:
 You can add Product To Wishlist by sending an object like the following to `/api/wishlist/` endpoint.
 
 ```
-[POST] https://localhost:3000/api/wishlist
+[POST] https://yofakestoreapi.onrender.com/api/wishlist
 ```
 
 ```json
@@ -1397,7 +1438,7 @@ You can add Product To Wishlist by sending an object like the following to `/api
 You can Remove Product From Wishlist by adding the `id` as a parameter: `/api/wishlist/{id}`
 
 ```bash
-[DELETE] https://localhost:3000/api/wishlist/{productId}
+[DELETE] https://yofakestoreapi.onrender.com/api/wishlist/{productId}
 ```
 
 ```json
@@ -1413,7 +1454,7 @@ You can Remove Product From Wishlist by adding the `id` as a parameter: `/api/wi
 You can access the list of User Wishlist by using the `/api/wishlist` endpoint.
 
 ```
-[GET] https://localhost:3000/api/wishlist
+[GET] https://yofakestoreapi.onrender.com/api/wishlist
 ```
 
 ```json
@@ -1473,7 +1514,7 @@ Addresses Routes:
 You can Add address to user addresses list by sending an object like the following to `/api/addressess/` endpoint.
 
 ```
-[POST] https://localhost:3000/api/addressess
+[POST] https://yofakestoreapi.onrender.com/api/addressess
 ```
 
 ```json
@@ -1491,7 +1532,7 @@ You can Add address to user addresses list by sending an object like the followi
 You can Remove address from user addresses list by adding the `id` as a parameter: `/api/addressess/{id}`
 
 ```bash
-[DELETE] https://localhost:3000/api/addressess/{addressId}
+[DELETE] https://yofakestoreapi.onrender.com/api/addressess/{addressId}
 ```
 
 ```json
@@ -1517,7 +1558,7 @@ You can Remove address from user addresses list by adding the `id` as a paramete
 You can access the list of addresses by using the `/api/addressess` endpoint.
 
 ```
-[GET] https://localhost:3000/api/addressess
+[GET] https://yofakestoreapi.onrender.com/api/addressess
 ```
 
 ```json
@@ -1561,7 +1602,7 @@ Coupon Routes:
 You can Create Coupon by sending an object like the following to `/coupons/`
 
 ```bash
-[POST] https://localhost:3000/api/coupons/
+[POST] https://yofakestoreapi.onrender.com/api/coupons/
 ```
 
 ```json
@@ -1577,7 +1618,7 @@ You can Create Coupon by sending an object like the following to `/coupons/`
 You can Update specific coupon by sending an object like the following and adding the `id` as a parameter: `/coupons/{id}`
 
 ```bash
-[PUT] https://localhost:3000/api/coupons/{couponId}
+[PUT] https://yofakestoreapi.onrender.com/api/coupons/{couponId}
 ```
 
 ```json
@@ -1593,7 +1634,7 @@ You can Update specific coupon by sending an object like the following and addin
 You can Delete specific coupon by adding the `id`as a parameter: `/api/coupons/{id}`
 
 ```bash
-[DELETE] https://localhost:3000/api/coupons/{couponId}
+[DELETE] https://yofakestoreapi.onrender.com/api/coupons/{couponId}
 ```
 
 ```json
@@ -1605,7 +1646,7 @@ status : 204 No Content
 You can access the list of coupons by using the `/api/coupons` endpoint.
 
 ```bash
-[GET] https://localhost:3000/api/coupons
+[GET] https://yofakestoreapi.onrender.com/api/coupons
 ```
 
 ```json
@@ -1631,7 +1672,7 @@ You can access the list of coupons by using the `/api/coupons` endpoint.
 You can get specific coupon by adding the `id` as a parameter: `/api/coupons/{id}`
 
 ```bash
-[GET] https://localhost:3000/api/coupons/{couponId}
+[GET] https://yofakestoreapi.onrender.com/api/coupons/{couponId}
 ```
 
 ```json
@@ -1680,7 +1721,7 @@ Cart Routes:
 You can Add product to cart by sending an object like the following to `/cart/`
 
 ```bash
-[POST] https://localhost:3000/api/cart/
+[POST] https://yofakestoreapi.onrender.com/api/cart/
 ```
 
 ```json
@@ -1693,7 +1734,7 @@ You can Add product to cart by sending an object like the following to `/cart/`
 ## Get logged user cart
 
 ```bash
-[GET] https://localhost:3000/api/cart
+[GET] https://yofakestoreapi.onrender.com/api/cart
 ```
 
 ```json
@@ -1725,7 +1766,7 @@ You can Add product to cart by sending an object like the following to `/cart/`
 You can Update specific coupon by sending an object like the following and adding the `id` as a parameter: `/cart/{id}`
 
 ```bash
-[PUT] https://localhost:3000/api/cart/{itemId}
+[PUT] https://yofakestoreapi.onrender.com/api/cart/{itemId}
 ```
 
 ```json
@@ -1739,13 +1780,13 @@ You can Update specific coupon by sending an object like the following and addin
 You can remove Specific Cart Item by adding the `id`as a parameter: `/api/cart/{id}`
 
 ```bash
-[DELETE] https://localhost:3000/api/cart/{itemId}
+[DELETE] https://yofakestoreapi.onrender.com/api/cart/{itemId}
 ```
 
 ## Clear logged user cart
 
 ```bash
-[DELETE] https://localhost:3000/api/cart/
+[DELETE] https://yofakestoreapi.onrender.com/api/cart/
 ```
 
 ## Apply Coupon On Shopping Cart
@@ -1753,7 +1794,7 @@ You can remove Specific Cart Item by adding the `id`as a parameter: `/api/cart/{
 You can Apply Coupon On Shopping Cart by sending an object like the following
 
 ```bash
-[PUT] https://localhost:3000/api/cart/applyCoupon
+[PUT] https://yofakestoreapi.onrender.com/api/cart/applyCoupon
 ```
 
 ```json

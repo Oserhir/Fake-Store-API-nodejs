@@ -1,0 +1,35 @@
+[
+  {
+    "name": "Women's Clothing",
+    "slug": "women's-clothing",
+    "_id": "63b9d58a01dc8bc2a732c34e",
+    "createdAt": "2023-01-07T20:26:50.438Z",
+    "updatedAt": "2023-01-07T20:26:50.438Z"
+  },
+
+  {
+    "name": "Men's Clothing",
+    "slug": "men's-clothing",
+    "image": "http://localhost:3000/categories/category-ad2c30cb-ff7e-47e7-99be-79a06399cd83-1673123347758.jpeg",
+    "_id": "63b9d61375a3b24e4c17a724",
+    "createdAt": "2023-01-07T20:29:07.908Z",
+    "updatedAt": "2023-01-07T20:29:07.908Z"
+  },
+  {
+    "name": "Sports & Outdoors",
+    "slug": "sports-and-outdoors",
+    "image": "http://localhost:3000/categories/category-96ebcab6-760b-431d-b8fb-6ba15f3dd470-1673123451584.jpeg",
+    "_id": "63b9d67b909f069dd834a11e",
+    "createdAt": "2023-01-07T20:30:51.709Z",
+    "updatedAt": "2023-01-07T20:30:51.709Z"
+  },
+
+  {
+    "name": "Health,Beauty & Hair",
+    "slug": "healthbeauty-and-hair",
+    "image": "http://localhost:3000/categories/category-0b23da8e-c06e-47dd-934c-9040dd8a8f1e-1673123489522.jpeg",
+    "_id": "63b9d6a122c88ca8f04d4d34",
+    "createdAt": "2023-01-07T20:31:29.664Z",
+    "updatedAt": "2023-01-07T20:31:29.664Z"
+  }
+]
