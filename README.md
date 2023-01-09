@@ -724,7 +724,6 @@ You can access the list of categories by using the `/categories` endpoint.
     // ...
   ]
 }
-// ...
 ```
 
 ## Get all products by category
@@ -1073,19 +1072,31 @@ You can create a new product by sending an object like the following to `/api/pr
 
 ```json
 {
-  "title": "Big Chill Women's Wrap Fleece Jacket",
-  "description": "Fleece is not only for athleisure! Get a sophisticated style upgrade to your standard .............",
-  "quantity": 3,
-  "sold": 0,
-  "price": 44.96,
-  "priceAfterDiscount": 14.99,
-  "imageCover": "product-9ee766fa-2eb1-47b5-9c3f-94fc483bdcb3-1672326428001-cover.jpeg",
-  "images": [
-    "product-008610d3-0044-45b3-8e3a-8b886abcd130-1672326428159-2.jpeg",
-    "product-519c8e4a-887b-4463-b0f5-932943ac7498-1672326428158-1.jpeg"
-  ],
-  "category": "636e64579569c30b4ef8de53",
-  "ratingsQuantity": 0
+  "data": {
+    "title": "Pedigree Complete Nutrition Grilled Steak & Vegetable Flavor Dog Kibble Adult Dry Dog Food",
+    "slug": "pedigree-complete-nutrition-grilled-steak-and-vegetable-flavor-dog-kibble-adult-dry-dog-food",
+    "description": "Give your furry friend a taste of the good life with the Pedigree Complete Nutrition Grilled Steak & Vegetable Flavor Dog Kibble Adult Dry Dog Food. With a succulent steak flavor accented with hearty vegetables, this food has everything you need to keep your dog feeling his best. It’s prepared with whole grains for healthy digestion, plus essential nutrients and omega-6 fatty acids to promote a healthy skin and luxurious coat. And perhaps best of all, the crunchy texture of the kibble helps clean his teeth, so he’s always ready for his close up. It’s the easy way to combine great-tasting food plus nutrition that promotes health and vitality into a single bowl.",
+    "quantity": 12,
+    "sold": 0,
+    "price": 27.78,
+    "priceAfterDiscount": 16.99,
+    "colors": [],
+    "imageCover": "https://yofakestoreapi.onrender.com//products/product-f720ed78-f7ae-4b97-984e-724fd649b526-1673301241065-cover.jpeg",
+    "images": [
+      "https://yofakestoreapi.onrender.com//products/product-75dda5a2-05c8-4ece-9e93-56cd68629d9b-1673301243414-3.jpeg",
+      "https://yofakestoreapi.onrender.com//products/product-6265568d-907a-4c00-a8da-3461ffd0f9d9-1673301243413-1.jpeg",
+      "https://yofakestoreapi.onrender.com//products/product-c1abe725-affd-4db1-b223-fe3a397f8551-1673301243414-2.jpeg",
+      "https://yofakestoreapi.onrender.com//products/product-5a1e1cc9-37ad-438f-ab25-fec0ecf2596d-1673301243415-4.jpeg"
+    ],
+    "category": "63bc88ec3e721990a8cc5064",
+    "subcategories": [],
+    "ratingsQuantity": 0,
+    "_id": "63bc8d063e721990a8cc5085",
+    "createdAt": "2023-01-09T21:54:14.049Z",
+    "updatedAt": "2023-01-09T21:54:14.049Z",
+    "__v": 0,
+    "id": "63bc8d063e721990a8cc5085"
+  }
 }
 ```
 
@@ -1094,7 +1105,7 @@ You can create a new product by sending an object like the following to `/api/pr
 you can update a product exists by sending an object like the following and adding the `id` as a parameter: `/api/products/{id}`
 
 ```bash
-[PUT] https://yofakestoreapi.onrender.com/api/products/{productsId}
+[PUT] https://yofakestoreapi.onrender.com/api/products/63bc8d063e721990a8cc5085
 ```
 
 ```json
@@ -1111,7 +1122,7 @@ you can update a product exists by sending an object like the following and addi
 You can delete a product exists by adding the `id` as a parameter: `/api/products/{id}`
 
 ```bash
-[DELETE] https://yofakestoreapi.onrender.com/api/products/{productrId}
+[DELETE] https://yofakestoreapi.onrender.com/api/products/63bc8e693e721990a8cc508d
 ```
 
 ```json
@@ -1123,32 +1134,38 @@ status : 204 No Content
 You can get a single product by adding the `id` as a parameter: `/api/products/{id}`
 
 ```bash
-[GET] https://yofakestoreapi.onrender.com/api/products/{productId}
+[GET] https://yofakestoreapi.onrender.com/api/products/63bc8e4b3e721990a8cc5089
 ```
 
 ```json
 {
   "data": {
-    "_id": "636e6bef6c34aa33724e6cdb",
-    "title": "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
-    "slug": "john-hardy-women's-legends-naga-gold-and-silver-dragon-station-chain-bracelet",
-    "description": "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
-    "quantity": 91,
-    "sold": 23,
-    "price": 695,
+    "_id": "63bc8e4b3e721990a8cc5089",
+    "title": "Kibbles 'n Bits Original Savory Beef & Chicken Flavors Dry Dog Food",
+    "slug": "kibbles-'n-bits-original-savory-beef-and-chicken-flavors-dry-dog-food",
+    "description": "Give your pup the nutrition and flavor he loves with the Kibbles 'n Bits Original Savory Beef & Chicken Flavors Dry Dog Food. This formula packs plenty of meaty taste into a blend of crunchy kibble and soft meaty bits made with the flavors of beef and chicken. It’s loaded with high-quality protein to help support strong muscles, plus vitamins, minerals and antioxidants so it’s a complete and balanced diet for adults. Plus, it’s proudly made in the USA so it’s a satisfying meal you can feel good about serving your dog every day!\n\n",
+    "quantity": 80,
+    "sold": 0,
+    "price": 26.83,
+    "priceAfterDiscount": 25.49,
     "colors": [],
-    "imageCover": "https://test.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg",
-    "images": [],
+    "imageCover": "https://yofakestoreapi.onrender.com//products/product-843c9047-6b04-41ef-8006-c649a9717976-1673301569183-cover.jpeg",
+    "images": [
+      "https://yofakestoreapi.onrender.com//products/product-0cfe07c8-2f7e-460c-9ce0-3f405e6fea95-1673301571031-4.jpeg",
+      "https://yofakestoreapi.onrender.com//products/product-86670577-2138-4e16-b405-0b4757a67293-1673301571030-1.jpeg",
+      "https://yofakestoreapi.onrender.com//products/product-0d83e714-47b7-4b01-8126-8d9be261f7fe-1673301571031-3.jpeg",
+      "https://yofakestoreapi.onrender.com//products/product-998a7b86-fb60-4299-a5ca-895906919a58-1673301571030-2.jpeg"
+    ],
     "category": {
-      "_id": "636e64579569c30b4ef8de53",
-      "name": "Women's Clothing"
+      "name": "Dog Food"
     },
     "subcategories": [],
-    "ratingsAverage": 4.4,
-    "ratingsQuantity": 12,
-    "createdAt": "2022-11-11T15:36:15.688Z",
-    "updatedAt": "2022-12-20T12:12:03.570Z",
-    "__v": 0
+    "ratingsQuantity": 0,
+    "createdAt": "2023-01-09T21:59:39.954Z",
+    "updatedAt": "2023-01-09T21:59:39.954Z",
+    "__v": 0,
+    "reviews": [],
+    "id": "63bc8e4b3e721990a8cc5089"
   }
 }
 ```
@@ -1163,29 +1180,41 @@ You can access the list of 200 products by using the `/api/products` endpoint.
 
 ```json
 {
-  "page": 1,
-  "result": 200,
+  "results": 2,
+  "paginationResult": {
+    "currentPage": 1,
+    "limit": 50,
+    "numberOfPages": 1
+  },
   "data": [
     {
-      "_id": "63adad1c279142448c05b4ff",
-      "title": "Big Chill Women's Wrap Fleece Jacket",
-      "slug": "big-chill-women's-wrap-fleece-jacket",
-      "description": "Fleece is not only for athleisure.......................",
-      "quantity": 3,
+      "_id": "63bc8d063e721990a8cc5085",
+      "title": "Pedigree Complete Nutrition Grilled Steak & Vegetable Flavor Dog Kibble Adult Dry Dog Food",
+      "slug": "pedigree-complete-nutrition-grilled-steak-and-vegetable-flavor-dog-kibble-adult-dry-dog-food",
+      "description": "Give your furry friend a taste of the good life with the Pedigree Complete Nutrition Grilled Steak & Vegetable Flavor Dog Kibble Adult Dry Dog Food. With a succulent steak flavor accented with hearty vegetables, this food has everything you need to keep your dog feeling his best. It’s prepared with whole grains for healthy digestion, plus essential nutrients and omega-6 fatty acids to promote a healthy skin and luxurious coat. And perhaps best of all, the crunchy texture of the kibble helps clean his teeth, so he’s always ready for his close up. It’s the easy way to combine great-tasting food plus nutrition that promotes health and vitality into a single bowl.",
+      "quantity": 12,
       "sold": 0,
-      "price": 44.96,
-      "priceAfterDiscount": 14.99,
+      "price": 27.78,
+      "priceAfterDiscount": 16.99,
       "colors": [],
+      "imageCover": "https://yofakestoreapi.onrender.com//products/product-f720ed78-f7ae-4b97-984e-724fd649b526-1673301241065-cover.jpeg",
+      "images": [
+        "https://yofakestoreapi.onrender.com//products/product-75dda5a2-05c8-4ece-9e93-56cd68629d9b-1673301243414-3.jpeg",
+        "https://yofakestoreapi.onrender.com//products/product-6265568d-907a-4c00-a8da-3461ffd0f9d9-1673301243413-1.jpeg",
+        "https://yofakestoreapi.onrender.com//products/product-c1abe725-affd-4db1-b223-fe3a397f8551-1673301243414-2.jpeg",
+        "https://yofakestoreapi.onrender.com//products/product-5a1e1cc9-37ad-438f-ab25-fec0ecf2596d-1673301243415-4.jpeg"
+      ],
       "category": {
-        "_id": "636e64579569c30b4ef8de53",
-        "name": "Women's Clothing"
+        "name": "Dog Food"
       },
+      "subcategories": [],
       "ratingsQuantity": 0,
-      "createdAt": "2022-12-29T15:07:08.918Z",
-      "updatedAt": "2022-12-29T15:07:08.918Z"
+      "createdAt": "2023-01-09T21:54:14.049Z",
+      "updatedAt": "2023-01-09T21:54:14.049Z",
+      "id": "63bc8d063e721990a8cc5085"
     }
+    // ...
   ]
-  // ...
 }
 ```
 
@@ -1245,35 +1274,46 @@ You can search for a product by price by sending an object like the following
 To Search by title or description the API needs to be called with the `keyword` set word that you want
 
 ```bash
-[GET] https://yofakestoreapi.onrender.com/api/products/?keyword=Clark,Olsen
+[GET] https://yofakestoreapi.onrender.com/api/products/?keyword=Flavors
 ```
 
 ```json
 {
-  "page": 1,
-  "result": 16,
+  "results": 1,
+  "paginationResult": {
+    "currentPage": 1,
+    "limit": 50,
+    "numberOfPages": 1
+  },
   "data": [
     {
-      "_id": "63adad1c279142448c05b4ff",
-      "title": "Big Chill Women's Wrap Fleece Jacket",
-      "slug": "big-chill-women's-wrap-fleece-jacket",
-      "description": "Fleece is not only for athleisure! .................",
-      "quantity": 3,
+      "_id": "63bc8e4b3e721990a8cc5089",
+      "title": "Kibbles 'n Bits Original Savory Beef & Chicken Flavors Dry Dog Food",
+      "slug": "kibbles-'n-bits-original-savory-beef-and-chicken-flavors-dry-dog-food",
+      "description": "Give your pup the nutrition and flavor he loves with the Kibbles 'n Bits Original Savory Beef & Chicken Flavors Dry Dog Food. This formula packs plenty of meaty taste into a blend of crunchy kibble and soft meaty bits made with the flavors of beef and chicken. It’s loaded with high-quality protein to help support strong muscles, plus vitamins, minerals and antioxidants so it’s a complete and balanced diet for adults. Plus, it’s proudly made in the USA so it’s a satisfying meal you can feel good about serving your dog every day!\n\n",
+      "quantity": 80,
       "sold": 0,
-      "price": 44.96,
-      "priceAfterDiscount": 14.99,
+      "price": 26.83,
+      "priceAfterDiscount": 25.49,
       "colors": [],
+      "imageCover": "https://yofakestoreapi.onrender.com//products/product-843c9047-6b04-41ef-8006-c649a9717976-1673301569183-cover.jpeg",
+      "images": [
+        "https://yofakestoreapi.onrender.com//products/product-0cfe07c8-2f7e-460c-9ce0-3f405e6fea95-1673301571031-4.jpeg",
+        "https://yofakestoreapi.onrender.com//products/product-86670577-2138-4e16-b405-0b4757a67293-1673301571030-1.jpeg",
+        "https://yofakestoreapi.onrender.com//products/product-0d83e714-47b7-4b01-8126-8d9be261f7fe-1673301571031-3.jpeg",
+        "https://yofakestoreapi.onrender.com//products/product-998a7b86-fb60-4299-a5ca-895906919a58-1673301571030-2.jpeg"
+      ],
       "category": {
-        "_id": "636e64579569c30b4ef8de53",
-        "name": "Women's Clothing"
+        "name": "Dog Food"
       },
       "subcategories": [],
       "ratingsQuantity": 0,
-      "createdAt": "2022-12-29T15:07:08.918Z",
-      "updatedAt": "2022-12-29T15:07:08.918Z"
+      "createdAt": "2023-01-09T21:59:39.954Z",
+      "updatedAt": "2023-01-09T21:59:39.954Z",
+      "id": "63bc8e4b3e721990a8cc5089"
     }
+    // ..
   ]
-  // ...
 }
 ```
 
@@ -1324,16 +1364,24 @@ To Field Limiting the API needs to be called with the `fields` set attribute tha
 
 ```json
 {
-  "page": 1,
-  "result": 16,
+  "results": 2,
+  "paginationResult": {
+    "currentPage": 1,
+    "limit": 50,
+    "numberOfPages": 1
+  },
   "data": [
     {
-      "_id": "63adad1c279142448c05b4ff",
-      "title": "Big Chill Women's Wrap Fleece Jacket",
-      "price": 44.96
+      "_id": "63bc8d063e721990a8cc5085",
+      "title": "Pedigree Complete Nutrition Grilled Steak & Vegetable Flavor Dog Kibble Adult Dry Dog Food",
+      "price": 27.78,
+      "category": {
+        "name": "Dog Food"
+      },
+      "id": "63bc8d063e721990a8cc5085"
     }
+    // ..
   ]
-  // ...
 }
 ```
 
