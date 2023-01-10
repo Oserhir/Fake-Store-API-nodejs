@@ -15,7 +15,7 @@ Goals : Build Fake Store API that can be used with any type project that needs p
 - ✅ Add to wishlist
 - ✅ Add to cart
 
-# EndPoints
+## EndPoints
 
 <!--ts-->
 
@@ -137,7 +137,7 @@ To run this project, you will need to add the following environment variables to
 
 ##### BASE_URL = `https://yofakestoreapi.onrender.com`
 
-# API Authentication
+## API Authentication
 
 Some endpoints may require authentication for example To create a create/delete/update category, you need to register your API users and obtain an access token.
 
