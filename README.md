@@ -15,10 +15,13 @@ Goals : Build Fake Store API that can be used with any type project that needs p
 - ✅ Add to wishlist
 - ✅ Add to cart
 
-# Table of contents
+# EndPoints
 
 <!--ts-->
 
+- [Authentication](#authentication)
+  - [Login](#login)
+  - [Sign Up](#sign-up)
 - [Users ](#users--access--admin-)
   - [Get all users](#get-all-users)
   - [Get a single user](#get-a-single-user)
@@ -32,10 +35,6 @@ Goals : Build Fake Store API that can be used with any type project that needs p
   - [Update Logged User](#update-logged-user)
   - [Deactivate Logged Users](#deactivate-logged-users)
   - [Activate Logged Users](#activate-logged-users)
-- [Authentication](#authentication)
-  - [Login](#login)
-  - [Sign Up](#sign-up)
-  - [Sign Out](#sign-out)
 - [Categories](#categories)
   - [Create a category](#create-a-category)
   - [Update a category](#update-a-category)
@@ -102,6 +101,51 @@ Goals : Build Fake Store API that can be used with any type project that needs p
   - [Clear logged user cart ](#clear-logged-user-cart)
   - [Apply Coupon On Shopping Cart ](#apply-coupon-on-shopping-cart)
   - [Cart Schema ](#cart-schema)
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://link-to-project
+```
+
+Go to the project directory
+
+```bash
+  cd my-project
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  node index.js
+```
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`MONGO_URI`
+`JWT_SECRET`
+
+##### BASE_URL = `https://yofakestoreapi.onrender.com`
+
+# API Authentication
+
+Some endpoints may require authentication for example To create a create/delete/update category, you need to register your API users and obtain an access token.
+
+The endpoints that require authentication expect a bearer token sent in the `Authorization header`.
+
+**Example**:
+
+`Authorization: Bearer YOUR TOKEN`
 
 <!--te-->
 
