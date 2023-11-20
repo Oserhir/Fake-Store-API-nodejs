@@ -1,6 +1,6 @@
 # My Ecommerce Software Requirements
 
-Goals : Build Fake Store API that can be used with any type project that needs products, categories, authentication and users. you can use examples below to check how fakeStoreApi works!
+fakeStoreApi is an online REST API that you can use whenever you need Pseudo-real data for your e-commerce or shopping website without running any server-side code.
 
 ## The features in the API :
 
